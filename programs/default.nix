@@ -63,7 +63,7 @@ let
     blender
 
     # office
-    libreoffice
+    #libreoffice
 
     # gaming
     osu-lazer
