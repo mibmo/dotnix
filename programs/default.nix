@@ -11,6 +11,7 @@ let
     (import ./git user)
     ./fish
     ./neovim
+    ./alacritty
     ./firefox
   ];
   hmMore = { ... }: {
