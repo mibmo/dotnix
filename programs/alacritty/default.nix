@@ -3,7 +3,7 @@ let
   settings = {
     font = {
       size = 12;
-      normal.family = "monospace";
+      normal.family = "FantasqueSansMono Nerd Font";
     };
   };
 in
