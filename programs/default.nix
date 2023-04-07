@@ -13,7 +13,17 @@ let
     ./neovim
     ./firefox
   ];
-  hmMore = { pkgs, ... }: {
+  hmMore = { ... }: {
+    xdg.userDirs = {
+      desktop = ".desktop";
+      documents = "assets/documents";
+      download = "download";
+      music = "assets/music";
+      pictures = "assets/pictures";
+      templates = ".templates";
+      publicShare = ".publicShare";
+    };
+
     programs = {
       gpg.enable = true;
       fzf.enable = true;
