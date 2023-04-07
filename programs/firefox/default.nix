@@ -5,9 +5,20 @@ let
 
   extensions = with pkgs.nur.repos.rycee.firefox-addons; [
     tokyo-night-v2 # theme
-    sidebery
-    umatrix
-    unpaywall
+    sidebery # nested tabs
+
+    # privacy
+    ublock-origin # ad block
+    umatrix # fine-grained resource blocking
+    decentraleyes # cache common web dependencies such as ajax
+    clearurls
+    consent-o-matic # handle gdpr consent forms
+    libredirect # redirect big sites to privacy-friendly alternatives
+
+    # misc
+    keepassxc-browser
+    unpaywall # (legally) remove paywalls from journal websites
+    flagfox # display country info about website host
   ];
 
   settings = {
