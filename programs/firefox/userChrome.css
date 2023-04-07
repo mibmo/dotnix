@@ -1,0 +1,4 @@
+/* disable floating icon when camera or mic in use */
+#webrtcIndicator {
+	display: none;
+}
