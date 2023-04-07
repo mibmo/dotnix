@@ -6,6 +6,15 @@ let
     email = "mib@kanp.ai";
     gpgKeyId = null;
   };
+  nerdFonts = pkgs.nerdfonts.override {
+    fonts = [
+      "FiraCode"
+      "FantasqueSansMono"
+    ];
+  };
+  googleFonts = pkgs.google-fonts.override {
+    fonts = [ "Nunito" ];
+  };
 in
 {
   imports = [ (import ./programs user) ];
@@ -71,6 +80,11 @@ in
 
     # @TODO: enable local monitoring with prometheus & grafana
   };
+
+  fonts.fonts = with pkgs; [
+    nerdFonts
+    googleFonts
+  ];
 
   programs.fish.enable = true;
   users.users.${user.name} = {
