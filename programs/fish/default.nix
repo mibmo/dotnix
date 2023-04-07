@@ -24,6 +24,7 @@ in
     shellAbbrs = {
       e = "nvim";
       ns = "nix-shell";
+      nd = "nix develop";
     };
   };
 }
