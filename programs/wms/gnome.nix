@@ -18,7 +18,19 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.gnomeExtensions.appindicator ];
+  environment.systemPackages = with pkgs.gnomeExtensions; [
+    # top bar
+    appindicator 
+    keep-awake
+    time-awareness
+    uptime-indicator
+    vitals
+
+    # looks
+    burn-my-windows
+    undecorate
+    shu-zhi
+  ];
 
   # dont install default gnome applications
   environment.gnome.excludePackages =
