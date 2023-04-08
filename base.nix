@@ -93,6 +93,10 @@ in
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    opentabletdriver
+  ];
+
   programs.fish.enable = true;
   users.users.${user.name} = {
     isNormalUser = true;
