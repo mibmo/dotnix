@@ -41,7 +41,6 @@ let
     killall
     any-nix-shell # shell support for nix
     duf # nicer df
-    neofetch
 
     # security
     keepassxc
@@ -60,6 +59,9 @@ let
     blender
     insomnia
     obs-studio
+    ffmpeg
+    mpv
+    neofetch
     #libreoffice
 
     # gaming
