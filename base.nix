@@ -73,8 +73,6 @@ in
   i18n.defaultLocale = "en_DK.UTF-8";
   console.keyMap = "dk";
 
-  environment.systemPackages = with pkgs; [ vim nur.repos.mic92.hello-nur ];
-
   services = {
     printing.enable = true;
 
