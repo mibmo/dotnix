@@ -23,7 +23,6 @@
     appindicator 
     keep-awake
     time-awareness
-    uptime-indicator
     vitals
 
     # looks
