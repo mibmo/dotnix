@@ -34,15 +34,16 @@ let
   };
 
   includedPkgs = with pkgs; [
-    mktemp
     gnumake
     which
-    any-nix-shell # shell support for nix
-    killall
-    neofetch
+    mktemp
     wl-clipboard
+    killall
+    any-nix-shell # shell support for nix
+    duf # nicer df
+    neofetch
 
-    # essentials
+    # security
     keepassxc
 
     # audio stuff
@@ -53,16 +54,12 @@ let
     element-desktop
     jitsi-meet-electron
 
-    # code
-    #rustup
-    insomnia
-
-    # graphics
+    # misc
     gimp
     krita
     blender
-
-    # office
+    insomnia
+    obs-studio
     #libreoffice
 
     # gaming
