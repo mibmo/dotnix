@@ -68,6 +68,7 @@ let
     #libreoffice
 
     # gaming
+    lutris
     osu-lazer
     prismlauncher
   ];
