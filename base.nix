@@ -105,9 +105,17 @@ in
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    opentabletdriver
-  ];
+  environment = {
+    variables = {
+      # fcitx5
+      GTK_IM_MODULE = "fcitx";
+      QT_IM_MODULE = "fcitx";
+      XMODIFIERS= "@im=fcitx";
+    };
+    systemPackages = with pkgs; [
+      opentabletdriver
+    ];
+  };
 
   programs.fish.enable = true;
   users.users.${user.name} = {
