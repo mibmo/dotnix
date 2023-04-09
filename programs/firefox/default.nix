@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ config, ... }:
 
 let
   searchEngine = "DuckDuckGo";
 
-  extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+  extensions = with config.nur.repos.rycee.firefox-addons; [
     tokyo-night-v2 # theme
     sidebery # nested tabs
 

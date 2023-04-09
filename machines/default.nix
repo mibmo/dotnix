@@ -5,7 +5,6 @@ let
   pkgs = import inputs.nixpkgs {
     inherit system;
     config.allowUnfree = true;
-    config.packageOverrides = {pkgs, ...}: { nur = import inputs.nur { inherit pkgs; }; };
   };
 
   mkMachine = machineModule:

@@ -1,4 +1,4 @@
-user: { pkgs, ... }:
+user: { inputs, pkgs, ... }:
 let
   imports = [
     ./wms/gnome.nix
@@ -7,6 +7,7 @@ let
   ];
 
   hmImports = [
+    inputs.nur.hmModules.nur
     hmMore
     (import ./git user)
     ./fish
