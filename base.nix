@@ -86,6 +86,14 @@ in
   fonts.fonts = with pkgs; [
     nerdFonts
     googleFonts
+
+    # japanese fonts
+    noto-fonts-cjk-serif
+    noto-fonts-cjk-sans
+    migmix
+    migu
+    ipafont
+    takao
   ];
 
   i18n.inputMethod = {
