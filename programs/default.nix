@@ -61,6 +61,7 @@ let
     obs-studio
     ffmpeg
     mpv
+    imv
     neofetch
     #libreoffice
 
