@@ -62,6 +62,7 @@ let
     ffmpeg
     mpv
     imv
+    imv
     neofetch
     #libreoffice
 
