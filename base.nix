@@ -52,12 +52,19 @@ in
   };
   services.dnsmasq = {
     enable = true;
-    settings.server = [
-      "9.9.9.9"
-      "149.112.112.112"
-      #"2620:fe::fe"
-      #"2620:fe::9"
-    ];
+
+    settings = {
+      no-resolv = true;
+      dnssec = true;
+      conf-file = "${pkgs.dnsmasq}/share/dnsmasq/trust-anchors.conf";
+      cache-size = "1000";
+      server = [
+        "9.9.9.9"
+        "149.112.112.112"
+        "2620:fe::fe"
+        "2620:fe::9"
+      ];
+    };
   };
 
   sound.enable = true;
