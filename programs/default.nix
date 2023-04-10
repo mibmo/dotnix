@@ -69,6 +69,7 @@ let
 
     # gaming
     lutris
+    wine
     osu-lazer
     prismlauncher
   ];
