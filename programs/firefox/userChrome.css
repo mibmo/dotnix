@@ -2,3 +2,8 @@
 #webrtcIndicator {
 	display: none;
 }
+
+/* disable tab bar */
+#TabsToolbar { 
+  visibility: collapse;
+}
