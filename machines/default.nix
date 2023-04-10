@@ -1,11 +1,6 @@
-{ inputs, system, nur, home-manager, ... }:
+{ inputs, system, pkgs, nur, home-manager }:
 let
   lib = inputs.nixpkgs.lib;
-
-  pkgs = import inputs.nixpkgs {
-    inherit system;
-    config.allowUnfree = true;
-  };
 
   mkMachine = machineModule:
     lib.nixosSystem {

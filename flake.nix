@@ -15,9 +15,13 @@
     inputs @ { self, nixpkgs, nur, home-manager, ... }:
     let
       system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
-      nixosConfigurations = import ./machines { inherit inputs system nur home-manager; };
+      nixosConfigurations = import ./machines { inherit inputs system pkgs nur home-manager; };
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
