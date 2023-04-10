@@ -162,3 +162,6 @@ require("lazy").setup({
 vim.opt.number = true;
 vim.opt.relativenumber = true;
 vim.opt.wrap = false;
+
+vim.keymap.set('', '<Leader>y', '"+y')
+vim.keymap.set('', '<Leader>p', '"+p')
