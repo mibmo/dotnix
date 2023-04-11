@@ -10,6 +10,6 @@ in
 {
   programs.alacritty = {
     enable = true;
-    inherit settings; 
+    inherit settings;
   };
 }

@@ -1,5 +1,5 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 pkgs.mkShell {
   name = "dotnix";
-  buildInputs = with pkgs; [];
+  buildInputs = with pkgs; [ ];
 }

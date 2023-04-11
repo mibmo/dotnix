@@ -20,7 +20,7 @@
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
     # top bar
-    appindicator 
+    appindicator
     keep-awake
     time-awareness
     vitals

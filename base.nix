@@ -1,6 +1,6 @@
 { config, pkgs, home-manager, ... }:
 let
-  user = { 
+  user = {
     name = "mib";
     home = "/home/${user.name}"; # @TODO: support darwin
     email = "mib@kanp.ai";
@@ -117,7 +117,7 @@ in
       # fcitx5
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
-      XMODIFIERS= "@im=fcitx";
+      XMODIFIERS = "@im=fcitx";
     };
     systemPackages = with pkgs; [
       opentabletdriver

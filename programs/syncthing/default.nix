@@ -31,9 +31,9 @@ with lib; {
     "d /var/lib/syncthing/config 0770 syncthing syncthing"
     "d ${user.home} 0750 ${user.name} syncthing"
   ] ++
-    # Additionally set sticky bit for syncthing group ownership of folders
-    (builtins.map (folder: "d ${folder.path} 1770 ${user.name} syncthing")
-      (builtins.attrValues folders)));
+  # Additionally set sticky bit for syncthing group ownership of folders
+  (builtins.map (folder: "d ${folder.path} 1770 ${user.name} syncthing")
+    (builtins.attrValues folders)));
 
   config.systemd.services.syncthing.serviceConfig.UMask = mkIf (config.services.syncthing.enable) "0007";
 }
