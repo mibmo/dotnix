@@ -44,6 +44,9 @@ let
     duf # nicer df
     libqalculate
 
+    # nix
+    nix-index
+
     # security
     keepassxc
 
