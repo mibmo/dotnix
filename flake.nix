@@ -18,6 +18,9 @@
       pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        overlays = builtins.map (path: import path) [
+          ./overlays/gnome-shell.nix
+        ];
       };
     in
     {
