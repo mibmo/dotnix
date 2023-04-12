@@ -9,6 +9,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs =
@@ -24,7 +26,7 @@
       };
     in
     {
-      nixosConfigurations = import ./machines { inherit inputs system pkgs nur home-manager; };
+      nixosConfigurations = import ./machines { inherit inputs system pkgs; };
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 

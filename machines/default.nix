@@ -1,4 +1,4 @@
-{ inputs, system, pkgs, nur, home-manager }:
+{ inputs, system, pkgs }:
 let
   lib = inputs.nixpkgs.lib;
 
@@ -6,11 +6,13 @@ let
     lib.nixosSystem {
       inherit lib pkgs system;
       specialArgs = { inherit inputs; };
-      modules = [
+      modules = with inputs; [
         ../base.nix
+        machineModule
+
         nur.nixosModules.nur
         home-manager.nixosModules.home-manager
-        machineModule
+        hyprland.nixosModules.default
       ];
     };
 in

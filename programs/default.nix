@@ -8,6 +8,7 @@ let
 
   hmImports = [
     inputs.nur.hmModules.nur
+    inputs.hyprland.homeManagerModules.default
     hmMore
     (import ./git user)
     ./fish
