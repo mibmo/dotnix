@@ -1,8 +1,15 @@
 user: { lib, ... }:
 let
+  parallelConnections = 16;
   extraConfig = {
     core.editor = "nvim";
     init.defaultBranch = "main";
+    commit = {
+      status = true;
+      verbose = 1;
+    };
+    fetch.parallel = parallelConnections;
+    http.maxRequests = parallelConnections;
     url = {
       "https://github.com/".insteadOf = "gh:";
       "ssh://git@github.com".pushInsteadOf = "gh:";
