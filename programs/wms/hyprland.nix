@@ -7,7 +7,7 @@
   # might need gdm? maybe enable that, but not gnome?
 
   /*
-  services = {
+    services = {
     xserver = {
       enable = true;
       layout = "dk";
@@ -19,7 +19,7 @@
       displayManager.gdm.wayland = true;
       desktopManager.gnome.enable = true;
     };
-  };
+    };
   */
 
 

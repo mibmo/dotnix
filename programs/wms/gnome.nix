@@ -56,14 +56,16 @@ user: { config, lib, pkgs, ... }: {
   # might need this for nvidia
   #hardware.nvidia.modesetting.enable = true;
 
-  home-manager.users.${user.name}.imports = [(
-    { ... }: {
-      xdg.configFile."shuzhi.sh".source = builtins.toFile "shuzhi.sh" ''
-        #!/usr/bin/env sh
-        echo "こんにちは"
-        hostname
-      '';
-      xdg.configFile."test".source = builtins.toFile "test" "aこんにちはc";
-    }
-  )];
+  home-manager.users.${user.name}.imports = [
+    (
+      { ... }: {
+        xdg.configFile."shuzhi.sh".source = builtins.toFile "shuzhi.sh" ''
+          #!/usr/bin/env sh
+          echo "こんにちは"
+          hostname
+        '';
+        xdg.configFile."test".source = builtins.toFile "test" "aこんにちはc";
+      }
+    )
+  ];
 }
