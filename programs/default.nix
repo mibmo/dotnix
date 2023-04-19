@@ -63,6 +63,7 @@ let
     gimp
     krita
     blender
+    prusa-slicer
     insomnia
     obs-studio
     ffmpeg
