@@ -15,4 +15,7 @@ You'll have to manually configure
 - Lutris
 	- Prefer non-system libraries
 	- Set games directory (typically `$HOME/games`)
-- Gnome: enable & configure extensions 
+- Gnome:
+	- Enable & configure extensions 
+	- Set Shuzhi's text command to `.config/shuzhi.sh` and font to `TakaoPMincho Italic 16`
+		- @TODO: create the .config/shuzhi.sh file using xdg in gnome file

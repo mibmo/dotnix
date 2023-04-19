@@ -1,7 +1,7 @@
 user: { inputs, pkgs, ... }:
 let
   imports = [
-    ./wms/gnome.nix
+    (import ./wms/gnome.nix user)
     (import ./syncthing user)
     ./steam
   ];
