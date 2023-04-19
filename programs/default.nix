@@ -99,6 +99,4 @@ in
       };
     };
   };
-
-  services.firefox-syncserver.singleNode.enable = true;
 }
