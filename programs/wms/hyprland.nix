@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ ... }: {
   programs = {
     hyprland.enable = true;
     gnupg.agent.pinentryFlavor = "qt";

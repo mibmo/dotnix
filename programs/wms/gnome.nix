@@ -1,4 +1,4 @@
-user: { config, lib, pkgs, ... }: {
+user: { pkgs, ... }: {
   programs.gnupg.agent.pinentryFlavor = "gnome3";
 
   services = {
@@ -64,7 +64,6 @@ user: { config, lib, pkgs, ... }: {
           echo "こんにちは"
           hostname
         '';
-        xdg.configFile."test".source = builtins.toFile "test" "aこんにちはc";
       }
     )
   ];
