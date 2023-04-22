@@ -64,6 +64,7 @@ let
     krita
     blender
     prusa-slicer
+    kicad
     insomnia
     obs-studio
     ffmpeg
