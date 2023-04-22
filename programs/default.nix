@@ -4,6 +4,7 @@ let
     (import ./wms/gnome.nix user)
     (import ./syncthing user)
     ./steam
+    ./ipfs
   ];
 
   hmImports = [
