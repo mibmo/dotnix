@@ -59,11 +59,14 @@ user: { pkgs, ... }: {
   home-manager.users.${user.name}.imports = [
     (
       { ... }: {
-        xdg.configFile."shuzhi.sh".source = builtins.toFile "shuzhi.sh" ''
-          #!/usr/bin/env sh
-          echo "こんにちは"
-          hostname
-        '';
+        xdg.configFile."shuzhi.sh" = {
+          executable = true;
+          source = builtins.toFile "shuzhi.sh" ''
+            #!/usr/bin/env sh
+            echo "こんにちは"
+            hostname
+          '';
+        };
       }
     )
   ];
