@@ -45,6 +45,7 @@ let
     any-nix-shell # shell support for nix
     duf # nicer df
     libqalculate
+    ldns # dns utility
 
     # nix
     nix-index
