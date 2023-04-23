@@ -68,6 +68,7 @@ let
     prusa-slicer
     kicad
     freecad
+    solvespace
     insomnia
     obs-studio
     ffmpeg
