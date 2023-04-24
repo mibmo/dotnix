@@ -123,8 +123,18 @@ function cfg_peek()
 	local peek = require('peek')
 
 	peek.setup({
-			auto_load = false,
+		auto_load = false,
 	})
+end
+
+function cfg_lualine()
+	local lualine = require('lualine')
+
+	lualine.setup {
+		options = {
+			theme = 'material'
+		};
+	}
 end
 
 ------ @TODO: bunchhh of stuff to migrate from old config file
@@ -155,7 +165,8 @@ require("lazy").setup({
   -- convenience
   'monaqa/dial.nvim',
 
-  -- colorschemes
+  -- looks
+  'nvim-lualine/lualine.nvim',
   'marko-cerovac/material.nvim',
   'folke/tokyonight.nvim',
 
@@ -164,7 +175,7 @@ require("lazy").setup({
 
   -- language-specific
   { 'folke/neodev.nvim', ft = 'lua' },
-  { 'toppair/peek.nvim', config = cfg_peek }, -- markdown preview
+	{ 'toppair/peek.nvim', config = cfg_peek, ft = 'lua' }, -- markdown preview
 
   {} -- empty
 })
