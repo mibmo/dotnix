@@ -119,6 +119,14 @@ function cfg_nvimcmp()
 	})
 end
 
+function cfg_peek()
+	local peek = require('peek')
+
+	peek.setup({
+			auto_load = false,
+	})
+end
+
 ------ @TODO: bunchhh of stuff to migrate from old config file
 require("lazy").setup({
   'tpope/vim-sensible',
@@ -155,7 +163,10 @@ require("lazy").setup({
   'sheerun/vim-polyglot',
 
   -- language-specific
-  { 'folke/neodev.nvim', ft = 'lua' }
+  { 'folke/neodev.nvim', ft = 'lua' },
+  { 'toppair/peek.nvim', config = cfg_peek }, -- markdown preview
+
+  {} -- empty
 })
 
 --vim.opt.syntax = true;
