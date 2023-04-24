@@ -177,4 +177,6 @@ vim.opt.wrap = false;
 vim.keymap.set('', '<Leader>y', '"+y')
 vim.keymap.set('', '<Leader>p', '"+p')
 
-vim.cmd.colorscheme('tokyonight-dark')
+-- colorscheme
+vim.g.material_style = "deep ocean"
+vim.cmd.colorscheme('material')
