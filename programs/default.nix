@@ -46,6 +46,9 @@ let
     duf # nicer df
     libqalculate
     ldns # dns utility
+    ffmpeg
+    imv
+    neofetch
 
     # nix
     nix-index
@@ -71,10 +74,7 @@ let
     solvespace
     insomnia
     obs-studio
-    ffmpeg
     mpv
-    imv
-    neofetch
     #libreoffice
     chromium
 
