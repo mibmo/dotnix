@@ -175,7 +175,7 @@ require("lazy").setup({
 
   -- language-specific
   { 'folke/neodev.nvim', ft = 'lua' },
-	{ 'toppair/peek.nvim', config = cfg_peek, ft = 'lua' }, -- markdown preview
+  { 'toppair/peek.nvim', config = cfg_peek, ft = 'markdown' }, -- markdown preview
 
   {} -- empty
 })
