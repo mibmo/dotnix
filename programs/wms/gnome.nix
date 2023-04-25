@@ -33,8 +33,6 @@ in
     burn-my-windows
     undecorate
     shu-zhi
-
-    (mkIf config.services.mullvad-vpn.enable mullvad-indicator) 
   ];
 
   # dont install default gnome applications
