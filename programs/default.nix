@@ -76,6 +76,7 @@ let
     imv
     neofetch
     #libreoffice
+    chromium
 
     # gaming
     lutris
