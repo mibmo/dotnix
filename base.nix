@@ -54,7 +54,10 @@ in
     enable = true;
 
     settings = {
-      no-resolv = true;
+      # prefer using defined servers but also allow isp defined (if e.g. using public wifi)
+      no-resolv = false;
+      strict-order = true;
+
       dnssec = true;
       conf-file = "${pkgs.dnsmasq}/share/dnsmasq/trust-anchors.conf";
       cache-size = "1000";
