@@ -104,4 +104,9 @@ in
       };
     };
   };
+
+  services.mullvad-vpn = {
+    enable = true;
+    enableExcludeWrapper = false; # disables mullvad-exclude as it has a minor seurity impact
+  };
 }

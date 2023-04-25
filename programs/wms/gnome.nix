@@ -1,4 +1,8 @@
-user: { pkgs, ... }: {
+user: { config, pkgs, ... }:
+let
+  inherit (pkgs.lib) mkIf;
+in
+{
   programs.gnupg.agent.pinentryFlavor = "gnome3";
 
   services = {
@@ -29,6 +33,8 @@ user: { pkgs, ... }: {
     burn-my-windows
     undecorate
     shu-zhi
+
+    (mkIf config.services.mullvad-vpn.enable mullvad-indicator) 
   ];
 
   # dont install default gnome applications
