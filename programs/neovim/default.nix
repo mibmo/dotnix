@@ -7,6 +7,10 @@
     vimdiffAlias = true;
 
     extraLuaConfig = builtins.readFile ./config.lua;
-    extraPackages = with pkgs.vimPlugins; [ luasnip cmp_luasnip ];
+    extraPackages = with pkgs.vimPlugins; [
+      luasnip
+      cmp_luasnip
+      pkgs.deno # peek.nvim dependency
+    ];
   };
 }
