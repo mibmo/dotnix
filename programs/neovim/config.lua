@@ -122,6 +122,9 @@ end
 function cfg_peek()
 	local peek = require('peek')
 
+    vim.api.nvim_create_user_command('PeekOpen', peek.open, {})
+    vim.api.nvim_create_user_command('PeekClose', peek.close, {})
+
 	peek.setup({
 		auto_load = false,
 	})
