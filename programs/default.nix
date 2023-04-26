@@ -76,6 +76,7 @@ let
     insomnia
     obs-studio
     mpv
+    zathura
     #libreoffice
     chromium
 
