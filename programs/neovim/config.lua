@@ -140,6 +140,19 @@ function cfg_lualine()
 	}
 end
 
+function cfg_vimtex()
+    vim.g.vimtex_view_general_viewer = 'zathura'
+    vim.g.vimtex_compiler_latexmk = {
+        options = {
+            '-verbose',
+            '-file-line-error',
+            '-synctex=1',
+            '-interaction=nonstopmode',
+            '-shell-escape'
+        }
+    }
+end
+
 ------ @TODO: bunchhh of stuff to migrate from old config file
 require("lazy").setup({
   'tpope/vim-sensible',
@@ -179,6 +192,7 @@ require("lazy").setup({
   -- language-specific
   { 'folke/neodev.nvim', ft = 'lua' },
   { 'toppair/peek.nvim', config = cfg_peek, build = 'deno task --quiet build:fast', ft = 'markdown' }, -- markdown preview
+  { 'lervag/vimtex', config = cfg_vimtex, ft = 'tex' },
 
   {} -- empty
 })
