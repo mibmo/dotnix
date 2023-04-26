@@ -191,7 +191,7 @@ require("lazy").setup({
 
   -- language-specific
   { 'folke/neodev.nvim', ft = 'lua' },
-  { 'toppair/peek.nvim', config = cfg_peek, build = 'deno task --quiet build:fast', ft = 'markdown' }, -- markdown preview
+  { 'iamcco/markdown-preview.nvim', build = 'cd app && yarn install', ft = 'markdown' }, -- markdown preview
   { 'lervag/vimtex', config = cfg_vimtex, ft = 'tex' },
 
   {} -- empty

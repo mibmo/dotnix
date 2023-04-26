@@ -13,8 +13,7 @@
     withRuby = true;
 
     extraPackages = with pkgs; [
-      deno
-      webkitgtk # peek @TODO: deno can't see webkitgtk, so this is broken
+      yarn
 
       texlive.combined.scheme-full # tex distribution
       python310Packages.pygments # tex minted
