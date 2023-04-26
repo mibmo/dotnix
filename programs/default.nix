@@ -31,7 +31,10 @@ let
     programs = {
       gpg.enable = true;
       fzf.enable = true;
-      htop.enable = true;
+      htop = {
+        enable = true;
+        settings.tree_view = true;
+      };
       bottom.enable = true;
     };
   };
