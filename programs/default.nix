@@ -3,9 +3,8 @@ let
   imports = [
     (import ./wms/gnome.nix settings)
     (import ./syncthing settings)
-    ./steam
     ./ipfs
-    ./gamemode
+    ./gaming
   ];
 
   hmImports = [
