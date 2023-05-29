@@ -84,7 +84,9 @@ let
     chromium
 
     # gaming
-    lutris
+    (lutris.override {
+      extraPkgs = pkgs: with pkgs; [ mangohud gamescope gamemode ];
+    })
     wine
     osu-lazer
     prismlauncher
