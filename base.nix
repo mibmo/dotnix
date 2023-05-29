@@ -4,7 +4,7 @@ let
     name = "mib";
     home = "/home/${user.name}"; # @TODO: support darwin
     email = "mib@kanp.ai";
-    gpgKeyId = null;
+    gpgKeyId = "AB0DC647B2F786EB045C7EFECF6E67DED6DC1E3F";
   };
   nerdFonts = pkgs.nerdfonts.override {
     fonts = [
