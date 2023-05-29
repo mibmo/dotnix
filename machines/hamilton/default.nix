@@ -21,7 +21,17 @@
 
   # video
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.opengl.enable = true;
+  hardware = {
+    opengl.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      prime = {
+        offload.enable = true;
+        nvidiaBusId = "PCI:1:00:0";
+        amdgpuBusId = "PCI:5:00:0";
+      };
+    };
+  };
 
   # system
   networking.hostName = "hamilton";
