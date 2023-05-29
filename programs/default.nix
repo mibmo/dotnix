@@ -5,6 +5,7 @@ let
     (import ./syncthing settings)
     ./steam
     ./ipfs
+    ./gamemode
   ];
 
   hmImports = [
@@ -85,7 +86,7 @@ let
 
     # gaming
     (lutris.override {
-      extraPkgs = pkgs: with pkgs; [ mangohud gamescope gamemode ];
+      extraPkgs = pkgs: with pkgs; [ mangohud gamescope ];
     })
     wine
     prismlauncher
