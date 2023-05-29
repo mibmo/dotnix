@@ -7,6 +7,7 @@
       };
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      gamescopeSession.enable = true;
     };
 
     gamemode = {
@@ -20,5 +21,7 @@
         };
       };
     };
+
+    gamescope.enable = true;
   };
 }
