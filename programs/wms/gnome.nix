@@ -6,7 +6,7 @@ in
   programs.gnupg.agent.pinentryFlavor = "gnome3";
 
   services = {
-    dbus.packages = [ pkgs.dconf ];
+    dbus.packages = with pkgs; [ dconf gcr ];
     udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
 
     xserver = {
@@ -23,6 +23,8 @@ in
   };
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
+    pkgs.pinentry-gnome
+
     # top bar
     appindicator
     keep-awake

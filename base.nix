@@ -92,6 +92,7 @@ in
   services = {
     printing.enable = true;
     udev.extraRules = udevRules;
+    pcscd.enable = true;
 
     # @TODO: enable local monitoring with prometheus & grafana
   };
@@ -128,6 +129,13 @@ in
     systemPackages = with pkgs; [
       opentabletdriver
     ];
+  };
+
+  # gpg
+  hardware.gpgSmartcards.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
   };
 
   programs.fish.enable = true;
