@@ -88,7 +88,6 @@ let
       extraPkgs = pkgs: with pkgs; [ mangohud gamescope gamemode ];
     })
     wine
-    osu-lazer
     prismlauncher
   ];
 in
