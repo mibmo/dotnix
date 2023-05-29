@@ -84,9 +84,8 @@ let
     chromium
 
     # gaming
-    (lutris.override {
-      extraPkgs = pkgs: with pkgs; [ mangohud gamescope ];
-    })
+    lutris
+    mangohud
     wine
     prismlauncher
   ];
