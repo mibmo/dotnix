@@ -24,9 +24,10 @@
           ./overlays/gnome-shell.nix
         ];
       };
+      settings = import ./settings.nix;
     in
     {
-      nixosConfigurations = import ./machines { inherit inputs system pkgs; };
+      nixosConfigurations = import ./machines { inherit inputs system pkgs settings; };
 
       formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 

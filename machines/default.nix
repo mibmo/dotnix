@@ -1,11 +1,11 @@
-{ inputs, system, pkgs }:
+{ inputs, system, pkgs, settings }:
 let
   lib = inputs.nixpkgs.lib;
 
   mkMachine = machineModule:
     lib.nixosSystem {
       inherit lib pkgs system;
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs settings; };
       modules = with inputs; [
         ../base.nix
         machineModule

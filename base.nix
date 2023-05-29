@@ -1,11 +1,5 @@
-{ config, pkgs, home-manager, ... }:
+{ settings, pkgs, home-manager, ... }:
 let
-  user = {
-    name = "mib";
-    home = "/home/${user.name}"; # @TODO: support darwin
-    email = "mib@kanp.ai";
-    gpgKeyId = "AB0DC647B2F786EB045C7EFECF6E67DED6DC1E3F";
-  };
   nerdFonts = pkgs.nerdfonts.override {
     fonts = [
       "FiraCode"
@@ -20,7 +14,7 @@ let
   '';
 in
 {
-  imports = [ (import ./programs user) ];
+  imports = [ (import ./programs settings) ];
 
   nix = {
     package = pkgs.nixVersions.unstable;
@@ -139,7 +133,7 @@ in
   };
 
   programs.fish.enable = true;
-  users.users.${user.name} = {
+  users.users.${settings.user.name} = {
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [ "wheel" "input" "networkmanager" ];

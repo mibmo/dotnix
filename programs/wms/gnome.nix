@@ -1,4 +1,4 @@
-user: { config, pkgs, ... }:
+settings: { config, pkgs, ... }:
 let
   inherit (pkgs.lib) mkIf;
 in
@@ -62,7 +62,7 @@ in
   # might need this for nvidia
   #hardware.nvidia.modesetting.enable = true;
 
-  home-manager.users.${user.name}.imports = [
+  home-manager.users.${settings.user.name}.imports = [
     (
       { ... }: {
         xdg.configFile."shuzhi.sh" = {

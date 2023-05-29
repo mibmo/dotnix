@@ -1,5 +1,7 @@
-user: { lib, ... }:
+config: { lib, ... }:
 let
+  inherit (config) user;
+  inherit (config.secret) gpg;
   parallelConnections = 16;
   extraConfig = {
     core.editor = "nvim";
@@ -17,8 +19,8 @@ let
       "ssh://git@gitlab.com".pushInsteadOf = "gl:";
     };
   };
-  signing = lib.mkIf (user ? key) {
-    key = user.key;
+  signing = lib.mkIf (gpg ? keyId) {
+    key = gpg.keyId;
     signByDefault = true;
   };
 in

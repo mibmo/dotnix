@@ -1,8 +1,8 @@
-user: { inputs, pkgs, ... }:
+settings: { inputs, pkgs, ... }:
 let
   imports = [
-    (import ./wms/gnome.nix user)
-    (import ./syncthing user)
+    (import ./wms/gnome.nix settings)
+    (import ./syncthing settings)
     ./steam
     ./ipfs
   ];
@@ -11,7 +11,7 @@ let
     inputs.nur.hmModules.nur
     inputs.hyprland.homeManagerModules.default
     hmMore
-    (import ./git user)
+    (import ./git settings)
     ./fish
     ./neovim
     ./alacritty
@@ -99,7 +99,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
 
-    users.${user.name} = {
+    users.${settings.user.name} = {
       news.display = "silent";
       imports = hmImports;
       home = {
