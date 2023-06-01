@@ -80,6 +80,7 @@ let
     obs-studio
     mpv
     zathura
+    qbittorrent
     #libreoffice
     chromium
 
