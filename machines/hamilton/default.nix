@@ -25,11 +25,7 @@
     opengl.enable = true;
     nvidia = {
       modesetting.enable = true;
-      prime = {
-        offload.enable = true;
-        nvidiaBusId = "PCI:1:00:0";
-        amdgpuBusId = "PCI:5:00:0";
-      };
+      prime.offload.enable = true;
     };
   };
 

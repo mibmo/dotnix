@@ -14,6 +14,6 @@ let
       ];
     };
 in
-{
-  hamilton = mkMachine [ ./hamilton ];
+with inputs.nixos-hardware.nixosModules; {
+  hamilton = mkMachine [ ./hamilton asus-zephyrus-ga503 ];
 }
