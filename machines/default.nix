@@ -2,14 +2,12 @@
 let
   lib = inputs.nixpkgs.lib;
 
-  mkMachine = machineModule:
+  mkMachine = modules:
     lib.nixosSystem {
       inherit lib pkgs system;
       specialArgs = { inherit inputs settings; };
-      modules = with inputs; [
+      modules = with inputs; modules ++ [
         ../base.nix
-        machineModule
-
         nur.nixosModules.nur
         home-manager.nixosModules.home-manager
         hyprland.nixosModules.default
@@ -17,5 +15,5 @@ let
     };
 in
 {
-  hamilton = mkMachine ./hamilton;
+  hamilton = mkMachine [ ./hamilton ];
 }
