@@ -83,6 +83,7 @@ let
     qbittorrent
     #libreoffice
     chromium
+    anki
 
     # gaming
     lutris
