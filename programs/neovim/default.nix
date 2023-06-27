@@ -31,6 +31,7 @@
       lua-language-server
       nixd
       rust-analyzer
+      pyright
 
       # debuggers
       delve

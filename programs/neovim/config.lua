@@ -99,6 +99,19 @@ Languages = {
       server = 'nixd',
     },
   },
+  {
+    name = 'Python',
+    filetype = 'py',
+    formatter = 'python:black',
+    style = {
+      tabstop = 4,
+      shiftwidth = 4,
+      expandtab = false,
+    },
+    lsp = {
+      server = 'pyright',
+    },
+  },
 }
 
 -- setup functions
