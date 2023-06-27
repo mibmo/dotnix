@@ -22,7 +22,10 @@
   # video
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
-    opengl.enable = true;
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+    };
     nvidia = {
       modesetting.enable = true;
       prime.offload.enable = true;
