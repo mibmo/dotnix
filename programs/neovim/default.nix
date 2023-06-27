@@ -13,10 +13,27 @@
     withRuby = true;
 
     extraPackages = with pkgs; [
-      yarn
+      zathura
 
-      texlive.combined.scheme-full # tex distribution
-      python310Packages.pygments # tex minted
+      # build tools
+      yarn
+      gcc
+
+      # plugin dependencies
+      luaPackages.jsregexp
+      vscode-extensions.llvm-org.lldb-vscode
+      texlive.combined.scheme-full
+      python310Packages.pygments
+      ripgrep
+      fd
+
+      # language servers
+      lua-language-server
+      nixd
+      rust-analyzer
+
+      # debuggers
+      delve
     ];
   };
 }
