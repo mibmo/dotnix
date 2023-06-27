@@ -21,6 +21,7 @@ let
   aliases = rec {
     rebuild = "sudo nixos-rebuild switch --flake ~/dev/dotnix#$hostname";
     rebuild-offline = rebuild + " --offline";
+    lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS";
   };
 in
 config
