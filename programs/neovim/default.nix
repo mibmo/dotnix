@@ -32,6 +32,7 @@
       nixd
       rust-analyzer
       pyright
+      lua54Packages.digestif
 
       # debuggers
       delve

@@ -112,6 +112,20 @@ Languages = {
       server = 'pyright',
     },
   },
+  {
+    name = 'Latex',
+    filetype = 'tex',
+    --filetypes = {'tex', 'cls'}, -- @TODO: add support for multiple filetypes
+    formatter = 'latex:latexindent',
+    style = {
+      tabstop = 4,
+      shiftwidth = 4,
+      expandtab = false,
+    },
+    lsp = {
+      server = 'digestif',
+    },
+  },
 }
 
 -- setup functions
@@ -316,6 +330,19 @@ function Cfg_neodev()
   })
 end
 
+function Cfg_vimtex()
+  vim.g.vimtex_view_general_viewer = 'zathura'
+  vim.g.vimtex_compiler_latexmk = {
+    options = {
+        '-verbose',
+        '-file-line-error',
+        '-synctex=1',
+        '-interaction=nonstopmode',
+        '-shell-escape',
+    }
+  }
+end
+
 -- plugin install
 require('lazy').setup({
   'nvim-lua/plenary.nvim',
@@ -350,6 +377,7 @@ require('lazy').setup({
   { 'lervag/vimtex', config = Cfg_vimtex, ft = 'tex' },
   { 'simrat39/rust-tools.nvim', config = Cfg_rusttools, ft = 'rust' },
   { 'folke/neodev.nvim', config = Cfg_neodev, ft = 'lua' },
+  { 'lervag/vimtex', config = Cfg_vimtex, ft = { 'tex', 'cls' } },
 
   -- appearance
   {
