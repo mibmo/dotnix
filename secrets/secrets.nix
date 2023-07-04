@@ -5,6 +5,7 @@ let
 
   mkSecret = name: { ${name}.publicKeys = keys; };
   secrets = [
+    "user_password"
     "aur_private_key"
     "github_private_key"
     "scaleway_private_key"

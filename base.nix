@@ -137,6 +137,7 @@ in
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [ "wheel" "input" "networkmanager" ];
+    passwordFile = config.age.secrets.user_password.path;
   };
 
   age = {
