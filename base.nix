@@ -1,4 +1,4 @@
-{ settings, pkgs, home-manager, ... }:
+{ settings, lib, config, pkgs, home-manager, ... }:
 let
   nerdFonts = pkgs.nerdfonts.override {
     fonts = [
@@ -137,6 +137,16 @@ in
     isNormalUser = true;
     shell = pkgs.fish;
     extraGroups = [ "wheel" "input" "networkmanager" ];
+  };
+
+  age = {
+    identityPaths = [ (config.users.users.${settings.user.name}.home + "/.secret/age.keys") ];
+    secrets =
+      let
+        config = import ./secrets/secrets.nix;
+        secrets = builtins.mapAttrs (name: value: { file = ./secrets/${name}; }) config;
+      in
+      secrets;
   };
 
   # read the docs (or crash and burn)

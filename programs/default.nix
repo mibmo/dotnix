@@ -1,4 +1,4 @@
-settings: { inputs, pkgs, ... }:
+settings: { inputs, pkgs, system, ... }:
 let
   imports = [
     (import ./wms/gnome.nix settings)
@@ -59,6 +59,8 @@ let
 
     # security
     keepassxc
+    age
+    inputs.agenix.packages.${system}.default
 
     # audio stuff
     pulsemixer
