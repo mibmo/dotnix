@@ -285,6 +285,11 @@ function Cfg_lualine()
   })
 end
 
+function Cfg_telescope()
+  local telescope = require('telescope')
+  telescope.setup({})
+end
+
 function Cfg_vimtex()
   vim.g.vimtex_view_general_viewer = 'zathura'
   vim.g.vimtex_compiler_latexmk = {
@@ -370,6 +375,12 @@ require('lazy').setup({
         },
       },
     },
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.2',
+    config = Cfg_telescope,
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 
   -- tools
