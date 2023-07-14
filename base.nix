@@ -37,9 +37,6 @@ in
   };
 
   networking = {
-    # disable the global DHCP flag as it is deprecated
-    useDHCP = false;
-
     firewall.enable = false;
 
     networkmanager.enable = true;
