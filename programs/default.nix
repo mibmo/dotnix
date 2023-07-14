@@ -5,6 +5,7 @@ let
     (import ./syncthing settings)
     ./ipfs
     ./gaming
+    ./podman
   ];
 
   hmImports = [
