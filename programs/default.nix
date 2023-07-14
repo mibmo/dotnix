@@ -61,6 +61,7 @@ let
     # security
     keepassxc
     age
+    minisign
     inputs.agenix.packages.${system}.default
 
     # audio stuff
