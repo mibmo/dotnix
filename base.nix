@@ -81,7 +81,15 @@ in
   services.ntp.enable = true;
 
   services = {
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        gutenprint
+        cups-bjnp
+        carps-cups
+        canon-cups-ufr2
+      ];
+    };
     udev.extraRules = udevRules;
     pcscd.enable = true;
 
