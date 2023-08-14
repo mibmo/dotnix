@@ -86,7 +86,7 @@ let
     mpv
     zathura
     qbittorrent
-    #libreoffice
+    libreoffice
     chromium
     anki
 
