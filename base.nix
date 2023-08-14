@@ -39,20 +39,9 @@ in
   networking = {
     firewall.enable = false;
 
-    networkmanager.enable = true;
-  };
-  services.dnsmasq = {
-    enable = true;
-
-    settings = {
-      # prefer using defined servers but also allow isp defined (if e.g. using public wifi)
-      no-resolv = false;
-      strict-order = true;
-
-      dnssec = true;
-      conf-file = "${pkgs.dnsmasq}/share/dnsmasq/trust-anchors.conf";
-      cache-size = "1000";
-      server = [
+    networkmanager = {
+      enable = true;
+      insertNameservers = [
         "9.9.9.9"
         "149.112.112.112"
         "2620:fe::fe"
