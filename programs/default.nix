@@ -63,6 +63,7 @@ let
     age
     minisign
     inputs.agenix.packages.${system}.default
+    tor-browser-bundle-bin
 
     # audio stuff
     pulsemixer
