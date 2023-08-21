@@ -54,6 +54,7 @@ let
     imv
     neofetch
     wireguard-tools
+    ydotool
 
     # nix
     nix-index

@@ -113,6 +113,7 @@ in
       GTK_IM_MODULE = "fcitx";
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
+      YDOTOOL_SOCKET = "/run/ydotool.socket";
     };
     systemPackages = with pkgs; [
       opentabletdriver
@@ -132,6 +133,18 @@ in
     shell = pkgs.fish;
     extraGroups = [ "wheel" "input" "networkmanager" ];
     passwordFile = config.age.secrets.user_password.path;
+  };
+  systemd.services.ydotoold = {
+    description = "An auto-input utility for wayland";
+    documentation = [ "man:ydotool(1)" "man:ydotoold(8)" ];
+    wantedBy = ["multi-user.target"];
+    
+    serviceConfig.ExecStart = ''
+      ${pkgs.ydotool}/bin/ydotoold \
+        --socket-path=${config.environment.variables.YDOTOOL_SOCKET} \
+        --socket-own=0:1 \
+        --socket-perm=0660
+    '';
   };
 
   age = {
