@@ -86,7 +86,7 @@ let
       };
 
       "Home Manager Options" = {
-        urls = [{ template = "https://mipmip.github.io/home-manager-option-search/?{searchTerms}"; }];
+        urls = [{ template = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}"; }];
         iconUpdateURL = "https://mipmip.github.io/home-manager-option-search/images/favicon.png";
         updateInterval = 24 * 60 * 60 * 1000; # every day
         definedAliases = [ "@hm" "@hmopts" ];
