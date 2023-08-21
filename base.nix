@@ -122,6 +122,7 @@ in
 
   # gpg
   hardware.gpgSmartcards.enable = true;
+  hardware.nitrokey.enable = true;
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
@@ -131,9 +132,12 @@ in
   users.users.${settings.user.name} = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "input" "networkmanager" ];
+    extraGroups = [ "wheel" "input" "networkmanager" "nitrokey" ];
     passwordFile = config.age.secrets.user_password.path;
   };
+  users.groups.nitrokey = { };
+  services.udev.packages = [ pkgs.nitrokey-udev-rules ];
+
   systemd.services.ydotoold = {
     description = "An auto-input utility for wayland";
     documentation = [ "man:ydotool(1)" "man:ydotoold(8)" ];

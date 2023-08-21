@@ -64,6 +64,7 @@ let
     age
     minisign
     inputs.agenix.packages.${system}.default
+    nitrokey-app
     tor-browser-bundle-bin
 
     # audio stuff
