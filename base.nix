@@ -132,7 +132,7 @@ in
   users.users.${settings.user.name} = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" "input" "networkmanager" "nitrokey" ];
+    extraGroups = [ "wheel" "input" "networkmanager" "adbusers" "nitrokey" ];
     passwordFile = config.age.secrets.user_password.path;
   };
   users.groups.nitrokey = { };
@@ -160,6 +160,8 @@ in
       in
       secrets;
   };
+  
+  programs.adb.enable = true;
 
   # read the docs (or crash and burn)
   system.stateVersion = "22.11";
