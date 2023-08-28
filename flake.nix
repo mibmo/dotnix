@@ -6,6 +6,11 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
 
+    conch = {
+      url = "github:mibmo/conch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,9 +28,12 @@
   };
 
   outputs =
-    inputs @ { self, nixpkgs, nur, home-manager, ... }:
+    inputs@{ nixpkgs, conch, ... }:
     let
-      system = "x86_64-linux";
+      lib = inputs.nixpkgs.lib // import ./lib.nix { inherit inputs; };
+      config = import ./config.nix { inherit inputs lib; };
+
+      /*
       pkgs = import inputs.nixpkgs {
         inherit system;
         config.allowUnfree = true;
@@ -33,19 +41,11 @@
           ./overlays/gnome-shell.nix
         ];
       };
-      settings = import ./settings.nix;
-    in
-    {
-      nixosConfigurations = import ./machines { inherit inputs system pkgs settings; };
-
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-
-      /*
-      devShell.${system} = (
-        import ./shell.nix {
-          inherit system nixpkgs;
-        }
-      );
       */
-    };
+    in
+    conch.load [
+      "x86_64-linux"
+    ] ({ pkgs, ... }: {
+      flake.nixosConfigurations = import ./hosts { inherit inputs lib config; };
+    });
 }

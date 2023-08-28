@@ -1,0 +1,3 @@
+{
+  mobai = { id = "746EZ7Y-TFBI5H2-ITXQ2YO-PYRVMEW-MFOYP5W-HVKVWDP-SLNMRPU-ECAJIQ5"; introducer = true; };
+}
