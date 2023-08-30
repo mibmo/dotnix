@@ -1,13 +1,15 @@
 { ... }: {
   services.kubo = {
-    enable = false;
+    enable = true;
     enableGC = true;
     localDiscovery = true;
     autoMigrate = true;
-    autoMount = true;
+    #autoMount = true;
     settings = {
-      Datastore.StorageMax = "10GB";
-      Discovey.MDNS.Enabled = true;
+      Addresses.API = [
+        "/ip4/127.0.0.1/tcp/5001"
+        "/ip6/::1/tcp/5001"
+      ];
     };
   };
 }
