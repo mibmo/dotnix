@@ -2,6 +2,7 @@
   imports = [
     ../internet/firefox
     ./ydotool
+    ./element
   ];
 
   environment.systemPackages = with pkgs; [
