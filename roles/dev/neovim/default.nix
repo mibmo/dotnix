@@ -47,4 +47,5 @@ in
     imports = [ module ];
     home.sessionVariables.EDITOR = "nvim";
   };
+  environment.variables.EDITOR = "nvim";
 }
