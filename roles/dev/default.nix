@@ -43,4 +43,11 @@ in
       fzf
     ];
   };
+
+  programs.nix-index = {
+    enable = true;
+    enableZshIntegration = lib.mkDefault false;
+    enableFishIntegration = lib.mkDefault false;
+    enableBashIntegration = lib.mkDefault false;
+  };
 }
