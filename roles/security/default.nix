@@ -12,6 +12,7 @@ in
       age
       minisign
       nitrokey-app
+      monero-gui
       inputs.agenix.packages.${host.system}.default
     ];
   };
