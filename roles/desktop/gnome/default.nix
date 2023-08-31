@@ -32,6 +32,7 @@
     burn-my-windows
     undecorate
     shu-zhi
+    material-you-color-theming
   ];
 
   # dont install default gnome applications
