@@ -21,6 +21,7 @@ in
     ./alacritty
     ./android
     ./containers
+    ./virt-manager
   ];
 
   home-manager.users.${settings.user.name} = {
