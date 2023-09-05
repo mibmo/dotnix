@@ -34,7 +34,7 @@
 
   # system
   networking.hostName = "hamilton";
-  
+
   # state versions
   system.stateVersion = "22.11";
   home-manager.users.${settings.user.name}.home.stateVersion = "22.11";

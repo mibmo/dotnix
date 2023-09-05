@@ -45,7 +45,8 @@
     in
     conch.load [
       "x86_64-linux"
-    ] ({ pkgs, ... }: {
-      flake.nixosConfigurations = import ./hosts { inherit inputs lib config; };
-    });
+    ]
+      ({ pkgs, ... }: {
+        flake.nixosConfigurations = import ./hosts { inherit inputs lib config; };
+      });
 }
