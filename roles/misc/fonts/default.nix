@@ -3,11 +3,13 @@ let
   nerd = pkgs.nerdfonts.override {
     fonts = [
       "FiraCode"
-      "FantasqueSansMono"
     ];
   };
   google = pkgs.google-fonts.override {
-    fonts = [ "Nunito" ];
+    fonts = [
+      "Nunito"
+      "Roboto"
+    ];
   };
 in
 {
@@ -15,12 +17,17 @@ in
     nerd
     google
 
-    # japanese fonts
+    fantasque-sans-mono
+
+    # japanese
     noto-fonts-cjk-serif
     noto-fonts-cjk-sans
     migmix
     migu
     ipafont
     takao
+
+    # chinese
+    smiley-sans
   ];
 }
