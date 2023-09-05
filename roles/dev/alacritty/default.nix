@@ -6,7 +6,7 @@ let
       settings = {
         font = {
           size = 12;
-          normal.family = "FantasqueSansM Nerd Font";
+          normal.family = "Fantasque Sans Mono";
         };
       };
     };
