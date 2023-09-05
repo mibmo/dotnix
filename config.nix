@@ -11,6 +11,7 @@ let
         ./roles/dev
         ./roles/gaming
         ./roles/desktop
+        ./roles/education
         ./roles/productivity
 
         ./roles/desktop/gnome
