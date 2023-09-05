@@ -40,6 +40,7 @@ let
       lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS";
       rebuild = "sudo nixos-rebuild switch --flake ~/dev/dotnix#$hostname";
       rebuild-offline = "${rebuild} --offline";
+      tmp = "pushd $(mktemp -d)";
     };
   };
 
