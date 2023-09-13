@@ -1,4 +1,12 @@
-{ pkgs, settings, ... }: {
+{ pkgs, settings, ... }:
+let
+  module = {
+    services = {
+      easyeffects.enable = true;
+    };
+  };
+in
+{
   imports = [
     ../internet/firefox
     ./ydotool
@@ -9,12 +17,17 @@
     wl-clipboard
   ];
 
-  home-manager.users.${settings.user.name}.home.packages = with pkgs; [
-    mpv
-    zathura
-    libreoffice
-    easyeffects
-  ];
+  home-manager.users.${settings.user.name} = {
+    imports = [ module ];
+    home.packages = with pkgs; [
+      mpv
+      zathura
+      libreoffice
+      pulsemixer
+    ];
+  };
+
+  programs.dconf.enable = true;
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
