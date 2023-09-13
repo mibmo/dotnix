@@ -126,6 +126,16 @@ Languages = {
       server = 'digestif',
     },
   },
+  {
+    name = 'Typescript',
+    filetype = 'ts',
+    formatter = 'typescript:eslint_d',
+    style = {
+      tabstop = 2,
+      shiftwidth = 2,
+      expandtab = true,
+    },
+  },
 }
 
 -- setup functions
