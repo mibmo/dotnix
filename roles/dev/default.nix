@@ -42,6 +42,7 @@ in
       tree
       libqalculate
       fzf
+      drawio
     ];
   };
 
