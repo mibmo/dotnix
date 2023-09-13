@@ -9,6 +9,7 @@ in
 {
   imports = [
     ../internet/firefox
+    ./fcitx5
     ./ydotool
     ./element
   ];
