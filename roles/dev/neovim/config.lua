@@ -136,6 +136,16 @@ Languages = {
       expandtab = true,
     },
   },
+  {
+    name = 'HTML',
+    filetype = 'html',
+    formatter = 'html:tidy',
+    style = {
+      tabstop = 4,
+      shiftwidth = 4,
+      expandtab = true,
+    },
+  },
 }
 
 -- setup functions
@@ -381,7 +391,10 @@ require('lazy').setup({
         config = Cfg_luasnip,
         dependencies = {
           'saadparwaiz1/cmp_luasnip',
-          --'rafamadriz/friendly-snippets',
+          {
+            'rafamadriz/friendly-snippets',
+            ft = { 'html', 'js', 'ts' }
+          }
         },
       },
     },
