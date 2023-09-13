@@ -8,6 +8,7 @@ let
       status = true;
       verbose = 1;
     };
+    push.autoSetupRemote = true;
     fetch.parallel = parallelConnections;
     http.maxRequests = parallelConnections;
     url = {
