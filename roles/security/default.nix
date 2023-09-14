@@ -1,7 +1,12 @@
 { inputs, pkgs, config, settings, host, ... }:
 let
   module = {
-    programs.gpg.enable = true;
+    programs = {
+      gpg = {
+        enable = true;
+        scdaemonSettings.disable-ccid = true;
+      };
+    };
   };
 in
 {
@@ -34,12 +39,13 @@ in
       (import ../../secrets/secrets.nix);
   };
 
+    #gpg-connect-agent /bye
+  environment.shellInit = ''
+    export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+  '';
+
   hardware.gpgSmartcards.enable = true;
   hardware.nitrokey.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-
   services.pcscd.enable = true;
+  programs.ssh.startAgent = false;
 }
