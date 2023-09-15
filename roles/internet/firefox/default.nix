@@ -59,6 +59,13 @@ let
         definedAliases = [ "@nw" "@nixwiki" ];
       };
 
+      "Nix Reference Manual" = {
+        urls = [{ template = "https://nixos.org/manual/nix/unstable/?search={searchTerms}"; }];
+        iconUpdateURL = "https://nixos.org/manual/nix/unstable/favicon.png";
+        updateInterval = 24 * 60 * 60 * 1000; # every day
+        definedAliases = [ "@nm" "@nixman" "@nixmanual" ];
+      };
+
       "Nix Packages" = {
         urls = [{
           template = "https://search.nixos.org/packages";
