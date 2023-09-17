@@ -41,6 +41,7 @@ let
       rebuild = "sudo nixos-rebuild switch --flake ~/dev/dotnix#$hostname";
       rebuild-offline = "${rebuild} --offline";
       tmp = "pushd $(mktemp -d)";
+      cleanup-results = ''find . -type l -name "result" -exec echo "unlinking {}" \; -exec unlink {} \;'';
     };
   };
 
