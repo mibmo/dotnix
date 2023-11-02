@@ -49,6 +49,10 @@ in
 
   users.users.${settings.user.name}.extraGroups = [ "uucp" "dialout" ];
 
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+  ];
+
   programs.nix-index = {
     enable = true;
     enableZshIntegration = lib.mkDefault false;
