@@ -37,7 +37,7 @@ let
       se = "sudo ${e}";
       ns = "nix-shell";
       nd = "nix develop";
-      lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS";
+      lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
       rebuild = "sudo nixos-rebuild switch --flake ~/dev/dotnix#$hostname";
       rebuild-offline = "${rebuild} --offline";
       tmp = "pushd $(mktemp -d)";
