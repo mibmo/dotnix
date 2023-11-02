@@ -47,6 +47,8 @@ in
     ];
   };
 
+  users.users.${settings.user.name}.extraGroups = [ "uucp" "dialout" ];
+
   programs.nix-index = {
     enable = true;
     enableZshIntegration = lib.mkDefault false;
