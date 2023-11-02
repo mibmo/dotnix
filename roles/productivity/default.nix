@@ -7,5 +7,7 @@
     inkscape
     gimp
     prusa-slicer
+    betaflight-configurator
+    edgetx
   ];
 }
