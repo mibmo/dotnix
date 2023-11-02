@@ -7,6 +7,11 @@ let
         scdaemonSettings.disable-ccid = true;
       };
     };
+    services.gpg-agent = {
+      enable = true;
+      enableExtraSocket = true;
+      enableSshSupport = true;
+    };
   };
 in
 {
