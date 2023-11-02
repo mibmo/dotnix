@@ -21,6 +21,7 @@
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
     pkgs.pinentry-gnome
+    pkgs.gnome.file-roller
 
     # top bar
     appindicator
