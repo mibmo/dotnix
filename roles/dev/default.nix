@@ -43,6 +43,7 @@ in
       libqalculate
       fzf
       drawio
+      mmv-go
     ];
   };
 
