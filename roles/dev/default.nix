@@ -44,6 +44,7 @@ in
       fzf
       drawio
       mmv-go
+      jq
     ];
   };
 
