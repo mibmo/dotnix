@@ -42,7 +42,6 @@ in
       (import ../../secrets/secrets.nix);
   };
 
-    #gpg-connect-agent /bye
   environment.shellInit = ''
     export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
   '';
