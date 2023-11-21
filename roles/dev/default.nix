@@ -52,6 +52,7 @@ in
 
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
+    "armv6l-linux"
   ];
 
   programs.nix-index = {
