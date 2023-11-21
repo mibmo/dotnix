@@ -22,9 +22,7 @@ in
       age
       minisign
       nitrokey-app
-      (pynitrokey.overrideAttrs (final: {
-        propagatedBuildInputs = final.propagatedBuildInputs ++ [ pkgs.python310Packages.importlib-metadata ];
-      }))
+      pynitrokey
       monero-gui
       inputs.agenix.packages.${host.system}.default
     ];
