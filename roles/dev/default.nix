@@ -45,6 +45,7 @@ in
       drawio
       mmv-go
       jq
+      dwarfs
     ];
   };
 
