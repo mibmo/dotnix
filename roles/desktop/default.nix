@@ -25,6 +25,7 @@ in
       zathura
       libreoffice
       pulsemixer
+      qbittorrent
     ];
   };
 
