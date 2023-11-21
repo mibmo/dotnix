@@ -56,10 +56,14 @@ in
     "armv6l-linux"
   ];
 
-  programs.nix-index = {
-    enable = true;
-    enableZshIntegration = lib.mkDefault false;
-    enableFishIntegration = lib.mkDefault false;
-    enableBashIntegration = lib.mkDefault false;
+  programs = {
+    nix-index = {
+      enable = true;
+      enableZshIntegration = lib.mkDefault false;
+      enableFishIntegration = lib.mkDefault false;
+      enableBashIntegration = lib.mkDefault false;
+    };
+
+    mtr.enable = true;
   };
 }
