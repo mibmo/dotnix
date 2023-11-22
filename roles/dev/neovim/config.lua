@@ -91,7 +91,7 @@ Languages = {
 	{
 		name = "Nix",
 		filetype = "nix",
-		formatter = "nix:nixpkgs_fmt",
+		formatter = "nix:alejandra",
 		style = {
 			tabstop = 2,
 			shiftwidth = 2,
@@ -117,7 +117,7 @@ Languages = {
 		name = "Latex",
 		filetype = "tex",
 		--filetypes = {'tex', 'cls'}, -- @TODO: add support for multiple filetypes
-		formatter = "latex:latexindent",
+		formatter = nil,
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,
@@ -130,7 +130,7 @@ Languages = {
 	{
 		name = "Typescript",
 		filetype = "ts",
-		formatter = "typescript:eslint_d",
+		formatter = "typescript:denofmt",
 		style = {
 			tabstop = 2,
 			shiftwidth = 2,
@@ -140,7 +140,7 @@ Languages = {
 	{
 		name = "HTML",
 		filetype = "html",
-		formatter = "html:tidy",
+		formatter = nil,
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,

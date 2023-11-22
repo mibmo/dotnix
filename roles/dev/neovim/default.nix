@@ -38,6 +38,13 @@ let
 
         # debuggers
         delve
+
+        # formatters
+        stylua # lua
+        alejandra # nix
+        black # python
+        deno # typescript
+        clang-tools # java
       ];
     };
   };
