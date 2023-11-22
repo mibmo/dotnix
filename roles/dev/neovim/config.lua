@@ -146,6 +146,16 @@ Languages = {
       expandtab = true,
     },
   },
+  {
+    name = 'Java',
+    filetype = 'java',
+    formatter = 'java:clangformat',
+    style = {
+      tabstop = 4,
+      shiftwidth = 4,
+      expandtab = false,
+    },
+  },
 }
 
 -- setup functions
