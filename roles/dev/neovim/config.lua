@@ -285,19 +285,17 @@ end
 function Cfg_formatter()
   local formatter = require('formatter')
 
-  local filetypes = {};
+  local filetypes = {}
   for _, language in pairs(Languages) do
-    local fmt = nil
     if language.formatter ~= nil then
-			local filetype, name = string.match(language.formatter, '(.*):(.*)') -- split on :
-			fmt = require('formatter.filetypes.' .. filetype)[name]
-    else
-      fmt = require('formatter.filetypes.' .. language.filetype)[0]
+      local filetype, name = string.match(language.formatter, '(.*):(.*)') -- split on :
+      filetypes[filetype] = { require('formatter.filetypes.' .. filetype)[name] }
     end
-    filetypes[language.name] = fmt
   end
 
   formatter.setup({
+    logging = true,
+    log_level = vim.log.levels.WARN,
     filetype = filetypes,
   })
 end
@@ -446,6 +444,9 @@ vim.opt.expandtab = true
 vim.keymap.set('', '<Leader>y', '"+y') -- yank to clipboard
 vim.keymap.set('', '<Leader>p', '"+p') -- paste from clipboard
 vim.keymap.set('', '<Leader>n', ':nohlsearch<CR>') -- disables highlight of previous search pattern
+vim.keymap.set('n', '<Leader>f', ':Format<CR>', { silent = true }) -- format buffer
+vim.keymap.set('n', '<Leader>F', ':FormatWrite<CR>', { silent = true }) -- formatter buffer and write
+
 
 -- autocmds
 local au_language_styles = vim.api.nvim_create_augroup('language_styles', { clear = true })
