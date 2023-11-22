@@ -2,7 +2,10 @@
 let
   parallelConnections = 16;
   extraConfig = {
-    core.editor = settings.defaults.editor;
+    core = {
+      editor = settings.defaults.editor;
+      untrackedCache = true;
+    };
     init.defaultBranch = "main";
     commit = {
       status = true;
