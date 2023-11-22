@@ -450,6 +450,7 @@ vim.keymap.set("n", "<Leader>F", ":FormatWrite<CR>", { silent = true }) -- forma
 
 -- autocmds
 local au_language_styles = vim.api.nvim_create_augroup("language_styles", { clear = true })
+local au_language_formatters = vim.api.nvim_create_augroup("language_formatters", { clear = true })
 for _, language in pairs(Languages) do
 	if language.style ~= nil then
 		local style = language.style
@@ -462,6 +463,16 @@ for _, language in pairs(Languages) do
 					vim.o[key] = value
 				end
 			end,
+		})
+	end
+
+	if language.formatter ~= nil then
+		-- @TODO: seems to save twice, but to use BufWritePre we'd need a sync Format command :b
+		vim.api.nvim_create_autocmd("BufWritePost", {
+			desc = "Run formatter on buffer save for " .. language.name,
+			pattern = "*",
+			group = au_language_formatters,
+			command = "FormatWrite",
 		})
 	end
 end
