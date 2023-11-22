@@ -41,7 +41,7 @@ let
 
         # formatters
         stylua # lua
-        alejandra # nix
+        nixpkgs-fmt # nix
         black # python
         deno # typescript
         clang-tools # java
