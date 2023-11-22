@@ -22,6 +22,7 @@ Languages = {
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,
+			expandtab = false,
 		},
 		lsp = {
 			server = "lua_ls",
