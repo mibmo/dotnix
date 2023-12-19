@@ -46,6 +46,7 @@ in
       mmv-go
       jq
       dwarfs
+      nix-output-monitor
     ];
   };
 
