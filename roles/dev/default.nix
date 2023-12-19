@@ -22,6 +22,8 @@ in
     ./android
     ./containers
     ./virt-manager
+    ../internet/tor
+    ../internet/i2p
   ];
 
   home-manager.users.${settings.user.name} = {
