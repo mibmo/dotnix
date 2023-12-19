@@ -1,4 +1,4 @@
-{ inputs, pkgs, settings, ... }: {
+{ inputs, pkgs, config, settings, ... }: {
   imports = [
     ./hardware-configuration.nix
   ];
@@ -29,6 +29,7 @@
     nvidia = {
       modesetting.enable = true;
       prime.offload.enable = true;
+      package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     };
   };
 
