@@ -18,6 +18,10 @@
       preLVM = true;
     };
   };
+  boot.plymouth = {
+    enable = true;
+    theme = "fade-in";
+  };
 
   # video
   services.xserver.videoDrivers = [ "nvidia" ];
