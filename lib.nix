@@ -21,9 +21,7 @@ let
         ({ ... }: {
           nixpkgs = {
             config.allowUnfree = true;
-            overlays = builtins.map
-              (path: import (./overlays + "/${path}"))
-              (attrsets.attrNames (builtins.readDir ./overlays));
+            overlays = import ./overlays/default.nix { inherit (inputs.nixpkgs) lib; };
           };
         })
         module.host
@@ -35,15 +33,6 @@ let
         modules = ../modules;
         settings = import ./config.nix { inherit inputs; lib = combined-lib; };
         lib = combined-lib;
-        /*
-        pkgs = import inputs.nixpkgs {
-          system = module.system;
-          config.allowUnfree = true;
-          overlays = builtins.map
-            (path: import (./overlays + "/${path}"))
-            (attrsets.attrNames (builtins.readDir ./overlays));
-        };
-            */
       };
     };
 
