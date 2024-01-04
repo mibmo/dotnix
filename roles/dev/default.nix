@@ -49,6 +49,7 @@ in
       jq
       dwarfs
       nix-output-monitor
+      github-cli
     ];
   };
 
