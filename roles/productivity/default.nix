@@ -1,6 +1,6 @@
 { pkgs, settings, ... }: {
   home-manager.users.${settings.user.name}.home.packages = with pkgs; [
-    blender
+    blender-hip
     freecad
     kicad
     solvespace
