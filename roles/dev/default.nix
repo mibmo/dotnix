@@ -51,6 +51,8 @@ in
       nix-output-monitor
       github-cli
       p7zip
+      zip
+      unzip
     ];
   };
 
