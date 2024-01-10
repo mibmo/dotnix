@@ -50,6 +50,7 @@ in
       dwarfs
       nix-output-monitor
       github-cli
+      p7zip
     ];
   };
 
