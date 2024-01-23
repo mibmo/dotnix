@@ -64,12 +64,20 @@
   home-manager.users.${settings.user.name}.imports = [
     (
       { ... }: {
-        xdg.configFile."shuzhi.sh" = {
+        xdg.configFile."shuzhi.py" = {
           executable = true;
-          source = builtins.toFile "shuzhi.sh" ''
-            #!/usr/bin/env sh
-            echo "こんにちは"
-            hostname
+          source = pkgs.writeScript "shuzhi.py" ''
+            #!${pkgs.python3}/bin/python
+            import socket
+
+            def print_wide(*args, sep=" ", **kwargs):
+              wide_map = {i: i + 0xFEE0 for i in range(0x21, 0x7F)}
+              wide_map[0x20] = 0x3000
+              text = sep.join(map(str, args)).translate(wide_map)
+              print(text, **kwargs)
+
+            print("こんにちは")
+            print_wide(socket.gethostname())
           '';
         };
       }
