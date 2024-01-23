@@ -15,6 +15,7 @@ in
     solvespace
     inkscape
     gimp
+    krita
     prusa-slicer
     betaflight-configurator
     edgetx
