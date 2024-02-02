@@ -45,7 +45,7 @@ Languages = {
 		},
 	},
 	{
-		name = "Go",
+		name = "Golang",
 		filetype = "go",
 		formatter = nil,
 		style = {
@@ -114,7 +114,7 @@ Languages = {
 		},
 	},
 	{
-		name = "Latex",
+		name = "LaTeX",
 		filetype = "tex",
 		--filetypes = {'tex', 'cls'}, -- @TODO: add support for multiple filetypes
 		formatter = nil,
@@ -138,7 +138,7 @@ Languages = {
 		},
 	},
 	{
-		name = "HTML",
+		name = "Hyper Text Markup Language",
 		filetype = "html",
 		formatter = nil,
 		style = {
