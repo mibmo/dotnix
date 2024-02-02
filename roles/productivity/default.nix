@@ -17,6 +17,7 @@ in
     gimp
     krita
     prusa-slicer
+    renderdoc
     betaflight-configurator
     edgetx
   ];
