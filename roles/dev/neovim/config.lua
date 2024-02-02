@@ -301,6 +301,26 @@ function Cfg_formatter()
 	})
 end
 
+function Cfg_treesitter()
+	local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+	for _, language in pairs(Languages) do
+		if language.treesitter ~= nil then
+			parser_configs[language.filetype] = {
+				url = language.treesitter,
+				files = { "src/parser.c" },
+			}
+		end
+	end
+
+	local configs = require("nvim-treesitter.configs")
+	configs.setup({
+		ensure_installed = TreesitterLanguages,
+		sync_install = false,
+		highlight = { enable = true },
+		indent = { enable = false },
+	})
+end
+
 function Cfg_luasnip()
 	require("luasnip.loaders.from_vscode").lazy_load()
 end
@@ -377,6 +397,18 @@ function Cfg_vimtex()
 	}
 end
 
+-- treesitter integration
+TreesitterLanguages = {}
+for _, language in pairs(Languages) do
+	if language.treesitter ~= nil then
+		local filetype = language.filetype
+		table.insert(TreesitterLanguages, filetype)
+		local extension = {}
+		extension[filetype] = filetype
+		vim.filetype.add({ extension = extension })
+	end
+end
+
 -- plugin install
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
@@ -387,6 +419,7 @@ require("lazy").setup({
 	{ "neovim/nvim-lspconfig", config = Cfg_lspconfig },
 	{ "mfussenegger/nvim-dap", config = Cfg_dap },
 	{ "mhartington/formatter.nvim", config = Cfg_formatter },
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = Cfg_treesitter, ft = TreesitterLanguages },
 	{
 		"hrsh7th/nvim-cmp",
 		config = Cfg_cmp,
