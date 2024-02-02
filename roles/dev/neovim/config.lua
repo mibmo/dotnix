@@ -157,6 +157,16 @@ Languages = {
 			expandtab = false,
 		},
 	},
+	{
+		name = "WebGPU Shading Language",
+		filetype = "wgsl",
+		treesitter = "https://github.com/szebniok/tree-sitter-wgsl",
+		style = {
+			tabstop = 4,
+			shiftwidth = 4,
+			expandtab = false,
+		},
+	},
 }
 
 -- setup functions
