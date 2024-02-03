@@ -372,6 +372,24 @@ end
 function Cfg_telescope()
 	local telescope = require("telescope")
 	telescope.setup({})
+
+	local builtin = require("telescope.builtin")
+
+	-- files
+	vim.keymap.set("n", "<leader>ff", builtin.find_files, { silent = true })
+	vim.keymap.set("n", "<leader>fs", builtin.live_grep, { silent = true })
+
+	-- vim
+	vim.keymap.set("n", "<leader>fc", builtin.commands, { silent = true })
+	vim.keymap.set("n", "<leader>fC", builtin.command_history, { silent = true })
+	vim.keymap.set("n", "<leader>fm", builtin.marks, { silent = true })
+	vim.keymap.set("n", "<leader>fp", builtin.man_pages, { silent = true })
+	vim.keymap.set("n", "<leader>fr", builtin.spell_suggest, { silent = true })
+
+	-- git
+	vim.keymap.set("n", "<leader>fgc", builtin.git_commits, { silent = true })
+	vim.keymap.set("n", "<leader>fgb", builtin.git_branches, { silent = true })
+	vim.keymap.set("n", "<leader>fgs", builtin.git_status, { silent = true })
 end
 
 function Cfg_vimtex()
