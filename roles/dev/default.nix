@@ -53,6 +53,7 @@ in
       p7zip
       zip
       unzip
+      ripgrep
     ];
   };
 
