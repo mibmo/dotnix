@@ -54,6 +54,7 @@ in
       zip
       unzip
       ripgrep
+      fd
     ];
   };
 
