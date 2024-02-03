@@ -522,7 +522,7 @@ for _, language in pairs(Languages) do
 		-- @TODO: seems to save twice, but to use BufWritePre we'd need a sync Format command :b
 		vim.api.nvim_create_autocmd("BufWritePost", {
 			desc = "Run formatter on buffer save for " .. language.name,
-			pattern = "*",
+			pattern = "*." .. language.filetype,
 			group = au_language_formatters,
 			command = "FormatWrite",
 		})
