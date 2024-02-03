@@ -1,6 +1,6 @@
 { pkgs, settings, ... }:
 let
-  kicad = pkgs.kicad-unstable.override {
+  kicad = pkgs.kicad.override {
     addons = with pkgs.kicadAddons; [
       kikit
       kikit-library
