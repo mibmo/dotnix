@@ -432,7 +432,6 @@ end
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
 	"tpope/vim-sensible",
-	"sheerun/vim-polyglot",
 
 	-- magic
 	{ "neovim/nvim-lspconfig", config = Cfg_lspconfig },
