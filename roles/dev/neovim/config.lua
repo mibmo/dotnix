@@ -324,6 +324,9 @@ function Cfg_formatter()
 end
 
 function Cfg_treesitter()
+	local install = require("nvim-treesitter.install")
+	install.compilers = { "zig" }
+
 	local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 	for _, language in pairs(Languages) do
 		if language.treesitter ~= nil then

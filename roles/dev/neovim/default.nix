@@ -20,6 +20,7 @@ let
         # build tools
         yarn
         gcc
+        zig
 
         # plugin dependencies
         luaPackages.jsregexp
