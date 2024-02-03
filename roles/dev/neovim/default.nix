@@ -48,6 +48,10 @@ let
         clang-tools # java
       ];
     };
+    home.file.nvim-wgsl-queries = {
+      target = ".local/share/nvim/queries/wgsl";
+      source = "${pkgs.tree-sitter-grammars.tree-sitter-wgsl}/queries";
+    };
   };
 in
 {
