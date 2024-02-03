@@ -350,6 +350,7 @@ function Cfg_treesitter()
 	configs.setup({
 		ensure_installed = TreesitterLanguages,
 		sync_install = false,
+		ignore_install = { "all" },
 		highlight = { enable = true },
 		indent = { enable = false },
 	})
