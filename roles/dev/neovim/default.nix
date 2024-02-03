@@ -55,9 +55,5 @@ let
   };
 in
 {
-  home-manager.users.${settings.user.name} = {
-    imports = [ module ];
-    home.sessionVariables.EDITOR = "nvim";
-  };
-  environment.variables.EDITOR = "nvim";
+  home-manager.users.${settings.user.name}.imports = [ module ];
 }
