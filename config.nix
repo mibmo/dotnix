@@ -32,17 +32,23 @@ let
   };
 
   shell = {
-    aliases = rec {
-      e = defaults.editor;
-      se = "sudo ${e}";
-      ns = "nix-shell";
-      nd = "nix develop";
-      lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
-      rebuild = "sudo nixos-rebuild switch --flake ~/dev/dotnix#$hostname";
-      rebuild-offline = "${rebuild} --offline";
-      tmp = "pushd $(mktemp -d)";
-      cleanup-results = ''find . -type l -name "result" -exec echo "unlinking {}" \; -exec unlink {} \;'';
-    };
+    aliases =
+      let
+        dotnixDir = "~/dev/dotnix";
+      in
+      rec {
+        e = defaults.editor;
+        se = "sudo ${e}";
+        ns = "nix-shell";
+        nd = "nix develop";
+        lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
+        build = "nom build ${dotnixDir}#nixosConfigurations.$hostname.config.system.build.toplevel && unlink result";
+        switch = "sudo nixos-rebuild switch --flake ${dotnixDir}#$hostname";
+        rebuild = "${build} && ${switch}";
+        rebuild-offline = "${build} --offline && ${switch} --offline";
+        tmp = "pushd $(mktemp -d)";
+        cleanup-results = ''find . -type l -name "result" -exec echo "unlinking {}" \; -exec unlink {} \;'';
+      };
   };
 
   gpg = {
