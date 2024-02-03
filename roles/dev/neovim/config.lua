@@ -169,6 +169,18 @@ Languages = {
 	},
 }
 
+-- treesitter integration
+TreesitterLanguages = {}
+for _, language in pairs(Languages) do
+	if language.treesitter ~= nil then
+		local filetype = language.filetype
+		table.insert(TreesitterLanguages, filetype)
+		local extension = {}
+		extension[filetype] = filetype
+		vim.filetype.add({ extension = extension })
+	end
+end
+
 -- setup functions
 function Cfg_lspconfig()
 	vim.api.nvim_create_autocmd("LspAttach", {
@@ -315,10 +327,19 @@ function Cfg_treesitter()
 	local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 	for _, language in pairs(Languages) do
 		if language.treesitter ~= nil then
-			parser_configs[language.filetype] = {
-				url = language.treesitter,
-				files = { "src/parser.c" },
-			}
+			if string.sub(language.treesitter, 1, 1) == "#" then
+				-- treat as link to existing treesitter config
+				local name = string.sub(language.treesitter, 2)
+				parser_configs[language.filetype] = parser_configs[name]
+			else
+				-- treat as url
+				parser_configs[language.filetype] = {
+					install_info = {
+						url = language.treesitter,
+						files = { "src/parser.c", "src/scanner.c" },
+					},
+				}
+			end
 		end
 	end
 
@@ -405,18 +426,6 @@ function Cfg_vimtex()
 			"-shell-escape",
 		},
 	}
-end
-
--- treesitter integration
-TreesitterLanguages = {}
-for _, language in pairs(Languages) do
-	if language.treesitter ~= nil then
-		local filetype = language.filetype
-		table.insert(TreesitterLanguages, filetype)
-		local extension = {}
-		extension[filetype] = filetype
-		vim.filetype.add({ extension = extension })
-	end
 end
 
 -- plugin install
