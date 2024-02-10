@@ -23,6 +23,9 @@
     pkgs.pinentry-gnome
     pkgs.gnome.file-roller
 
+    # wayland
+    kimpanel
+
     # top bar
     appindicator
     keep-awake
