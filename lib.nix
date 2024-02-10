@@ -16,6 +16,13 @@ let
       set;
 
   mkModule = module:
+    let
+      pkgs-stable = pkgs-23_11;
+      pkgs-23_11 = import inputs.nixpkgs-23_11 {
+        inherit (module) system;
+        config.allowUnfree = true;
+      };
+    in
     args@{ ... }: {
       imports = with inputs; [
         ({ ... }: {
@@ -29,6 +36,7 @@ let
 
       _module.args = {
         inherit inputs args;
+        inherit pkgs-stable pkgs-23_11;
         host = module;
         modules = ../modules;
         settings = import ./config.nix { inherit inputs; lib = combined-lib; };
