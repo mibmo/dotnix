@@ -11,6 +11,8 @@ let
       enable = true;
       enableExtraSocket = true;
       enableSshSupport = true;
+      enableScDaemon = true;
+      pinentryFlavor = config.programs.gnupg.agent.pinentryFlavor;
     };
   };
 in
