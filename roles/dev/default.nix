@@ -10,6 +10,10 @@ let
           tree_view = true;
         };
       };
+      ssh = {
+        enable = true;
+        serverAliveInterval = 60;
+      };
     };
   };
 in
