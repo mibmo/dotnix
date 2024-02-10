@@ -1,9 +1,9 @@
-{ inputs, pkgs, config, settings, ... }: {
+{ pkgs-23_11, config, settings, ... }: {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs-23_11.linuxPackages_zen;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
     enable = true;
