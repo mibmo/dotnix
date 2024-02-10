@@ -1,4 +1,4 @@
-{ pkgs, config, settings, ... }: {
+{ pkgs, inputs, config, settings, ... }: {
   imports = [
     ./networking
     ./home-manager
@@ -16,6 +16,9 @@
     };
 
     extraOptions = "experimental-features = nix-command flakes";
+
+    # pin local nixpkgs to flake nixpkgs
+    registry.nixpkgs.flake = inputs.nixpkgs;
 
     settings = {
       auto-optimise-store = true;
