@@ -51,61 +51,83 @@ let
     inherit extensions;
 
     search.default = searchEngine;
-    search.engines = {
-      "NixOS Wiki" = {
-        urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
-        iconUpdateURL = "https://nixos.wiki/favicon.png";
-        updateInterval = 24 * 60 * 60 * 1000; # every day
-        definedAliases = [ "@nw" "@nixwiki" ];
+    search.engines =
+      let
+        second = 1000;
+        minute = 60 * second;
+        hour = 60 * minute;
+        day = 24 * hour;
+        week = 7 * day;
+      in
+      {
+        "NixOS Wiki" = {
+          urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
+          iconUpdateURL = "https://nixos.wiki/favicon.png";
+          updateInterval = week;
+          definedAliases = [ "@nw" "@nixwiki" ];
+        };
+
+        "Nix Reference Manual" = {
+          urls = [{ template = "https://nixos.org/manual/nix/unstable/?search={searchTerms}"; }];
+          iconUpdateURL = "https://nixos.org/manual/nix/unstable/favicon.png";
+          updateInterval = week;
+          definedAliases = [ "@nm" "@nixman" "@nixmanual" ];
+        };
+
+        "Nix Packages" = {
+          urls = [{
+            template = "https://search.nixos.org/packages";
+            params = [
+              { name = "type"; value = "packages"; }
+              { name = "query"; value = "{searchTerms}"; }
+            ];
+          }];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@np" "@nixpkgs" ];
+        };
+
+        "Nix Options" = {
+          urls = [{
+            template = "https://search.nixos.org/options";
+            params = [
+              { name = "type"; value = "packages"; }
+              { name = "query"; value = "{searchTerms}"; }
+            ];
+          }];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@no" "@nixopts" ];
+        };
+
+        "Home Manager Options" = {
+          urls = [{ template = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}"; }];
+          iconUpdateURL = "https://mipmip.github.io/home-manager-option-search/images/favicon.png";
+          updateInterval = week;
+          definedAliases = [ "@hm" "@hmopts" ];
+        };
+
+        "Jisho" = {
+          urls = [{ template = "https://jisho.org/search/{searchTerms}"; }];
+          iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
+          updateInterval = week;
+          definedAliases = [ "@js" "@jisho" ];
+        };
+
+        "Rust Language Documentation" = {
+          urls = [{ template = "https://doc.rust-lang.org/std/?search={searchTerms}"; }];
+          iconUpdateURL = "https://doc.rust-lang.org/favicon.ico";
+          updateInterval = week;
+          definedAliases = [ "@r" "@rust" ];
+        };
+
+        "Rust Crates Documentation" = {
+          urls = [{ template = "https://docs.rs/releases/search?query={searchTerms}"; }];
+          iconUpdateURL = "https://docs.rs/favicon.ico";
+          updateInterval = week;
+          definedAliases = [ "@drs" "@docsrs" ];
+        };
       };
-
-      "Nix Reference Manual" = {
-        urls = [{ template = "https://nixos.org/manual/nix/unstable/?search={searchTerms}"; }];
-        iconUpdateURL = "https://nixos.org/manual/nix/unstable/favicon.png";
-        updateInterval = 24 * 60 * 60 * 1000; # every day
-        definedAliases = [ "@nm" "@nixman" "@nixmanual" ];
-      };
-
-      "Nix Packages" = {
-        urls = [{
-          template = "https://search.nixos.org/packages";
-          params = [
-            { name = "type"; value = "packages"; }
-            { name = "query"; value = "{searchTerms}"; }
-          ];
-        }];
-
-        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        definedAliases = [ "@np" "@nixpkgs" ];
-      };
-
-      "Nix Options" = {
-        urls = [{
-          template = "https://search.nixos.org/options";
-          params = [
-            { name = "type"; value = "packages"; }
-            { name = "query"; value = "{searchTerms}"; }
-          ];
-        }];
-
-        icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-        definedAliases = [ "@no" "@nixopts" ];
-      };
-
-      "Home Manager Options" = {
-        urls = [{ template = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}"; }];
-        iconUpdateURL = "https://mipmip.github.io/home-manager-option-search/images/favicon.png";
-        updateInterval = 24 * 60 * 60 * 1000; # every day
-        definedAliases = [ "@hm" "@hmopts" ];
-      };
-
-      "Jisho" = {
-        urls = [{ template = "https://jisho.org/search/{searchTerms}"; }];
-        iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
-        updateInterval = 14 * 24 * 60 * 60 * 1000; # every other week
-        definedAliases = [ "@js" "@jisho" ];
-      };
-    };
   };
 
   module = {
