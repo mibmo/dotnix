@@ -59,6 +59,7 @@ in
       unzip
       ripgrep
       fd
+      file
     ];
   };
 
