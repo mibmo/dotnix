@@ -20,7 +20,7 @@ in
 {
   imports = [
     ./git
-    ./fish
+    ./shell
     ./neovim
     ./terminal
     ./android
