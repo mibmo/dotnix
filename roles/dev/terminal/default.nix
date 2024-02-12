@@ -18,7 +18,7 @@ let
           main = {
             font = "Fantasque Sans Mono";
             font-size-adjustment = 0.5;
-            #pad = "10x10 center";
+            pad = "10x10 center";
             dpi-aware = true;
           };
           text-bindings = {
