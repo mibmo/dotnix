@@ -48,6 +48,7 @@ let
         rebuild-offline = "${build} --offline && ${switch} --offline";
         tmp = "pushd $(mktemp -d)";
         cleanup-results = ''find . -type l -name "result*" -exec echo "unlinking {}" \; -exec unlink {} \;'';
+        gc-nix = "nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
       };
   };
 
