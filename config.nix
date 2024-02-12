@@ -47,7 +47,7 @@ let
         rebuild = "${build} && ${switch}";
         rebuild-offline = "${build} --offline && ${switch} --offline";
         tmp = "pushd $(mktemp -d)";
-        cleanup-results = ''find . -type l -name "result" -exec echo "unlinking {}" \; -exec unlink {} \;'';
+        cleanup-results = ''find . -type l -name "result*" -exec echo "unlinking {}" \; -exec unlink {} \;'';
       };
   };
 
