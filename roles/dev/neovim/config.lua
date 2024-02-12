@@ -501,6 +501,7 @@ require("lazy").setup({
 		config = Cfg_lualine,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
+	{ "raindev/daybreak.nvim", config = true },
 	{ "marko-cerovac/material.nvim", lazy = true },
 	{ "folke/tokyonight.nvim", lazy = true },
 })
