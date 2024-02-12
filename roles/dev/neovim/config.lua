@@ -1,3 +1,6 @@
+-- fish and vim don't mix
+vim.opt.shell = "/bin/sh"
+
 -- install lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
