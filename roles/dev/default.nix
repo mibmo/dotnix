@@ -22,7 +22,7 @@ in
     ./git
     ./fish
     ./neovim
-    ./alacritty
+    ./terminal
     ./android
     ./containers
     ./virt-manager
