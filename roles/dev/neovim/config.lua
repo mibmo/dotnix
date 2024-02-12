@@ -507,6 +507,7 @@ require("lazy").setup({
 	{ "raindev/daybreak.nvim", config = true },
 	{ "marko-cerovac/material.nvim", lazy = true },
 	{ "folke/tokyonight.nvim", lazy = true },
+	{ "catppuccin/nvim", lazy = true },
 })
 
 -- lsp
@@ -554,13 +555,24 @@ for _, language in pairs(Languages) do
 	end
 end
 
+--[[
+local tty = "/dev/" .. vim.fn.system("ps -o tty= $(ps -o ppid= $(ps -o ppid= $$))")
+vim.api.nvim_create_autocmd("ColorScheme", {
+	desc = "Update terminal background color on ColorScheme change",
+	pattern = "*",
+	callback = function()
+		vim.fn.system("printf '�[6 q' > /home/mib/test") -- " .. tty)
+		--vim.fn.system("printf > /dev")
+	end,
+})
+--]]
+
 -- appearance
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = true
 
-vim.g.material_style = "deep ocean"
-vim.cmd.colorscheme("material")
+vim.cmd.colorscheme("catppuccin")
 
 --[[
 @TODO: telescope
