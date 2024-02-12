@@ -21,7 +21,11 @@ let
             #pad = "10x10 center";
             dpi-aware = true;
           };
-          text-bindings."\\x03" = "Mod4+c";
+          text-bindings = {
+            # patch for broken d-key in neovim
+            "d" = "Mod4+d";
+            "D" = "Mod4+D";
+          };
           csd.size = 0;
         };
       };
