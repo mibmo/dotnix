@@ -453,6 +453,16 @@ function Cfg_vimtex()
 	}
 end
 
+function Cfg_catppuccin()
+	local catppuccin = require("catppuccin")
+	catppuccin.setup({
+		background = {
+			light = "latte",
+			dark = "macchiato",
+		},
+	})
+end
+
 -- plugin install
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
@@ -507,7 +517,7 @@ require("lazy").setup({
 	{ "raindev/daybreak.nvim", config = true },
 	{ "marko-cerovac/material.nvim", lazy = true },
 	{ "folke/tokyonight.nvim", lazy = true },
-	{ "catppuccin/nvim", lazy = true },
+	{ "catppuccin/nvim", config = Cfg_catppuccin, lazy = true },
 })
 
 -- lsp
