@@ -23,7 +23,7 @@
     settings = {
       auto-optimise-store = true;
 
-      # avoid unwanted gc when using nix-direnv
+      # avoid unwanted gc when using flakes
       keep-outputs = true;
       keep-derivations = true;
     };
