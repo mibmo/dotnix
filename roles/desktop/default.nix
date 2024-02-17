@@ -41,4 +41,6 @@ in
     jack.enable = true;
     pulse.enable = true;
   };
+
+  hardware.opentabletdriver.enable = true;
 }
