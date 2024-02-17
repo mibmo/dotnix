@@ -1,5 +1,9 @@
-{ pkgs, config, settings, ... }: {
-  home-manager.users.${settings.user.name}.home.packages = [ pkgs.ydotool ];
+{ pkgs-23_11, config, settings, ... }:
+let
+  package = pkgs-23_11.ydotool;
+in
+{
+  home-manager.users.${settings.user.name}.home.packages = [ package ];
 
   environment.variables.YDOTOOL_SOCKET = "/run/ydotool.socket";
 
@@ -9,7 +13,7 @@
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig.ExecStart = ''
-      ${pkgs.ydotool}/bin/ydotoold \
+      ${package}/bin/ydotoold \
         --socket-path=${config.environment.variables.YDOTOOL_SOCKET} \
         --socket-own=0:1 \
         --socket-perm=0660
