@@ -55,7 +55,7 @@ let
     end
 
     function __system_theme --on-signal SIGUSR1
-      set isDark (dbus-send --session --dest=org.freedesktop.portal.Desktop --print-reply \
+      set isDark (dbus-send --reply-timeout=500 --session --dest=org.freedesktop.portal.Desktop --print-reply \
         /org/freedesktop/portal/desktop org.freedesktop.portal.Settings.Read \
         string:org.freedesktop.appearance string:color-scheme | awk 'END { print $NF }')
 
