@@ -37,6 +37,9 @@
     };
   };
 
+  # compress nix store
+  fileSystems."/nix/store".options = [ "compress-force=zstd" ];
+
   # system
   networking.hostName = "hamilton";
 
