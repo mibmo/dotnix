@@ -1,4 +1,8 @@
 { settings, ... }: {
+  imports = [
+    ./vpn.nix
+  ];
+
   networking = {
     firewall.enable = false;
     networkmanager = {
