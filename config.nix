@@ -40,8 +40,8 @@ let
       rec {
         e = defaults.editor;
         se = "sudo ${e}";
-        ns = "nix-shell";
-        nd = "nix develop";
+        ns = "nom shell";
+        nd = "nom develop";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
         build = "nom build ${dotnixDir}#nixosConfigurations.$hostname.config.system.build.toplevel && unlink result";
         switch = "sudo nixos-rebuild switch --flake ${dotnixDir}#$hostname";
