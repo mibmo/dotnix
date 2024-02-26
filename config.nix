@@ -43,7 +43,7 @@ let
         ns = "nom shell";
         nd = "nom develop";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
-        build = "nom build ${dotnixDir}#nixosConfigurations.$hostname.config.system.build.toplevel && unlink result";
+        build = "nom build ${dotnixDir}#nixosConfigurations.$hostname.config.system.build.toplevel --no-link";
         switch = "sudo nixos-rebuild switch --flake ${dotnixDir}#$hostname";
         rebuild = "${build} && ${switch}";
         rebuild-offline = "${build} --offline && ${switch} --offline";
