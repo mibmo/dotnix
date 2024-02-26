@@ -110,7 +110,7 @@ Languages = {
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,
-			expandtab = false,
+			expandtab = true,
 		},
 		lsp = {
 			server = "pyright",
