@@ -20,13 +20,23 @@
     # pin local nixpkgs to flake nixpkgs
     registry.nixpkgs.flake = inputs.nixpkgs;
 
-    settings = {
-      auto-optimise-store = true;
+    settings =
+      let
+        substituters = [
+          { url = "https://crane.cachix.org"; key = "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="; }
+        ];
+      in
+      {
+        auto-optimise-store = true;
 
-      # avoid unwanted gc when using flakes
-      keep-outputs = true;
-      keep-derivations = true;
-    };
+        # avoid unwanted gc when using flakes
+        keep-outputs = true;
+        keep-derivations = true;
+
+        # cachix
+        trusted-substituters = map (s: s.url) substituters;
+        trusted-public-keys = map (s: s.key) substituters;
+      };
   };
 
   # locale
