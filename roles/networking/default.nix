@@ -1,5 +1,6 @@
 { lib, pkgs, settings, ... }: {
   imports = [
+    ./dns.nix
     ./vpn.nix
   ];
 
@@ -7,12 +8,6 @@
     firewall.enable = false;
     networkmanager = {
       enable = true;
-      insertNameservers = [
-        "9.9.9.9"
-        "149.112.112.112"
-        "2620:fe::fe"
-        "2620:fe::9"
-      ];
       dispatcherScripts = map
         ({ name, ap-name, effect }: {
           type = "basic";
