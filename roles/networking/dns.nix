@@ -1,4 +1,4 @@
-{ lib, pkgs, settings, ... }:
+{ config, ... }:
 let
   tailscale-stub-zones = [
     "mib"
@@ -30,8 +30,7 @@ in
         }
       ];
 
-      # tailscale magicdns
-      domain-insecure = tailscale-stub-zones;
+      domain-insecure = config.networking.timeServers ++ tailscale-stub-zones;
       stub-zone = map
         (name: {
           inherit name;
