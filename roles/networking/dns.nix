@@ -30,6 +30,11 @@ in
         }
       ];
 
+      remote-control = {
+        control-enable = true;
+        control-use-cert = false;
+      };
+
       domain-insecure = config.networking.timeServers ++ tailscale-stub-zones;
       stub-zone = map
         (name: {
