@@ -1,4 +1,11 @@
-{ lib, pkgs, settings, ... }: {
+{ lib, pkgs, settings, ... }:
+let
+  tailscale-stub-zones = [
+    "mib"
+    "kanpai"
+  ];
+in
+{
   networking.networkmanager.dns = "unbound";
 
   services.unbound = {
@@ -24,14 +31,13 @@
       ];
 
       # tailscale magicdns
-      domain-insecure = [ "kanpai" ];
-      stub-zone = [{
-        name = "kanpai";
-        stub-addr = [
-          "100.100.100.100"
-          "fd7a:115c:a1e0::53"
-        ];
-      }];
+      domain-insecure = tailscale-stub-zones;
+      stub-zone = map
+        (name: {
+          inherit name;
+          stub-addr = [ "100.100.100.100" "fd7a:115c:a1e0::53" ];
+        })
+        tailscale-stub-zones;
     };
   };
 }
