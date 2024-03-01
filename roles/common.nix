@@ -34,7 +34,7 @@
         keep-derivations = true;
 
         # cachix
-        trusted-substituters = map (s: s.url) substituters;
+        substituters = map (s: s.url) substituters;
         trusted-public-keys = map (s: s.key) substituters;
       };
   };
