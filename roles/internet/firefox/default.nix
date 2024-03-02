@@ -127,6 +127,13 @@ let
           updateInterval = week;
           definedAliases = [ "@drs" "@docsrs" ];
         };
+
+        "Lib.rs" = {
+          urls = [{ template = "https://lib.rs/search?q={searchTerms}"; }];
+          iconUpdateURL = "https://lib.rs/favicon.ico";
+          updateInterval = week;
+          definedAliases = [ "@lrs" "@librs" ];
+        };
       };
   };
 
