@@ -9,6 +9,8 @@ let
     "aur_private_key"
     "github_private_key"
     "scaleway_private_key"
+    "syncthing_hamilton_key"
+    "syncthing_hamilton_cert"
   ];
 in
 builtins.foldl'

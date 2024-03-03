@@ -9,26 +9,23 @@ let
   folders = import ./folders.nix { inherit home; };
 in
 with lib; {
-  config.services.syncthing = {
+  services.syncthing = {
     enable = true;
+    openDefaultPorts = true;
     overrideDevices = false; # allow introductions
     overrideFolders = true;
     settings = { inherit devices folders; };
+    key = config.age.secrets.syncthing-hamilton-key.path;
+    cert = config.age.secrets.syncthing-hamilton-cert.path;
+    dataDir = home;
+
+    # @TODO: run as syncthing user and handle permissions properly
+    user = name;
+    group = "users";
   };
 
-  config.users.users = mkIf (cfg.enable) {
-    ${name}.extraGroups = [ cfg.group ];
-    ${cfg.user}.extraGroups = [ "users" ];
+  age.secrets = {
+    syncthing-hamilton-key.file = ../../../secrets/syncthing_hamilton_key;
+    syncthing-hamilton-cert.file = ../../../secrets/syncthing_hamilton_cert;
   };
-
-  config.systemd.tmpfiles.rules = mkIf (config.services.syncthing.enable) ([
-    "d ${cfg.dataDir} 0770 ${cfg.user} ${cfg.group}"
-    "d ${cfg.configDir} 0770 ${cfg.user} ${cfg.group}"
-    "d ${home} 0750 ${name} ${cfg.user}"
-  ] ++
-  # Additionally set sticky bit for syncthing group ownership of folders
-  (builtins.map (folder: "d ${folder.path} 1770 ${name} ${cfg.group}")
-    (builtins.attrValues folders)));
-
-  config.systemd.services.syncthing.serviceConfig.UMask = mkIf (config.services.syncthing.enable) "0007";
 }
