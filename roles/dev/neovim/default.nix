@@ -46,6 +46,7 @@ let
         black # python
         deno # typescript
         clang-tools # java
+        rubyPackages.htmlbeautifier # html
       ];
     };
     home.file.nvim-wgsl-queries = {

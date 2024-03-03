@@ -143,7 +143,7 @@ Languages = {
 	{
 		name = "Hyper Text Markup Language",
 		filetype = "html",
-		formatter = nil,
+		formatter = "html:prettier",
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,
