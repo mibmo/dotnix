@@ -1,7 +1,7 @@
 { home }: {
   "Secret" = {
     id = "0hhw6-hojo4";
-    devices = [ "mobai" ];
+    devices = [ "mobai" "ichi" ];
     path = "${home}/.secret";
     enable = true;
   };
