@@ -60,6 +60,7 @@ in
       ripgrep
       fd
       file
+      lsof
     ];
   };
 
