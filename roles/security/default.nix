@@ -24,7 +24,8 @@ in
       age
       minisign
       nitrokey-app
-      pynitrokey
+      # broken on unstable 2024-03-04
+      #pynitrokey
       monero-gui
       inputs.agenix.packages.${host.system}.default
     ];

@@ -6,7 +6,10 @@ let
   ];
 in
 {
-  networking.networkmanager.dns = "unbound";
+  environment.etc."resolv.conf".text = ''
+    nameserver 127.0.0.1
+    options edns0 trust-ad
+  '';
 
   services.unbound = {
     enable = true;
