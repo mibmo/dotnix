@@ -3,6 +3,10 @@ let
   module = {
     services = {
       easyeffects.enable = true;
+      nextcloud-client = {
+        enable = true;
+        startInBackground = true;
+      };
     };
   };
 in
