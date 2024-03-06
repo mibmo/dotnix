@@ -565,17 +565,25 @@ for _, language in pairs(Languages) do
 	end
 end
 
---[[
-local tty = "/dev/" .. vim.fn.system("ps -o tty= $(ps -o ppid= $(ps -o ppid= $$))")
-vim.api.nvim_create_autocmd("ColorScheme", {
-	desc = "Update terminal background color on ColorScheme change",
-	pattern = "*",
+-- handle borders on color switch
+local modified = false
+vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 	callback = function()
-		vim.fn.system("printf '�[6 q' > /home/mib/test") -- " .. tty)
-		--vim.fn.system("printf > /dev")
+		local normal = vim.api.nvim_get_hl(0, { name = "Normal" })
+		if normal.bg then
+			io.write(string.format("\027]11;#%06x\027\\", normal.bg))
+			modified = true
+		end
 	end,
 })
---]]
+
+vim.api.nvim_create_autocmd("UILeave", {
+	callback = function()
+		if modified then
+			io.write("\027]111\027\\")
+		end
+	end,
+})
 
 -- appearance
 vim.opt.number = true
