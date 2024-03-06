@@ -25,6 +25,7 @@
         substituters = [
           { url = "https://nix-community.cachix.org"; key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="; }
           { url = "https://crane.cachix.org"; key = "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="; }
+          { url = "https://deploy-rs.cachix.org"; key = "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="; }
         ];
       in
       {
