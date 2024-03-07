@@ -47,4 +47,7 @@ in
   };
 
   hardware.opentabletdriver.enable = true;
+
+  # start nextcloud-client on user login
+  systemd.user.services.nextcloud-client.wantedBy = [ "default.target" ];
 }
