@@ -1,6 +1,6 @@
-{ pkgs-23_11, config, settings, ... }:
+{ pkgs, config, settings, ... }:
 let
-  package = pkgs-23_11.ydotool;
+  package = pkgs.ydotool;
 in
 {
   home-manager.users.${settings.user.name}.home.packages = [ package ];
