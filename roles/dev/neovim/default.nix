@@ -21,6 +21,7 @@ let
         yarn
         gcc
         zig
+        tree-sitter
 
         # plugin dependencies
         luaPackages.jsregexp
