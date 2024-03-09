@@ -5,6 +5,7 @@ let
   extensions = with config.nur.repos.rycee.firefox-addons; [
     tokyo-night-v2 # theme
     sidebery # nested tabs
+    floccus # blookmark sync
 
     # privacy
     ublock-origin # ad block
