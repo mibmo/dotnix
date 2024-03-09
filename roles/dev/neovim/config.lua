@@ -170,6 +170,16 @@ Languages = {
 			expandtab = false,
 		},
 	},
+	{
+		name = "Yet Another Markup Language",
+		filetype = "yaml",
+		treesitter = "#yaml",
+		style = {
+			tabstop = 2,
+			shiftwidth = 2,
+			expandtab = true,
+		},
+	},
 }
 
 -- treesitter integration
