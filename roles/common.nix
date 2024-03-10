@@ -1,4 +1,4 @@
-{ pkgs, inputs, config, settings, ... }: {
+{ lib, pkgs, inputs, config, settings, ... }: {
   imports = [
     ./networking
     ./home-manager
@@ -22,12 +22,18 @@
 
     settings =
       let
-        # move to own file and get url from key (wacky i know)
-        substituters = [
-          { url = "https://nix-community.cachix.org"; key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="; }
-          { url = "https://crane.cachix.org"; key = "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="; }
-          { url = "https://deploy-rs.cachix.org"; key = "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="; }
-          { url = "https://conduit.cachix.org"; key = "conduit.cachix.org-1:eoSbRnf/MRgV54rQ9rFdrnB3FH25KN9IYjgfT4FY0YQ="; }
+        extractSubstituter = key:
+          let
+            parts = lib.strings.splitString "-" key;
+            url = "https://" + lib.strings.concatStringsSep "-" (lib.lists.take (lib.lists.length parts - 1) parts);
+          in
+          { inherit key url; };
+
+        substituters = map extractSubstituter [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "crane.cachix.org-1:8Scfpmn9w+hGdXH/Q9tTLiYAE/2dnJYRJP7kl80GuRk="
+          "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI="
+          "conduit.cachix.org-1:eoSbRnf/MRgV54rQ9rFdrnB3FH25KN9IYjgfT4FY0YQ="
         ];
       in
       {
