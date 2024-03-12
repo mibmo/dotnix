@@ -145,8 +145,8 @@ Languages = {
 		filetype = "html",
 		formatter = "html:prettier",
 		style = {
-			tabstop = 4,
-			shiftwidth = 4,
+			tabstop = 2,
+			shiftwidth = 2,
 			expandtab = true,
 		},
 	},
