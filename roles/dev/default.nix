@@ -61,6 +61,7 @@ in
       fd
       file
       lsof
+      arp-scan
     ];
   };
 
