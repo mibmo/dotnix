@@ -482,6 +482,7 @@ end
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
 	"tpope/vim-sensible",
+	"tpope/vim-fugitive",
 	{ "junegunn/vim-easy-align", config = Cfg_easy_align },
 
 	-- magic
