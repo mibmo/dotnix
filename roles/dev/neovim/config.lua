@@ -405,6 +405,11 @@ function Cfg_telescope()
 	vim.keymap.set("n", "<leader>fgs", builtin.git_status, { silent = true })
 end
 
+function Cfg_easy_align()
+	vim.keymap.set("n", "ga", "<Plug>(EasyAlign)")
+	vim.keymap.set("x", "ga", "<Plug>(EasyAlign)")
+end
+
 function Cfg_vimtex()
 	vim.g.vimtex_view_general_viewer = "zathura"
 	vim.g.vimtex_compiler_latexmk = {
@@ -477,6 +482,7 @@ end
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
 	"tpope/vim-sensible",
+	{ "junegunn/vim-easy-align", config = Cfg_easy_align },
 
 	-- magic
 	{ "neovim/nvim-lspconfig", config = Cfg_lspconfig },
