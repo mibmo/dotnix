@@ -9,6 +9,7 @@ let
 in
 {
   home-manager.users.${settings.user.name}.home.packages = with pkgs; [
+    anki
     blender-hip
     freecad
     kicad
