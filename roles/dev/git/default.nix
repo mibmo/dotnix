@@ -11,9 +11,12 @@ let
       status = true;
       verbose = 1;
     };
+    branch.sort = "-committerdate";
+    column.ui = "auto";
     push.autoSetupRemote = true;
     fetch.parallel = parallelConnections;
     http.maxRequests = parallelConnections;
+    rerere.enabled = true;
     url = {
       "https://github.com/".insteadOf = "gh:";
       "ssh://git@github.com".pushInsteadOf = "gh:";
