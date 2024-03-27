@@ -15,7 +15,6 @@ in
     ../internet/firefox
     ./fcitx5
     ./ydotool
-    ./element
   ];
 
   environment.systemPackages = with pkgs; [
@@ -30,6 +29,8 @@ in
       libreoffice
       pulsemixer
       qbittorrent
+      element-desktop
+      nheko
     ];
   };
 
