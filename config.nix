@@ -20,6 +20,7 @@ let
         ./roles/internet/i2p
         ./roles/internet/ipfs
       ];
+      keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5JejZv7d0tOG1QXxbHVt4qhp8nMpOfSGTMsL/l98kf" ];
     };
 
     macadamia = {
