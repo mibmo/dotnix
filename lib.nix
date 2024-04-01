@@ -31,6 +31,7 @@ let
             overlays = import ./overlays/default.nix { inherit (inputs.nixpkgs) lib; };
           };
         })
+        ./modules
         module.host
       ] ++ module.roles;
 
@@ -38,7 +39,6 @@ let
         inherit inputs args;
         inherit pkgs-stable pkgs-23_11;
         host = module;
-        modules = ../modules;
         settings = import ./config.nix { inherit inputs; lib = combined-lib; };
         lib = combined-lib;
       };

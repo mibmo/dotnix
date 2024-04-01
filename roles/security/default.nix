@@ -39,7 +39,7 @@ in
   services.udev.packages = [ pkgs.nitrokey-udev-rules ];
 
   age = {
-    identityPaths = [ (config.users.users.mib.home + "/.secret/age.keys") ];
+    identityPaths = map (key: key.path) config.services.openssh.hostKeys ++ [ (config.users.users.mib.home + "/.secret/age.keys") ];
     secrets = builtins.mapAttrs
       (name: value: { file = ../../secrets/${name}; })
       (import ../../secrets/secrets.nix);

@@ -21,6 +21,17 @@ let
         ./roles/internet/ipfs
       ];
     };
+
+    macadamia = {
+      name = "macadamia";
+      system = "x86_64-linux";
+      host = ./hosts/macadamia;
+      roles = [
+        hardwareModules.apple-macbook-pro-14-1
+        ./roles/desktop/gnome
+      ];
+      keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUJBjmqie6MuzMpkvw8k/SoEZ8dHcWDNggVVanyqYqE" ];
+    };
   };
 
   user = {

@@ -19,6 +19,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko.url = "github:nix-community/disko";
+    impermanence.url = "github:nix-community/impermanence";
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {

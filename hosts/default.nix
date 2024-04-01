@@ -5,6 +5,8 @@ let
       inherit (host) system;
       modules = with inputs; [
         home-manager.nixosModules.home-manager
+        disko.nixosModules.disko
+        impermanence.nixosModules.impermanence
         nur.nixosModules.nur
         agenix.nixosModules.default
         hyprland.nixosModules.default
