@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, settings, ... }:
 with lib;
 let
   cfg = config.persist;
@@ -22,6 +22,26 @@ in
   config.environment.persistence.main = {
     # avoid infinite recursion; adds a little hassle when configuring hosts
     enable = mkDefault false;
-    inherit (cfg) directories files;
+    persistentStoragePath = "/persist";
+    directories = cfg.directories ++ [
+      "/var/log"
+      "/var/logs"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+    ];
+    files = cfg.files ++ [
+      "/etc/machine-id"
+    ];
+
+    users.${settings.user.name} = {
+      directories = [
+        "assets"
+        "backup"
+        "dev"
+        "downloads"
+        "games"
+        { directory = ".ssh"; mode = "0700"; }
+      ];
+    };
   };
 }
