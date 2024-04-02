@@ -1,4 +1,4 @@
-{ pkgs, config, settings, ... }:
+{ pkgs, config, ... }:
 let
   searchEngine = "DuckDuckGo";
 
@@ -137,15 +137,11 @@ let
         };
       };
   };
-
-  module = {
-    programs.firefox = {
-      enable = true;
-      package = pkgs.firefox;
-      profiles.default = profile;
-    };
-  };
 in
 {
-  home-manager.users.${settings.user.name}.imports = [ module ];
+  home.settings.programs.firefox = {
+    enable = true;
+    package = pkgs.firefox;
+    profiles.default = profile;
+  };
 }

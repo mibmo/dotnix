@@ -1,7 +1,6 @@
-{ pkgs, settings, ... }:
+{ pkgs, ... }:
 {
-
-  home-manager.users.${settings.user.name}.home.packages = with pkgs; [
+  home.packages = with pkgs; [
     geogebra6
     joplin-desktop
   ];

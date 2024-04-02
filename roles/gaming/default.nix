@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }: {
+{ pkgs, ... }: {
   programs = {
     steam = {
       enable = true;
@@ -25,7 +25,7 @@
     };
   };
 
-  home-manager.users.${settings.user.name}.home.packages = with pkgs; [
+  home.packages = with pkgs; [
     lutris
     prismlauncher
     mangohud

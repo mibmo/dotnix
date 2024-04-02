@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }:
+{ pkgs, ... }:
 let
   kicad = pkgs.kicad.override {
     addons = with pkgs.kicadAddons; [
@@ -8,7 +8,7 @@ let
   };
 in
 {
-  home-manager.users.${settings.user.name}.home.packages = with pkgs; [
+  home.packages = with pkgs; [
     anki
     blender-hip
     freecad

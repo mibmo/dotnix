@@ -28,19 +28,15 @@ let
     key = settings.gpg.keyId;
     signByDefault = true;
   };
-
-  module = {
-    programs.git = {
-      enable = true;
-      lfs.enable = true;
-      delta.enable = true;
-
-      userName = settings.user.name;
-      userEmail = settings.user.email;
-      inherit extraConfig signing;
-    };
-  };
 in
 {
-  home-manager.users.${settings.user.name}.imports = [ module ];
+  home.settings.programs.git = {
+    enable = true;
+    lfs.enable = true;
+    delta.enable = true;
+
+    userName = settings.user.name;
+    userEmail = settings.user.email;
+    inherit extraConfig signing;
+  };
 }

@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }:
+{ pkgs, ... }:
 {
   programs.gnupg.agent.pinentryFlavor = "gnome3";
 
@@ -64,26 +64,20 @@
   # might need this for nvidia
   #hardware.nvidia.modesetting.enable = true;
 
-  home-manager.users.${settings.user.name}.imports = [
-    (
-      { ... }: {
-        xdg.configFile."shuzhi.py" = {
-          executable = true;
-          source = pkgs.writeScript "shuzhi.py" ''
-            #!${pkgs.python3}/bin/python
-            import socket
+  home.settings.xdg.configFile."shuzhi.py" = {
+    executable = true;
+    source = pkgs.writeScript "shuzhi.py" ''
+      #!${pkgs.python3}/bin/python
+      import socket
 
-            def print_wide(*args, sep=" ", **kwargs):
-              wide_map = {i: i + 0xFEE0 for i in range(0x21, 0x7F)}
-              wide_map[0x20] = 0x3000
-              text = sep.join(map(str, args)).translate(wide_map)
-              print(text, **kwargs)
+      def print_wide(*args, sep=" ", **kwargs):
+        wide_map = {i: i + 0xFEE0 for i in range(0x21, 0x7F)}
+        wide_map[0x20] = 0x3000
+        text = sep.join(map(str, args)).translate(wide_map)
+        print(text, **kwargs)
 
-            print("こんにちは")
-            print_wide(socket.gethostname())
-          '';
-        };
-      }
-    )
-  ];
+      print("こんにちは")
+      print_wide(socket.gethostname())
+    '';
+  };
 }

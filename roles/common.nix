@@ -1,7 +1,6 @@
 { lib, pkgs, inputs, config, settings, ... }: {
   imports = [
     ./networking
-    ./home-manager
     ./security
     ./misc/fonts
   ];

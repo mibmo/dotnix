@@ -1,6 +1,5 @@
-{ pkgs, settings, ... }:
-let
-  module = {
+{ pkgs, ... }: {
+  home.settings = {
     programs.neovim = {
       enable = true;
 
@@ -55,7 +54,4 @@ let
       source = "${pkgs.tree-sitter-grammars.tree-sitter-wgsl}/queries";
     };
   };
-in
-{
-  home-manager.users.${settings.user.name}.imports = [ module ];
 }

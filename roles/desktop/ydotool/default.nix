@@ -1,9 +1,9 @@
-{ pkgs, config, settings, ... }:
+{ pkgs, config, ... }:
 let
   package = pkgs.ydotool;
 in
 {
-  home-manager.users.${settings.user.name}.home.packages = [ package ];
+  home.packages = [ package ];
 
   environment.variables.YDOTOOL_SOCKET = "/run/ydotool.socket";
 

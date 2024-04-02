@@ -1,23 +1,4 @@
-{ lib, pkgs, config, settings, ... }:
-let
-  module = {
-    programs = {
-      fzf.enable = true;
-      bottom.enable = true;
-      htop = {
-        enable = true;
-        settings = {
-          tree_view = true;
-        };
-      };
-      ssh = {
-        enable = true;
-        serverAliveInterval = 60;
-      };
-    };
-  };
-in
-{
+{ lib, pkgs, config, ... }: {
   imports = [
     ./git
     ./shell
@@ -30,9 +11,8 @@ in
     ../internet/i2p
   ];
 
-  home-manager.users.${settings.user.name} = {
-    imports = [ module ];
-    home.packages = with pkgs; [
+  home = {
+    packages = with pkgs; [
       ffmpeg
       duf
       imv
@@ -63,9 +43,24 @@ in
       lsof
       arp-scan
     ];
+    groups = [ "uucp" "dialout" ];
+    settings = {
+      programs = {
+        fzf.enable = true;
+        bottom.enable = true;
+        htop = {
+          enable = true;
+          settings = {
+            tree_view = true;
+          };
+        };
+        ssh = {
+          enable = true;
+          serverAliveInterval = 60;
+        };
+      };
+    };
   };
-
-  users.users.${settings.user.name}.extraGroups = [ "uucp" "dialout" ];
 
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"

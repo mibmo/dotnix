@@ -1,5 +1,5 @@
-{ config, settings, ... }: {
-  users.users.${settings.user.name}.extraGroups = [ "podman" ];
+{ config, ... }: {
+  home.groups = [ "podman" ];
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;

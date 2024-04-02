@@ -85,18 +85,17 @@ let
       };
     }
   ];
-
-  module = {
+in
+{
+  home.settings = {
     programs.fish = {
       enable = true;
       interactiveShellInit = "any-nix-shell fish --info-right | source";
       inherit shellInit shellAbbrs plugins;
     };
   };
-in
-{
+
   environment.systemPackages = [ pkgs.any-nix-shell ];
-  home-manager.users.${settings.user.name}.imports = [ module ];
   users.users.${settings.user.name}.shell = pkgs.fish;
   programs.fish.enable = true;
   programs.nix-index.enableFishIntegration = true;

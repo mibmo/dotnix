@@ -1,4 +1,4 @@
-{ lib, pkgs, settings, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./dns.nix
     ./vpn.nix
@@ -10,5 +10,5 @@
     networkmanager.enable = true;
   };
 
-  users.users.${settings.user.name}.extraGroups = [ "networkmanager" ];
+  home.groups = [ "networkmanager" ];
 }

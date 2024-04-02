@@ -1,4 +1,4 @@
-{ lib, settings, ... }:
+{ lib, ... }:
 let
   mkEmail = account@{ address, ... }:
     let
@@ -13,8 +13,9 @@ let
     } // config;
 
   accounts = [ ];
-
-  module = {
+in
+{
+  home.settings = {
     programs.thunderbird = {
       enable = true;
       profiles.default = {
@@ -28,7 +29,4 @@ let
       { }
       accounts;
   };
-in
-{
-  home-manager.users.${settings.user.name}.imports = [ module ];
 }

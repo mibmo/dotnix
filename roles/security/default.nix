@@ -1,25 +1,6 @@
-{ inputs, pkgs, config, settings, host, ... }:
-let
-  module = {
-    programs = {
-      gpg = {
-        enable = true;
-        scdaemonSettings.disable-ccid = true;
-      };
-    };
-    services.gpg-agent = {
-      enable = true;
-      enableExtraSocket = true;
-      enableSshSupport = true;
-      enableScDaemon = true;
-      pinentryFlavor = config.programs.gnupg.agent.pinentryFlavor;
-    };
-  };
-in
-{
-  home-manager.users.${settings.user.name} = {
-    imports = [ module ];
-    home.packages = with pkgs; [
+{ inputs, pkgs, config, host, ... }: {
+  home = {
+    packages = with pkgs; [
       keepassxc
       age
       minisign
@@ -29,11 +10,22 @@ in
       monero-gui
       inputs.agenix.packages.${host.system}.default
     ];
-  };
-
-  users = {
-    users.${settings.user.name}.extraGroups = [ "nitrokey" ];
-    groups.nitrokey = { };
+    groups = [ "nitrokey" ];
+    settings = {
+      programs = {
+        gpg = {
+          enable = true;
+          scdaemonSettings.disable-ccid = true;
+        };
+      };
+      services.gpg-agent = {
+        enable = true;
+        enableExtraSocket = true;
+        enableSshSupport = true;
+        enableScDaemon = true;
+        pinentryFlavor = config.programs.gnupg.agent.pinentryFlavor;
+      };
+    };
   };
 
   services.udev.packages = [ pkgs.nitrokey-udev-rules ];

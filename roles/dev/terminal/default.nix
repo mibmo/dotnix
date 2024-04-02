@@ -1,6 +1,5 @@
-{ pkgs-23_11, settings, ... }:
-let
-  module = {
+{ pkgs-23_11, ... }: {
+  home.settings = {
     programs = {
       alacritty = {
         enable = true;
@@ -31,7 +30,4 @@ let
       };
     };
   };
-in
-{
-  home-manager.users.${settings.user.name}.imports = [ module ];
 }
