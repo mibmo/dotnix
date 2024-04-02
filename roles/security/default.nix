@@ -1,4 +1,4 @@
-{ inputs, pkgs, config, host, ... }: {
+{ inputs, pkgs, config, ... }: {
   home = {
     packages = with pkgs; [
       keepassxc
@@ -8,7 +8,6 @@
       # broken on unstable 2024-03-04
       #pynitrokey
       monero-gui
-      inputs.agenix.packages.${host.system}.default
     ];
     groups = [ "nitrokey" ];
     settings = {
