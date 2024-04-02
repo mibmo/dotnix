@@ -8,20 +8,11 @@ let
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
         nur.nixosModules.nur
-        agenix.nixosModules.default
+        agenix.nixosModules.age
         hyprland.nixosModules.default
         ../roles/common.nix
         (lib.mkModule host)
       ];
-      /*
-      modules = with inputs; modules ++ [
-        ../base.nix
-        nur.nixosModules.nur
-        home-manager.nixosModules.home-manager
-        agenix.nixosModules.default
-        hyprland.nixosModules.default
-      ];
-      */
     };
 
   hosts = lib.recurse (c: c ? name) mkHost config.hosts;
