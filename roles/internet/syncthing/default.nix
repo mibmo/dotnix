@@ -5,7 +5,9 @@ let
 
   cfg = config.services.syncthing;
 
-  devices = import ./devices.nix;
+  devices = lib.attrsets.filterAttrs
+    (name: _: name != config.networking.hostName)
+    (import ./devices.nix);
   folders = import ./folders.nix { inherit home; };
 in
 with lib; {
