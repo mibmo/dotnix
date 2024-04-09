@@ -20,6 +20,8 @@ let
     "scaleway_private_key"
     "syncthing_hamilton_key"
     "syncthing_hamilton_cert"
+    "syncthing_macadamia_key"
+    "syncthing_macadamia_cert"
   ];
 in
 builtins.foldl'
