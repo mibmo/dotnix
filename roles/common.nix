@@ -21,9 +21,12 @@
   time.timeZone = "Europe/Copenhagen";
   services.ntp.enable = true;
 
-  users.users.${settings.user.name} = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "input" ];
-    hashedPasswordFile = config.age.secrets.user_password.path;
+  users = {
+    mutableUsers = false;
+    users.${settings.user.name} = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "input" ];
+      hashedPasswordFile = config.age.secrets.user_password.path;
+    };
   };
 }
