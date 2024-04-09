@@ -73,6 +73,12 @@
           options.mountpoint = "legacy";
           mountpoint = "/persist";
           mountOptions = [ "noexec" ];
+          postMountHook = ''
+            # copy over host keys
+            mkdir --parents --mode=755 /mnt/persist/etc/ssh
+            find /etc/ssh/ -type f -name "ssh_host_*_key" \
+              -execdir cp {,/mnt/persist}/etc/ssh/{} \;
+          '';
         };
       };
     };
