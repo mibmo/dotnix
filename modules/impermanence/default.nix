@@ -38,7 +38,6 @@ in
         "assets"
         "backup"
         "dev"
-        "downloads"
         "games"
         { directory = ".ssh"; mode = "0700"; }
       ];
