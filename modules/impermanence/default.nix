@@ -54,7 +54,6 @@ in
           "assets"
           "backup"
           "dev"
-          "games"
           { directory = ".ssh"; mode = "0700"; }
         ];
         files = lib.mkAfter [ ];

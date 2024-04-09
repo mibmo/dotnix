@@ -31,4 +31,6 @@
     mangohud
     wine
   ];
+
+  persist.user.directories = [ "games" ];
 }
