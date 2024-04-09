@@ -55,4 +55,6 @@
       source = "${pkgs.tree-sitter-grammars.tree-sitter-wgsl}/queries";
     };
   };
+
+  persist.user.directories = [ ".local/share/nvim" ];
 }
