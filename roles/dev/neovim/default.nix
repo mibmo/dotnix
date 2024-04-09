@@ -21,6 +21,7 @@
         gcc
         zig
         tree-sitter
+        luajit
 
         # plugin dependencies
         luaPackages.jsregexp
