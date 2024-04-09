@@ -33,6 +33,7 @@
       jq
       dwarfs
       nix-output-monitor
+      nvd
       github-cli
       p7zip
       zip
