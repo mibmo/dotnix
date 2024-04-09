@@ -29,6 +29,9 @@ let
       host = ./hosts/macadamia;
       roles = [
         hardwareModules.apple-macbook-pro-14-1
+        ./roles/dev
+        ./roles/desktop
+
         ./roles/desktop/gnome
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnTI64CyDnCoQFZKWI0T1Z6YcyVW8XrJypWxD9HdMGW" ];
