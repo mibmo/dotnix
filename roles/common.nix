@@ -24,6 +24,6 @@
   users.users.${settings.user.name} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" ];
-    passwordFile = config.age.secrets.user_password.path;
+    hashedPasswordFile = config.age.secrets.user_password.path;
   };
 }
