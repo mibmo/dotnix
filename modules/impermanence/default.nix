@@ -17,6 +17,20 @@ in
       default = [ ];
       description = "Files to persist";
     };
+
+    user = {
+      directories = mkOption {
+        type = with types; listOf (coercedTo str (d: { directory = d; }) attrs);
+        default = [ ];
+        description = "Directories to persist for primary user";
+      };
+
+      files = mkOption {
+        type = with types; listOf (coercedTo str (f: { file = f; }) attrs);
+        default = [ ];
+        description = "Files to persist for primary user";
+      };
+    };
   };
 
   config.environment.persistence.main = {
@@ -34,13 +48,14 @@ in
     ];
 
     users.${settings.user.name} = {
-      directories = [
+      directories = cfg.user.directories ++ [
         "assets"
         "backup"
         "dev"
         "games"
         { directory = ".ssh"; mode = "0700"; }
       ];
+      files = cfg.user.files;
     };
   };
 }

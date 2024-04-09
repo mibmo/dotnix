@@ -19,5 +19,5 @@ in
     (_: path: "/home/${settings.user.name}/${path}")
     userDirs;
 
-  environment.persistence.main.users.${settings.user.name}.directories = lib.attrsets.attrValues userDirs;
+  persist.user.directories = lib.attrsets.attrValues userDirs;
 }
