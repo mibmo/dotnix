@@ -2,13 +2,18 @@
 let
   inherit (settings.user) name;
   home = "/home/${name}";
+  hosts = {
+    managed = lib.lists.remove
+      config.networking.hostName
+      [ "hamilton" "macadamia" ];
+  };
 
   cfg = config.services.syncthing;
 
   devices = lib.attrsets.filterAttrs
     (name: _: name != config.networking.hostName)
     (import ./devices.nix);
-  folders = import ./folders.nix { inherit home; };
+  folders = import ./folders.nix { inherit home hosts; };
 in
 with lib; {
   services.syncthing = {

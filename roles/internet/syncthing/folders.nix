@@ -1,4 +1,4 @@
-{ home }:
+{ home, hosts ? { } }:
 let
   staggered =
     { days ? 14 # every two weeks
@@ -14,7 +14,7 @@ in
 {
   "Secret" = {
     id = "0hhw6-hojo4";
-    devices = [ "mobai" "ichi" ];
+    devices = hosts.managed ++ [ "mobai" "ichi" ];
     path = "${home}/.secret";
     versioning = staggered {
       days = 7 * 4 * 2; # two months
@@ -23,14 +23,14 @@ in
   };
   "Code" = {
     id = "tcvau-dajz7";
-    devices = [ "mobai" "ichi" ];
+    devices = hosts.managed ++ [ "mobai" "ichi" ];
     path = "${home}/dev";
     versioning = staggered { };
     enable = true;
   };
   "Books" = {
     id = "6whpv-fec6p";
-    devices = [ "mobai" "holger" ];
+    devices = hosts.managed ++ [ "mobai" "holger" ];
     path = "${home}/assets/books";
     enable = true;
   };
