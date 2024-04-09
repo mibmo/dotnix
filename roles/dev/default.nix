@@ -78,4 +78,6 @@
 
     mtr.enable = true;
   };
+
+  persist.user.directories = [ "dev" ];
 }

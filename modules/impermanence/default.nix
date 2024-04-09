@@ -53,7 +53,6 @@ in
         directories = lib.mkAfter [
           "assets"
           "backup"
-          "dev"
           { directory = ".ssh"; mode = "0700"; }
         ];
         files = lib.mkAfter [ ];
