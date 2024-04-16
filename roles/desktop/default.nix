@@ -13,6 +13,7 @@ in
 {
   imports = [
     ../internet/firefox
+    ./communication
     ./fcitx5
     ./ydotool
   ];
@@ -29,8 +30,6 @@ in
       libreoffice
       pulsemixer
       qbittorrent
-      element-desktop
-      nheko
     ];
   };
 
