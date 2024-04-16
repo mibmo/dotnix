@@ -39,4 +39,11 @@ with lib; {
       syncthing-key.file = getSecret "key";
       syncthing-cert.file = getSecret "cert";
     };
+
+  persist.directories = map
+    (folder: {
+      directory = folder.path;
+      inherit (cfg) user group;
+    })
+    (lib.attrsets.attrValues folders ++ [{ path = cfg.dataDir; }]);
 }
