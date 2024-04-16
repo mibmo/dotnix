@@ -1,6 +1,8 @@
 { lib, config, settings, ... }:
 with lib;
 let
+  inherit (lists) unique;
+
   cfg = config.persist;
 in
 {
@@ -35,8 +37,12 @@ in
       enable = mkDefault false;
       persistentStoragePath = "/persist";
 
-      inherit (cfg) directories files;
-      users.${settings.user.name} = { inherit (cfg.user) directories files; };
+      directories = unique cfg.directories;
+      files = unique cfg.files;
+      users.${settings.user.name} = {
+        directories = unique cfg.directories;
+        files = unique cfg.files;
+      };
     };
 
     persist = {
