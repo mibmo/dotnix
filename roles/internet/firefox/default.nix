@@ -61,6 +61,7 @@ let
         week = 7 * day;
       in
       {
+        # nix
         "NixOS Wiki" = {
           urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
           iconUpdateURL = "https://nixos.wiki/favicon.png";
@@ -108,13 +109,7 @@ let
           definedAliases = [ "@hm" "@hmopts" ];
         };
 
-        "Jisho" = {
-          urls = [{ template = "https://jisho.org/search/{searchTerms}"; }];
-          iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
-          updateInterval = week;
-          definedAliases = [ "@js" "@jisho" ];
-        };
-
+        # rust
         "Rust Language Documentation" = {
           urls = [{ template = "https://doc.rust-lang.org/std/?search={searchTerms}"; }];
           iconUpdateURL = "https://doc.rust-lang.org/favicon.ico";
@@ -134,6 +129,22 @@ let
           iconUpdateURL = "https://lib.rs/favicon.ico";
           updateInterval = week;
           definedAliases = [ "@lrs" "@librs" ];
+        };
+
+        # gaming
+        "Terraria Wiki" = {
+          urls = [{ template = "https://terraria.wiki.gg/index.php?search={searchTerms}"; }];
+          iconUpdateUrl = "https://terraria.wiki.gg/favicon.ico";
+          updateInterval = week;
+          definedAliases = [ "@tw" "@terraria" ];
+        };
+
+        # dictionaries
+        "Jisho" = {
+          urls = [{ template = "https://jisho.org/search/{searchTerms}"; }];
+          iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
+          updateInterval = week;
+          definedAliases = [ "@js" "@jisho" ];
         };
       };
   };
