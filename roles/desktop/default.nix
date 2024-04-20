@@ -46,7 +46,11 @@ in
       jack.enable = true;
       pulse.enable = true;
     };
-    xserver.xkb.layout = "dk";
+    xserver = {
+      xkb.layout = "dk";
+      # enable touchpad support
+      libinput.enable = true;
+    };
   };
 
   hardware.opentabletdriver.enable = true;
