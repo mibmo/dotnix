@@ -584,6 +584,9 @@ for _, language in pairs(Languages) do
 end
 
 -- handle borders on color switch
+--[[
+-- disabled as it conflicts with current setup and, while generally being nice, does completely break under some circumstances making it a ugly to use.
+-- @TODO: figure out a fix; maybe change signal handling for shell?
 local modified = false
 vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
 	callback = function()
@@ -602,6 +605,7 @@ vim.api.nvim_create_autocmd("UILeave", {
 		end
 	end,
 })
+--]]
 
 -- appearance
 vim.opt.number = true
