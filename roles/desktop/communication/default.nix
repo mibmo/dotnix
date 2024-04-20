@@ -11,5 +11,6 @@
     ".config/nheko"
     ".local/share/chat.fluffy.fluffychat"
     ".local/share/cinny"
+    ".local/share/in.cinny.app"
   ];
 }
