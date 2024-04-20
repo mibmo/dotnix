@@ -30,6 +30,7 @@
         python310Packages.pygments
         ripgrep
         fd
+        gawk
 
         # language servers
         lua-language-server
