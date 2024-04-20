@@ -11,4 +11,10 @@
   };
 
   home.groups = [ "networkmanager" ];
+
+  persist.directories = [{
+    directory = "/etc/NetworkManager/system-connections";
+    user = "root";
+    group = "root";
+  }];
 }
