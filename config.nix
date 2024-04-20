@@ -59,8 +59,8 @@ let
         ns = "nom shell";
         nd = "nom develop";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
-        build = "nom build ${dotnixDir}#nixosConfigurations.$hostname.config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
-        switch = "sudo nixos-rebuild switch --flake ${dotnixDir}#$hostname";
+        build = "nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
+        switch = "sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname)";
         rebuild = "${build} && ${switch}";
         rebuild-offline = "${build} --offline && ${switch} --offline";
         tmp = "pushd $(mktemp -d)";
