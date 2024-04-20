@@ -8,7 +8,6 @@
 
     xserver = {
       enable = true;
-      layout = "dk";
 
       # enable touchpad support
       libinput.enable = true;

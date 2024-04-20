@@ -37,13 +37,16 @@ in
 
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    wireplumber.enable = true;
+  services = {
+    pipewire = {
+      enable = true;
+      wireplumber.enable = true;
 
-    alsa.enable = true;
-    jack.enable = true;
-    pulse.enable = true;
+      alsa.enable = true;
+      jack.enable = true;
+      pulse.enable = true;
+    };
+    xserver.xkb.layout = "dk";
   };
 
   hardware.opentabletdriver.enable = true;
