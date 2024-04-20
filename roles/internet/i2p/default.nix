@@ -2,6 +2,6 @@
   services.i2pd = {
     enable = true;
     yggdrasil.enable = true;
-    proto.socksProxy.enable = true;
+    proto.httpProxy.enable = true;
   };
 }
