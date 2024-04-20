@@ -45,5 +45,5 @@ with lib; {
       directory = folder.path;
       inherit (cfg) user group;
     })
-    (lib.attrsets.attrValues folders ++ [{ path = cfg.dataDir; }]);
+    (lib.attrsets.attrValues folders ++ [{ path = if cfg.dataDir == home then "${home}/.config/syncthing" else cfg.dataDir; }]);
 }
