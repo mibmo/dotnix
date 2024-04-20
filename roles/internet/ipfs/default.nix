@@ -1,4 +1,8 @@
-{ ... }: {
+{ config, ... }:
+let
+  cfg = config.services.kubo;
+in
+{
   services.kubo = {
     enable = true;
     enableGC = true;
@@ -12,4 +16,6 @@
       ];
     };
   };
+
+  home.groups = [ cfg.group ];
 }
