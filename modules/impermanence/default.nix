@@ -40,8 +40,8 @@ in
       directories = unique cfg.directories;
       files = unique cfg.files;
       users.${settings.user.name} = {
-        directories = unique cfg.directories;
-        files = unique cfg.files;
+        directories = unique cfg.user.directories;
+        files = unique cfg.user.files;
       };
     };
 
