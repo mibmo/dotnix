@@ -70,7 +70,10 @@
         };
         persist = {
           type = "zfs_fs";
-          options.mountpoint = "legacy";
+          options = {
+            mountpoint = "legacy";
+            "com.sun:auto-snapshot" = "true";
+          };
           mountpoint = "/persist";
           mountOptions = [ "noexec" ];
           postMountHook = ''
