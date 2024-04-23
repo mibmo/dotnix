@@ -28,6 +28,12 @@ let
     key = settings.gpg.keyId;
     signByDefault = true;
   };
+  includes = map
+    (name: {
+      path = "~/dev/${name}/.gitconfig";
+      condition = "gitdir:~/dev/${name}/";
+    })
+    (import ./organizations.nix);
 in
 {
   home.settings.programs.git = {
@@ -37,6 +43,6 @@ in
 
     userName = settings.user.name;
     userEmail = settings.user.email;
-    inherit extraConfig signing;
+    inherit extraConfig signing includes;
   };
 }
