@@ -23,6 +23,10 @@ let
       "https://gitlab.com/".insteadOf = "gl:";
       "ssh://git@gitlab.com".pushInsteadOf = "gl:";
     };
+    filter.ignore-marked-lines = {
+      clean = "sed -E '/@ignore(: .+)?$/d'";
+      smudge = "cat";
+    };
   };
   signing = lib.mkIf (settings.gpg ? keyId) {
     key = settings.gpg.keyId;
