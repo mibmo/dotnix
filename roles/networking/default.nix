@@ -7,7 +7,13 @@
 
   networking = {
     firewall.enable = false;
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      settings.device-p2p = {
+        match-device = "interface-name:p2p-dev-*";
+        managed = false;
+      };
+    };
   };
 
   home.groups = [ "networkmanager" ];
