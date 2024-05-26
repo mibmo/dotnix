@@ -4,6 +4,10 @@
     enable = true;
     dockerCompat = true;
     dockerSocket.enable = true;
-    enableNvidia = builtins.any (vd: vd == "nvidia") config.services.xserver.videoDrivers;
   };
+
+  hardware.nvidia-container-toolkit.enable =
+    builtins.any
+      (vd: vd == "nvidia")
+      config.services.xserver.videoDrivers;
 }
