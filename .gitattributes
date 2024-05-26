@@ -1,1 +1,1 @@
-*.nix text eol=lf filter=ignore-marked-lines
+*.nix text eol=lf

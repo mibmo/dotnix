@@ -41,6 +41,47 @@ let
       condition = "gitdir:~/dev/${name}/";
     })
     (import ./organizations.nix);
+  attributes =
+    let
+      all = lib.lists.flatten [ programming configuration ];
+      programming = [
+        "c"
+        "cpp"
+        "cs"
+        "css"
+        "fish"
+        "go"
+        "html"
+        "js"
+        "less"
+        "lisp"
+        "md"
+        "nix"
+        "pl"
+        "py"
+        "r"
+        "rs"
+        "scss"
+        "sh"
+        "svg"
+        "ts"
+        "txt"
+        "zsh"
+      ];
+      configuration = [
+        "conf"
+        "ini"
+        "toml"
+        "yaml"
+      ];
+
+      mkFilter = { attributes, filetypes ? all }: map (filetype: "*.${filetype} ${attributes}") filetypes;
+    in
+    lib.flatten (map mkFilter [
+      { attributes = "text"; }
+      { attributes = "eol=lf"; }
+      { attributes = "filter=ignore-marked-lines"; }
+    ]);
 in
 {
   home.settings.programs.git = {
@@ -50,6 +91,6 @@ in
 
     userName = settings.user.name;
     userEmail = settings.user.email;
-    inherit extraConfig ignores includes signing;
+    inherit attributes extraConfig ignores includes signing;
   };
 }
