@@ -17,6 +17,8 @@
       };
     };
 
+    zfs.package = pkgs.zfs_unstable;
+
     plymouth = {
       enable = true;
       theme = "fade-in";
