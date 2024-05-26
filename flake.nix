@@ -34,7 +34,7 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, conch, ... }:
+    inputs@{ conch, ... }:
     let
       lib = inputs.nixpkgs.lib // import ./lib.nix { inherit inputs; };
       config = import ./config.nix { inherit inputs lib; };
@@ -42,7 +42,10 @@
     conch.load [
       "x86_64-linux"
     ]
-      ({ pkgs, ... }: {
-        flake.nixosConfigurations = import ./hosts { inherit inputs lib config; };
+      ({ ... }: {
+        flake = {
+          inherit inputs;
+          nixosConfigurations = import ./hosts { inherit inputs lib config; };
+        };
       });
 }
