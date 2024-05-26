@@ -16,6 +16,11 @@
     };
   };
 
+  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = [
+    ""
+    "${lib.getExe' pkgs.networkmanager "nm-online"} -q"
+  ];
+
   home.groups = [ "networkmanager" ];
 
   persist.directories = [{
