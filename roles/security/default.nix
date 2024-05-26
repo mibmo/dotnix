@@ -22,7 +22,7 @@
         enableExtraSocket = true;
         enableSshSupport = true;
         enableScDaemon = true;
-        pinentryFlavor = config.programs.gnupg.agent.pinentryFlavor;
+        pinentryPackage = config.programs.gnupg.agent.pinentryPackage;
       };
     };
   };

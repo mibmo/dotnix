@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
-  programs.gnupg.agent.pinentryFlavor = "gnome3";
+  programs.gnupg.agent.pinentryPackage = pkgs.pinentry-gnome3;
 
   services = {
     dbus.packages = with pkgs; [ dconf gcr ];
@@ -16,7 +16,7 @@
   };
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
-    pkgs.pinentry-gnome
+    config.programs.gnupg.agent.pinentryPackage
     pkgs.gnome.file-roller
 
     # wayland
