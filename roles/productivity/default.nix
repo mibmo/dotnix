@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-23_11, ... }:
 let
   kicad = pkgs.kicad.override {
     addons = with pkgs.kicadAddons; [
@@ -9,7 +9,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    anki
+    pkgs-23_11.anki
     blender-hip
     freecad
     kicad
