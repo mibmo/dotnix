@@ -51,6 +51,17 @@ in
       # enable touchpad support
       libinput.enable = true;
     };
+    printing = {
+      enable = true;
+      stateless = true;
+      startWhenNeeded = true;
+      drivers = with pkgs; [
+        brlaser
+        cups-bjnp
+        cups-dymo
+        gutenprint
+      ];
+    };
   };
 
   hardware.opentabletdriver.enable = true;
