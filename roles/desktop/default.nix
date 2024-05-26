@@ -46,11 +46,8 @@ in
       jack.enable = true;
       pulse.enable = true;
     };
-    xserver = {
-      xkb.layout = "dk";
-      # enable touchpad support
-      libinput.enable = true;
-    };
+    xserver.xkb.layout = "dk";
+    libinput.enable = true;
     printing = {
       enable = true;
       stateless = true;
