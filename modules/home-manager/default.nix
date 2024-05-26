@@ -40,6 +40,9 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
 
+      # also fixes issue with fcitx5's profile file
+      backupFileExtension = "backup";
+
       users.${settings.user.name} = {
         news.display = "silent";
         imports = [ cfg.settings ];
