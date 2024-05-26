@@ -32,6 +32,9 @@ let
     key = settings.gpg.keyId;
     signByDefault = true;
   };
+  ignores = [
+    "*sync-conflict-*-*-*"
+  ];
   includes = map
     (name: {
       path = "~/dev/${name}/.gitconfig";
@@ -47,6 +50,6 @@ in
 
     userName = settings.user.name;
     userEmail = settings.user.email;
-    inherit extraConfig signing includes;
+    inherit extraConfig ignores includes signing;
   };
 }
