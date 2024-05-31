@@ -25,6 +25,7 @@
     {
       fcitx5-config = {
         target = ".config/fcitx5/config";
+        force = true;
         source = format.generate "fcitx5-config" {
           Hotkey = {
             # enumerate when press trigger key repeatedly
@@ -98,6 +99,7 @@
         in
         {
           target = ".config/fcitx5/profile";
+          force = true;
           source = format.generate "fcitx5-profile" {
             GroupOrder."0" = "Default";
             "Groups/0" = {
