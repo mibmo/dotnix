@@ -5,6 +5,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.follows = "nixpkgs-23_11";
 
+    nixpkgs-24_05.url = "nixpkgs/nixos-24.05";
     nixpkgs-23_11.url = "nixpkgs/nixos-23.11";
     nixpkgs-23_05.url = "nixpkgs/nixos-23.05";
     nixpkgs-22_11.url = "nixpkgs/nixos-22.11";
