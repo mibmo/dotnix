@@ -103,8 +103,8 @@ let
         };
 
         "Home Manager Options" = {
-          urls = [{ template = "https://mipmip.github.io/home-manager-option-search/?query={searchTerms}"; }];
-          iconUpdateURL = "https://mipmip.github.io/home-manager-option-search/images/favicon.png";
+          urls = [{ template = "https://home-manager-options.extranix.com/?query={searchTerms}"; }];
+          iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.ico";
           updateInterval = week;
           definedAliases = [ "@hm" "@hmopts" ];
         };
