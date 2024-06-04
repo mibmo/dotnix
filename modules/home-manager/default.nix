@@ -43,6 +43,9 @@ in
       # also fixes issue with fcitx5's profile file
       backupFileExtension = "backup";
 
+      # use same state version across root and user
+      users.root.home.stateVersion = config.home-manager.users.${settings.user.name}.home.stateVersion;
+
       users.${settings.user.name} = {
         news.display = "silent";
         imports = [ cfg.settings ];
