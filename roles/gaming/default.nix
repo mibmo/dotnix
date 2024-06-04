@@ -32,5 +32,10 @@
     wineWowPackages.waylandFull
   ];
 
+  environment.systemPackages = with pkgs; [
+    dxvk
+    vkd3d
+  ];
+
   persist.user.directories = [ "games" ];
 }
