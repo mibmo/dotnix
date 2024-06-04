@@ -29,7 +29,7 @@
     lutris
     prismlauncher
     mangohud
-    wine
+    wineWowPackages.waylandFull
   ];
 
   persist.user.directories = [ "games" ];
