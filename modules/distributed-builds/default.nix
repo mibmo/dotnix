@@ -32,9 +32,9 @@
   };
 
   substituters = [
-    "kanna.kanpai:C3JZdjcT13Kgqwnau3qX/YWxerHT9A1Canbb/iX+AXc="
-    "mewo.kanpai:u6biJLZJ1OYyASejpGbnbs/hSi3vjmG1rV0E3yjY5Iw="
-    "muffin.kanpai:p09hN/DGfVxn0fvlKbaPglRLkV1RPPQHgj/prKPN31Y="
+    { protocol = "http"; host = "kanna.kanpai"; key = "C3JZdjcT13Kgqwnau3qX/YWxerHT9A1Canbb/iX+AXc="; }
+    { protocol = "http"; host = "mewo.kanpai"; key = "u6biJLZJ1OYyASejpGbnbs/hSi3vjmG1rV0E3yjY5Iw="; }
+    { protocol = "http"; host = "muffin.kanpai"; key = "p09hN/DGfVxn0fvlKbaPglRLkV1RPPQHgj/prKPN31Y="; }
   ];
 
   home-manager.users.root.programs.ssh = {
