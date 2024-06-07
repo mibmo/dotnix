@@ -22,6 +22,8 @@ let
     "syncthing_hamilton_cert"
     "syncthing_macadamia_key"
     "syncthing_macadamia_cert"
+    "remotebuilder_hamilton"
+    "remotebuilder_macadamia"
   ];
 in
 builtins.foldl'
