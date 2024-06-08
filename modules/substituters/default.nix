@@ -5,8 +5,14 @@
     example = [ "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" ];
   };
 
-  config.nix.settings =
+  config =
     let
+      inherit (builtins) elemAt match;
+      inherit (lib.lists) reverseList;
+      inherit (lib.strings) concatStrings stringToCharacters;
+
+      reverse = text: concatStrings (reverseList (stringToCharacters text));
+
       substituters =
         map
           (s:
@@ -16,14 +22,7 @@
               then s
               else
                 let
-                  inherit (builtins) elemAt match;
-                  inherit (lib.lists) reverseList;
-                  inherit (lib.strings) concatStrings stringToCharacters;
-
-                  reverse = text: concatStrings (reverseList (stringToCharacters text));
-
                   matches = match "(([a-z]+)://)?(.*):([a-zA-Z0-9+/=]+)" s;
-
                   hostParts = match "(([0-9]+)-)?(.*)" (reverse (elemAt matches 2));
 
                   protocol = elemAt matches 1;
@@ -31,12 +30,39 @@
                   suffix = reverse (elemAt hostParts 1);
                   key = elemAt matches 3;
                 in
-                { inherit protocol host suffix key; })
+                { inherit matches hostParts protocol host suffix key; })
           )
           config.substituters;
     in
     {
-      substituters = map (s: "${s.protocol or "https"}://${s.host}") substituters;
-      trusted-public-keys = map (s: "${s.host}${lib.optionalString (s ? "suffix") "-${s.suffix}"}:${s.key}") substituters;
+      nix.settings = {
+        substituters = map (s: "${s.protocol or "https"}://${s.host}") substituters;
+        trusted-public-keys = map (s: "${s.host}${lib.optionalString (s ? "suffix") "-${s.suffix}"}:${s.key}") substituters;
+      };
+
+      environment.etc.substituters.text = lib.concatMapStringsSep "\n"
+        (s: ''
+          info:
+            protocol: ${s.protocol or "https"}
+                host: ${s.host}
+              suffix: ${s.suffix or "none"}
+                 key: ${s.key}
+          parsing details:
+            matches: ${
+              if (s ? "matches")
+              then lib.concatMapStrings
+                ({ fst, snd }: "\n    ${toString fst}: ${toString snd}")
+                (lib.lists.zipLists (lib.lists.range 1 (builtins.length s.matches)) s.matches)
+              else "none"
+            }
+            host parts: ${
+              if (s ? "hostParts")
+              then lib.concatMapStrings
+                ({ fst, snd }: "\n    ${toString fst}: ${reverse snd}")
+                (lib.lists.zipLists (lib.lists.range 1 (builtins.length s.hostParts)) s.hostParts)
+              else "none"
+            }
+        '')
+        substituters;
     };
 }
