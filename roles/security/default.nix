@@ -27,8 +27,6 @@
     };
   };
 
-  services.udev.packages = [ pkgs.nitrokey-udev-rules ];
-
   age = {
     identityPaths = map (key: key.path) config.services.openssh.hostKeys;
     secrets = builtins.mapAttrs
