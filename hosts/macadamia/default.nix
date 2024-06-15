@@ -9,7 +9,7 @@
   boot = {
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-intel" ];
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot = {
