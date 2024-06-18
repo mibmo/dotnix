@@ -7,4 +7,11 @@
       "--accept-dns=false"
     ];
   };
+
+  persist.directories = [{
+    directory = "/var/lib/tailscale";
+    mode = "700";
+    user = "root";
+    group = "root";
+  }];
 }
