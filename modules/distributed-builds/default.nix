@@ -1,51 +1,82 @@
 { lib, config, ... }:
+let
+  inherit (lib.attrsets) mapAttrs' mapAttrsToList;
+
+  hosts = {
+    kanna = {
+      host = "kanna.kanpai";
+      storePublicKey = "C3JZdjcT13Kgqwnau3qX/YWxerHT9A1Canbb/iX+AXc=";
+
+      builder = {
+        systems = [ "x86_64-linux" ];
+        maxJobs = 16;
+        speedFactor = 64;
+        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
+      };
+    };
+
+    mewo = {
+      host = "mewo.kanpai";
+      storePublicKey = "u6biJLZJ1OYyASejpGbnbs/hSi3vjmG1rV0E3yjY5Iw=";
+
+      builder = {
+        systems = [ "aarch64-linux" ];
+        maxJobs = 1;
+        speedFactor = 1;
+        supportedFeatures = [ ];
+      };
+    };
+
+    muffin = {
+      host = "muffin.kanpai";
+      storePublicKey = "p09hN/DGfVxn0fvlKbaPglRLkV1RPPQHgj/prKPN31Y=";
+
+      builder = {
+        systems = [ "x86_64-linux" ];
+        maxJobs = 8;
+        speedFactor = 8;
+        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
+      };
+    };
+  };
+in
 {
   nix = {
     distributedBuilds = true;
     extraOptions = "builders-use-substitutes = true";
-    buildMachines = [
-      {
-        hostName = "kanna.kanpai";
-        systems = [ "x86_64-linux" ];
-        protocol = "ssh";
-        maxJobs = 16;
-        speedFactor = 64;
-        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
-      }
-      {
-        hostName = "mewo.kanpai";
-        systems = [ "aarch64-linux" ];
+    buildMachines = mapAttrsToList
+      (_: b: {
+        hostName = b.host;
+        systems = [ ];
         protocol = "ssh";
         maxJobs = 1;
         speedFactor = 1;
         supportedFeatures = [ ];
-      }
-      {
-        hostName = "muffin.kanpai";
-        systems = [ "x86_64-linux" ];
-        protocol = "ssh";
-        maxJobs = 8;
-        speedFactor = 8;
-        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
-      }
-    ];
+      } // b.builder or { })
+      hosts;
   };
 
-  substituters = [
-    { protocol = "http"; host = "kanna.kanpai"; key = "C3JZdjcT13Kgqwnau3qX/YWxerHT9A1Canbb/iX+AXc="; }
-    { protocol = "http"; host = "mewo.kanpai"; key = "u6biJLZJ1OYyASejpGbnbs/hSi3vjmG1rV0E3yjY5Iw="; }
-    { protocol = "http"; host = "muffin.kanpai"; key = "p09hN/DGfVxn0fvlKbaPglRLkV1RPPQHgj/prKPN31Y="; }
-  ];
+  substituters = mapAttrsToList
+    (_: b: {
+      protocol = "http";
+      host = b.host;
+      key = b.storePublicKey;
+    } // b.substituter or { })
+    hosts;
 
   home-manager.users.root.programs.ssh = {
     enable = true;
-    matchBlocks =
-      lib.genAttrs (map (m: m.hostName) config.nix.buildMachines) (host: {
-        user = "remote-builder";
-        port = 12248;
-        identitiesOnly = true;
-        identityFile = config.age.secrets.remote-builder-key.path;
-      });
+    matchBlocks = mapAttrs'
+      (name: { host, ... }: {
+        name = host;
+        value = {
+          user = "remote-builder";
+          port = 12248;
+          identitiesOnly = true;
+          identityFile = config.age.secrets.remote-builder-key.path;
+        };
+      })
+      hosts;
   };
 
   age.secrets.remote-builder-key.file = "${../../secrets}/remotebuilder_${config.networking.hostName}";
