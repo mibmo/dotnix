@@ -5,6 +5,7 @@ let
   hosts = {
     kanna = {
       host = "kanna.kanpai";
+      sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPgiVv9HzuP6HlCvJeUYdSsMCp60/0HSlkYw7YA80lVX";
       storePublicKey = "C3JZdjcT13Kgqwnau3qX/YWxerHT9A1Canbb/iX+AXc=";
 
       builder = {
@@ -17,6 +18,7 @@ let
 
     mewo = {
       host = "mewo.kanpai";
+      sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtD5IqU+Y3RkZKxQYR5fXRugRensSihj7diYAIgxEdI";
       storePublicKey = "u6biJLZJ1OYyASejpGbnbs/hSi3vjmG1rV0E3yjY5Iw=";
 
       builder = {
@@ -29,6 +31,7 @@ let
 
     muffin = {
       host = "muffin.kanpai";
+      sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/Xm/uSh6Ppy2lBtTr4ucw8mVBYWrqcDYLXmXN1XMTP";
       storePublicKey = "p09hN/DGfVxn0fvlKbaPglRLkV1RPPQHgj/prKPN31Y=";
 
       builder = {
@@ -78,6 +81,16 @@ in
       })
       hosts;
   };
+
+  services.openssh.knownHosts = mapAttrs'
+    (name: { host, sshPublicKey, ... }: {
+      name = host;
+      value = {
+        extraHostNames = [ "${name}.host.kanp.ai" ];
+        publicKey = sshPublicKey;
+      };
+    })
+    hosts;
 
   age.secrets.remote-builder-key.file = "${../../secrets}/remotebuilder_${config.networking.hostName}";
 }
