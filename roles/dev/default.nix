@@ -43,6 +43,8 @@
       file
       lsof
       arp-scan
+      usbutils
+      pciutils
     ];
     groups = [ "uucp" "dialout" ];
     settings = {
