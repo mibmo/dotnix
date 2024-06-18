@@ -29,4 +29,9 @@ in
       { }
       accounts;
   };
+
+  persist.user.directories = [
+    ".thunderbird"
+    ".cache/thunderbird"
+  ];
 }
