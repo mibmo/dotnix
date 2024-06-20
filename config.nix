@@ -33,6 +33,7 @@ let
         ./roles/desktop
 
         ./roles/desktop/gnome
+        ./roles/internet/thunderbird
         ./roles/internet/syncthing
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnTI64CyDnCoQFZKWI0T1Z6YcyVW8XrJypWxD9HdMGW" ];
