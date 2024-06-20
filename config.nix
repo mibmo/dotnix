@@ -31,6 +31,7 @@ let
         hardwareModules.apple-macbook-pro-14-1
         ./roles/dev
         ./roles/desktop
+        ./roles/productivity
 
         ./roles/desktop/gnome
         ./roles/internet/thunderbird
