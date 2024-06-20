@@ -47,7 +47,10 @@ in
       pulse.enable = true;
     };
     xserver.xkb.layout = "dk";
-    libinput.enable = true;
+    libinput = {
+      enable = true;
+      touchpad.disableWhileTyping = true;
+    };
     printing = {
       enable = true;
       stateless = true;
