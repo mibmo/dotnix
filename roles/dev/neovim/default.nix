@@ -17,38 +17,38 @@
         zathura
 
         # build tools
-        yarn
         gcc
-        zig
-        tree-sitter
         luajit
+        tree-sitter
+        yarn
+        zig
 
         # plugin dependencies
-        luaPackages.jsregexp
-        vscode-extensions.llvm-org.lldb-vscode
-        texlive.combined.scheme-full
-        python310Packages.pygments
-        ripgrep
         fd
         gawk
+        luaPackages.jsregexp
+        python310Packages.pygments
+        ripgrep
+        texlive.combined.scheme-full
+        vscode-extensions.llvm-org.lldb-vscode
 
         # language servers
         lua-language-server
-        nixd
-        rust-analyzer
-        pyright
         lua54Packages.digestif
+        nixd
+        pyright
+        rust-analyzer
 
         # debuggers
         delve
 
         # formatters
-        stylua # lua
-        nixpkgs-fmt # nix
         black # python
-        deno # typescript
         clang-tools # java
+        deno # typescript
+        nixpkgs-fmt # nix
         rubyPackages.htmlbeautifier # html
+        stylua # lua
       ];
     };
     home.file.nvim-wgsl-queries = {

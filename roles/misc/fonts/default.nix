@@ -14,17 +14,17 @@ let
 in
 {
   fonts.packages = with pkgs; [
-    nerd
     google
+    nerd
 
     fantasque-sans-mono
 
     # japanese
-    noto-fonts-cjk-serif
-    noto-fonts-cjk-sans
+    ipafont
     migmix
     migu
-    ipafont
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     takao
 
     # chinese

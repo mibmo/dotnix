@@ -1,13 +1,13 @@
 { inputs, pkgs, config, ... }: {
   home = {
     packages = with pkgs; [
-      keepassxc
       age
+      keepassxc
       minisign
+      monero-gui
       nitrokey-app
       # broken on unstable 2024-03-04
       #pynitrokey
-      monero-gui
     ];
     groups = [ "nitrokey" ];
     settings = {

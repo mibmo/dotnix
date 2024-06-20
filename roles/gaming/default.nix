@@ -27,8 +27,8 @@
 
   home.packages = with pkgs; [
     lutris
-    prismlauncher
     mangohud
+    prismlauncher
     wineWowPackages.waylandFull
   ];
 

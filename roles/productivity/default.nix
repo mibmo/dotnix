@@ -9,19 +9,19 @@ let
 in
 {
   home.packages = with pkgs; [
-    pkgs-23_11.anki
+    betaflight-configurator
     blender-hip
+    edgetx
     freecad
-    kicad
-    solvespace
-    inkscape
     gimp
+    inkscape
+    kicad
     krita
+    openscad-unstable
+    pkgs-23_11.anki
     prusa-slicer
     renderdoc
-    betaflight-configurator
-    edgetx
-    openscad-unstable
+    solvespace
   ];
 
   home.settings.home.file.".local/share/OpenSCAD/libraries/BOSL".source =

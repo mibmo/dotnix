@@ -25,11 +25,11 @@ in
   home-manager.users.${settings.user.name} = {
     imports = [ module ];
     home.packages = with pkgs; [
-      mpv
-      zathura
       libreoffice
+      mpv
       pulsemixer
       qbittorrent
+      zathura
     ];
   };
 

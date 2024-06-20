@@ -13,38 +13,38 @@
 
   home = {
     packages = with pkgs; [
-      ffmpeg
-      duf
-      imv
-      mktemp
-      which
-      nix-index
-      ldns
-      neofetch
-      killall
-      insomnia
-      htop
-      gnumake
-      tree
-      libqalculate
-      fzf
+      arp-scan
       drawio
-      mmv-go
-      jq
+      duf
       dwarfs
+      fd
+      ffmpeg
+      file
+      fzf
+      github-cli
+      gnumake
+      htop
+      imv
+      insomnia
+      jq
+      killall
+      ldns
+      libqalculate
+      lsof
+      mktemp
+      mmv-go
+      neofetch
+      nix-index
       nix-output-monitor
       nvd
-      github-cli
       p7zip
-      zip
-      unzip
-      ripgrep
-      fd
-      file
-      lsof
-      arp-scan
-      usbutils
       pciutils
+      ripgrep
+      tree
+      unzip
+      usbutils
+      which
+      zip
     ];
     groups = [ "uucp" "dialout" ];
     settings = {

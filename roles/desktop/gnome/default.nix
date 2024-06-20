@@ -30,31 +30,31 @@
 
     # looks
     burn-my-windows
-    undecorate
-    shu-zhi
     material-you-color-theming
+    shu-zhi
+    undecorate
   ];
 
   # dont install default gnome applications
   environment.gnome.excludePackages =
     (with pkgs; [
+      gedit # text editor
       gnome-photos
       gnome-tour
-      gedit # text editor
     ])
     ++ (with pkgs.gnome; [
+      atomix # puzzle game
       cheese # webcam tool
+      epiphany # web browser
+      evince # document viewer
+      geary # email readear
+      gnome-characters
       gnome-music
       gnome-terminal
-      epiphany # web browser
-      geary # email readear
-      evince # document viewer
-      gnome-characters
-      totem # video player
-      tali # poker game
-      iagno # go game
       hitori # sudoku game
-      atomix # puzzle game
+      iagno # go game
+      tali # poker game
+      totem # video player
     ]);
 
   # might need this for nvidia
