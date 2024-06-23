@@ -1,7 +1,5 @@
 { pkgs, config, ... }:
 let
-  searchEngine = "DuckDuckGo";
-
   extensions = with config.nur.repos.rycee.firefox-addons; [
     tokyo-night-v2 # theme
     sidebery # nested tabs
@@ -21,38 +19,10 @@ let
     flagfox # display country info about website host
   ];
 
-  profileSettings = {
-    "app.normandy.first_run" = false;
-    "app.shield.optoutstudies.enabled" = false;
-
-    "browser.contentblocking.category" = "strict";
-    "browser.download.useDownloadDir" = false;
-
-    "browser.tabs.loadInBackground" = true;
-
-    # theme
-    "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
-    "extensions.extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
-
-    # extensions
-    "extensions.update.enabled" = false;
-    "extensions.webcompat.enable_picture_in_picture_overrides" = true;
-    "extensions.webcompat.enable_shims" = true;
-    "extensions.webcompat.perform_injections" = true;
-    "extensions.webcompat.perform_ua_overrides" = true;
-
-    # privacy 
-    "privacy.donottrackheader.enabled" = true;
-  };
-
-  profile = {
-    search.force = true;
-    userChrome = builtins.readFile ./userChrome.css;
-    settings = profileSettings;
-    inherit extensions;
-
-    search.default = searchEngine;
-    search.engines =
+  search = {
+    force = true;
+    default = "DuckDuckGo";
+    engines =
       let
         second = 1000;
         minute = 60 * second;
@@ -148,11 +118,38 @@ let
         };
       };
   };
+
+  settings = {
+    "app.normandy.first_run" = false;
+    "app.shield.optoutstudies.enabled" = false;
+
+    "browser.contentblocking.category" = "strict";
+    "browser.download.useDownloadDir" = false;
+
+    "browser.tabs.loadInBackground" = true;
+
+    # theme
+    "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+    "extensions.extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+
+    # extensions
+    "extensions.update.enabled" = false;
+    "extensions.webcompat.enable_picture_in_picture_overrides" = true;
+    "extensions.webcompat.enable_shims" = true;
+    "extensions.webcompat.perform_injections" = true;
+    "extensions.webcompat.perform_ua_overrides" = true;
+
+    # privacy 
+    "privacy.donottrackheader.enabled" = true;
+  };
 in
 {
   home.settings.programs.firefox = {
     enable = true;
     package = pkgs.firefox;
-    profiles.default = profile;
+    profiles.default = {
+      inherit extensions search settings;
+      userChrome = builtins.readFile ./userChrome.css;
+    };
   };
 }
