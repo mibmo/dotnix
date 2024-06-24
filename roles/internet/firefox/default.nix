@@ -1,22 +1,23 @@
 { lib, pkgs, config, ... }:
 let
   extensions = with config.nur.repos.rycee.firefox-addons; [
-    tokyo-night-v2 # theme
-    sidebery # nested tabs
-    floccus # blookmark sync
+    # themes
+    tokyo-night-v2
 
     # privacy
+    clearurls # clean tracking off urls
+    consent-o-matic # handle gdpr consent forms
+    decentraleyes # cache common web dependencies such as ajax
+    libredirect # redirect big sites to privacy-friendly alternatives
     ublock-origin # ad block
     umatrix # fine-grained resource blocking
-    decentraleyes # cache common web dependencies such as ajax
-    clearurls
-    consent-o-matic # handle gdpr consent forms
-    libredirect # redirect big sites to privacy-friendly alternatives
 
     # misc
-    keepassxc-browser
-    unpaywall # (legally) remove paywalls from journal websites
     flagfox # display country info about website host
+    floccus # blookmark sync
+    keepassxc-browser # password manager
+    sidebery # nested tabs
+    unpaywall # (legally) remove paywalls from journal websites
   ];
 
   search = {
@@ -121,9 +122,7 @@ let
 
   settings = {
     "app.normandy.first_run" = false;
-    "app.shield.optoutstudies.enabled" = false;
 
-    "browser.contentblocking.category" = "strict";
     "browser.download.useDownloadDir" = false;
 
     "browser.tabs.loadInBackground" = true;
@@ -140,6 +139,8 @@ let
     "extensions.webcompat.perform_ua_overrides" = true;
 
     # privacy 
+    "app.shield.optoutstudies.enabled" = false;
+    "browser.contentblocking.category" = "strict";
     "privacy.donottrackheader.enabled" = true;
   };
 in
