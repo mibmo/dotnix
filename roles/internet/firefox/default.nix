@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 let
   extensions = with config.nur.repos.rycee.firefox-addons; [
     tokyo-night-v2 # theme
@@ -152,4 +152,39 @@ in
       userChrome = builtins.readFile ./userChrome.css;
     };
   };
+
+  persist.user =
+    let
+      perProfile = profile: map (path: ".mozilla/firefox/${profile}/${path}");
+      prefix = prefix: map (suffix: prefix + suffix);
+      sqlite = file: prefix file [
+        ".sqlite"
+        ".sqlite-shm"
+        ".sqlite-wal"
+      ];
+    in
+    lib.attrsets.mapAttrs
+      (_: paths: perProfile "default" (lib.lists.flatten paths))
+      {
+        directories = [
+          "crashes"
+          "storage"
+        ];
+        files = [
+          [
+            "cert9.db"
+            "compatability.ini"
+          ]
+          (sqlite "content-prefs")
+          (sqlite "cookies")
+          (sqlite "favicons")
+          (sqlite "formhistory")
+          (sqlite "permissions")
+          (sqlite "places")
+          (sqlite "protections")
+          (sqlite "storage")
+          (sqlite "storage-sync-v2")
+          (sqlite "webappsstore")
+        ];
+      };
 }
