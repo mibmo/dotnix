@@ -130,6 +130,7 @@ let
     # theme
     "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
     "extensions.extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
     # extensions
     "extensions.update.enabled" = false;
