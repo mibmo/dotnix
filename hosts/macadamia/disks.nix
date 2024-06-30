@@ -46,7 +46,6 @@
       mountOptions = [
         "defaults"
         "mode=755"
-        "noexec"
       ];
     };
 
@@ -75,7 +74,6 @@
             "com.sun:auto-snapshot" = "true";
           };
           mountpoint = "/persist";
-          mountOptions = [ "noexec" ];
           postMountHook = ''
             # copy over host keys
             mkdir --parents --mode=755 /mnt/persist/etc/ssh
