@@ -1,4 +1,13 @@
 { pkgs, config, ... }:
+let
+  keybinds = {
+    terminal = {
+      name = "Open terminal";
+      binding = "<Super>Return";
+      command = "foot";
+    };
+  };
+in
 {
   imports = [ ../. ];
 
@@ -61,7 +70,11 @@
 
   home.settings = { lib, ... }:
     let
+      inherit (lib.attrsets) attrNames mapAttrs';
       inherit (lib.hm.gvariant) mkUint32;
+
+      keybindPath = name: "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/${name}";
+      keybindDir = name: "/${keybindPath name}/";
 
       shuzhiCommand = pkgs.writeScript "shuzhi.py" ''
         #!${pkgs.python3}/bin/python
@@ -88,6 +101,10 @@
           "sleep-inactive-battery-timeout" = 300; # 5 min
         };
 
+        "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = map
+          keybindDir
+          (attrNames keybinds);
+
         "org/gnome/shell"."enabled-extensions" = [ "shuzhi@tuberry" ];
         "org/gnome/shell/extensions/shuzhi" = {
           "default-style" = mkUint32 3;
@@ -97,6 +114,12 @@
           "text-command" = toString shuzhiCommand;
           "enable-systray" = true;
         };
-      };
+      } // (mapAttrs'
+        (name: value: {
+          name = keybindPath name;
+          inherit value;
+        })
+        keybinds
+      );
     };
 }
