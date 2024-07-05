@@ -162,6 +162,7 @@ let
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
     # extensions
+    "extensions.autoDisableScopes" = 0;
     "extensions.update.enabled" = false;
     "extensions.webcompat.enable_picture_in_picture_overrides" = true;
     "extensions.webcompat.enable_shims" = true;
