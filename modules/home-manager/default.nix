@@ -24,7 +24,7 @@ in
     };
 
     settings = mkOption {
-      type = with types; submodule { freeformType = types.anything; };
+      type = with types; deferredModule;
       default = { };
       description = lib.mdDoc "Alias to home-manager options for user";
     };
