@@ -10,7 +10,6 @@ let
         hardwareModules.asus-zephyrus-ga502
         ./roles/dev
         ./roles/gaming
-        ./roles/desktop
         ./roles/education
         ./roles/productivity
 
@@ -30,7 +29,6 @@ let
       roles = [
         hardwareModules.apple-macbook-pro-14-1
         ./roles/dev
-        ./roles/desktop
         ./roles/productivity
 
         ./roles/desktop/gnome
