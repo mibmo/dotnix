@@ -59,20 +59,33 @@
   # might need this for nvidia
   #hardware.nvidia.modesetting.enable = true;
 
-  home.settings.xdg.configFile."shuzhi.py" = {
-    executable = true;
-    source = pkgs.writeScript "shuzhi.py" ''
-      #!${pkgs.python3}/bin/python
-      import socket
+  home.settings = {
+    dconf.settings = {
+      "org/gnome/desktop/interface"."show-battery-percentage" = true;
+      "org/gnome/mutter"."edge-tiling" = true;
+      "org/gnome/settings-daemon/plugins/color"."night-light-enable" = true;
+      "org/gnome/settings-daemon/plugins/power" = {
+        "ambient-enabled" = true;
+        "sleep-inactive-ac-timeout" = 7200; # 2 hours
+        "sleep-inactive-battery-timeout" = 300; # 5 min
+      };
+    };
 
-      def print_wide(*args, sep=" ", **kwargs):
-        wide_map = {i: i + 0xFEE0 for i in range(0x21, 0x7F)}
-        wide_map[0x20] = 0x3000
-        text = sep.join(map(str, args)).translate(wide_map)
-        print(text, **kwargs)
+    xdg.configFile."shuzhi.py" = {
+      executable = true;
+      source = pkgs.writeScript "shuzhi.py" ''
+        #!${pkgs.python3}/bin/python
+        import socket
 
-      print("こんにちは")
-      print_wide(socket.gethostname())
-    '';
+        def print_wide(*args, sep=" ", **kwargs):
+          wide_map = {i: i + 0xFEE0 for i in range(0x21, 0x7F)}
+          wide_map[0x20] = 0x3000
+          text = sep.join(map(str, args)).translate(wide_map)
+          print(text, **kwargs)
+
+        print("こんにちは")
+        print_wide(socket.gethostname())
+      '';
+    };
   };
 }
