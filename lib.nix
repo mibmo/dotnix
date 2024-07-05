@@ -15,7 +15,7 @@ let
       )
       set;
 
-  mkModule = module: args@{ ... }: {
+  mkModule = module: args@{ pkgs, ... }: {
     imports = with inputs; [
       ({ ... }: {
         nixpkgs = {
@@ -39,7 +39,7 @@ let
       {
         inherit inputs args;
         host = module;
-        settings = import ./config.nix { inherit inputs; lib = combined-lib; };
+        settings = import ./config.nix { inherit inputs pkgs; lib = combined-lib; };
         lib = combined-lib;
       } // foldlAttrs
         (acc: name: input: acc // optionalAttrs

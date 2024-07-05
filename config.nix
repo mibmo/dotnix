@@ -1,4 +1,4 @@
-{ inputs, lib }:
+args@{ inputs, lib ? args.pkgs.lib, pkgs ? { } }:
 let
   hardwareModules = inputs.nixos-hardware.nixosModules;
   hosts = {

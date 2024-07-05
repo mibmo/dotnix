@@ -42,14 +42,15 @@
 
   outputs =
     inputs@{ conch, ... }:
-    let
-      lib = inputs.nixpkgs.lib // import ./lib.nix { inherit inputs; };
-      config = import ./config.nix { inherit inputs lib; };
-    in
     conch.load [
       "x86_64-linux"
     ]
-      ({ ... }: {
+      ({ pkgs, ... }:
+      let
+        lib = inputs.nixpkgs.lib // import ./lib.nix { inherit inputs; };
+        config = import ./config.nix { inherit inputs pkgs lib; };
+      in
+      {
         flake = {
           inherit inputs;
           nixosConfigurations = import ./hosts { inherit inputs lib config; };
