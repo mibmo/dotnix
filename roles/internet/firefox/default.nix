@@ -20,6 +20,34 @@ let
     unpaywall # (legally) remove paywalls from journal websites
   ];
 
+  containers = {
+    entertainment = {
+      id = 0;
+      icon = "fence";
+      color = "blue";
+    };
+    hobby = {
+      id = 1;
+      icon = "circle";
+      color = "purple";
+    };
+    shopping = {
+      id = 2;
+      icon = "cart";
+      color = "orange";
+    };
+    personal = {
+      id = 3;
+      icon = "fingerprint";
+      color = "pink";
+    };
+    dangerous = {
+      id = 4;
+      icon = "fence";
+      color = "red";
+    };
+  };
+
   search = {
     force = true;
     default = "DuckDuckGo";
@@ -150,8 +178,9 @@ in
     enable = true;
     package = pkgs.firefox;
     profiles.default = {
-      inherit extensions search settings;
+      inherit containers extensions search settings;
       userChrome = builtins.readFile ./userChrome.css;
+      containersForce = true;
     };
   };
 
