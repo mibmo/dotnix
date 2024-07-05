@@ -54,7 +54,7 @@ let
 
   user = {
     name = "mib";
-    email = "mib@mib.dev";
+    email = "mib@kanp.ai";
   };
 
   defaults = {
