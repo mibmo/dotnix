@@ -45,13 +45,17 @@ let
         (acc: name: input: acc // optionalAttrs
           (hasPrefix "nixpkgs-" name)
           {
-            ${removePrefix "nix" name} = import input {
-              inherit (module) system;
-              config = {
-                allowUnfree = true;
-                permittedInsecurePackages = permittedInsecurePackages.${removePrefix "nixpkgs-" name};
-              };
-            };
+            ${removePrefix "nix" name} =
+              let
+                version = removePrefix "nixpkgs-" name;
+              in
+              if !permittedInsecurePackages ? ${version}
+              then input.legacyPackages.${module.system}
+              else
+                import input {
+                  inherit (module) system;
+                  config.permittedInsecurePackages = permittedInsecurePackages.${version};
+                };
           }
         )
         { }
