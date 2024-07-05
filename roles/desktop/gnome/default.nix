@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [ ../. ];
 
@@ -59,21 +59,11 @@
   # might need this for nvidia
   #hardware.nvidia.modesetting.enable = true;
 
-  home.settings = {
-    dconf.settings = {
-      "org/gnome/desktop/interface"."show-battery-percentage" = true;
-      "org/gnome/mutter"."edge-tiling" = true;
-      "org/gnome/settings-daemon/plugins/color"."night-light-enable" = true;
-      "org/gnome/settings-daemon/plugins/power" = {
-        "ambient-enabled" = true;
-        "sleep-inactive-ac-timeout" = 7200; # 2 hours
-        "sleep-inactive-battery-timeout" = 300; # 5 min
-      };
-    };
+  home.settings = { lib, ... }:
+    let
+      inherit (lib.hm.gvariant) mkUint32;
 
-    xdg.configFile."shuzhi.py" = {
-      executable = true;
-      source = pkgs.writeScript "shuzhi.py" ''
+      shuzhiCommand = pkgs.writeScript "shuzhi.py" ''
         #!${pkgs.python3}/bin/python
         import socket
 
@@ -86,6 +76,27 @@
         print("こんにちは")
         print_wide(socket.gethostname())
       '';
+    in
+    {
+      dconf.settings = {
+        "org/gnome/desktop/interface"."show-battery-percentage" = true;
+        "org/gnome/mutter"."edge-tiling" = true;
+        "org/gnome/settings-daemon/plugins/color"."night-light-enable" = true;
+        "org/gnome/settings-daemon/plugins/power" = {
+          "ambient-enabled" = true;
+          "sleep-inactive-ac-timeout" = 7200; # 2 hours
+          "sleep-inactive-battery-timeout" = 300; # 5 min
+        };
+
+        "org/gnome/shell"."enabled-extensions" = [ "shuzhi@tuberry" ];
+        "org/gnome/shell/extensions/shuzhi" = {
+          "default-style" = mkUint32 3;
+          "dark-sketch-type" = mkUint32 4;
+          "light-sketch-type" = mkUint32 4;
+          "color-name" = mkUint32 1;
+          "text-command" = toString shuzhiCommand;
+          "enable-systray" = true;
+        };
+      };
     };
-  };
 }
