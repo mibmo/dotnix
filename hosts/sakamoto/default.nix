@@ -33,11 +33,9 @@
 
   # video
   services.xserver.videoDrivers = [ ];
-  hardware = {
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
-    };
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
   };
 
   # system
