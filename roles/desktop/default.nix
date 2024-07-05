@@ -56,6 +56,7 @@ in
       startWhenNeeded = true;
       drivers = with pkgs; [
         brlaser
+        canon-cups-ufr2
         cups-bjnp
         cups-dymo
         gutenprint
