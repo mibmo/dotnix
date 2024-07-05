@@ -95,6 +95,7 @@
           defaultLayout = {
             hamilton = "dk";
             macadamia = "dk-mac";
+            sakamoto = "us";
           }.${config.networking.hostName};
         in
         {
