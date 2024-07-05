@@ -18,4 +18,9 @@ in
   };
 
   home.groups = [ cfg.group ];
+
+  persist.directories = [{
+    directory = "/var/lib/ipfs";
+    inherit (cfg) user group;
+  }];
 }
