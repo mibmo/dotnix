@@ -24,6 +24,7 @@ let
     "syncthing_macadamia_cert"
     "remotebuilder_hamilton"
     "remotebuilder_macadamia"
+    "remotebuilder_sakamoto"
   ];
 in
 builtins.foldl'
