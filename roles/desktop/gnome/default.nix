@@ -105,7 +105,7 @@ in
           keybindDir
           (attrNames keybinds);
 
-        "org/gnome/desktop/peripherals/touchpad/send-events" = "disabled-on-external-mouse";
+        "org/gnome/desktop/peripherals/touchpad"."send-events" = "disabled-on-external-mouse";
 
         "org/gnome/shell"."enabled-extensions" = [ "shuzhi@tuberry" ];
         "org/gnome/shell/extensions/shuzhi" = {
