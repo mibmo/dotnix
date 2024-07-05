@@ -33,6 +33,7 @@ let
         ./roles/desktop/gnome
         ./roles/internet/thunderbird
         ./roles/internet/syncthing
+        ./roles/internet/ipfs
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnTI64CyDnCoQFZKWI0T1Z6YcyVW8XrJypWxD9HdMGW" ];
     };
@@ -46,6 +47,7 @@ let
         ./roles/dev
 
         ./roles/desktop/gnome
+        ./roles/internet/ipfs
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPQ3PpMq59iLXy5j/r/mwTlrZsU2xhyDtTXdHv6yM7b" ];
     };
