@@ -150,6 +150,7 @@ let
 
   settings = {
     "app.normandy.first_run" = false;
+    "trailhead.firstrun.didSeeAboutWelcome" = true;
 
     "browser.download.useDownloadDir" = false;
 
