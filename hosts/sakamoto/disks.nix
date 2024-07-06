@@ -78,7 +78,6 @@ in
             "com.sun:auto-snapshot" = "true";
           };
           mountpoint = "/persist";
-          mountOptions = [ "noexec" ];
           # copy over host keys
           postMountHook = ''
             mkdir --parents --mode=755 /mnt/persist/etc/ssh
