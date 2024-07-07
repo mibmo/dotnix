@@ -32,6 +32,5 @@ in
 
   persist.user.directories = [
     ".thunderbird"
-    ".cache/thunderbird"
   ];
 }
