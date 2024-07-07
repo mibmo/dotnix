@@ -113,5 +113,5 @@ in
       };
     };
 
-  persist.user.files = [ ".local/share/fish/fish_history" ];
+  persist.user.directories = [ ".local/share/fish" ];
 }
