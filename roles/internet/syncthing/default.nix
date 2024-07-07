@@ -1,5 +1,7 @@
 { lib, config, settings, ... }:
 let
+  inherit (lib.attrsets) attrValues;
+
   inherit (settings.user) name;
   home = "/home/${name}";
   hosts = {
@@ -15,7 +17,7 @@ let
     (import ./devices.nix);
   folders = import ./folders.nix { inherit home hosts; };
 in
-with lib; {
+{
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
@@ -45,5 +47,5 @@ with lib; {
       directory = folder.path;
       inherit (cfg) user group;
     })
-    (lib.attrsets.attrValues folders ++ [{ path = if cfg.dataDir == home then "${home}/.config/syncthing" else cfg.dataDir; }]);
+    (attrValues folders ++ [{ path = if cfg.dataDir == home then "${home}/.config/syncthing" else cfg.dataDir; }]);
 }
