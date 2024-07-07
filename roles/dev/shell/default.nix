@@ -112,4 +112,6 @@ in
           '';
       };
     };
+
+  persist.user.files = [ ".local/share/fish/fish_history" ];
 }
