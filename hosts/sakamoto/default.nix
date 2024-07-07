@@ -8,7 +8,10 @@
   ];
 
   boot = {
-    initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod" ];
+    initrd = {
+      availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod" ];
+      systemd.enable = true;
+    };
     kernelModules = [ "kvm-amd" ];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
@@ -26,8 +29,9 @@
     zfs.package = pkgs.zfs_unstable;
 
     plymouth = {
-      #enable = true;
-      theme = "fade-in";
+      enable = true;
+      theme = "cuts"; # connect, cuts, pixels, sphere
+      themePackages = with pkgs; [ adi1090x-plymouth-themes ];
     };
   };
 
