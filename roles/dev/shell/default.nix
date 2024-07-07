@@ -54,19 +54,7 @@ let
       cat ${terminal-theme-dark} | INHIBIT_THEME_HIST=1 ${pkgs.theme-sh}/bin/theme.sh
     end
 
-    function __system_theme --on-signal SIGUSR1
-      set isDark (dbus-send --reply-timeout=500 --session --dest=org.freedesktop.portal.Desktop --print-reply \
-        /org/freedesktop/portal/desktop org.freedesktop.portal.Settings.Read \
-        string:org.freedesktop.appearance string:color-scheme | awk 'END { print $NF }')
-
-      if [ $isDark -eq 0 ]
-        __light_theme
-      else
-        __dark_theme
-      end
-    end
-
-    __system_theme
+    __dark_theme
   '';
 
   shellAbbrs = settings.shell.aliases // { };
