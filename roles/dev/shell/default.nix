@@ -88,30 +88,5 @@ in
   programs.fish.enable = true;
   programs.nix-index.enableFishIntegration = true;
 
-  systemd.user.services.terminal-match-system-theme =
-    let
-      terminal = "foot";
-      shell = "fish";
-    in
-    {
-      description = "${terminal} + ${shell} automatic themeing";
-      wantedBy = [ "graphical-session.target" ];
-      serviceConfig = {
-        ExecStart =
-          let
-            change-theme = pkgs.writeShellScript "signal-shells" ''
-              for pid in $(${pkgs.procps}/bin/pgrep ${terminal});
-                do kill -USR1 $(cat /proc/$pid/task/$pid/children | xargs echo);
-              done
-            '';
-          in
-          pkgs.writeShellScript "watch-system-change" ''
-            ${pkgs.glib}/bin/gdbus monitor --session --dest org.freedesktop.portal.Desktop --object-path /org/freedesktop/portal/desktop \
-              | sed -rnu 's/^.+<uint32 (.*)>\)$/\1/p' \
-              | xargs -n1 -d'\n' ${change-theme}
-          '';
-      };
-    };
-
   persist.user.directories = [ ".local/share/fish" ];
 }
