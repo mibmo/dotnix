@@ -5,7 +5,7 @@ let
   hosts = {
     managed = lib.lists.remove
       config.networking.hostName
-      [ "hamilton" "macadamia" ];
+      [ "hamilton" "macadamia" "sakamoto" ];
   };
 
   cfg = config.services.syncthing;

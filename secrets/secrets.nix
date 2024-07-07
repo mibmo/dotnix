@@ -22,6 +22,8 @@ let
     "syncthing_hamilton_cert"
     "syncthing_macadamia_key"
     "syncthing_macadamia_cert"
+    "syncthing_sakamoto_key"
+    "syncthing_sakamoto_cert"
     "remotebuilder_hamilton"
     "remotebuilder_macadamia"
     "remotebuilder_sakamoto"
