@@ -1,15 +1,5 @@
 { pkgs, settings, ... }:
-let
-  module = {
-    services = {
-      easyeffects.enable = true;
-      nextcloud-client = {
-        enable = true;
-        startInBackground = true;
-      };
-    };
-  };
-in
+
 {
   imports = [
     ../internet/firefox
@@ -22,9 +12,15 @@ in
     wl-clipboard
   ];
 
-  home-manager.users.${settings.user.name} = {
-    imports = [ module ];
-    home.packages = with pkgs; [
+  home = {
+    settings.services = {
+      easyeffects.enable = true;
+      nextcloud-client = {
+        enable = true;
+        startInBackground = true;
+      };
+    };
+    packages = with pkgs; [
       libreoffice
       mpv
       pulsemixer
