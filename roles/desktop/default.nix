@@ -25,6 +25,7 @@
       mpv
       pulsemixer
       qbittorrent
+      sioyek
       zathura
     ];
   };
