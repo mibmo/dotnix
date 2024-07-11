@@ -30,20 +30,12 @@ in
     config.programs.gnupg.agent.pinentryPackage
     pkgs.file-roller
 
-    # wayland
-    kimpanel
-
     # top bar
     appindicator
-    keep-awake
-    time-awareness
-    vitals
 
     # looks
     burn-my-windows
-    material-you-color-theming
     shu-zhi
-    undecorate
   ];
 
   # dont install default gnome applications
