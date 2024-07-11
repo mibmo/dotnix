@@ -102,11 +102,16 @@ in
           "sleep-inactive-battery-timeout" = 300; # 5 min
         };
 
-        "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = map
-          keybindDir
-          (attrNames keybinds);
-
         "org/gnome/desktop/peripherals/touchpad"."send-events" = "disabled-on-external-mouse";
+
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = map
+            keybindDir
+            (attrNames keybinds);
+
+          www = [ "<Super>w" ];
+        };
+        "org/gnome/desktop/wm/keybindings"."close" = [ "<Super>q" ];
 
         "org/gnome/shell"."enabled-extensions" = [ "shuzhi@tuberry" ];
         "org/gnome/shell/extensions/shuzhi" = {
