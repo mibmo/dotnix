@@ -5,6 +5,7 @@
     ../internet/firefox
     ./communication
     ./fcitx5
+    ./media
     ./ydotool
   ];
 
@@ -24,7 +25,6 @@
       libreoffice
       mpv
       pulsemixer
-      qbittorrent
       sioyek
       zathura
     ];
