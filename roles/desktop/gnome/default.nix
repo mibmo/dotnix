@@ -114,7 +114,7 @@ in
         };
         "org/gnome/desktop/wm/keybindings"."close" = [ "<Super>q" ];
 
-        "org/gnome/shell"."enabled-extensions" = map (e: e.extensionUuid) (attrNames extensions);
+        "org/gnome/shell"."enabled-extensions" = map (name: pkgs.gnomeExtensions.${name}.extensionUuid) (attrNames extensions);
       } // (mapAttrs'
         (name: value: {
           name = keybindPath name;
