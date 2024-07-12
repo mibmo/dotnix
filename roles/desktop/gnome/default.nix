@@ -26,18 +26,6 @@ in
     };
   };
 
-  environment.systemPackages = with pkgs.gnomeExtensions; [
-    config.programs.gnupg.agent.pinentryPackage
-    pkgs.file-roller
-
-    # top bar
-    appindicator
-
-    # looks
-    burn-my-windows
-    shu-zhi
-  ];
-
   # dont install default gnome applications
   environment.gnome.excludePackages = with pkgs; [
     cheese # webcam tool
@@ -62,8 +50,24 @@ in
 
   home.settings = { lib, ... }:
     let
-      inherit (lib.attrsets) attrNames mapAttrs';
+      inherit (lib.attrsets) attrNames mapAttrs' removeAttrs;
       inherit (lib.hm.gvariant) mkUint32;
+
+      # key is attribute name of extension in gnomeExtensions
+      extensions = {
+        appindicator = { };
+        burn-my-windows = { };
+        shu-zhi = {
+          default-style = mkUint32 3;
+          dark-sketch-type = mkUint32 4;
+          light-sketch-type = mkUint32 4;
+          color-name = mkUint32 1;
+          text-command = toString shuzhiCommand;
+          enable-systray = true;
+
+          meta.dconfKey = "shuzhi";
+        };
+      };
 
       keybindPath = name: "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/${name}";
       keybindDir = name: "/${keybindPath name}/";
@@ -83,6 +87,11 @@ in
       '';
     in
     {
+      home.packages = [
+        config.programs.gnupg.agent.pinentryPackage
+        pkgs.file-roller
+      ] ++ map (name: pkgs.gnomeExtensions.${name}) (attrNames extensions);
+
       dconf.settings = {
         "org/gnome/desktop/interface"."show-battery-percentage" = true;
         "org/gnome/desktop/wm/preferences"."focus-mode" = "sloppy";
@@ -105,21 +114,24 @@ in
         };
         "org/gnome/desktop/wm/keybindings"."close" = [ "<Super>q" ];
 
-        "org/gnome/shell"."enabled-extensions" = [ "shuzhi@tuberry" ];
-        "org/gnome/shell/extensions/shuzhi" = {
-          "default-style" = mkUint32 3;
-          "dark-sketch-type" = mkUint32 4;
-          "light-sketch-type" = mkUint32 4;
-          "color-name" = mkUint32 1;
-          "text-command" = toString shuzhiCommand;
-          "enable-systray" = true;
-        };
+        "org/gnome/shell"."enabled-extensions" = map (e: e.extensionUuid) (attrNames extensions);
       } // (mapAttrs'
         (name: value: {
           name = keybindPath name;
           inherit value;
         })
         keybinds
+      ) // (
+        mapAttrs'
+          (name: config:
+            let
+              extension = pkgs.gnomeExtensions.${name};
+            in
+            {
+              name = "org/gnome/shell/extensions/${config.meta.dconfKey or extension.extensionPortalSlug}";
+              value = removeAttrs config [ "meta" ];
+            })
+          extensions
       );
     };
 }
