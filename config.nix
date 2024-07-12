@@ -48,6 +48,7 @@ let
         ./roles/productivity
 
         ./roles/desktop/gnome
+        ./roles/internet/thunderbird
         ./roles/internet/syncthing
         ./roles/internet/ipfs
       ];
