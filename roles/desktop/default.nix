@@ -65,4 +65,6 @@
 
   # start nextcloud-client on user login
   systemd.user.services.nextcloud-client.wantedBy = [ "graphical.target" ];
+
+  persist.user.directories = [ ".config/Nextcloud" ];
 }
