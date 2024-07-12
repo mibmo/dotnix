@@ -45,6 +45,7 @@ let
       roles = [
         hardwareModules.framework-16-7040-amd
         ./roles/dev
+        ./roles/productivity
 
         ./roles/desktop/gnome
         ./roles/internet/syncthing
