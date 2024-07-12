@@ -95,7 +95,10 @@ in
       dconf.settings = {
         "org/gnome/desktop/interface"."show-battery-percentage" = true;
         "org/gnome/desktop/wm/preferences"."focus-mode" = "sloppy";
-        "org/gnome/mutter"."edge-tiling" = true;
+        "org/gnome/mutter" = {
+          "dynamic-workspaces" = true;
+          "edge-tiling" = true;
+        };
         "org/gnome/settings-daemon/plugins/color"."night-light-enable" = true;
         "org/gnome/settings-daemon/plugins/power" = {
           "ambient-enabled" = true;
