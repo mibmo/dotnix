@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, settings, ... }:
 let
   keybinds = {
     terminal = {
@@ -7,6 +7,8 @@ let
       command = "foot";
     };
   };
+
+  ini = pkgs.formats.ini { };
 in
 {
   imports = [ ../. ];
@@ -56,7 +58,7 @@ in
       # key is attribute name of extension in gnomeExtensions
       extensions = {
         appindicator = { };
-        burn-my-windows = { };
+        burn-my-windows.active-profile = "/home/${settings.user.name}/.config/burn-my-windows/profiles/main.conf";
         shu-zhi = {
           default-style = mkUint32 3;
           dark-sketch-type = mkUint32 4;
@@ -87,10 +89,44 @@ in
       '';
     in
     {
-      home.packages = [
-        config.programs.gnupg.agent.pinentryPackage
-        pkgs.file-roller
-      ] ++ map (name: pkgs.gnomeExtensions.${name}) (attrNames extensions);
+      home = {
+        file.".config/burn-my-windows/profiles/main.conf".source = ini.generate "burn-my-windows-profile" {
+          burn-my-windows-profile = {
+            profile-window-type = 0;
+            profile-animation-type = 0;
+
+            apparition-enable-effect = false;
+            broken-glass-enable-effect = false;
+            doom-enable-effect = false;
+            energize-a-enable-effect = false;
+            energize-b-enable-effect = false;
+            fire-enable-effect = false;
+            glide-enable-effect = false;
+            glitch-enable-effect = false;
+            hexagon-enable-effect = true;
+            incinerate-enable-effect = false;
+            matrix-enable-effect = false;
+            paint-brush-enable-effect = false;
+            pixelate-enable-effect = false;
+            pixel-wheel-enable-effect = false;
+            pixel-wipe-enable-effect = false;
+            portal-enable-effect = false;
+            snap-enable-effect = false;
+            trex-enable-effect = false;
+            tv-enable-effect = false;
+            tv-glitch-enable-effect = false;
+            wisps-enable-effect = false;
+
+            hexagon-animation-time = 600;
+            hexagon-line-color = "rgba(200,255,255,0.5)";
+            hexagon-glow-color = "rgba(20,80,255,0.5)";
+          };
+        };
+        packages = [
+          config.programs.gnupg.agent.pinentryPackage
+          pkgs.file-roller
+        ] ++ map (name: pkgs.gnomeExtensions.${name}) (attrNames extensions);
+      };
 
       dconf.settings = {
         "org/gnome/desktop/interface"."show-battery-percentage" = true;
