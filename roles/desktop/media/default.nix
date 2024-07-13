@@ -3,5 +3,10 @@
 {
   home.packages = with pkgs; [ qbittorrent ];
 
-  persist.user.directories = [ ".config/qBittorrent" ];
+  persist.user = {
+    files = [
+      ".config/qBittorrent/qBittorrent-data.conf" # stats
+    ];
+    directories = [ ".local/share/qBittorrent" ];
+  };
 }
