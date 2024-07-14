@@ -39,6 +39,7 @@
 
   persist.user.directories = [
     ".local/share/Steam"
+    ".local/share/lutris"
     ".steam"
     "games"
   ];
