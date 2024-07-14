@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     cinny-desktop
-    element-desktop
-    fluffychat
+    element-desktop # persist broken
+    fluffychat # persist broken
     nheko
   ];
 
