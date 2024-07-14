@@ -42,4 +42,6 @@
   hardware.nitrokey.enable = true;
   services.pcscd.enable = true;
   programs.ssh.startAgent = false;
+
+  persist.user.files = [ ".cache/keepassxc/keepassxc.ini" ];
 }
