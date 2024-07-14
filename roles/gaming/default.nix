@@ -37,5 +37,9 @@
     vkd3d
   ];
 
-  persist.user.directories = [ "games" ];
+  persist.user.directories = [
+    ".local/share/Steam"
+    ".steam"
+    "games"
+  ];
 }
