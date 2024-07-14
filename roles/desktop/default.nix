@@ -14,13 +14,7 @@
   ];
 
   home = {
-    settings.services = {
-      easyeffects.enable = true;
-      nextcloud-client = {
-        enable = true;
-        startInBackground = true;
-      };
-    };
+    settings.services.easyeffects.enable = true;
     packages = with pkgs; [
       libreoffice
       mpv
@@ -62,9 +56,4 @@
   };
 
   hardware.opentabletdriver.enable = true;
-
-  # start nextcloud-client on user login
-  systemd.user.services.nextcloud-client.after = [ "graphical-session.target" ];
-
-  persist.user.directories = [ ".config/Nextcloud" ];
 }
