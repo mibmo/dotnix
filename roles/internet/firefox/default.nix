@@ -1,24 +1,106 @@
 { lib, pkgs, config, ... }:
 let
-  extensions = with config.nur.repos.rycee.firefox-addons; [
-    # themes
-    tokyo-night-v2
+  inherit (lib.attrsets) mapAttrs';
+  inherit (lib.strings) concatStringsSep;
 
-    # privacy
-    clearurls # clean tracking off urls
-    consent-o-matic # handle gdpr consent forms
-    decentraleyes # cache common web dependencies such as ajax
-    libredirect # redirect big sites to privacy-friendly alternatives
-    ublock-origin # ad block
-    umatrix # fine-grained resource blocking
+  firefox-addons = config.nur.repos.rycee.firefox-addons;
 
-    # misc
-    flagfox # display country info about website host
-    floccus # blookmark sync
-    keepassxc-browser # password manager
-    sidebery # nested tabs
-    unpaywall # (legally) remove paywalls from journal websites
-  ];
+  extensions = {
+    # clean tracking off urls
+    clearurls = { };
+    # handle gdpr consent forms
+    consent-o-matic = { };
+    # cache common web dependencies such as ajax
+    decentraleyes = { };
+    # display info about website host
+    flagfox = { };
+    # bookmark sync
+    floccus = { };
+    # password manager
+    keepassxc-browser = { };
+    # redirect big sites to privacy-friendly alternatives
+    libredirect = { };
+    # side-menu nested tabs = {};
+    sidebery = { };
+    # performant ad- & tracker-blocking
+    ublock-origin.adminSettings =
+      let
+        builtinLists = [
+          "JPN-0" # Japanese ad-blocking
+          "KOR-0" # Korean ad-blocking
+          "NOR-0" # Dandelion Sprout's nordic-relevant filters
+          "adguard-generic" # AdGuard - Ads (ads)
+          "adguard-spyware" # AdGuard - Spyware (privacy)
+          "block-lan" # Block outsider intrusion into LAN (privacy)
+          "curben-phishing" # Phishing URLs (security)
+          "dpollock-0" # Dan Pollock's hosts file (multipurpose)
+          "easylist" # EasyList (ads)
+          "easyprivacy" # EasyPrivacy (privacy)
+          "plowe-0" # Pete Lowe's Ad and tracking server list (multipurpose)
+          "ublock-annoyances" # uBlock - Annoyances
+          "ublock-badware" # uBlock - Badware risks
+          "ublock-filters" # uBlock - Ads
+          "ublock-privacy" # uBlock - Privacy
+          "ublock-quick-fixes" # uBlock - Quick fixes
+          "ublock-unbreak" # uBlock - Unbreak
+          "urlhaus-1" # Online Malicious URLs (security)
+        ];
+        extraLists = [
+          "https://github.com/DandelionSprout/adfilt/raw/master/LegitimateURLShortener.txt" # sanitize urls
+        ];
+      in
+      {
+        userSettings = {
+          uiTheme = "auto";
+          importedLists = extraLists;
+          externalLists = concatStringsSep "\n" extraLists;
+        };
+        selectedFilterLists = builtinLists ++ extraLists;
+      };
+    # fine-grained resource blocking
+    umatrix = { };
+    # remove paywalls for journals
+    unpaywall = { };
+  };
+
+  policies = {
+    DisableFirefoxStudies = true; # disable firefox studies
+    DisableSetDesktopBackground = true; # remove "set as desktop background" menu item when right-clicking
+    DisablePocket = true; # disable firefox pocket
+    DisableTelemetry = true; # disable mozilla telemetry
+    DontCheckDefaultBrowser = true; # assume firefox is default
+    OfferToSaveLogins = false; # managed by password manager
+    ExtensionUpdate = false; # managed by nix
+    ExtensionSettings =
+      # enable configured extensions
+      mapAttrs'
+        (name: _:
+          let
+            addon = firefox-addons.${name};
+            inherit (addon) addonId;
+          in
+          {
+            name = addonId;
+            value = {
+              installation_mode = "force_installed";
+              install_url = "file:///${addon}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/${addonId}.xpi";
+            };
+          })
+        extensions
+      # disallow manual management of extensions
+      // {
+        "*" = {
+          installation_mode = "blocked";
+          blocked_install_message = "Manual addon management is disabled";
+        };
+      };
+    "3rdparty".Extensions = mapAttrs'
+      (name: config: {
+        name = firefox-addons.${name}.addonId;
+        value = config;
+      })
+      extensions;
+  };
 
   containers = {
     entertainment = {
@@ -179,8 +261,9 @@ in
   home.settings.programs.firefox = {
     enable = true;
     package = pkgs.firefox;
+    inherit policies;
     profiles.default = {
-      inherit containers extensions search settings;
+      inherit containers search settings;
       userChrome = builtins.readFile ./userChrome.css;
       containersForce = true;
     };
