@@ -34,4 +34,10 @@ in
     path = "${home}/assets/books";
     enable = true;
   };
+  "LitterBox" = {
+    id = "adwbv-qpipw";
+    devices = [ "holger" ];
+    path = "${home}/assets/litterbox";
+    enable = true;
+  };
 }
