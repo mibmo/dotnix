@@ -57,13 +57,13 @@ let
         };
         selectedFilterLists = builtinLists ++ extraLists;
       };
-    # fine-grained resource blocking
-    umatrix = { };
     # remove paywalls for journals
     unpaywall = { };
   };
 
   policies = {
+    AutofillAddressEnabled = true; # autofill address
+    AutofillCreditCardEnabled = false; # dont autofill credit cards
     DisableFirefoxStudies = true; # disable firefox studies
     DisableSetDesktopBackground = true; # remove "set as desktop background" menu item when right-clicking
     DisablePocket = true; # disable firefox pocket
