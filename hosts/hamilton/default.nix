@@ -42,7 +42,6 @@
     enable = true;
     powertop.enable = true;
   };
-  hardware.nvidia.powerManagement.enable = true; # spooky
 
   # compress nix store
   fileSystems."/nix/store".options = [ "compress-force=zstd" ];
