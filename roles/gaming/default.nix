@@ -25,12 +25,14 @@
     };
   };
 
-  home.packages = with pkgs; [
-    lutris
-    mangohud
-    prismlauncher
-    wineWowPackages.waylandFull
-  ];
+  home = {
+    packages = with pkgs; [
+      lutris
+      prismlauncher
+      wineWowPackages.waylandFull
+    ];
+    settings.programs.mangohud.enable = true;
+  };
 
   environment.systemPackages = with pkgs; [
     dxvk
