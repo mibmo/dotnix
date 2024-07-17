@@ -142,6 +142,7 @@ in
           "sleep-inactive-battery-timeout" = 300; # 5 min
         };
 
+        "org/gnome/desktop/peripherals/mouse"."accel-profile" = "flat";
         "org/gnome/desktop/peripherals/touchpad"."send-events" = "disabled-on-external-mouse";
 
         "org/gnome/settings-daemon/plugins/media-keys" = {
