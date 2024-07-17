@@ -1,6 +1,10 @@
 { inputs, ... }:
 let
-  inherit (inputs.nixpkgs.lib) attrsets strings;
+  nixpkgs-lib = inputs.nixpkgs.lib;
+  inherit (nixpkgs-lib.attrsets) attrByPath collect foldlAttrs
+    genAttrs mapAttrs mapAttrsRecursive optionalAttrs;
+  inherit (nixpkgs-lib.strings) concatStringsSep hasPrefix removePrefix;
+  inherit (builtins) typeOf readDir;
 
   noop = a: a;
 
@@ -20,7 +24,7 @@ let
       ({ ... }: {
         nixpkgs = {
           config.allowUnfree = true;
-          overlays = import ./overlays/default.nix { inherit (inputs.nixpkgs) lib; };
+          overlays = import ./overlays/default.nix { lib = nixpkgs-lib; };
         };
       })
       ./modules
@@ -29,9 +33,6 @@ let
 
     _module.args =
       let
-        inherit (attrsets) foldlAttrs optionalAttrs;
-        inherit (strings) hasPrefix removePrefix;
-
         # "release" = [ "pkgs-0.1.0" "to-0.2.0" "allow-0.3.0];
         # i.e. `"23.11" = [ "hello-2.12.1" ];`
         permittedInsecurePackages = { };
@@ -62,7 +63,7 @@ let
         inputs;
   };
 
-  combined-lib = inputs.nixpkgs.lib // lib;
+  combined-lib = nixpkgs-lib // lib;
 
   lib = {
     inherit noop recurse recurseTransform mkModule;
