@@ -121,10 +121,54 @@ let
       )
       source;
 
+  # get paths to symlink when symlinking `source` into `destination` without
+  # symlinking over any existing directories or files.
+  # should be used in a process where symlinks in `destination` are cleaned up prior
+  #
+  # example:
+  # when merging these two folders
+  # a
+  # ├── bin
+  # │   └── foo.txt
+  # ├── hello.txt
+  # └── other
+  #     ├── test.txt
+  #     └── thingy.txt
+  # b
+  # ├── bin
+  # │   └── bar.txt
+  # └── world.txt
+  #
+  # the ideal merge would be
+  # c
+  # ├── bin (both a and b have `bin`, so recurse)
+  # │   ├── bar.txt
+  # │   └── foo.txt -> a/bin/foo.txt
+  # ├── hello.txt -> a/hello.txt
+  # ├── other -> a/other (no `other` in b, so symlink safe)
+  # └── world.txt
+  #
+  # so the paths produced are [ "bin/foo.txt" "hello.txt" "other" ]
+  differingPaths =
+    source: destination:
+    # collect paths
+    collect
+      (attr: typeOf attr == "string")
+      # set leaf nodes to their path in the attribute set
+      # discard if existing file
+      (mapAttrsRecursive
+        # pass "none" and "file" types (i.e. if path is non-existant in destination, or file exists in both)
+        (path: type: (genAttrs [ "none" "file" ] (_: concatStringsSep "/" path)).${type} or null)
+        (pruneIntersectedAttrs
+          "none"
+          (loadDirectory source)
+          (loadDirectory destination)));
+
   combined-lib = nixpkgs-lib // lib;
 
   lib = {
-    inherit noop recurse recurseTransform mkModule loadDirectory pruneIntersectedAttrs;
+    inherit noop recurse recurseTransform mkModule
+      loadDirectory pruneIntersectedAttrs differingPaths;
   };
 in
 lib
