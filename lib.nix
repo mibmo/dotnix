@@ -63,10 +63,25 @@ let
         inputs;
   };
 
+  # read directory, producing attribute set where child sets represent
+  # directories and leaf nodes are strings with their filesystem types
+  loadDirectory = readDirectoryIntoAttrs [ ];
+  readDirectoryIntoAttrs = dirs: directory:
+    let
+      path = dirs ++ [ directory ];
+      dirPath = concatStringsSep "/" path;
+    in
+    mapAttrs
+      (name: type: {
+        regular = "file";
+        directory = readDirectoryIntoAttrs path name;
+      }.${type} or type)
+      (readDir dirPath);
+
   combined-lib = nixpkgs-lib // lib;
 
   lib = {
-    inherit noop recurse recurseTransform mkModule;
+    inherit noop recurse recurseTransform mkModule loadDirectory;
   };
 in
 lib
