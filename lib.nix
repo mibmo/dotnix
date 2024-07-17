@@ -78,10 +78,53 @@ let
       }.${type} or type)
       (readDir dirPath);
 
+  # prune intersect attribute sets for merging.
+  # returns a set comparing source and destination where:
+  #  - attributes present only in source are null
+  #  - attributes present only in destination are ignored
+  #  - attributes present in both favor the destination
+  #  - childsets present only in source are null
+  #  - childsets present only in destination are ignored
+  #  - childsets present in both are recursively handled,
+  #      applying the above logic to both childsets
+  #
+  # pruneIntersectedAttrs
+  # {
+  #   both = "hello";
+  #   sourceAttr = "coming!";
+  #   recurse.source = "src";
+  #   onlyInSource.whatever = "whatever";
+  # }
+  # {
+  #   both = "there";
+  #   destinationAttr = "here!";
+  #   recurse.destination = "dest";
+  #   onlyInDest.whatever = "whatever";
+  # }
+  # returns
+  # {
+  #   both = "there";
+  #   sourceAttr = "none";
+  #   recurse.source = "none";
+  #   onlyInSource = "none";
+  # }
+  pruneIntersectedAttrs = default: source: destination:
+    mapAttrs
+      (name: value:
+        let
+          attr = attrByPath [ name ] default destination;
+        in
+        if typeOf attr == "set"
+        then pruneIntersectedAttrs default source.${name} destination.${name}
+        else
+          if attr == default then attr else value
+      )
+      source;
+
   combined-lib = nixpkgs-lib // lib;
 
   lib = {
-    inherit noop recurse recurseTransform mkModule loadDirectory;
+    inherit noop recurse recurseTransform mkModule loadDirectory pruneIntersectedAttrs;
   };
 in
 lib
