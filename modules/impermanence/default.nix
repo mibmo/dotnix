@@ -35,6 +35,7 @@ in
     environment.persistence.main = {
       # avoid infinite recursion; adds a little hassle when configuring hosts
       enable = mkDefault false;
+      hideMounts = true;
       persistentStoragePath = "/persist";
 
       directories = unique cfg.directories;
