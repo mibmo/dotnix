@@ -50,6 +50,7 @@ in
       mountOptions = [
         "defaults"
         "mode=755"
+        "exec"
       ];
     };
 
