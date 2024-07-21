@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ inputs, lib, pkgs, settings, ... }: {
+  imports = [
+    ./games.nix
+  ];
+
   programs = {
     steam = {
       enable = true;
