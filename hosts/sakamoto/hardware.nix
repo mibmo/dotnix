@@ -17,4 +17,7 @@
 
   # microcode
   hardware.cpu.amd.updateMicrocode = true;
+
+  # use swap less often
+  boot.kernel.sysctl."vm.swappiness" = 10;
 }
