@@ -10,4 +10,8 @@
     builtins.any
       (vd: vd == "nvidia")
       config.services.xserver.videoDrivers;
+
+  persist.user.directories = [
+    ".local/share/containers"
+  ];
 }
