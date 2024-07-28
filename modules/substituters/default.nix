@@ -8,7 +8,7 @@
   config =
     let
       inherit (builtins) elemAt match;
-      inherit (lib.lists) reverseList;
+      inherit (lib.lists) filter reverseList;
       inherit (lib.strings) concatStrings stringToCharacters;
 
       reverse = text: concatStrings (reverseList (stringToCharacters text));
@@ -37,7 +37,7 @@
     {
       nix.settings = {
         substituters = map (s: "${s.protocol or "https"}://${s.host}") substituters;
-        trusted-public-keys = map (s: "${s.host}${lib.optionalString (s ? "suffix") "-${s.suffix}"}:${s.key}") substituters;
+        trusted-public-keys = map (s: "${s.host}${lib.optionalString (s ? "suffix") "-${s.suffix}"}:${s.key}") (filter (s: s ? "key") substituters);
       };
 
       environment.etc.substituters.text = lib.concatMapStringsSep "\n"
@@ -46,7 +46,7 @@
             protocol: ${s.protocol or "https"}
                 host: ${s.host}
               suffix: ${s.suffix or "none"}
-                 key: ${s.key}
+                 key: ${s.key or "none"}
           parsing details:
             matches: ${
               if (s ? "matches")
