@@ -80,10 +80,10 @@ in
         enable = true;
         startInBackground = true;
       };
+
+      systemd.user.services.nextcloud-client.Unit.After = [ "graphical-session.target" ];
     };
   };
-
-  systemd.user.services.nextcloud-client.after = lib.mkForce [ "graphical-session.target" ];
 
   persist.user = {
     files = [
