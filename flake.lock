@@ -625,9 +625,6 @@
         "nixpkgs-23_05": "nixpkgs-23_05",
         "nixpkgs-23_11": "nixpkgs-23_11",
         "nixpkgs-24_05": "nixpkgs-24_05",
-        "nixpkgs-stable": [
-          "nixpkgs-23_11"
-        ],
         "nur": "nur"
       }
     },
