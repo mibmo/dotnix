@@ -56,4 +56,8 @@
   };
 
   hardware.opentabletdriver.enable = true;
+
+  persist.user.directories = [
+    ".local/share/keyrings"
+  ];
 }
