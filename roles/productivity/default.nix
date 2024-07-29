@@ -1,4 +1,4 @@
-{ pkgs, pkgs-23_11, ... }:
+{ pkgs, ... }:
 let
   kicad = pkgs.kicad.override {
     addons = with pkgs.kicadAddons; [
@@ -18,7 +18,7 @@ in
     kicad
     krita
     openscad-unstable
-    pkgs-23_11.anki
+    anki
     prusa-slicer
     renderdoc
     solvespace
