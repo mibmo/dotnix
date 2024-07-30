@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }: {
   nix = {
-    package = pkgs.nixVersions.git;
+    package = pkgs.nixVersions.stable;
 
     gc = {
       automatic = true;
