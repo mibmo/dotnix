@@ -65,15 +65,6 @@ let
       pure
       sponge
       autopair
-      {
-        name = "fuzzy_cd";
-        src = pkgs.fetchFromGitHub {
-          owner = "ttscoff";
-          repo = "fuzzy_cd";
-          rev = "0649dab1d915f322ebe477cb19e0ba7181ca07e0";
-          hash = "sha256-y1dzIRH7L4B+o8Y5kLNsKGc49vmSrDYSptRaVELJEpY=";
-        };
-      }
     ];
 in
 {
