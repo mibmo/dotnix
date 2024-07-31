@@ -1,9 +1,8 @@
-{ pkgs-23_11, ... }: {
+{ ... }: {
   home.settings = {
     programs = {
       alacritty = {
         enable = true;
-        package = pkgs-23_11.alacritty;
         settings = {
           font = {
             size = 12;
