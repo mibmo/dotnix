@@ -41,7 +41,7 @@ let
         inherit inputs;
         host = module;
         settings = import ./config.nix { inherit inputs pkgs; lib = combined-lib; };
-        lib = combined-lib;
+        clib = lib;
       } // foldlAttrs
         (acc: name: input: acc // optionalAttrs
           (hasPrefix "nixpkgs-" name)
