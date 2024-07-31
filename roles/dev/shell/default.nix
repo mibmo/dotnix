@@ -59,20 +59,22 @@ let
 
   shellAbbrs = settings.shell.aliases // { };
 
-  plugins = with pkgs.fishPlugins; [
-    { name = "pure"; src = pure.src; }
-    { name = "sponge"; src = sponge.src; }
-    { name = "autopair"; src = autopair.src; }
-    {
-      name = "fuzzy_cd";
-      src = pkgs.fetchFromGitHub {
-        owner = "ttscoff";
-        repo = "fuzzy_cd";
-        rev = "0649dab1d915f322ebe477cb19e0ba7181ca07e0";
-        hash = "sha256-y1dzIRH7L4B+o8Y5kLNsKGc49vmSrDYSptRaVELJEpY=";
-      };
-    }
-  ];
+  plugins = with pkgs.fishPlugins; map
+    (attrs: { inherit (attrs) name src; })
+    [
+      pure
+      sponge
+      autopair
+      {
+        name = "fuzzy_cd";
+        src = pkgs.fetchFromGitHub {
+          owner = "ttscoff";
+          repo = "fuzzy_cd";
+          rev = "0649dab1d915f322ebe477cb19e0ba7181ca07e0";
+          hash = "sha256-y1dzIRH7L4B+o8Y5kLNsKGc49vmSrDYSptRaVELJEpY=";
+        };
+      }
+    ];
 in
 {
   home.settings = {
