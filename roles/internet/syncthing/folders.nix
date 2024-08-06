@@ -14,7 +14,7 @@ in
 {
   "Secret" = {
     id = "0hhw6-hojo4";
-    devices = hosts.managed ++ [ "mobai" "ichi" ];
+    devices = hosts.managed ++ [ "mobai" "trixie" "ichi" ];
     path = "${home}/.secret";
     versioning = staggered {
       days = 7 * 4 * 2; # two months
@@ -23,14 +23,14 @@ in
   };
   "Code" = {
     id = "tcvau-dajz7";
-    devices = hosts.managed ++ [ "mobai" "ichi" ];
+    devices = hosts.managed ++ [ "mobai" "trixie" "ichi" ];
     path = "${home}/dev";
     versioning = staggered { };
     enable = true;
   };
   "Books" = {
     id = "6whpv-fec6p";
-    devices = hosts.managed ++ [ "mobai" "holger" ];
+    devices = hosts.managed ++ [ "mobai" "trixie" "holger" ];
     path = "${home}/assets/books";
     enable = true;
   };
