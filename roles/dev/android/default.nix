@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs-23_11, ... }: {
   home = {
-    packages = [ pkgs.android-tools ];
+    packages = [ pkgs-23_11.android-tools ];
     groups = [ "adbusers" ];
   };
   programs.adb.enable = true;
