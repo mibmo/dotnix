@@ -43,19 +43,37 @@ let
     cursor: #00/0
   '';
 
-  shellInit = ''
-    set fish_greeting
+  shellInit =
+    let
+      # fzf and fish break together, so can't just have this in shell variable... :/
+      fdOpts = "--type=directory --exclude nixpkgs";
+    in
+    ''
+      set fish_greeting
 
-    function __light_theme
-      cat ${terminal-theme-light} | INHIBIT_THEME_HIST=1 ${pkgs.theme-sh}/bin/theme.sh
-    end
+      function __is_project_dir
+        set  $status
+      end
 
-    function __dark_theme
-      cat ${terminal-theme-dark} | INHIBIT_THEME_HIST=1 ${pkgs.theme-sh}/bin/theme.sh
-    end
+      function dev -d "Find directory in dev folder based on search and cd into it"
+        cd $(fzf \
+          --bind 'start:reload:fd "" ~/dev ${fdOpts}' \
+          --bind 'change:reload:fd {q} ~/dev ${fdOpts} || true' \
+          --preview='tree -CL 2 {}' \
+          --height=50% --layout=reverse \
+          --query "$argv")
+      end
 
-    __dark_theme
-  '';
+      function __light_theme
+        cat ${terminal-theme-light} | INHIBIT_THEME_HIST=1 ${pkgs.theme-sh}/bin/theme.sh
+      end
+
+      function __dark_theme
+        cat ${terminal-theme-dark} | INHIBIT_THEME_HIST=1 ${pkgs.theme-sh}/bin/theme.sh
+      end
+
+      __dark_theme
+    '';
 
   shellAbbrs = settings.shell.aliases // { };
 
