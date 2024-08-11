@@ -1,4 +1,14 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+let
+  curl = ''
+    ${lib.getExe pkgs.curl} \
+      --connect-timeout 2 \
+      --dns-servers $IP4_NAMESERVERS \
+      --insecure \
+      --silent \
+  '';
+in
+{
   networking.networkmanager.dispatcherScripts = map
     ({ name, ap-name, effect }: {
       type = "basic";
@@ -21,10 +31,7 @@
       name = "dsbwifi";
       ap-name = ".DSB_Wi-Fi";
       effect = ''
-        ${lib.getExe pkgs.curl} \
-            --silent \
-            --insecure \
-            --connect-timeout 2 \
+        ${curl} \
             --header 'Host: dsbwifi.dk' \
             --form 'language=dk' \
             "https://$IP4_GATEWAY/login.php"
