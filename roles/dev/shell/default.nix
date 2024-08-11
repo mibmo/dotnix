@@ -46,7 +46,7 @@ let
   shellInit =
     let
       # fzf and fish break together, so can't just have this in shell variable... :/
-      fdOpts = "--type=directory --exclude nixpkgs";
+      fdOpts = "--type=directory --full-path --exclude nixpkgs";
     in
     ''
       set fish_greeting
