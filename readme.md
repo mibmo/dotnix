@@ -1,21 +1,13 @@
 # <sub>dot</sub>nix -- nixos configuartion and dotfiles
-Personal NixOS configuration.
+Personal NixOS configuration. Not intended for outside consumption, but I won't stop you.
 
-## Installation
-```
-sudo nixos-rebuild switch --flake gh:mibmo/dotnix
-```
+## Hosts
+Directory for each nixos configuration exposed, handling partitioning, booting, and host-specific quirks.
 
-### Manual configuration
-Sadly not all configuration is automatic (yet).
-You'll have to manually configure
-- Firefox
-	- Enable browser plugins
-	- Set `toolkit.legacyUserProfileCustomizations.stylesheets` to true in about:config
-- Lutris
-	- Prefer non-system libraries
-	- Set games directory (typically `$HOME/games`)
-- Gnome:
-	- Enable & configure extensions 
-	- Set Shuzhi's text command to `.config/shuzhi.sh` and font to `TakaoPMincho Italic 16`
-		- @TODO: create the .config/shuzhi.sh file using xdg in gnome file
+## Modules
+The modules directory contains NixOS modules that either map from one option to another (i.e. `home.` to `home-manager.users.${settings.user.name}`), expose new options (i.e. substituters) or expand upon existing modules (i.e. impermanence).
+They're imported for all hosts, regardless of other setup.
+
+## Roles
+Roles define larger chunks of configuration exposing enabling specific tasks or functionality.
+They're not necessarily universal, so they're applied on a per-host basis (see config.nix).
