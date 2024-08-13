@@ -6,6 +6,7 @@
     ./communication
     ./fcitx5
     ./media
+    ./notes
     ./ydotool
   ];
 
