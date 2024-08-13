@@ -1,12 +1,23 @@
 { inputs, ... }:
 let
+  config = import ./config.nix { inherit inputs; };
+  inherit (config) permittedInsecurePackages permittedUnfreePatterns;
+
   nixpkgs-lib = inputs.nixpkgs.lib;
-  inherit (nixpkgs-lib.attrsets) attrByPath collect foldlAttrs
-    genAttrs mapAttrs mapAttrsRecursive optionalAttrs;
+  inherit (nixpkgs-lib.attrsets) attrNames attrByPath collect
+    filterAttrs genAttrs mapAttrs mapAttrs' mapAttrsRecursive;
   inherit (nixpkgs-lib.strings) concatStringsSep hasPrefix removePrefix;
-  inherit (builtins) typeOf readDir;
+  inherit (nixpkgs-lib.trivial) pipe;
+  inherit (nixpkgs-lib) getName;
+  inherit (builtins) any head match typeOf readDir replaceStrings;
 
   noop = a: a;
+
+  # set key in attribute set based on condition
+  # usage: {
+  #  ${setIf "favourites" hasFavourites} = favourites;
+  # }
+  setIf = key: cond: if cond then key else null;
 
   recurse = recurseTransform noop;
 
@@ -19,49 +30,83 @@ let
       )
       set;
 
-  mkModule = module: args@{ pkgs, ... }: {
-    imports = with inputs; [
-      ({ ... }: {
-        nixpkgs = {
-          config.allowUnfree = true;
-          overlays = import ./overlays/default.nix { lib = nixpkgs-lib; };
-        };
-      })
-      ./modules
-      module.host
-    ] ++ module.roles;
 
-    _module.args =
-      let
-        # "release" = [ "pkgs-0.1.0" "to-0.2.0" "allow-0.3.0];
-        # i.e. `"23.11" = [ "hello-2.12.1" ];`
-        permittedInsecurePackages = { };
-      in
-      {
+  # turn `nixpkgs-24_05` into `24.05`
+  inputNixpkgsToVersion = name: replaceStrings [ "_" ] [ "." ] (removePrefix "nixpkgs-" name);
+
+  # nixpkgs inputs
+  nixpkgsInputs = filterAttrs (name: _: hasPrefix "nixpkgs-" name) inputs;
+
+  # release of nixpkgs that modules are built with
+  # @TODO: isn't this actually just `inputNixpkgsToVersion inputs.nixpkgs.follows`?
+  # @TODO: maybe rename to "systemNixpkgsRelease"?
+  moduleNixpkgsVersion = pipe nixpkgsInputs [
+    (filterAttrs (name: input: input.rev == inputs.nixpkgs.rev && name != "stable"))
+    attrNames
+    head
+    inputNixpkgsToVersion
+  ];
+
+  # temporary var; will be attr of release-dependent overlays
+  overlays = { }; # temp
+
+  packageSets = system:
+    mapAttrs'
+      (name: input:
+        let
+          version = inputNixpkgsToVersion name;
+          hasInsecureOverride = permittedInsecurePackages ? ${version};
+          hasUnfreeOverride = permittedUnfreePatterns ? ${version};
+          hasOverlays = overlays ? ${version};
+        in
+        {
+          name = inputNixpkgsToVersion name;
+          value =
+            if hasInsecureOverride || hasUnfreeOverride || hasOverlays
+            then
+              import input
+                {
+                  inherit system;
+                  ${setIf "overlays" hasOverlays} = overlays.${version};
+                  config = {
+                    ${setIf "allowUnfreePredicate" hasUnfreeOverride} =
+                      pkg:
+                      any
+                        (pattern: match pattern (getName pkg) != null)
+                        permittedUnfreePatterns.${version};
+                    ${setIf "permittedInsecurePackages" hasInsecureOverride} = permittedInsecurePackages.${version};
+                  };
+                }
+            else input.legacyPackages.${system};
+        }
+      )
+      nixpkgsInputs;
+
+  mkModule = module: args@{ ... }:
+    let
+      pkgs = (packageSets module.system).${moduleNixpkgsVersion};
+    in
+    {
+      imports = [
+        ./modules
+        module.host
+      ] ++ module.roles;
+
+      # inherit config and overlays from evaluating nixpkgs
+      nixpkgs = { inherit (pkgs) config overlays; };
+
+      _module.args = {
         inherit inputs;
         host = module;
         settings = import ./config.nix { inherit inputs pkgs; lib = combined-lib; };
         clib = lib;
-      } // foldlAttrs
-        (acc: name: input: acc // optionalAttrs
-          (hasPrefix "nixpkgs-" name)
-          {
-            ${removePrefix "nix" name} =
-              let
-                version = removePrefix "nixpkgs-" name;
-              in
-              if !permittedInsecurePackages ? ${version}
-              then input.legacyPackages.${module.system}
-              else
-                import input {
-                  inherit (module) system;
-                  config.permittedInsecurePackages = permittedInsecurePackages.${version};
-                };
-          }
-        )
-        { }
-        inputs;
-  };
+      } // mapAttrs'
+        (release: value: {
+          name = "pkgs-${replaceStrings [ "." ] [ "_" ] release}";
+          inherit value;
+        })
+        (packageSets module.system);
+    };
 
   # read directory, producing attribute set where child sets represent
   # directories and leaf nodes are strings with their filesystem types
@@ -167,8 +212,9 @@ let
   combined-lib = nixpkgs-lib // lib;
 
   lib = {
-    inherit noop recurse recurseTransform mkModule
-      loadDirectory pruneIntersectedAttrs differingPaths;
+    inherit noop setIf recurse recurseTransform mkModule
+      loadDirectory pruneIntersectedAttrs differingPaths
+      packageSets nixpkgsInputs inputNixpkgsToVersion;
   };
 in
 lib

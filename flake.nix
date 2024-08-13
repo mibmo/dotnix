@@ -2,8 +2,9 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.follows = "nixpkgs-unstable";
 
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nixpkgs-24_05.url = "nixpkgs/nixos-24.05";
     nixpkgs-23_11.url = "nixpkgs/nixos-23.11";
     #nixpkgs-23_05.url = "nixpkgs/nixos-23.05";
@@ -14,11 +15,6 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
-
-    conch = {
-      url = "github:mibmo/conch";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -40,19 +36,16 @@
   };
 
   outputs =
-    inputs@{ conch, ... }:
-    conch.load [
-      "x86_64-linux"
-    ]
-      ({ pkgs, ... }:
-      let
-        lib = inputs.nixpkgs.lib // import ./lib.nix { inherit inputs; };
-        config = import ./config.nix { inherit inputs pkgs lib; };
-      in
-      {
-        flake = {
-          inherit inputs;
-          nixosConfigurations = import ./hosts { inherit inputs lib config; };
-        };
-      });
+    inputs@{ nixpkgs, ... }:
+    let
+      system = "x86_64-linux";
+      lib = nixpkgs.lib // import ./lib.nix { inherit inputs; };
+      nixpkgsInstances = lib.packageSets system;
+      pkgs = nixpkgsInstances.unstable;
+      config = import ./config.nix { inherit inputs pkgs lib; };
+    in
+    {
+      inherit inputs;
+      nixosConfigurations = import ./hosts { inherit inputs lib config; };
+    };
 }

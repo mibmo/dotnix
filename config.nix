@@ -58,6 +58,22 @@ let
     };
   };
 
+  # "release" = [ "pkgs-0.1.0" "to-0.2.0" "allow-0.3.0];
+  # i.e. `"23.11" = [ "hello-2.12.1" ];`
+  permittedInsecurePackages = { };
+
+  # "release" = [ "pkgs-0.1.0" "to-0.2.0" "allow-0.3.0];
+  # i.e. `"23.11" = [ "hello-2.12.1" ];`
+  # the entries are regex patterns
+  permittedUnfreePatterns = {
+    unstable = [
+      "canon-cups-ufr2"
+      "flagfox"
+      "geogebra"
+      "steam(-(run|original))?"
+    ];
+  };
+
   user = {
     name = "mib";
     email = "mib@kanp.ai";
@@ -95,4 +111,5 @@ let
 in
 {
   inherit hosts user defaults shell gpg;
+  inherit permittedInsecurePackages permittedUnfreePatterns;
 }
