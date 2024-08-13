@@ -14,7 +14,7 @@ let
         ./roles/productivity
 
         ./roles/desktop/gnome
-        ./roles/internet/thunderbird
+        ./roles/desktop/email
         ./roles/internet/syncthing
         ./roles/internet/ipfs
       ];
@@ -31,7 +31,7 @@ let
         ./roles/productivity
 
         ./roles/desktop/gnome
-        ./roles/internet/thunderbird
+        ./roles/desktop/email
         ./roles/internet/syncthing
         ./roles/internet/ipfs
       ];
@@ -50,7 +50,7 @@ let
         ./roles/productivity
 
         ./roles/desktop/gnome
-        ./roles/internet/thunderbird
+        ./roles/desktop/email
         ./roles/internet/syncthing
         ./roles/internet/ipfs
       ];
