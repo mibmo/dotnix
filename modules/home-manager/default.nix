@@ -1,6 +1,6 @@
 { lib, config, settings, ... }:
-with lib;
 let
+  inherit (lib) mkOption types;
   cfg = config.home;
 in
 {

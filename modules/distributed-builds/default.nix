@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  inherit (lib.attrsets) mapAttrs' mapAttrsToList;
+  inherit (lib.attrsets) filterAttrs mapAttrs' mapAttrsToList;
 
   hosts = {
     kanna = {

@@ -1,7 +1,7 @@
 { lib, config, settings, ... }:
-with lib;
 let
-  inherit (lists) unique;
+  inherit (lib) mkOption mkDefault types;
+  inherit (lib.lists) unique;
 
   cfg = config.persist;
 in
