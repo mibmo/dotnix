@@ -42,6 +42,11 @@ let
       };
     };
   };
+
+  # conditionally disable (parts of) remote workers
+  enabled = filterAttrs (_: host: host.enabled or true) hosts;
+  substituters = filterAttrs (_: host: host.substitute or true) enabled;
+  builders = filterAttrs (_: host: host.build or true) enabled;
 in
 {
   nix = {
@@ -56,7 +61,7 @@ in
         speedFactor = 1;
         supportedFeatures = [ ];
       } // b.builder or { })
-      hosts;
+      builders;
   };
 
   substituters = mapAttrsToList
@@ -65,7 +70,7 @@ in
       host = b.host;
       key = b.storePublicKey;
     } // b.substituter or { })
-    hosts;
+    substituters;
 
   home-manager.users.root.programs.ssh = {
     enable = true;
@@ -79,7 +84,7 @@ in
           identityFile = config.age.secrets.remote-builder-key.path;
         };
       })
-      hosts;
+      builders;
   };
 
   services.openssh.knownHosts = mapAttrs'
