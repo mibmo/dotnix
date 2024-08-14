@@ -68,6 +68,8 @@
   boot.binfmt.emulatedSystems = [
     "aarch64-linux"
     "armv6l-linux"
+    "riscv32-linux"
+    "riscv64-linux"
   ];
 
   programs = {
