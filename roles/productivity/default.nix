@@ -24,11 +24,20 @@ in
     solvespace
   ];
 
-  home.settings.home.file.".local/share/OpenSCAD/libraries/BOSL".source =
-    pkgs.fetchFromGitHub {
-      owner = "revarbat";
-      repo = "BOSL";
-      rev = "v1.0.3";
-      hash = "sha256-FHHZ5MnOWbWnLIL2+d5VJoYAto4/GshK8S0DU3Bx7O8=";
+  home.settings = {
+    programs.obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        input-overlay
+      ];
     };
+
+    home.file.".local/share/OpenSCAD/libraries/BOSL".source =
+      pkgs.fetchFromGitHub {
+        owner = "revarbat";
+        repo = "BOSL";
+        rev = "v1.0.3";
+        hash = "sha256-FHHZ5MnOWbWnLIL2+d5VJoYAto4/GshK8S0DU3Bx7O8=";
+      };
+  };
 }
