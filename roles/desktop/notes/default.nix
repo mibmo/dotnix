@@ -10,5 +10,6 @@ in
 
   persist.user.directories = [
     ".config/Logseq"
+    ".logseq"
   ];
 }
