@@ -16,14 +16,12 @@
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {
       efi.canTouchEfiVariables = true;
-      /*
       grub = {
         enable = true;
         efiSupport = true;
         device = "nodev";
       };
-      */
-      systemd-boot.enable = true;
+      #systemd-boot.enable = true;
     };
 
     zfs.package = pkgs.zfs_unstable;
