@@ -10,21 +10,26 @@ let
     "assets/diary"
     "assets/notes"
   ];
+
+  globalConfig = ./global.edn;
+  graphConfig = ./graph.edn;
 in
 {
   home = {
     packages = [ logseq ];
-    settings.home.file =
-      { ".config/Logseq/configs.edn".source = ./global.edn; } //
-      (builtins.listToAttrs
-        (
-          map
-            (path: {
-              name = "${path}/logseq/config.edn";
-              value.source = ./graph.edn;
-            })
-            graphs
-        ));
+    settings = { lib, ... }: {
+      home.activation.logseq = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        # logseq global config
+        verboseEcho "logseq: installing global config"
+        run cp ${globalConfig} $HOME/.config/Logseq/configs.edn
+
+        # logseq per-graph configs
+        ${lib.strings.concatMapStringsSep "\n" (path: ''
+          verboseEcho "logseq: installing per-graph config to graph at $HOME/${path}"
+          run cp ${graphConfig} $HOME/${path}/logseq/config.edn
+        '') graphs}
+      '';
+    };
   };
 
   persist.user.directories = [
