@@ -17,6 +17,7 @@ let
     };
 
     mewo = {
+      enabled = false;
       host = "mewo.kanpai";
       sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtD5IqU+Y3RkZKxQYR5fXRugRensSihj7diYAIgxEdI";
       storePublicKey = "u6biJLZJ1OYyASejpGbnbs/hSi3vjmG1rV0E3yjY5Iw=";
