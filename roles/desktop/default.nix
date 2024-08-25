@@ -7,6 +7,7 @@
     ./fcitx5
     ./media
     ./notes
+    ./reader
     ./ydotool
   ];
 
