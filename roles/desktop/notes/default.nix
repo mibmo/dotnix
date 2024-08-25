@@ -10,25 +10,30 @@ let
     "assets/diary"
     "assets/notes"
   ];
-
-  globalConfig = ./global.edn;
-  graphConfig = ./graph.edn;
 in
 {
   home = {
     packages = [ logseq ];
     settings = { lib, ... }: {
-      home.activation.logseq = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        # logseq global config
-        verboseEcho "logseq: installing global config"
-        run cp ${globalConfig} $HOME/.config/Logseq/configs.edn
+      home.activation.logseq =
+        let
+          globalConfig = ./global.edn;
+          graphConfig = ./graph.edn;
+          globalPath = "$HOME/.config/Logseq/configs.edn";
+        in
+        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          verboseEcho "installing global config"
+          run rm $VERBOSE_ARG ${globalPath}
+          run cp $VERBOSE_ARG ${globalConfig} ${globalPath}
 
-        # logseq per-graph configs
-        ${lib.strings.concatMapStringsSep "\n" (path: ''
-          verboseEcho "logseq: installing per-graph config to graph at $HOME/${path}"
-          run cp ${graphConfig} $HOME/${path}/logseq/config.edn
-        '') graphs}
-      '';
+          ${lib.strings.concatMapStringsSep "\n" (graph: let
+            path = "$HOME/${graph}/logseq/config.edn";
+          in ''
+            verboseEcho "installing per-graph config to graph at ${graph}"
+            run rm $VERBOSE_ARG ${path}
+            run cp $VERBOSE_ARG ${graphConfig} ${path}
+          '') graphs}
+        '';
     };
   };
 
