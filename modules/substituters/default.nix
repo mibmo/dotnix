@@ -1,4 +1,8 @@
 { lib, config, ... }: {
+  # use a proper submodule so that s3 support can be added without extreme jank
+  #   str -> coercible into a https substituter
+  #   submodule -> some substituer (s3, https, etc)
+  # probably kill /etc/substituters. it's useful for debugging but only janky now
   options.substituters = lib.mkOption {
     type = with lib.types; listOf (oneOf [ str attrs ]);
     default = [ ];
