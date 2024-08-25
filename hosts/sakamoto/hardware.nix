@@ -18,6 +18,12 @@
   # microcode
   hardware.cpu.amd.updateMicrocode = true;
 
+  # amdgpu
+  hardware.amdgpu = {
+    amdvlk.enable = true;
+    opencl.enable = true;
+  };
+
   # use swap less often
   boot.kernel.sysctl."vm.swappiness" = 10;
 }
