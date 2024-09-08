@@ -17,7 +17,7 @@ in
 
   services = {
     dbus.packages = with pkgs; [ dconf gcr ];
-    udev.packages = [ pkgs.gnome3.gnome-settings-daemon ];
+    udev.packages = [ pkgs.gnome-settings-daemon ];
 
     xserver = {
       enable = true;
@@ -38,12 +38,12 @@ in
     gnome-photos
     gnome-terminal
     gnome-tour
-    gnome.atomix # puzzle game
-    gnome.gnome-characters
-    gnome.gnome-music
-    gnome.hitori # sudoku game
-    gnome.iagno # go game
-    gnome.tali # poker game
+    atomix # puzzle game
+    gnome-characters
+    gnome-music
+    hitori # sudoku game
+    iagno # go game
+    tali # poker game
     totem # video player
   ];
 
