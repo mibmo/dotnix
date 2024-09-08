@@ -1,7 +1,11 @@
 { lib, pkgs, ... }:
 let
+  curlPkg = pkgs.curlFull.override {
+    # for --dns-servers
+    c-aresSupport = true;
+  };
   curl = ''
-    ${lib.getExe pkgs.curl} \
+    ${lib.getExe curlPkg} \
       --connect-timeout 2 \
       --dns-servers $IP4_NAMESERVERS \
       --insecure \
