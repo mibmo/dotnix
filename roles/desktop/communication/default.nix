@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    cinny-desktop
+    #cinny-desktop
     element-desktop # persist broken
-    fluffychat # persist broken
-    nheko
+    #fluffychat # persist broken
+    #nheko
   ];
 
   persist.user.directories = [
