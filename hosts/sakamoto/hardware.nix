@@ -24,11 +24,6 @@
     opencl.enable = true;
   };
 
-  # power management
-  powerManagement = {
-    powertop.enable = true;
-  };
-
   # use swap less often
   boot.kernel.sysctl."vm.swappiness" = 10;
 }
