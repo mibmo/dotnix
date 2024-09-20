@@ -24,7 +24,7 @@
   };
 
   home = {
-    groups = [ "gamemode" ];
+    groups = [ "gamemode" "gamescope" ];
     packages = with pkgs; [
       lutris
       prismlauncher
