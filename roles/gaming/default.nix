@@ -1,4 +1,21 @@
-{ inputs, lib, pkgs, settings, ... }: {
+{ inputs, lib, pkgs, settings, ... }:
+let
+  extraPkgs = pkgs': with pkgs'; [
+    dxvk
+    keyutils
+    libkrb5
+    libpng
+    libpulseaudio
+    libvorbis
+    stdenv.cc.cc.lib
+    vkd3d
+    xorg.libXScrnSaver
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXinerama
+  ];
+in
+{
   imports = [
     ./games.nix
   ];
@@ -10,6 +27,7 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       localNetworkGameTransfers.openFirewall = true;
+      extraPackages = extraPkgs pkgs;
     };
 
     gamemode = {
@@ -26,17 +44,12 @@
   home = {
     groups = [ "gamemode" "gamescope" ];
     packages = with pkgs; [
-      lutris
+      (lutris.override { inherit extraPkgs; })
       prismlauncher
       wineWowPackages.waylandFull
     ];
     settings.programs.mangohud.enable = true;
   };
-
-  environment.systemPackages = with pkgs; [
-    dxvk
-    vkd3d
-  ];
 
   persist.user.directories = [
     ".local/share/Steam"
