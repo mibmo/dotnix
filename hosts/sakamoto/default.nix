@@ -1,4 +1,4 @@
-{ pkgs, config, settings, modulesPath, ... }:
+{ pkgs, settings, modulesPath, ... }:
 
 {
   imports = [
@@ -13,7 +13,7 @@
       systemd.enable = true;
     };
     kernelModules = [ "kvm-amd" ];
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    kernelPackages = pkgs.linuxPackages_xanmod;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
