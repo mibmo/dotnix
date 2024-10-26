@@ -27,7 +27,7 @@
     mutableUsers = false;
     users.${settings.user.name} = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "input" ];
+      extraGroups = [ "wheel" "input" "systemd-journal" ];
       hashedPasswordFile = config.age.secrets.user_password.path;
     };
   };
