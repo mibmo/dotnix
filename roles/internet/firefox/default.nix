@@ -20,6 +20,8 @@ let
     keepassxc-browser = { };
     # redirect big sites to privacy-friendly alternatives
     libredirect = { };
+    # manage and switch between proxies
+    switchyomega = { };
     # side-menu nested tabs = {};
     sidebery = { };
     # performant ad- & tracker-blocking
