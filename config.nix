@@ -61,7 +61,7 @@ let
   # "release" = [ "pkgs-0.1.0" "to-0.2.0" "allow-0.3.0];
   # i.e. `"23.11" = [ "hello-2.12.1" ];`
   permittedInsecurePackages = {
-    unstable = [ "electron-27.3.11" ];
+    "24.05" = [ "electron-27.3.11" ];
   };
 
   # "release" = [ "pkgs-0.1.0" "to-0.2.0" "allow-0.3.0];

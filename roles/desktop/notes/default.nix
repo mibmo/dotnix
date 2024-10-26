@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs-24_05, ... }:
 let
-  logseq = pkgs.logseq.override {
+  logseq = pkgs-24_05.logseq.override {
     # graph doesnt sync properly; needs upstream major version (electron 27)
     #electron = pkgs.electron_29;
   };
