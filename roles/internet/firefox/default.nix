@@ -19,7 +19,7 @@ let
     # password manager
     keepassxc-browser = { };
     # redirect big sites to privacy-friendly alternatives
-    libredirect = { };
+    #libredirect = { };
     # manage and switch between proxies
     switchyomega = { };
     # side-menu nested tabs = {};
