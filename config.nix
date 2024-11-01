@@ -70,6 +70,7 @@ let
   permittedUnfreePatterns = {
     unstable = [
       "canon-cups-ufr2"
+      "drawio"
       "flagfox"
       "geogebra"
       "steam(-(run|original|unwrapped))?"
