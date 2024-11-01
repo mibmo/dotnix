@@ -6,7 +6,7 @@ let
   };
   curl = ''
     ${lib.getExe curlPkg} \
-      --connect-timeout 2 \
+      --connect-timeout 8 \
       --dns-servers $IP4_NAMESERVERS \
       --insecure \
       --silent \
