@@ -72,7 +72,7 @@ let
       "canon-cups-ufr2"
       "flagfox"
       "geogebra"
-      "steam(-(run|original))?"
+      "steam(-(run|original|unwrapped))?"
     ];
   };
 
