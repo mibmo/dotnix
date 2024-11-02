@@ -153,7 +153,7 @@ Languages = {
 	{
 		name = "Java",
 		filetype = "java",
-		formatter = "java:clangformat",
+		formatter = "java:google_java_format",
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,

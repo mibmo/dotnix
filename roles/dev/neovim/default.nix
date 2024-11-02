@@ -44,7 +44,7 @@
 
         # formatters
         black # python
-        clang-tools # java
+        google-java-format # java
         deno # typescript
         nixpkgs-fmt # nix
         rubyPackages.htmlbeautifier # html
