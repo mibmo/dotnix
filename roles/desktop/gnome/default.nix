@@ -59,34 +59,10 @@ in
       extensions = {
         appindicator = { };
         burn-my-windows.active-profile = "/home/${settings.user.name}/.config/burn-my-windows/profiles/main.conf";
-        shu-zhi = {
-          default-style = mkUint32 3;
-          dark-sketch-type = mkUint32 4;
-          light-sketch-type = mkUint32 4;
-          color-name = mkUint32 1;
-          text-command = toString shuzhiCommand;
-          enable-systray = true;
-
-          meta.dconfKey = "shuzhi";
-        };
       };
 
       keybindPath = name: "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/${name}";
       keybindDir = name: "/${keybindPath name}/";
-
-      shuzhiCommand = pkgs.writeScript "shuzhi.py" ''
-        #!${pkgs.python3}/bin/python
-        import socket
-
-        def print_wide(*args, sep=" ", **kwargs):
-          wide_map = {i: i + 0xFEE0 for i in range(0x21, 0x7F)}
-          wide_map[0x20] = 0x3000
-          text = sep.join(map(str, args)).translate(wide_map)
-          print(text, **kwargs)
-
-        print("こんにちは")
-        print_wide(socket.gethostname())
-      '';
     in
     {
       home = {

@@ -468,16 +468,6 @@ function Cfg_vimtex()
 	}
 end
 
-function Cfg_catppuccin()
-	local catppuccin = require("catppuccin")
-	catppuccin.setup({
-		background = {
-			light = "latte",
-			dark = "macchiato",
-		},
-	})
-end
-
 -- plugin install
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
@@ -531,10 +521,6 @@ require("lazy").setup({
 		config = Cfg_lualine,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	{ "raindev/daybreak.nvim", config = true },
-	{ "marko-cerovac/material.nvim", lazy = true },
-	{ "folke/tokyonight.nvim", lazy = true },
-	{ "catppuccin/nvim", config = Cfg_catppuccin, lazy = true },
 })
 
 -- lsp
@@ -610,8 +596,6 @@ vim.api.nvim_create_autocmd("UILeave", {
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = true
-
-vim.cmd.colorscheme("catppuccin")
 
 --[[
 @TODO: telescope

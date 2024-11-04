@@ -10,6 +10,7 @@ let
         nur.nixosModules.nur
         agenix.nixosModules.age
         hyprland.nixosModules.default
+        stylix.nixosModules.stylix
         ../roles/common.nix
         (lib.mkModule host)
       ];

@@ -1,20 +1,11 @@
-{ ... }: {
+{ lib, ... }: {
   home.settings = {
     programs = {
-      alacritty = {
-        enable = true;
-        settings = {
-          font = {
-            size = 12;
-            normal.family = "Fantasque Sans Mono";
-          };
-        };
-      };
+      alacritty .enable = true;
       foot = {
         enable = true;
-        settings = {
+        settings = lib.mkForce {
           main = {
-            font = "Fantasque Sans Mono";
             font-size-adjustment = 0.5;
             pad = "10x10 center";
             dpi-aware = true;

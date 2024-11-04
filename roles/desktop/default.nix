@@ -3,6 +3,7 @@
 {
   imports = [
     ../internet/firefox
+    ./stylix.nix
     ./communication
     ./fcitx5
     ./media
