@@ -120,6 +120,15 @@ let
             --height=50% --layout=reverse \
             --query "$argv")
         '';
+      # killall, but works wrapped programs
+      killall-nix = ''
+        name="$1"
+        shift
+        for pid in $(pgrep "$name"); do
+          echo "killing $pid";
+          kill "$pid" "$@";
+        done
+      '';
     };
   };
 
