@@ -52,6 +52,7 @@
         gh = {
           enable = true;
           settings.git_protocol = "ssh";
+          extensions = [ pkgs.gh-notify ];
         };
         htop = {
           enable = true;
