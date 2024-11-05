@@ -22,6 +22,7 @@
       programs.imv.enable = true;
     };
     packages = with pkgs; [
+      drawio
       libreoffice
       mpv
       pulsemixer

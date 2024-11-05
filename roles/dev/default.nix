@@ -14,7 +14,6 @@
   home = {
     packages = with pkgs; [
       arp-scan
-      drawio
       duf
       dwarfs
       ffmpeg
