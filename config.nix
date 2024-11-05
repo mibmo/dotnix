@@ -102,7 +102,6 @@ let
         rebuild = "${build} && sudo /tmp/nixos-configuration/bin/switch-to-configuration switch";
         rebuild-offline = "${build} --offline && ${switch} --offline";
         tmp = "pushd $(mktemp -d)";
-        cleanup-results = ''find . -type l -name "result*" -exec echo "unlinking {}" \; -exec unlink {} \;'';
         gc-nix = "nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
       };
 
@@ -129,6 +128,22 @@ let
           kill "$pid" "$@";
         done
       '';
+      # unlink result symlinks
+      cleanup-results =
+        let
+          cleanup = pkgs.writeShellScript "cleanup.sh" ''
+            for link in "$@"
+            do
+              target=$(readlink -f "$link")
+              printf "\n%s -> %s" "$link" "$target"
+              case $target in "/nix/store/"*)
+                printf " [unlinked]"
+                unlink "$link"
+              esac
+            done
+          '';
+        in
+        ''fd '^result(-[a-zA-Z]+)?$' --type symlink --unrestricted --exec-batch ${cleanup}'';
     };
   };
 
