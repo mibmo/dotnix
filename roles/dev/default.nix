@@ -33,7 +33,6 @@
       lsof
       mktemp
       mmv-go
-      neofetch
       nix-index
       nix-output-monitor
       nvd
@@ -51,6 +50,8 @@
         fzf.enable = true;
         bottom.enable = true;
         ripgrep.enable = true;
+        fastfetch.enable = true;
+        hyfetch.enable = true;
         htop = {
           enable = true;
           settings = {
