@@ -23,7 +23,6 @@
       fzf
       github-cli
       gnumake
-      htop
       insomnia
       killall
       ldns
