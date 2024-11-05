@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./git
     ./shell
@@ -38,16 +38,17 @@
       which
       zip
     ];
-    groups = [ "uucp" "dialout" ];
+    groups = [
+      # talk directly to usb and serial devices
+      "dialout"
+      "uucp"
+    ];
     settings = {
       programs = {
+        bottom.enable = true;
+        fastfetch.enable = true;
         fd.enable = true;
         fzf.enable = true;
-        bottom.enable = true;
-        ripgrep.enable = true;
-        jq.enable = true;
-        fastfetch.enable = true;
-        hyfetch.enable = true;
         gh = {
           enable = true;
           settings.git_protocol = "ssh";
@@ -59,6 +60,9 @@
             tree_view = true;
           };
         };
+        hyfetch.enable = true;
+        jq.enable = true;
+        ripgrep.enable = true;
         ssh = {
           enable = true;
           serverAliveInterval = 60;
@@ -75,13 +79,12 @@
   ];
 
   programs = {
+    mtr.enable = true;
     nix-index = {
       enable = true;
-      enableZshIntegration = lib.mkDefault false;
-      enableFishIntegration = lib.mkDefault false;
       enableBashIntegration = lib.mkDefault false;
+      enableFishIntegration = lib.mkDefault false;
+      enableZshIntegration = lib.mkDefault false;
     };
-
-    mtr.enable = true;
   };
 }
