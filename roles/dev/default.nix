@@ -17,7 +17,6 @@
       drawio
       duf
       dwarfs
-      fd
       ffmpeg
       file
       fzf
@@ -43,6 +42,7 @@
     groups = [ "uucp" "dialout" ];
     settings = {
       programs = {
+        fd.enable = true;
         fzf.enable = true;
         bottom.enable = true;
         ripgrep.enable = true;
