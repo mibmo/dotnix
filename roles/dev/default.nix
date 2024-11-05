@@ -19,7 +19,6 @@
       dwarfs
       ffmpeg
       file
-      fzf
       gnumake
       insomnia
       killall
