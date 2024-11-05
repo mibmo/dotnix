@@ -1,6 +1,6 @@
 { lib, pkgs, config, settings, ... }:
 let
-  inherit (builtins) readFile toFile;
+  inherit (builtins) readFile;
   inherit (lib.attrsets) mapAttrsToList;
   inherit (lib.strings) concatMapStringsSep;
 
@@ -9,7 +9,7 @@ let
       transpileFunction = name: body:
         pkgs.stdenv.mkDerivation {
           name = "${name}.fish";
-          src = toFile "${name}.sh" ''
+          src = ''
             function ${name}() {
               ${body}
             }
@@ -18,7 +18,7 @@ let
           nativeBuildInputs = [ pkgs.babelfish ];
 
           buildPhase = ''
-            cat "$src" | babelfish > script.fish
+            echo "$src" | babelfish > script.fish
           '';
           installPhase = ''
             cp script.fish $out
