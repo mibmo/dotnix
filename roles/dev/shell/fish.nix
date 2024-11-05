@@ -57,12 +57,11 @@ in
   home.settings = {
     programs.fish = {
       enable = true;
-      interactiveShellInit = "any-nix-shell fish --info-right | source";
+      interactiveShellInit = "${lib.getExe pkgs.any-nix-shell} fish --info-right | source";
       inherit shellInit shellAbbrs plugins;
     };
   };
 
-  environment.systemPackages = [ pkgs.any-nix-shell ];
   programs.fish.enable = true;
   programs.nix-index.enableFishIntegration = true;
 
