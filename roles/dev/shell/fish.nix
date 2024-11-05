@@ -63,7 +63,6 @@ in
   };
 
   environment.systemPackages = [ pkgs.any-nix-shell ];
-  users.users.${settings.user.name}.shell = pkgs.fish;
   programs.fish.enable = true;
   programs.nix-index.enableFishIntegration = true;
 
