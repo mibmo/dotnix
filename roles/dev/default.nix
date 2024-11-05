@@ -39,7 +39,6 @@
       nvd
       p7zip
       pciutils
-      ripgrep
       tree
       unzip
       usbutils
@@ -51,6 +50,7 @@
       programs = {
         fzf.enable = true;
         bottom.enable = true;
+        ripgrep.enable = true;
         htop = {
           enable = true;
           settings = {
