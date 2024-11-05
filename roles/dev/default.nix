@@ -26,7 +26,6 @@
       htop
       imv
       insomnia
-      jq
       killall
       ldns
       libqalculate
@@ -50,6 +49,7 @@
         fzf.enable = true;
         bottom.enable = true;
         ripgrep.enable = true;
+        jq.enable = true;
         fastfetch.enable = true;
         hyfetch.enable = true;
         htop = {
