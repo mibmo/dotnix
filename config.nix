@@ -105,6 +105,22 @@ let
         cleanup-results = ''find . -type l -name "result*" -exec echo "unlinking {}" \; -exec unlink {} \;'';
         gc-nix = "nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
       };
+
+    functions = {
+      # Find directory in dev folder based on search and cd into it
+      dev =
+        let
+          fdOpts = "--type=directory --full-path --exclude nixpkgs";
+        in
+        ''
+          cd $(fzf \
+            --bind 'start:reload:fd "" ~/dev ${fdOpts}' \
+            --bind 'change:reload:fd {q} ~/dev ${fdOpts} || true' \
+            --preview='tree -CL 2 {}' \
+            --height=50% --layout=reverse \
+            --query "$argv")
+        '';
+    };
   };
 
   gpg = {

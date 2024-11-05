@@ -1,26 +1,47 @@
 { lib, pkgs, config, settings, ... }:
 let
-  shellInit =
+  inherit (builtins) readFile toFile;
+  inherit (lib.attrsets) mapAttrsToList;
+  inherit (lib.strings) concatMapStringsSep;
+
+  shellCommands =
     let
-      # fzf and fish break together, so can't just have this in shell variable... :/
-      fdOpts = "--type=directory --full-path --exclude nixpkgs";
+      transpileFunction = name: body:
+        pkgs.stdenv.mkDerivation {
+          name = "${name}.fish";
+          src = toFile "${name}.sh" ''
+            function ${name}() {
+              ${body}
+            }
+          '';
+
+          nativeBuildInputs = [ pkgs.babelfish ];
+
+          buildPhase = ''
+            cat "$src" | babelfish > script.fish
+          '';
+          installPhase = ''
+            cp script.fish $out
+          '';
+
+          dontUnpack = true;
+        };
     in
-    ''
-      set fish_greeting
+    mapAttrsToList
+      transpileFunction
+      settings.shell.functions
+  ;
 
-      function __is_project_dir
-        set  $status
-      end
+  shellInit = ''
+    set fish_greeting
 
-      function dev -d "Find directory in dev folder based on search and cd into it"
-        cd $(fzf \
-          --bind 'start:reload:fd "" ~/dev ${fdOpts}' \
-          --bind 'change:reload:fd {q} ~/dev ${fdOpts} || true' \
-          --preview='tree -CL 2 {}' \
-          --height=50% --layout=reverse \
-          --query "$argv")
-      end
-    '';
+    function __is_project_dir
+      set  $status
+    end
+
+    # transpiled functions
+    ${concatMapStringsSep "\n" readFile shellCommands}
+  '';
 
   shellAbbrs = settings.shell.aliases // { };
 
