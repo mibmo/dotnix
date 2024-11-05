@@ -85,4 +85,8 @@
       enableZshIntegration = lib.mkDefault false;
     };
   };
+
+  persist.user.directories = [
+    ".cache/nix-index"
+  ];
 }
