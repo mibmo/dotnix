@@ -21,7 +21,6 @@
       ffmpeg
       file
       fzf
-      github-cli
       gnumake
       insomnia
       killall
@@ -50,6 +49,10 @@
         jq.enable = true;
         fastfetch.enable = true;
         hyfetch.enable = true;
+        gh = {
+          enable = true;
+          settings.git_protocol = "ssh";
+        };
         htop = {
           enable = true;
           settings = {
