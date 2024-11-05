@@ -24,7 +24,6 @@
       github-cli
       gnumake
       htop
-      imv
       insomnia
       killall
       ldns

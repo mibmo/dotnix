@@ -17,7 +17,10 @@
   ];
 
   home = {
-    settings.services.easyeffects.enable = true;
+    settings = {
+      services.easyeffects.enable = true;
+      programs.imv.enable = true;
+    };
     packages = with pkgs; [
       libreoffice
       mpv
