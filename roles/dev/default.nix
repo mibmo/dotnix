@@ -26,7 +26,6 @@
       lsof
       mktemp
       mmv-go
-      nix-index
       nix-output-monitor
       nvd
       p7zip
