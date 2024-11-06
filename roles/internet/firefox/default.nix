@@ -146,8 +146,8 @@ let
       {
         # nix
         "NixOS Wiki" = {
-          urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
-          iconUpdateURL = "https://nixos.wiki/favicon.png";
+          urls = [{ template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; }];
+          iconUpdateURL = "https://wiki.nixos.org/nixos.png";
           updateInterval = week;
           definedAliases = [ "@nw" "@nixwiki" ];
         };
