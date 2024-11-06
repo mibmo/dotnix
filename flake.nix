@@ -47,6 +47,7 @@
     in
     {
       inherit inputs;
+      formatter.${system} = pkgs.nixfmt-rfc-style;
       nixosConfigurations = import ./hosts { inherit inputs lib config; };
     };
 }

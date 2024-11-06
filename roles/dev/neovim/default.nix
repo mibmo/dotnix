@@ -46,7 +46,7 @@
         black # python
         google-java-format # java
         deno # typescript
-        nixpkgs-fmt # nix
+        nixfmt-rfc-style # nix
         rubyPackages.htmlbeautifier # html
         stylua # lua
       ];

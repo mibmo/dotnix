@@ -94,7 +94,7 @@ Languages = {
 	{
 		name = "Nix",
 		filetype = "nix",
-		formatter = "nix:nixpkgs_fmt",
+		formatter = "nix:nixfmt",
 		style = {
 			tabstop = 2,
 			shiftwidth = 2,
