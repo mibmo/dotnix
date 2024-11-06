@@ -50,7 +50,7 @@ let
       flavor = "outlook.office365.com";
       thunderbird.settings = id: {
         # auth via oAuth2
-        "mail.smtpserver.smtp_${id}.authMethod" = 3;
+        "mail.smtpserver.smtp_${id}.authMethod" = 10;
       };
       meta.authentication = {
         flavor = "keepassxc";
