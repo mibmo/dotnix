@@ -290,9 +290,7 @@ let
 
     "browser.tabs.loadInBackground" = true;
 
-    # theme
-    "extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
-    "extensions.extensions.activeThemeID" = "firefox-alpenglow@mozilla.org";
+    # enable user chrome
     "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
     # extensions
