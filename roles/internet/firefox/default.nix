@@ -333,24 +333,44 @@ in
     in
     lib.attrsets.mapAttrs (_: paths: perProfile "default" (lib.lists.flatten paths)) {
       directories = [
-        "crashes"
+        # website local storage
         "storage"
       ];
       files = [
-        [
-          "cert9.db"
-          "compatability.ini"
-        ]
-        (sqlite "content-prefs")
+        # mitigate bounce tracking protection.
+        # should generally not be persisted
+        #(sqlite "bounce-tracking-protection")
+
+        # website preferences; media permissions, font preferences, accessibility, etc
+        #(sqlite "content-prefs")
+
+        # website cookies
         (sqlite "cookies")
-        (sqlite "favicons")
-        (sqlite "formhistory")
-        (sqlite "permissions")
+
+        # favicon cache and metadata
+        (sqlite "facicons")
+
+        # web form history; logins, credentials, usernames, etc
+        #(sqlite "formhistory")
+
+        # permissions for specific websites; allowing pop-ups, location access, camera/mic, etc
+        #(sqlite "permissions")
+
+        # bookmarks, browsing history, and other metadata
         (sqlite "places")
+
+        # tracking protection information; blocked websites, block history, etc
         (sqlite "protections")
+
+        # firefox sync data
+        #(sqlite "storage-sync-v2")
+
+        # website local storage
         (sqlite "storage")
-        (sqlite "storage-sync-v2")
-        (sqlite "webappsstore")
+
+        # extensions data, e.g. icons and manifests.
+        # may not need to persist when configuring via policy
+        #(sqlite "webappsstore")
       ];
     };
 }
