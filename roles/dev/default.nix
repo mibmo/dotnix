@@ -78,11 +78,14 @@
 
   programs = {
     mtr.enable = true;
+
+    # nix-index and command-not-found are not compatible; prefer nix-index
+    command-not-found.enable = false;
     nix-index = {
       enable = true;
-      enableBashIntegration = lib.mkDefault false;
-      enableFishIntegration = lib.mkDefault false;
-      enableZshIntegration = lib.mkDefault false;
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
     };
   };
 

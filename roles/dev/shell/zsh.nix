@@ -47,9 +47,5 @@ in
 
   programs.zsh.enable = true;
 
-  # these are mutually exclusive
-  programs.nix-index.enableZshIntegration = true;
-  programs.command-not-found.enable = false;
-
   persist.user.files = [ ".zsh_history" ];
 }

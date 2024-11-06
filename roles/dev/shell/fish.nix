@@ -63,7 +63,6 @@ in
   };
 
   programs.fish.enable = true;
-  programs.nix-index.enableFishIntegration = true;
 
   persist.user.directories = [ ".local/share/fish" ];
 }
