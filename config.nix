@@ -129,7 +129,7 @@ let
         shift
         for pid in $(pgrep "$name"); do
           echo "killing $pid";
-          kill "$pid" "$@";
+          kill "$@" "$pid";
         done
       '';
       # unlink result symlinks
