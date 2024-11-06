@@ -313,6 +313,7 @@ in
     package = pkgs.firefox;
     inherit policies;
     profiles.default = {
+      isDefault = true;
       inherit containers search settings;
       userChrome = builtins.readFile ./userChrome.css;
       containersForce = true;
