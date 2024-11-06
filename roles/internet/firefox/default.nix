@@ -147,6 +147,10 @@ let
         week = 7 * day;
       in
       {
+        # traditional
+        "Bing".metaData.hidden = true;
+        "Google".metaData.hidden = true;
+
         # nix
         "NixOS Wiki" = {
           urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
