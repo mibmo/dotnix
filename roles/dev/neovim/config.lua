@@ -521,6 +521,7 @@ require("lazy").setup({
 		config = Cfg_lualine,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
+	{ "RRethy/base16-nvim" },
 })
 
 -- lsp

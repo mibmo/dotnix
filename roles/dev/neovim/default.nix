@@ -55,6 +55,7 @@
       target = ".local/share/nvim/queries/wgsl";
       source = "${pkgs.tree-sitter-grammars.tree-sitter-wgsl}/queries";
     };
+    stylix.targets.neovim.plugin = "base16-nvim";
   };
 
   persist.user.directories = [ ".local/share/nvim" ];
