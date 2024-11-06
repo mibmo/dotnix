@@ -1,4 +1,12 @@
-{ lib, pkgs, inputs, config, settings, ... }: {
+{
+  lib,
+  pkgs,
+  inputs,
+  config,
+  settings,
+  ...
+}:
+{
   imports = [
     ./networking
     ./security
@@ -27,7 +35,11 @@
     mutableUsers = false;
     users.${settings.user.name} = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "input" "systemd-journal" ];
+      extraGroups = [
+        "wheel"
+        "input"
+        "systemd-journal"
+      ];
       hashedPasswordFile = config.age.secrets.user_password.path;
     };
   };

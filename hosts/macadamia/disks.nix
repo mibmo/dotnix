@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   disko.devices = {
     disk.main = {
       device = "/dev/disk/by-id/nvme-APPLE_SSD_AP0128J_C08730604DVHV4KA9";

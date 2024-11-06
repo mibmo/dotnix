@@ -3,30 +3,32 @@ let
   inherit (clib) setIf;
   inherit (lib.attrsets) mapAttrs recursiveUpdate;
 
-  mkEmail = address: account@{ ... }:
+  mkEmail =
+    address:
+    account@{ ... }:
     let
       # allow for `meta` attribute
       config = lib.attrsets.removeAttrs account [ "meta" ];
       meta = config.meta or { };
       auth = meta.authentication or { };
 
-      passwordCommand = {
-        # @TODO: prompt-pw through `dialog` or smth...
-        #keepassxc = "prompt-pw | keepassxc-cli show ~/.secret/Passwords.kdbx --attributes Password '${auth.entry}'";
-      }.${toString auth.flavor} or null;
+      passwordCommand =
+        {
+          # @TODO: prompt-pw through `dialog` or smth...
+          #keepassxc = "prompt-pw | keepassxc-cli show ~/.secret/Passwords.kdbx --attributes Password '${auth.entry}'";
+        }
+        .${toString auth.flavor} or null;
     in
-    recursiveUpdate
-      {
-        # sane default
-        inherit address;
-        userName = address;
-        thunderbird = {
-          enable = true;
-          profiles = [ "default" ];
-        };
-        ${setIf "passwordCommand" (meta ? authentication)} = passwordCommand;
-      }
-      config;
+    recursiveUpdate {
+      # sane default
+      inherit address;
+      userName = address;
+      thunderbird = {
+        enable = true;
+        profiles = [ "default" ];
+      };
+      ${setIf "passwordCommand" (meta ? authentication)} = passwordCommand;
+    } config;
 
   accounts = mapAttrs mkEmail {
     "mib@kanp.ai" = {

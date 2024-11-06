@@ -16,7 +16,10 @@ in
     settings = {
       server = {
         # bind to ipv{4,6} loopback
-        ip-address = [ "127.0.0.1" "::1" ];
+        ip-address = [
+          "127.0.0.1"
+          "::1"
+        ];
         # nameservers already do this
         qname-minimisation = false;
       };
@@ -46,12 +49,13 @@ in
       };
 
       domain-insecure = config.networking.timeServers ++ tailscale-stub-zones;
-      stub-zone = map
-        (name: {
-          inherit name;
-          stub-addr = [ "100.100.100.100" "fd7a:115c:a1e0::53" ];
-        })
-        tailscale-stub-zones;
+      stub-zone = map (name: {
+        inherit name;
+        stub-addr = [
+          "100.100.100.100"
+          "fd7a:115c:a1e0::53"
+        ];
+      }) tailscale-stub-zones;
     };
   };
 }

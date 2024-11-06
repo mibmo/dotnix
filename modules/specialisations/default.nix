@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   specialisation =
     let
       inherit (lib.attrsets) mapAttrs recursiveUpdate;
@@ -24,9 +25,13 @@
       ];
     in
     mapAttrs
-      (_: specialisation: specialisation // {
-        configuration = foldl recursiveUpdate { } (flatten (toList specialisation.configuration));
-      })
+      (
+        _: specialisation:
+        specialisation
+        // {
+          configuration = foldl recursiveUpdate { } (flatten (toList specialisation.configuration));
+        }
+      )
       {
         no-gpu.configuration = disable-gpu;
         no-gui.configuration = disable-gui;

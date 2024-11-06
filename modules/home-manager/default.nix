@@ -1,4 +1,9 @@
-{ lib, config, settings, ... }:
+{
+  lib,
+  config,
+  settings,
+  ...
+}:
 let
   inherit (lib) mkOption types;
   cfg = config.home;
@@ -18,7 +23,14 @@ in
     };
 
     environment = mkOption {
-      type = with types; lazyAttrsOf (oneOf [ str path int float ]);
+      type =
+        with types;
+        lazyAttrsOf (oneOf [
+          str
+          path
+          int
+          float
+        ]);
       default = { };
       description = lib.mdDoc "Environment variables set for user";
     };

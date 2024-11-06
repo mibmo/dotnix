@@ -4,12 +4,27 @@ let
   inherit (config) permittedInsecurePackages permittedUnfreePatterns;
 
   nixpkgs-lib = inputs.nixpkgs.lib;
-  inherit (nixpkgs-lib.attrsets) attrNames attrByPath collect
-    filterAttrs genAttrs mapAttrs mapAttrs' mapAttrsRecursive;
+  inherit (nixpkgs-lib.attrsets)
+    attrNames
+    attrByPath
+    collect
+    filterAttrs
+    genAttrs
+    mapAttrs
+    mapAttrs'
+    mapAttrsRecursive
+    ;
   inherit (nixpkgs-lib.strings) concatStringsSep hasPrefix removePrefix;
   inherit (nixpkgs-lib.trivial) pipe;
   inherit (nixpkgs-lib) getName;
-  inherit (builtins) any head match typeOf readDir replaceStrings;
+  inherit (builtins)
+    any
+    head
+    match
+    typeOf
+    readDir
+    replaceStrings
+    ;
 
   noop = a: a;
 
@@ -21,15 +36,11 @@ let
 
   recurse = recurseTransform noop;
 
-  recurseTransform = transform: pred: f: set:
-    builtins.mapAttrs
-      (name: value:
-        if pred value
-        then f value
-        else recurse pred f (transform value)
-      )
-      set;
-
+  recurseTransform =
+    transform: pred: f: set:
+    builtins.mapAttrs (
+      name: value: if pred value then f value else recurse pred f (transform value)
+    ) set;
 
   # turn `nixpkgs-24_05` into `24.05`
   inputNixpkgsToVersion = name: replaceStrings [ "_" ] [ "." ] (removePrefix "nixpkgs-" name);
@@ -50,39 +61,37 @@ let
   # temporary var; will be attr of release-dependent overlays
   overlays = { }; # temp
 
-  packageSets = system:
-    mapAttrs'
-      (name: input:
-        let
-          version = inputNixpkgsToVersion name;
-          hasInsecureOverride = permittedInsecurePackages ? ${version};
-          hasUnfreeOverride = permittedUnfreePatterns ? ${version};
-          hasOverlays = overlays ? ${version};
-        in
-        {
-          name = inputNixpkgsToVersion name;
-          value =
-            if hasInsecureOverride || hasUnfreeOverride || hasOverlays
-            then
-              import input
-                {
-                  inherit system;
-                  ${setIf "overlays" hasOverlays} = overlays.${version};
-                  config = {
-                    ${setIf "allowUnfreePredicate" hasUnfreeOverride} =
-                      pkg:
-                      any
-                        (pattern: match pattern (getName pkg) != null)
-                        permittedUnfreePatterns.${version};
-                    ${setIf "permittedInsecurePackages" hasInsecureOverride} = permittedInsecurePackages.${version};
-                  };
-                }
-            else input.legacyPackages.${system};
-        }
-      )
-      nixpkgsInputs;
+  packageSets =
+    system:
+    mapAttrs' (
+      name: input:
+      let
+        version = inputNixpkgsToVersion name;
+        hasInsecureOverride = permittedInsecurePackages ? ${version};
+        hasUnfreeOverride = permittedUnfreePatterns ? ${version};
+        hasOverlays = overlays ? ${version};
+      in
+      {
+        name = inputNixpkgsToVersion name;
+        value =
+          if hasInsecureOverride || hasUnfreeOverride || hasOverlays then
+            import input {
+              inherit system;
+              ${setIf "overlays" hasOverlays} = overlays.${version};
+              config = {
+                ${setIf "allowUnfreePredicate" hasUnfreeOverride} =
+                  pkg: any (pattern: match pattern (getName pkg) != null) permittedUnfreePatterns.${version};
+                ${setIf "permittedInsecurePackages" hasInsecureOverride} = permittedInsecurePackages.${version};
+              };
+            }
+          else
+            input.legacyPackages.${system};
+      }
+    ) nixpkgsInputs;
 
-  mkModule = module: args@{ ... }:
+  mkModule =
+    module:
+    args@{ ... }:
     let
       pkgs = (packageSets module.system).${moduleNixpkgsVersion};
     in
@@ -93,35 +102,43 @@ let
       ] ++ module.roles;
 
       # inherit config and overlays from evaluating nixpkgs
-      nixpkgs = { inherit (pkgs) config overlays; };
+      nixpkgs = {
+        inherit (pkgs) config overlays;
+      };
 
-      _module.args = {
-        inherit inputs;
-        host = module;
-        settings = import ./config.nix { inherit inputs pkgs; lib = combined-lib; };
-        clib = lib;
-      } // mapAttrs'
-        (release: value: {
+      _module.args =
+        {
+          inherit inputs;
+          host = module;
+          settings = import ./config.nix {
+            inherit inputs pkgs;
+            lib = combined-lib;
+          };
+          clib = lib;
+        }
+        // mapAttrs' (release: value: {
           name = "pkgs-${replaceStrings [ "." ] [ "_" ] release}";
           inherit value;
-        })
-        (packageSets module.system);
+        }) (packageSets module.system);
     };
 
   # read directory, producing attribute set where child sets represent
   # directories and leaf nodes are strings with their filesystem types
   loadDirectory = readDirectoryIntoAttrs [ ];
-  readDirectoryIntoAttrs = dirs: directory:
+  readDirectoryIntoAttrs =
+    dirs: directory:
     let
       path = dirs ++ [ directory ];
       dirPath = concatStringsSep "/" path;
     in
-    mapAttrs
-      (name: type: {
+    mapAttrs (
+      name: type:
+      {
         regular = "file";
         directory = readDirectoryIntoAttrs path name;
-      }.${type} or type)
-      (readDir dirPath);
+      }
+      .${type} or type
+    ) (readDir dirPath);
 
   # prune intersect attribute sets for merging.
   # returns a set comparing source and destination where:
@@ -153,18 +170,20 @@ let
   #   recurse.source = "none";
   #   onlyInSource = "none";
   # }
-  pruneIntersectedAttrs = default: source: destination:
-    mapAttrs
-      (name: value:
-        let
-          attr = attrByPath [ name ] default destination;
-        in
-        if typeOf attr == "set"
-        then pruneIntersectedAttrs default source.${name} destination.${name}
-        else
-          if attr == default then attr else value
-      )
-      source;
+  pruneIntersectedAttrs =
+    default: source: destination:
+    mapAttrs (
+      name: value:
+      let
+        attr = attrByPath [ name ] default destination;
+      in
+      if typeOf attr == "set" then
+        pruneIntersectedAttrs default source.${name} destination.${name}
+      else if attr == default then
+        attr
+      else
+        value
+    ) source;
 
   # get paths to symlink when symlinking `source` into `destination` without
   # symlinking over any existing directories or files.
@@ -197,24 +216,38 @@ let
   differingPaths =
     source: destination:
     # collect paths
-    collect
-      (attr: typeOf attr == "string")
+    collect (attr: typeOf attr == "string")
       # set leaf nodes to their path in the attribute set
       # discard if existing file
-      (mapAttrsRecursive
-        # pass "none" and "file" types (i.e. if path is non-existant in destination, or file exists in both)
-        (path: type: (genAttrs [ "none" "file" ] (_: concatStringsSep "/" path)).${type} or null)
-        (pruneIntersectedAttrs
-          "none"
-          (loadDirectory source)
-          (loadDirectory destination)));
+      (
+        mapAttrsRecursive
+          # pass "none" and "file" types (i.e. if path is non-existant in destination, or file exists in both)
+          (
+            path: type:
+            (genAttrs [
+              "none"
+              "file"
+            ] (_: concatStringsSep "/" path)).${type} or null
+          )
+          (pruneIntersectedAttrs "none" (loadDirectory source) (loadDirectory destination))
+      );
 
   combined-lib = nixpkgs-lib // lib;
 
   lib = {
-    inherit noop setIf recurse recurseTransform mkModule
-      loadDirectory pruneIntersectedAttrs differingPaths
-      packageSets nixpkgsInputs inputNixpkgsToVersion;
+    inherit
+      noop
+      setIf
+      recurse
+      recurseTransform
+      mkModule
+      loadDirectory
+      pruneIntersectedAttrs
+      differingPaths
+      packageSets
+      nixpkgsInputs
+      inputNixpkgsToVersion
+      ;
   };
 in
 lib

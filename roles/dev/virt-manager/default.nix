@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
     packages = [ pkgs.virt-manager ];
     settings.dconf.settings."org/virt-manager/virt-manager/connections" = {

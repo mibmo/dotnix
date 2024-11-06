@@ -1,4 +1,5 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+{
   nix = {
     package = pkgs.nixVersions.stable;
 
@@ -24,7 +25,11 @@
       in
       {
         # enable flakes
-        experimental-features = [ "nix-command" "flakes" "ca-derivations" ];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+          "ca-derivations"
+        ];
 
         # gc
         min-free = 1 * GiB;

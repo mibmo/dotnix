@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.settings = {
     programs.neovim = {
       enable = true;

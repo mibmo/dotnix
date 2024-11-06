@@ -12,7 +12,11 @@ let
         systems = [ "x86_64-linux" ];
         maxJobs = 16;
         speedFactor = 64;
-        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
+        supportedFeatures = [
+          "big-parallel"
+          "kvm"
+          "nixos-test"
+        ];
       };
     };
 
@@ -39,7 +43,11 @@ let
         systems = [ "x86_64-linux" ];
         maxJobs = 8;
         speedFactor = 8;
-        supportedFeatures = [ "big-parallel" "kvm" "nixos-test" ];
+        supportedFeatures = [
+          "big-parallel"
+          "kvm"
+          "nixos-test"
+        ];
       };
     };
   };
@@ -53,30 +61,36 @@ in
   nix = {
     distributedBuilds = true;
     extraOptions = "builders-use-substitutes = true";
-    buildMachines = mapAttrsToList
-      (_: b: {
+    buildMachines = mapAttrsToList (
+      _: b:
+      {
         hostName = b.host;
         systems = [ ];
         protocol = "ssh";
         maxJobs = 1;
         speedFactor = 1;
         supportedFeatures = [ ];
-      } // b.builder or { })
-      builders;
+      }
+      // b.builder or { }
+    ) builders;
   };
 
-  substituters = mapAttrsToList
-    (_: b: {
+  substituters = mapAttrsToList (
+    _: b:
+    {
       protocol = "http";
       host = b.host;
       key = b.storePublicKey;
-    } // b.substituter or { })
-    substituters;
+    }
+    // b.substituter or { }
+  ) substituters;
 
   home-manager.users.root.programs.ssh = {
     enable = true;
-    matchBlocks = mapAttrs'
-      (name: { host, ... }: {
+    matchBlocks = mapAttrs' (
+      name:
+      { host, ... }:
+      {
         name = host;
         value = {
           user = "remote-builder";
@@ -84,19 +98,21 @@ in
           identitiesOnly = true;
           identityFile = config.age.secrets.remote-builder-key.path;
         };
-      })
-      builders;
+      }
+    ) builders;
   };
 
-  services.openssh.knownHosts = mapAttrs'
-    (name: { host, sshPublicKey, ... }: {
+  services.openssh.knownHosts = mapAttrs' (
+    name:
+    { host, sshPublicKey, ... }:
+    {
       name = host;
       value = {
         extraHostNames = [ "${name}.host.kanp.ai" ];
         publicKey = sshPublicKey;
       };
-    })
-    hosts;
+    }
+  ) hosts;
 
   age.secrets.remote-builder-key.file = "${../../secrets}/remotebuilder_${config.networking.hostName}";
 }

@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.tailscale = {
     enable = true;
     openFirewall = true;
@@ -8,10 +9,12 @@
     ];
   };
 
-  persist.directories = [{
-    directory = "/var/lib/tailscale";
-    mode = "700";
-    user = "root";
-    group = "root";
-  }];
+  persist.directories = [
+    {
+      directory = "/var/lib/tailscale";
+      mode = "700";
+      user = "root";
+      group = "root";
+    }
+  ];
 }

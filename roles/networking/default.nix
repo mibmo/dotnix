@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   imports = [
     ./dns.nix
     ./vpn.nix
@@ -23,9 +24,11 @@
 
   home.groups = [ "networkmanager" ];
 
-  persist.directories = [{
-    directory = "/etc/NetworkManager/system-connections";
-    user = "root";
-    group = "root";
-  }];
+  persist.directories = [
+    {
+      directory = "/etc/NetworkManager/system-connections";
+      user = "root";
+      group = "root";
+    }
+  ];
 }

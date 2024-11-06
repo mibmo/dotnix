@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   services.zfs = {
     autoSnapshot = {
       enable = true;

@@ -1,4 +1,9 @@
-{ lib, config, settings, ... }:
+{
+  lib,
+  config,
+  settings,
+  ...
+}:
 let
   inherit (lib) mkOption mkDefault types;
   inherit (lib.lists) unique;
@@ -60,7 +65,10 @@ in
         directories = lib.mkAfter [
           "assets"
           "backup"
-          { directory = ".ssh"; mode = "0700"; }
+          {
+            directory = ".ssh";
+            mode = "0700";
+          }
         ];
         files = lib.mkAfter [ ];
       };

@@ -1,4 +1,10 @@
-{ pkgs-23_11, config, settings, ... }: {
+{
+  pkgs-23_11,
+  config,
+  settings,
+  ...
+}:
+{
   imports = [
     ./hardware-configuration.nix
   ];

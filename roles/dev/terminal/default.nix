@@ -1,7 +1,8 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   home.settings = {
     programs = {
-      alacritty .enable = true;
+      alacritty.enable = true;
       foot = {
         enable = true;
         settings = lib.mkForce {

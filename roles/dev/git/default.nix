@@ -1,4 +1,9 @@
-{ lib, pkgs, settings, ... }:
+{
+  lib,
+  pkgs,
+  settings,
+  ...
+}:
 let
   parallelConnections = 16;
   extraConfig = {
@@ -35,15 +40,16 @@ let
   ignores = [
     "*sync-conflict-*-*-*"
   ];
-  includes = map
-    (name: {
-      path = "~/dev/${name}/.gitconfig";
-      condition = "gitdir:~/dev/${name}/";
-    })
-    (import ./organizations.nix);
+  includes = map (name: {
+    path = "~/dev/${name}/.gitconfig";
+    condition = "gitdir:~/dev/${name}/";
+  }) (import ./organizations.nix);
   attributes =
     let
-      all = lib.lists.flatten [ programming configuration ];
+      all = lib.lists.flatten [
+        programming
+        configuration
+      ];
       programming = [
         "c"
         "cpp"
@@ -75,13 +81,20 @@ let
         "yaml"
       ];
 
-      mkFilter = { attributes, filetypes ? all }: map (filetype: "*.${filetype} ${attributes}") filetypes;
+      mkFilter =
+        {
+          attributes,
+          filetypes ? all,
+        }:
+        map (filetype: "*.${filetype} ${attributes}") filetypes;
     in
-    lib.flatten (map mkFilter [
-      { attributes = "text"; }
-      { attributes = "eol=lf"; }
-      { attributes = "filter=ignore-marked-lines"; }
-    ]);
+    lib.flatten (
+      map mkFilter [
+        { attributes = "text"; }
+        { attributes = "eol=lf"; }
+        { attributes = "filter=ignore-marked-lines"; }
+      ]
+    );
 in
 {
   home.settings.programs.git = {
@@ -91,6 +104,12 @@ in
 
     userName = settings.user.name;
     userEmail = settings.user.email;
-    inherit attributes extraConfig ignores includes signing;
+    inherit
+      attributes
+      extraConfig
+      ignores
+      includes
+      signing
+      ;
   };
 }

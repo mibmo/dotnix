@@ -1,4 +1,10 @@
-{ inputs, pkgs, config, ... }: {
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}:
+{
   home = {
     packages = with pkgs; [
       age
@@ -29,9 +35,9 @@
 
   age = {
     identityPaths = map (key: key.path) config.services.openssh.hostKeys;
-    secrets = builtins.mapAttrs
-      (name: value: { file = ../../secrets/${name}; })
-      (import ../../secrets/secrets.nix);
+    secrets = builtins.mapAttrs (name: value: {
+      file = ../../secrets/${name};
+    }) (import ../../secrets/secrets.nix);
   };
 
   environment.shellInit = ''

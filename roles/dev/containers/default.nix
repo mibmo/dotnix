@@ -1,7 +1,14 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   home = {
-    packages = with pkgs; [ kubectl kind ];
-    groups = [ "podman" "docker" ];
+    packages = with pkgs; [
+      kubectl
+      kind
+    ];
+    groups = [
+      "podman"
+      "docker"
+    ];
   };
   virtualisation = {
     containers.enable = true;
@@ -17,10 +24,9 @@
     */
   };
 
-  hardware.nvidia-container-toolkit.enable =
-    builtins.any
-      (vd: vd == "nvidia")
-      config.services.xserver.videoDrivers;
+  hardware.nvidia-container-toolkit.enable = builtins.any (
+    vd: vd == "nvidia"
+  ) config.services.xserver.videoDrivers;
 
   persist = {
     directories = [ "/var/lib/rancher/k3s" ];

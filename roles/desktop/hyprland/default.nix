@@ -1,4 +1,5 @@
-{ inputs, host, ... }: {
+{ inputs, host, ... }:
+{
   imports = [ ../. ];
 
   programs.hyprland = {

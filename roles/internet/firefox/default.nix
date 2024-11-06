@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   inherit (lib.attrsets) mapAttrs';
   inherit (lib.strings) concatStringsSep;
@@ -75,20 +80,20 @@ let
     ExtensionUpdate = false; # managed by nix
     ExtensionSettings =
       # enable configured extensions
-      mapAttrs'
-        (name: _:
-          let
-            addon = firefox-addons.${name};
-            inherit (addon) addonId;
-          in
-          {
-            name = addonId;
-            value = {
-              installation_mode = "force_installed";
-              install_url = "file:///${addon}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/${addonId}.xpi";
-            };
-          })
-        extensions
+      mapAttrs' (
+        name: _:
+        let
+          addon = firefox-addons.${name};
+          inherit (addon) addonId;
+        in
+        {
+          name = addonId;
+          value = {
+            installation_mode = "force_installed";
+            install_url = "file:///${addon}/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/${addonId}.xpi";
+          };
+        }
+      ) extensions
       # disallow manual management of extensions
       // {
         "*" = {
@@ -96,12 +101,10 @@ let
           blocked_install_message = "Manual addon management is disabled";
         };
       };
-    "3rdparty".Extensions = mapAttrs'
-      (name: config: {
-        name = firefox-addons.${name}.addonId;
-        value = config;
-      })
-      extensions;
+    "3rdparty".Extensions = mapAttrs' (name: config: {
+      name = firefox-addons.${name}.addonId;
+      value = config;
+    }) extensions;
   };
 
   containers = {
@@ -146,88 +149,135 @@ let
       {
         # nix
         "NixOS Wiki" = {
-          urls = [{ template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; }];
+          urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
           iconUpdateURL = "https://wiki.nixos.org/nixos.png";
           updateInterval = week;
-          definedAliases = [ "@nw" "@nixwiki" ];
+          definedAliases = [
+            "@nw"
+            "@nixwiki"
+          ];
         };
 
         "Nix Reference Manual" = {
-          urls = [{ template = "https://nixos.org/manual/nix/unstable/?search={searchTerms}"; }];
+          urls = [ { template = "https://nixos.org/manual/nix/unstable/?search={searchTerms}"; } ];
           iconUpdateURL = "https://nixos.org/manual/nix/unstable/favicon.png";
           updateInterval = week;
-          definedAliases = [ "@nm" "@nixman" "@nixmanual" ];
+          definedAliases = [
+            "@nm"
+            "@nixman"
+            "@nixmanual"
+          ];
         };
 
         "Nix Packages" = {
-          urls = [{
-            template = "https://search.nixos.org/packages";
-            params = [
-              { name = "type"; value = "packages"; }
-              { name = "query"; value = "{searchTerms}"; }
-            ];
-          }];
+          urls = [
+            {
+              template = "https://search.nixos.org/packages";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
 
           icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "@np" "@nixpkgs" ];
+          definedAliases = [
+            "@np"
+            "@nixpkgs"
+          ];
         };
 
         "Nix Options" = {
-          urls = [{
-            template = "https://search.nixos.org/options";
-            params = [
-              { name = "type"; value = "packages"; }
-              { name = "query"; value = "{searchTerms}"; }
-            ];
-          }];
+          urls = [
+            {
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "type";
+                  value = "packages";
+                }
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
 
           icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-          definedAliases = [ "@no" "@nixopts" ];
+          definedAliases = [
+            "@no"
+            "@nixopts"
+          ];
         };
 
         "Home Manager Options" = {
-          urls = [{ template = "https://home-manager-options.extranix.com/?query={searchTerms}"; }];
+          urls = [ { template = "https://home-manager-options.extranix.com/?query={searchTerms}"; } ];
           iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.ico";
           updateInterval = week;
-          definedAliases = [ "@hm" "@hmopts" ];
+          definedAliases = [
+            "@hm"
+            "@hmopts"
+          ];
         };
 
         # rust
         "Rust Language Documentation" = {
-          urls = [{ template = "https://doc.rust-lang.org/std/?search={searchTerms}"; }];
+          urls = [ { template = "https://doc.rust-lang.org/std/?search={searchTerms}"; } ];
           iconUpdateURL = "https://doc.rust-lang.org/favicon.ico";
           updateInterval = week;
-          definedAliases = [ "@r" "@rust" ];
+          definedAliases = [
+            "@r"
+            "@rust"
+          ];
         };
 
         "Rust Crates Documentation" = {
-          urls = [{ template = "https://docs.rs/releases/search?query={searchTerms}"; }];
+          urls = [ { template = "https://docs.rs/releases/search?query={searchTerms}"; } ];
           iconUpdateURL = "https://docs.rs/favicon.ico";
           updateInterval = week;
-          definedAliases = [ "@drs" "@docsrs" ];
+          definedAliases = [
+            "@drs"
+            "@docsrs"
+          ];
         };
 
         "Lib.rs" = {
-          urls = [{ template = "https://lib.rs/search?q={searchTerms}"; }];
+          urls = [ { template = "https://lib.rs/search?q={searchTerms}"; } ];
           iconUpdateURL = "https://lib.rs/favicon.ico";
           updateInterval = week;
-          definedAliases = [ "@lrs" "@librs" ];
+          definedAliases = [
+            "@lrs"
+            "@librs"
+          ];
         };
 
         # gaming
         "Terraria Wiki" = {
-          urls = [{ template = "https://terraria.wiki.gg/index.php?search={searchTerms}"; }];
+          urls = [ { template = "https://terraria.wiki.gg/index.php?search={searchTerms}"; } ];
           iconUpdateUrl = "https://terraria.wiki.gg/favicon.ico";
           updateInterval = week;
-          definedAliases = [ "@tw" "@terraria" ];
+          definedAliases = [
+            "@tw"
+            "@terraria"
+          ];
         };
 
         # dictionaries
         "Jisho" = {
-          urls = [{ template = "https://jisho.org/search/{searchTerms}"; }];
+          urls = [ { template = "https://jisho.org/search/{searchTerms}"; } ];
           iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
           updateInterval = week;
-          definedAliases = [ "@js" "@jisho" ];
+          definedAliases = [
+            "@js"
+            "@jisho"
+          ];
         };
       };
   };
@@ -275,34 +325,34 @@ in
     let
       perProfile = profile: map (path: ".mozilla/firefox/${profile}/${path}");
       prefix = prefix: map (suffix: prefix + suffix);
-      sqlite = file: prefix file [
-        ".sqlite"
-        ".sqlite-shm"
-        ".sqlite-wal"
-      ];
+      sqlite =
+        file:
+        prefix file [
+          ".sqlite"
+          ".sqlite-shm"
+          ".sqlite-wal"
+        ];
     in
-    lib.attrsets.mapAttrs
-      (_: paths: perProfile "default" (lib.lists.flatten paths))
-      {
-        directories = [
-          "crashes"
-          "storage"
-        ];
-        files = [
-          [
-            "cert9.db"
-            "compatability.ini"
-          ]
-          (sqlite "content-prefs")
-          (sqlite "cookies")
-          (sqlite "favicons")
-          (sqlite "formhistory")
-          (sqlite "permissions")
-          (sqlite "places")
-          (sqlite "protections")
-          (sqlite "storage")
-          (sqlite "storage-sync-v2")
-          (sqlite "webappsstore")
-        ];
-      };
+    lib.attrsets.mapAttrs (_: paths: perProfile "default" (lib.lists.flatten paths)) {
+      directories = [
+        "crashes"
+        "storage"
+      ];
+      files = [
+        [
+          "cert9.db"
+          "compatability.ini"
+        ]
+        (sqlite "content-prefs")
+        (sqlite "cookies")
+        (sqlite "favicons")
+        (sqlite "formhistory")
+        (sqlite "permissions")
+        (sqlite "places")
+        (sqlite "protections")
+        (sqlite "storage")
+        (sqlite "storage-sync-v2")
+        (sqlite "webappsstore")
+      ];
+    };
 }

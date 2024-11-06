@@ -1,4 +1,12 @@
-{ lib, pkgs, config, settings, modulesPath, ... }: {
+{
+  lib,
+  pkgs,
+  config,
+  settings,
+  modulesPath,
+  ...
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/hardware/network/broadcom-43xx.nix")
@@ -7,7 +15,14 @@
 
   # boot
   boot = {
-    initrd.availableKernelModules = [ "xhci_pci" "nvme" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "nvme"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+    ];
     kernelModules = [ "kvm-intel" ];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     loader = {

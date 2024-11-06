@@ -1,4 +1,8 @@
-args@{ inputs, lib ? args.pkgs.lib, pkgs ? { } }:
+args@{
+  inputs,
+  lib ? args.pkgs.lib,
+  pkgs ? { },
+}:
 let
   hardwareModules = inputs.nixos-hardware.nixosModules;
   hosts = {
@@ -153,6 +157,12 @@ let
 
 in
 {
-  inherit hosts user defaults shell gpg;
+  inherit
+    hosts
+    user
+    defaults
+    shell
+    gpg
+    ;
   inherit permittedInsecurePackages permittedUnfreePatterns;
 }

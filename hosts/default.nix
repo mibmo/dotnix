@@ -1,6 +1,11 @@
-{ inputs, lib, config }:
+{
+  inputs,
+  lib,
+  config,
+}:
 let
-  mkHost = host:
+  mkHost =
+    host:
     lib.nixosSystem {
       inherit (host) system;
       modules = with inputs; [

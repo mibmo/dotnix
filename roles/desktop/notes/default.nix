@@ -14,27 +14,33 @@ in
 {
   home = {
     packages = [ logseq ];
-    settings = { lib, ... }: {
-      home.activation.logseq =
-        let
-          globalConfig = ./global.edn;
-          graphConfig = ./graph.edn;
-          globalPath = "$HOME/.config/Logseq/configs.edn";
-        in
-        lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          verboseEcho "installing global config"
-          run rm $VERBOSE_ARG ${globalPath}
-          run cp $VERBOSE_ARG ${globalConfig} ${globalPath}
+    settings =
+      { lib, ... }:
+      {
+        home.activation.logseq =
+          let
+            globalConfig = ./global.edn;
+            graphConfig = ./graph.edn;
+            globalPath = "$HOME/.config/Logseq/configs.edn";
+          in
+          lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            verboseEcho "installing global config"
+            run rm $VERBOSE_ARG ${globalPath}
+            run cp $VERBOSE_ARG ${globalConfig} ${globalPath}
 
-          ${lib.strings.concatMapStringsSep "\n" (graph: let
-            path = "$HOME/${graph}/logseq/config.edn";
-          in ''
-            verboseEcho "installing per-graph config to graph at ${graph}"
-            run rm $VERBOSE_ARG ${path}
-            run cp $VERBOSE_ARG ${graphConfig} ${path}
-          '') graphs}
-        '';
-    };
+            ${lib.strings.concatMapStringsSep "\n" (
+              graph:
+              let
+                path = "$HOME/${graph}/logseq/config.edn";
+              in
+              ''
+                verboseEcho "installing per-graph config to graph at ${graph}"
+                run rm $VERBOSE_ARG ${path}
+                run cp $VERBOSE_ARG ${graphConfig} ${path}
+              ''
+            ) graphs}
+          '';
+      };
   };
 
   persist.user.directories = [

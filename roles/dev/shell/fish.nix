@@ -1,4 +1,10 @@
-{ lib, pkgs, config, settings, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  settings,
+  ...
+}:
 let
   inherit (builtins) readFile;
   inherit (lib.attrsets) mapAttrsToList;
@@ -6,7 +12,8 @@ let
 
   shellCommands =
     let
-      transpileFunction = name: body:
+      transpileFunction =
+        name: body:
         pkgs.stdenv.mkDerivation {
           name = "${name}.fish";
           src = ''
@@ -27,10 +34,7 @@ let
           dontUnpack = true;
         };
     in
-    mapAttrsToList
-      transpileFunction
-      settings.shell.functions
-  ;
+    mapAttrsToList transpileFunction settings.shell.functions;
 
   shellInit = ''
     set fish_greeting
@@ -45,9 +49,9 @@ let
 
   shellAbbrs = settings.shell.aliases // { };
 
-  plugins = with pkgs.fishPlugins; map
-    (attrs: { inherit (attrs) name src; })
-    [
+  plugins =
+    with pkgs.fishPlugins;
+    map (attrs: { inherit (attrs) name src; }) [
       pure
       sponge
       autopair

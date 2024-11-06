@@ -1,16 +1,20 @@
-{ lib, clib, pkgs, config, settings, ... }:
+{
+  lib,
+  clib,
+  pkgs,
+  config,
+  settings,
+  ...
+}:
 let
   inherit (lib.attrsets) mapAttrsToList;
   inherit (lib.strings) concatStringsSep;
 
-  shellCommands =
-    mapAttrsToList
-      (name: body: ''
-        function ${name}() {
-          ${body}
-        }
-      '')
-      settings.shell.functions;
+  shellCommands = mapAttrsToList (name: body: ''
+    function ${name}() {
+      ${body}
+    }
+  '') settings.shell.functions;
 
   initExtra = ''
     # config functions
@@ -20,18 +24,41 @@ let
   shellAliases = settings.shell.aliases // { };
 
   usePlugin =
-    attrs@{ name ? plugin.name, plugin, file ? null }: {
+    attrs@{
+      name ? plugin.name,
+      plugin,
+      file ? null,
+    }:
+    {
       inherit name;
       inherit (plugin) src;
       ${clib.setIf "file" (file != null)} = file;
     };
   plugins = map usePlugin [
-    { name = "F-Sy-H"; plugin = pkgs.zsh-f-sy-h; }
-    { name = "autopair"; plugin = pkgs.zsh-autopair; }
-    { name = "jq"; plugin = pkgs.jq-zsh-plugin; }
-    { name = "nix-shell"; plugin = pkgs.zsh-nix-shell; }
-    { name = "pure"; plugin = pkgs.pure-prompt; }
-    { name = "zsh-history-substring-search"; plugin = pkgs.zsh-history-substring-search; }
+    {
+      name = "F-Sy-H";
+      plugin = pkgs.zsh-f-sy-h;
+    }
+    {
+      name = "autopair";
+      plugin = pkgs.zsh-autopair;
+    }
+    {
+      name = "jq";
+      plugin = pkgs.jq-zsh-plugin;
+    }
+    {
+      name = "nix-shell";
+      plugin = pkgs.zsh-nix-shell;
+    }
+    {
+      name = "pure";
+      plugin = pkgs.pure-prompt;
+    }
+    {
+      name = "zsh-history-substring-search";
+      plugin = pkgs.zsh-history-substring-search;
+    }
   ];
 in
 {

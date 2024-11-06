@@ -1,4 +1,9 @@
-{ pkgs, settings, modulesPath, ... }:
+{
+  pkgs,
+  settings,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [
@@ -9,7 +14,14 @@
 
   boot = {
     initrd = {
-      availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod" ];
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "thunderbolt"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+      ];
       systemd.enable = true;
     };
     kernelModules = [ "kvm-amd" ];

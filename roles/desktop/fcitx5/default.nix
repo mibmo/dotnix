@@ -1,4 +1,10 @@
-{ lib, pkgs, config, ... }: {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
@@ -14,9 +20,7 @@
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
     };
-    systemPackages = lib.optional
-      config.services.xserver.desktopManager.gnome.enable
-      pkgs.gnomeExtensions.kimpanel;
+    systemPackages = lib.optional config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.kimpanel;
   };
 
   home.settings.home.file =
@@ -93,11 +97,13 @@
 
       fcitx5-profile =
         let
-          defaultLayout = {
-            hamilton = "dk";
-            macadamia = "dk-mac";
-            sakamoto = "us";
-          }.${config.networking.hostName};
+          defaultLayout =
+            {
+              hamilton = "dk";
+              macadamia = "dk-mac";
+              sakamoto = "us";
+            }
+            .${config.networking.hostName};
         in
         {
           target = ".config/fcitx5/profile";

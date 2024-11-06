@@ -1,6 +1,9 @@
 let
   lib = (import <nixpkgs/lib>) // (import ../lib.nix { inputs = { }; });
-  config = import ../config.nix { inherit lib; inputs = { }; };
+  config = import ../config.nix {
+    inherit lib;
+    inputs = { };
+  };
 
   inherit (lib.attrsets) collect recursiveUpdate;
   inherit (lib.lists) foldl foldr;
@@ -29,7 +32,4 @@ let
     "remotebuilder_sakamoto"
   ];
 in
-builtins.foldl'
-  (l: r: l // r)
-{ }
-  (map mkSecret secrets)
+builtins.foldl' (l: r: l // r) { } (map mkSecret secrets)
