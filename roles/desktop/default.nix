@@ -21,6 +21,7 @@
       services.easyeffects.enable = true;
       programs = {
         imv.enable = true;
+        mpv.enable = true;
         sioyek.enable = true;
         zathura.enable = true;
       };
@@ -28,7 +29,6 @@
     packages = with pkgs; [
       drawio
       libreoffice
-      mpv
       pulsemixer
     ];
   };
