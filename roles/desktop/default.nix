@@ -22,6 +22,7 @@
       programs = {
         imv.enable = true;
         sioyek.enable = true;
+        zathura.enable = true;
       };
     };
     packages = with pkgs; [
@@ -29,7 +30,6 @@
       libreoffice
       mpv
       pulsemixer
-      zathura
     ];
   };
 
