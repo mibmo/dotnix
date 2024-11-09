@@ -19,14 +19,16 @@
   home = {
     settings = {
       services.easyeffects.enable = true;
-      programs.imv.enable = true;
+      programs = {
+        imv.enable = true;
+        sioyek.enable = true;
+      };
     };
     packages = with pkgs; [
       drawio
       libreoffice
       mpv
       pulsemixer
-      sioyek
       zathura
     ];
   };
