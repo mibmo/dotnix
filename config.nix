@@ -113,7 +113,7 @@ let
       # Find directory in dev folder based on search and cd into it
       dev =
         let
-          fdOpts = "--type=directory --full-path --exclude nixpkgs";
+          fdOpts = "--type=directory --full-path ~/dev/nixpkgs/*";
         in
         ''
           cd $(fzf \
