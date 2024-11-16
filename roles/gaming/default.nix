@@ -56,12 +56,14 @@ in
     packages = with pkgs; [
       (lutris.override { inherit extraPkgs; })
       prismlauncher
+      rpcs3
       wineWowPackages.waylandFull
     ];
     settings.programs.mangohud.enable = true;
   };
 
   persist.user.directories = [
+    ".config/rpcs3"
     ".local/share/Steam"
     ".local/share/lutris"
     ".steam"
