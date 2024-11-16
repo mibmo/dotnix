@@ -29,6 +29,7 @@
       mktemp
       mmv-go
       nix-output-monitor
+      nixpkgs-review
       nvd
       p7zip
       pciutils
