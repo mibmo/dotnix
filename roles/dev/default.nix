@@ -15,6 +15,7 @@
   home = {
     packages = with pkgs; [
       arp-scan
+      devdocs-desktop
       duf
       dwarfs
       ffmpeg
