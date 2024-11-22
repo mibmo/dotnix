@@ -455,19 +455,6 @@ function Cfg_neodev()
 	})
 end
 
-function Cfg_vimtex()
-	vim.g.vimtex_view_general_viewer = "sioyek"
-	vim.g.vimtex_compiler_latexmk = {
-		options = {
-			"-verbose",
-			"-file-line-error",
-			"-synctex=1",
-			"-interaction=nonstopmode",
-			"-shell-escape",
-		},
-	}
-end
-
 -- plugin install
 require("lazy").setup({
 	"nvim-lua/plenary.nvim",
