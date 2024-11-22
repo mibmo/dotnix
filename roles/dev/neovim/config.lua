@@ -411,7 +411,7 @@ function Cfg_easy_align()
 end
 
 function Cfg_vimtex()
-	vim.g.vimtex_view_general_viewer = "zathura"
+	vim.g.vimtex_view_general_viewer = "sioyek"
 	vim.g.vimtex_compiler_latexmk = {
 		options = {
 			"-verbose",
@@ -456,7 +456,7 @@ function Cfg_neodev()
 end
 
 function Cfg_vimtex()
-	vim.g.vimtex_view_general_viewer = "zathura"
+	vim.g.vimtex_view_general_viewer = "sioyek"
 	vim.g.vimtex_compiler_latexmk = {
 		options = {
 			"-verbose",

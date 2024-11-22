@@ -15,7 +15,7 @@
       withRuby = true;
 
       extraPackages = with pkgs; [
-        zathura
+        sioyek
 
         # build tools
         gcc
