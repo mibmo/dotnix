@@ -22,7 +22,10 @@
       programs = {
         imv.enable = true;
         mpv.enable = true;
-        sioyek.enable = true;
+        sioyek = {
+          enable = true;
+          config."should_launch_new_window" = "1";
+        };
         zathura.enable = true;
       };
     };
