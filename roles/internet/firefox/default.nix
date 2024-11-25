@@ -148,8 +148,14 @@ let
       in
       {
         # traditional
-        "Bing".metaData.hidden = true;
-        "Google".metaData.hidden = true;
+        "Bing".metaData = {
+          alias = "@b";
+          hidden = true;
+        };
+        "Google".metaData = {
+          alias = "@g";
+          hidden = true;
+        };
 
         # nix
         "NixOS Wiki" = {
