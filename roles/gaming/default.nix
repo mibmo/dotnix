@@ -65,6 +65,7 @@ in
   persist.user.directories = [
     ".config/rpcs3"
     ".local/share/Steam"
+    ".local/share/etterna"
     ".local/share/lutris"
     ".steam"
     "games"
