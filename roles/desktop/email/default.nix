@@ -45,6 +45,19 @@ let
         port = 587;
       };
     };
+    "company@kanp.ai" = {
+      realName = "Kanpai";
+      imap = {
+        tls.useStartTls = true;
+        host = "mail.kanp.ai";
+        port = 143;
+      };
+      smtp = {
+        tls.useStartTls = true;
+        host = "mail.kanp.ai";
+        port = 587;
+      };
+    };
     "s245244@dtu.dk" = {
       realName = "RTS";
       flavor = "outlook.office365.com";
