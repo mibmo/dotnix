@@ -101,12 +101,13 @@ let
         ns = "nom shell";
         nd = "nom develop";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
-        build = "nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
-        switch = "sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname)";
-        rebuild = "${build} && sudo /tmp/nixos-configuration/bin/switch-to-configuration switch";
+        build = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
+        switch = "${inhibit} sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname)";
+        rebuild = "${build} && ${inhibit} sudo /tmp/nixos-configuration/bin/switch-to-configuration switch";
         rebuild-offline = "${build} --offline && ${switch} --offline";
         tmp = "pushd $(mktemp -d)";
-        gc-nix = "nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
+        gc-nix = "${inhibit} nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
+        inhibit = "gnome-session-inhibit";
       };
 
     functions = {
