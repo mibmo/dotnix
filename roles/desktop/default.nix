@@ -63,6 +63,7 @@
         cups-bjnp
         cups-dymo
         gutenprint
+        hplip
       ];
     };
   };
