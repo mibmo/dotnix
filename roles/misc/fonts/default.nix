@@ -1,10 +1,5 @@
 { pkgs, ... }:
 let
-  nerd = pkgs.nerdfonts.override {
-    fonts = [
-      "FiraCode"
-    ];
-  };
   google = pkgs.google-fonts.override {
     fonts = [
       "Nunito"
@@ -15,7 +10,7 @@ in
 {
   fonts.packages = with pkgs; [
     google
-    nerd
+    nerd-fonts.fira-code
 
     fantasque-sans-mono
 

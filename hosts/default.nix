@@ -12,7 +12,7 @@ let
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
-        nur.nixosModules.nur
+        nur.modules.nixos.default
         agenix.nixosModules.age
         hyprland.nixosModules.default
         stylix.nixosModules.stylix

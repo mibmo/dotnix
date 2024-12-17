@@ -1,14 +1,13 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }:
 let
   inherit (lib.attrsets) mapAttrs';
   inherit (lib.strings) concatStringsSep;
 
-  firefox-addons = config.nur.repos.rycee.firefox-addons;
+  firefox-addons = pkgs.nur.repos.rycee.firefox-addons;
 
   extensions = {
     # clean tracking off urls
