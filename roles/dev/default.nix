@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./git
@@ -21,7 +21,6 @@
       ffmpeg
       file
       gnumake
-      insomnia
       killall
       ldns
       libqalculate

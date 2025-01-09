@@ -21,7 +21,6 @@ in
     anki
     prusa-slicer
     pkgs-24_05.renderdoc
-    solvespace
   ];
 
   home.settings = {

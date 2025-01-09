@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -30,7 +30,6 @@
       };
     };
     packages = with pkgs; [
-      drawio
       libreoffice
       pulsemixer
     ];

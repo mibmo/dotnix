@@ -2,7 +2,6 @@
   lib,
   clib,
   pkgs,
-  config,
   settings,
   ...
 }:

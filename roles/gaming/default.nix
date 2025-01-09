@@ -1,8 +1,5 @@
 {
-  inputs,
-  lib,
   pkgs,
-  settings,
   ...
 }:
 let
@@ -55,7 +52,6 @@ in
     ];
     packages = with pkgs; [
       (lutris.override { inherit extraPkgs; })
-      prismlauncher
       rpcs3
       wineWowPackages.waylandFull
     ];
