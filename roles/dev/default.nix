@@ -94,5 +94,6 @@
 
   persist.user.directories = [
     ".cache/nix-index"
+    ".config/DevDocs"
   ];
 }
