@@ -42,6 +42,8 @@
       # talk directly to usb and serial devices
       "dialout"
       "uucp"
+      # allow capuring packets with wireshark
+      "wireshark"
     ];
     settings = {
       programs = {
@@ -88,6 +90,10 @@
       enableBashIntegration = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
+    };
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark-qt;
     };
   };
 
