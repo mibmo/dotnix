@@ -1,5 +1,16 @@
 { lib, pkgs, ... }:
 let
+  templates = {
+    mermaid =
+      args@{
+        name,
+        ap-name ? args.name,
+      }:
+      {
+        inherit name ap-name;
+      };
+  };
+
   curlPkg = pkgs.curlFull.override {
     # for --dns-servers
     c-aresSupport = true;
