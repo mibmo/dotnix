@@ -11,6 +11,11 @@ let
       binding = "<Super>Return";
       command = "foot";
     };
+    www-private = {
+      name = "Open private webbrowser";
+      binding = "<Super><Shift>w";
+      command = "firefox --private-window";
+    };
   };
 
   ini = pkgs.formats.ini { };
