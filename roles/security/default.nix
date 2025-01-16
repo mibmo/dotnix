@@ -19,7 +19,7 @@
       programs = {
         gpg = {
           enable = true;
-          scdaemonSettings.disable-ccid = false;
+          scdaemonSettings.disable-ccid = true;
         };
       };
       services.gpg-agent = {
