@@ -1,21 +1,55 @@
-{ lib, clib, ... }:
+{
+  lib,
+  clib,
+  pkgs,
+  ...
+}:
 let
   inherit (clib) setIf;
   inherit (lib.attrsets) mapAttrs recursiveUpdate;
+  inherit (lib.meta) getExe getExe';
 
   mkEmail =
     address:
     account@{ ... }:
     let
+
+      prompt =
+        {
+          title ? "Prompt",
+          field ? "Password",
+          hidden ? true,
+          ...
+        }:
+        pkgs.writeShellScript "secret-prompt-${field}" ''
+          ${getExe pkgs.yad} \
+            --title='${title}' --separator="" \
+            --form \
+            --field=${field}${lib.strings.optionalString hidden ":H"}
+        '';
+
       # allow for `meta` attribute
       config = lib.attrsets.removeAttrs account [ "meta" ];
       meta = config.meta or { };
-      auth = meta.authentication or { };
+      auth =
+        recursiveUpdate
+          {
+            keepassxc = {
+              file = "~/.secret/Passwords.kdbx";
+              attribute = "Password";
+            };
+          }
+          .${toString auth.flavor}
+          (meta.authentication or { });
 
       passwordCommand =
         {
-          # @TODO: prompt-pw through `dialog` or smth...
-          #keepassxc = "prompt-pw | keepassxc-cli show ~/.secret/Passwords.kdbx --attributes Password '${auth.entry}'";
+          keepassxc =
+            prompt {
+              title = "Get keepassxc ${auth.attribute} [${auth.file}:${auth.entry}}]";
+              field = auth.attribute;
+            }
+            + ''| ${getExe' pkgs.keepassxc "keepassxc-cli"} show "${auth.file}" --attributes "${auth.attribute}" "${auth.entry}"'';
         }
         .${toString auth.flavor} or null;
     in
@@ -65,10 +99,10 @@ let
         # auth via oAuth2
         "mail.smtpserver.smtp_${id}.authMethod" = 10;
       };
-      meta.authentication = {
-        flavor = "keepassxc";
-        entry = "DTU/Microsoft";
-      };
+      #meta.authentication = {
+      #  flavor = "keepassxc";
+      #  entry = "DTU/Microsoft";
+      #};
     };
   };
 in
