@@ -107,6 +107,8 @@ let
         tmp = "pushd $(mktemp -d)";
         gc-nix = "${inhibit} nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
         inhibit = "gnome-session-inhibit";
+        edushell = "nom develop $HOME/assets/education/shell";
+        edushell-offline = "${edushell} --offline";
       };
 
     functions = {
