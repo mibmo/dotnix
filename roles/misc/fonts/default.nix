@@ -3,6 +3,7 @@ let
   google = pkgs.google-fonts.override {
     fonts = [
       "Nunito"
+      "Press Start 2P"
       "Roboto"
     ];
   };
