@@ -25,6 +25,7 @@
       ldns
       libqalculate
       lsof
+      lurk
       mktemp
       mmv-go
       nix-output-monitor
