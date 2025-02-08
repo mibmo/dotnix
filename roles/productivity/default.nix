@@ -14,6 +14,7 @@ in
     edgetx
     freecad
     gimp
+    godot_4
     inkscape
     kicad
     krita
