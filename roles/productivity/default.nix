@@ -1,7 +1,7 @@
-{ pkgs, pkgs-24_05, ... }:
+{ pkgs, pkgs-stable, ... }:
 let
-  kicad = pkgs-24_05.kicad.override {
-    addons = with pkgs-24_05.kicadAddons; [
+  kicad = pkgs-stable.kicad.override {
+    addons = with pkgs-stable.kicadAddons; [
       kikit
       kikit-library
     ];
@@ -21,7 +21,7 @@ in
     openscad-unstable
     anki
     prusa-slicer
-    pkgs-24_05.renderdoc
+    pkgs-stable.renderdoc
   ];
 
   home.settings = {
