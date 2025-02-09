@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ pkgs-stable, ... }:
 {
   home.settings = {
     programs.neovim = {
       enable = true;
+
+      package = pkgs-stable.neovim-unwrapped;
 
       viAlias = false;
       vimAlias = true;
@@ -14,7 +16,7 @@
       withPython3 = true;
       withRuby = true;
 
-      extraPackages = with pkgs; [
+      extraPackages = with pkgs-stable; [
         sioyek
 
         # build tools
@@ -54,7 +56,7 @@
     };
     home.file.nvim-wgsl-queries = {
       target = ".local/share/nvim/queries/wgsl";
-      source = "${pkgs.tree-sitter-grammars.tree-sitter-wgsl}/queries";
+      source = "${pkgs-stable.tree-sitter-grammars.tree-sitter-wgsl}/queries";
     };
     stylix.targets.neovim.plugin = "base16-nvim";
   };
