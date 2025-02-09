@@ -10,7 +10,7 @@ in
 {
   home.packages = with pkgs; [
     betaflight-configurator
-    blender-hip
+    pkgs-stable.blender-hip
     edgetx
     freecad
     gimp
