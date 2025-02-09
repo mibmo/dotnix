@@ -15,6 +15,7 @@
   home = {
     packages = with pkgs; [
       arp-scan
+      bat
       devdocs-desktop
       duf
       dwarfs
