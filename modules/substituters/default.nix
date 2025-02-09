@@ -59,29 +59,6 @@
         ) (filter (s: s ? "key") substituters);
       };
 
-      environment.etc.substituters.text = lib.concatMapStringsSep "\n" (s: ''
-        info:
-          protocol: ${s.protocol or "https"}
-              host: ${s.host}
-            suffix: ${s.suffix or "none"}
-               key: ${s.key or "none"}
-        parsing details:
-          matches: ${
-            if (s ? "matches") then
-              lib.concatMapStrings ({ fst, snd }: "\n    ${toString fst}: ${toString snd}") (
-                lib.lists.zipLists (lib.lists.range 1 (builtins.length s.matches)) s.matches
-              )
-            else
-              "none"
-          }
-          host parts: ${
-            if (s ? "hostParts") then
-              lib.concatMapStrings ({ fst, snd }: "\n    ${toString fst}: ${reverse snd}") (
-                lib.lists.zipLists (lib.lists.range 1 (builtins.length s.hostParts)) s.hostParts
-              )
-            else
-              "none"
-          }
-      '') substituters;
+      environment.etc.substituters.text = builtins.toJSON substituters;
     };
 }
