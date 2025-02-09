@@ -21,7 +21,8 @@
       inherit (lib.lists) filter reverseList;
       inherit (lib.strings) concatStrings stringToCharacters;
 
-      reverse = text: concatStrings (reverseList (stringToCharacters text));
+      reverse =
+        text: if text != null then concatStrings (reverseList (stringToCharacters text)) else null;
 
       substituters = map (
         s:
