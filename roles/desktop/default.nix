@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 
 {
   imports = [
@@ -56,7 +56,7 @@
       enable = true;
       stateless = true;
       startWhenNeeded = true;
-      drivers = with pkgs; [
+      drivers = with pkgs-stable; [
         brlaser
         canon-cups-ufr2
         cups-bjnp

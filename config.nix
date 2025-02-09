@@ -73,10 +73,12 @@ let
   # the entries are regex patterns
   permittedUnfreePatterns = {
     unstable = [
-      "canon-cups-ufr2"
       "flagfox"
       "geogebra"
       "steam(-(run|original|unwrapped))?"
+    ];
+    stable = [
+      "canon-cups-ufr2"
     ];
   };
 
