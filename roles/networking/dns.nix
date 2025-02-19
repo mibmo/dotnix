@@ -13,6 +13,7 @@ in
 
   services.unbound = {
     enable = true;
+    enableRootTrustAnchor = true;
     settings = {
       server = {
         # bind to ipv{4,6} loopback
@@ -23,25 +24,6 @@ in
         # nameservers already do this
         qname-minimisation = false;
       };
-
-      forward-zone = [
-        {
-          name = ".";
-          forward-addr = [
-            # quad9
-            "9.9.9.9"
-            "149.112.112.112"
-            "2620:fe::fe"
-            "2620:fe::9"
-
-            # cloudflare
-            "1.1.1.1"
-            "1.0.0.1"
-            "2606:4700:4700::1111"
-            "2606:4700:4700::1001"
-          ];
-        }
-      ];
 
       remote-control = {
         control-enable = true;
