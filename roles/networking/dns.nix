@@ -23,6 +23,8 @@ in
         ];
         # send as little information as possible to upstream servers (for privacy reasons)
         qname-minimisation = false;
+        # require DNSSEC data for trust-anchored zones
+        harden-dnssec-stripped = true;
       };
 
       remote-control = {
