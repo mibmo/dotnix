@@ -21,7 +21,7 @@ in
           "127.0.0.1"
           "::1"
         ];
-        # nameservers already do this
+        # send as little information as possible to upstream servers (for privacy reasons)
         qname-minimisation = false;
       };
 
