@@ -14,6 +14,8 @@ let
     clearurls = { };
     # handle gdpr consent forms
     consent-o-matic = { };
+    # clickbait-less youtube
+    dearrow.licenseKey = "F4tZs-cb353";
     # cache common web dependencies such as ajax
     decentraleyes = { };
     # display info about website host
