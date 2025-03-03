@@ -28,6 +28,8 @@ let
     switchyomega = { };
     # side-menu nested tabs = {};
     sidebery = { };
+    # skip annoying youtube segments
+    sponsorblock = { };
     # performant ad- & tracker-blocking
     ublock-origin.adminSettings =
       let
