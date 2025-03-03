@@ -16,6 +16,11 @@
     packages = with pkgs; [
       arp-scan
       bat
+      (curlFull.override {
+        c-aresSupport = true;
+        http3Support = true;
+        openssl = pkgs.quictls;
+      })
       devdocs-desktop
       duf
       dwarfs
