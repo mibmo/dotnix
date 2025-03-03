@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (lib.attrsets) mapAttrs';
+  inherit (lib.attrsets) genAttrs mapAttrs';
   inherit (lib.strings) concatStringsSep;
 
   firefox-addons = pkgs.nur.repos.rycee.firefox-addons;
@@ -325,16 +325,23 @@ let
   };
 in
 {
-  home.settings.programs.firefox = {
-    enable = true;
-    package = pkgs.firefox;
-    inherit policies;
-    profiles.default = {
-      isDefault = true;
-      inherit containers search settings;
-      userChrome = builtins.readFile ./userChrome.css;
-      containersForce = true;
+  home.settings = {
+    programs.firefox = {
+      enable = true;
+      package = pkgs.firefox;
+      inherit policies;
+      profiles.default = {
+        isDefault = true;
+        inherit containers search settings;
+        userChrome = builtins.readFile ./userChrome.css;
+        containersForce = true;
+      };
     };
+    xdg.mimeApps.defaultApplications = genAttrs [
+      "text/html"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+    ] (_: "firefox.desktop");
   };
 
   persist.user =
