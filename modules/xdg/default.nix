@@ -12,10 +12,13 @@ let
   };
 in
 {
-  home.settings.xdg.userDirs = {
-    enable = true;
-    createDirectories = true;
-  } // builtins.mapAttrs (_: path: "/home/${settings.user.name}/${path}") userDirs;
+  home.settings.xdg = {
+    mimeApps.enable = true;
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    } // builtins.mapAttrs (_: path: "/home/${settings.user.name}/${path}") userDirs;
+  };
 
   persist.user.directories = lib.attrsets.attrValues userDirs;
 }
