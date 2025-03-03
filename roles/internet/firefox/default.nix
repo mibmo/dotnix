@@ -32,6 +32,8 @@ let
     sidebery = { };
     # skip annoying youtube segments
     sponsorblock = { };
+    # adds summaries of terms of services
+    terms-of-service-didnt-read = { };
     # performant ad- & tracker-blocking
     ublock-origin.adminSettings =
       let
