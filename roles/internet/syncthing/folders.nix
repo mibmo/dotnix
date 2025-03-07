@@ -33,12 +33,7 @@ in
   };
   "Code" = {
     id = "tcvau-dajz7";
-    devices = hosts.managed ++ [
-      "mobai"
-      "starlight"
-      "trixie"
-      "ichi"
-    ];
+    devices = hosts.managed;
     path = "${home}/dev";
     versioning = staggered { };
     enable = true;
