@@ -49,7 +49,10 @@
   programs.ssh.startAgent = false;
 
   persist.user = {
-    directories = [ "assets/wallets" ];
+    directories = [
+      ".config/monero-project"
+      "assets/wallets"
+    ];
     files = [ ".cache/keepassxc/keepassxc.ini" ];
   };
 }
