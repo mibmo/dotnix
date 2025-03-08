@@ -5,6 +5,7 @@
     ../internet/firefox
     ./stylix.nix
     ./communication
+    ./crypto
     ./fcitx5
     ./media
     ./notes

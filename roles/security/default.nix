@@ -9,7 +9,6 @@
       age
       keepassxc
       minisign
-      monero-gui
       nitrokey-app
       # broken on unstable 2024-03-04
       #pynitrokey
@@ -48,11 +47,5 @@
   services.pcscd.enable = true;
   programs.ssh.startAgent = false;
 
-  persist.user = {
-    directories = [
-      ".config/monero-project"
-      "assets/wallets"
-    ];
-    files = [ ".cache/keepassxc/keepassxc.ini" ];
-  };
+  persist.user.files = [ ".cache/keepassxc/keepassxc.ini" ];
 }
