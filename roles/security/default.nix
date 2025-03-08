@@ -48,5 +48,8 @@
   services.pcscd.enable = true;
   programs.ssh.startAgent = false;
 
-  persist.user.files = [ ".cache/keepassxc/keepassxc.ini" ];
+  persist.user = {
+    directories = [ "assets/wallets" ];
+    files = [ ".cache/keepassxc/keepassxc.ini" ];
+  };
 }
