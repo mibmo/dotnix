@@ -47,5 +47,12 @@
   services.pcscd.enable = true;
   programs.ssh.startAgent = false;
 
-  persist.user.files = [ ".cache/keepassxc/keepassxc.ini" ];
+  persist.user = {
+    directories = [ ".gnupg/private-keys-v1.d" ];
+    files = [
+      ".cache/keepassxc/keepassxc.ini"
+      ".gnupg/pubring.kbx"
+      ".gnupg/trustdb.gpg"
+    ];
+  };
 }
