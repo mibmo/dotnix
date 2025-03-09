@@ -9,4 +9,5 @@
   };
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
+  persist.directories = [ "/var/lib/libvirt" ];
 }

@@ -48,11 +48,22 @@
   programs.ssh.startAgent = false;
 
   persist.user = {
-    directories = [ ".gnupg/private-keys-v1.d" ];
+    directories = [
+      {
+        directory = ".gnupg/private-keys-v1.d";
+        mode = "700";
+      }
+    ];
     files = [
       ".cache/keepassxc/keepassxc.ini"
-      ".gnupg/pubring.kbx"
-      ".gnupg/trustdb.gpg"
+      {
+        file = ".gnupg/pubring.kbx";
+        mode = "700";
+      }
+      {
+        file = ".gnupg/trustdb.gpg";
+        mode = "700";
+      }
     ];
   };
 }
