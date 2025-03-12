@@ -95,6 +95,7 @@ let
     aliases =
       let
         dotnixDir = "~/dev/dotnix";
+        ignore-builders = ''--option builders "" --option substituters "$(jq -r '[.[].host | select(contains("kanpai") | not) | "https://\(.)"] | join(" ")' /etc/substituters)"'';
       in
       rec {
         e = defaults.editor;
@@ -103,8 +104,11 @@ let
         nd = "nom develop";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
         build = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
+        build-no-builders = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration ${ignore-builders}";
         switch = "${inhibit} sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname)";
+        switch-no-builders = "${inhibit} sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname) ${ignore-builders}";
         rebuild = "${build} && ${inhibit} sudo /tmp/nixos-configuration/bin/switch-to-configuration switch";
+        rebuild-no-builders = "${build-no-builders} && ${inhibit} sudo /tmp/nixos-configuration/bin/switch-to-configuration switch ${ignore-builders}";
         rebuild-offline = "${build} --offline && ${switch} --offline";
         tmp = "pushd $(mktemp -d)";
         gc-nix = "${inhibit} nix-env --delete-generations +3 && nix store gc --verbose && nix store optimise --verbose";
