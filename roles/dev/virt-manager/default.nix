@@ -2,6 +2,7 @@
 {
   home = {
     packages = [ pkgs.virt-manager ];
+    groups = [ "libvirtd" ];
     settings.dconf.settings."org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
