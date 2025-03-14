@@ -63,6 +63,7 @@ in
       ];
       user = {
         directories = lib.mkAfter [
+          ".local/state/nix"
           "assets"
           "backup"
           {
