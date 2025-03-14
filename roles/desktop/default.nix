@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../internet/chromium
     ../internet/firefox
     ./stylix.nix
     ./communication
