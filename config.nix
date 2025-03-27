@@ -104,7 +104,7 @@ let
         nd = "nom develop";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
         build = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
-        build-no-builders = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration ${ignore-builders}";
+        build-no-builders = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
         switch = "${inhibit} sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname)";
         switch-no-builders = "${inhibit} sudo nixos-rebuild switch --flake ${dotnixDir}#$(hostname) ${ignore-builders}";
         rebuild = "${build} && ${inhibit} sudo /tmp/nixos-configuration/bin/switch-to-configuration switch";
@@ -115,6 +115,7 @@ let
         inhibit = "gnome-session-inhibit";
         edushell = "nom develop $HOME/assets/education/shell";
         edushell-offline = "${edushell} --offline";
+        edushell-no-builders = "${edushell} ${ignore-builders}";
       };
 
     functions = {
