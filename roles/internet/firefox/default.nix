@@ -28,10 +28,10 @@ let
     #libredirect = { };
     # estimates youtube dislikes
     return-youtube-dislikes = { };
-    # manage and switch between proxies
-    switchyomega = { };
     # side-menu nested tabs = {};
     sidebery = { };
+    # manage and switch between proxies
+    smartproxy = { };
     # skip annoying youtube segments
     sponsorblock = { };
     # adds summaries of terms of services
