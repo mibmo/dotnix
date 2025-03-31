@@ -25,6 +25,8 @@ in
         qname-minimisation = false;
         # require DNSSEC data for trust-anchored zones
         harden-dnssec-stripped = true;
+        # dont cache empty responses
+        cache-max-negative-ttl = 5;
       };
 
       remote-control = {
