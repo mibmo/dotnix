@@ -27,6 +27,10 @@ in
         harden-dnssec-stripped = true;
         # dont cache empty responses
         cache-max-negative-ttl = 5;
+
+        # increase cache size
+        rrset-cache-size = "400m";
+        msg-cache-size = "200m";
       };
 
       remote-control = {
