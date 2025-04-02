@@ -25,6 +25,8 @@ in
         qname-minimisation = false;
         # require DNSSEC data for trust-anchored zones
         harden-dnssec-stripped = true;
+        # keep probing servers that are down
+        infra-keep-probing = true;
         # dont cache empty responses
         cache-max-negative-ttl = 5;
 
