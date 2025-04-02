@@ -27,6 +27,8 @@ in
         harden-dnssec-stripped = true;
         # keep probing servers that are down
         infra-keep-probing = true;
+        # prefetch entries about to expire (10% of TTL left)
+        prefetch = true;
         # dont cache empty responses
         cache-max-negative-ttl = 5;
 
