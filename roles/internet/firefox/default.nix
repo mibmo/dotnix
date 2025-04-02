@@ -144,7 +144,7 @@ let
 
   search = {
     force = true;
-    default = "DuckDuckGo";
+    default = "ddg";
     engines =
       let
         second = 1000;
@@ -155,11 +155,11 @@ let
       in
       {
         # traditional
-        "Bing".metaData = {
+        "bing".metaData = {
           alias = "@b";
           hidden = true;
         };
-        "Google".metaData = {
+        "google".metaData = {
           alias = "@g";
           hidden = true;
         };
@@ -167,7 +167,7 @@ let
         # nix
         "NixOS Wiki" = {
           urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
-          iconUpdateURL = "https://wiki.nixos.org/nixos.png";
+          icon = "https://wiki.nixos.org/nixos.png";
           updateInterval = week;
           definedAliases = [
             "@nw"
@@ -177,7 +177,7 @@ let
 
         "Nix Reference Manual" = {
           urls = [ { template = "https://nixos.org/manual/nix/unstable/?search={searchTerms}"; } ];
-          iconUpdateURL = "https://nixos.org/manual/nix/unstable/favicon.png";
+          icon = "https://nixos.org/manual/nix/unstable/favicon.png";
           updateInterval = week;
           definedAliases = [
             "@nm"
@@ -236,7 +236,7 @@ let
 
         "Home Manager Options" = {
           urls = [ { template = "https://home-manager-options.extranix.com/?query={searchTerms}"; } ];
-          iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.ico";
+          icon = "https://home-manager-options.extranix.com/images/favicon.ico";
           updateInterval = week;
           definedAliases = [
             "@hm"
@@ -247,7 +247,7 @@ let
         # rust
         "Rust Language Documentation" = {
           urls = [ { template = "https://doc.rust-lang.org/std/?search={searchTerms}"; } ];
-          iconUpdateURL = "https://doc.rust-lang.org/favicon.ico";
+          icon = "https://doc.rust-lang.org/favicon.ico";
           updateInterval = week;
           definedAliases = [
             "@r"
@@ -257,7 +257,7 @@ let
 
         "Rust Crates Documentation" = {
           urls = [ { template = "https://docs.rs/releases/search?query={searchTerms}"; } ];
-          iconUpdateURL = "https://docs.rs/favicon.ico";
+          icon = "https://docs.rs/favicon.ico";
           updateInterval = week;
           definedAliases = [
             "@drs"
@@ -267,7 +267,7 @@ let
 
         "Lib.rs" = {
           urls = [ { template = "https://lib.rs/search?q={searchTerms}"; } ];
-          iconUpdateURL = "https://lib.rs/favicon.ico";
+          icon = "https://lib.rs/favicon.ico";
           updateInterval = week;
           definedAliases = [
             "@lrs"
@@ -289,7 +289,7 @@ let
         # dictionaries
         "Jisho" = {
           urls = [ { template = "https://jisho.org/search/{searchTerms}"; } ];
-          iconUpdateURL = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
+          icon = "https://assets.jisho.org/assets/favicon-062c4a0240e1e6d72c38aa524742c2d558ee6234497d91dd6b75a182ea823d65.ico";
           updateInterval = week;
           definedAliases = [
             "@js"
