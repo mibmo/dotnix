@@ -52,4 +52,11 @@ in
       }) tailscale-stub-zones;
     };
   };
+
+  persist.files = [
+    {
+      file = "/var/lib/unbound/root.key";
+      parentDirectory.mode = "u=rw,g=,o=";
+    }
+  ];
 }
