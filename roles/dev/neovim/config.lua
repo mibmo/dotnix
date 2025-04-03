@@ -163,7 +163,12 @@ Languages = {
 	{
 		name = "WebGPU Shading Language",
 		filetype = "wgsl",
-		treesitter = "https://github.com/szebniok/tree-sitter-wgsl",
+		treesitter = {
+			install_info = {
+				url = "https://github.com/szebniok/tree-sitter-wgsl",
+				files = { "src/parser.c", "src/scanner.c" },
+			},
+		},
 		style = {
 			tabstop = 4,
 			shiftwidth = 4,
@@ -173,7 +178,9 @@ Languages = {
 	{
 		name = "Yet Another Markup Language",
 		filetype = "yaml",
-		treesitter = "#yaml",
+		treesitter = {
+			link = "yaml",
+		},
 		style = {
 			tabstop = 2,
 			shiftwidth = 2,
@@ -343,17 +350,12 @@ function Cfg_treesitter()
 	local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 	for _, language in pairs(Languages) do
 		if language.treesitter ~= nil then
-			if string.sub(language.treesitter, 1, 1) == "#" then
-				-- treat as link to existing treesitter config
-				local name = string.sub(language.treesitter, 2)
-				parser_configs[language.filetype] = parser_configs[name]
-			else
-				-- treat as url
+			if language.treesitter.link ~= nil then
+				parser_configs[language.filetype] = parser_configs[language.treesitter.link]
+			end
+			if language.treesitter.url ~= nil then
 				parser_configs[language.filetype] = {
-					install_info = {
-						url = language.treesitter,
-						files = { "src/parser.c", "src/scanner.c" },
-					},
+					install_info = language.treesitter.install_info,
 				}
 			end
 		end
