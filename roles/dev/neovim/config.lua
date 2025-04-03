@@ -497,7 +497,6 @@ require("lazy").setup({
 
 	-- tools
 	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install", ft = "markdown" },
-	{ "lervag/vimtex", config = Cfg_vimtex, lazy = false },
 	{ "simrat39/rust-tools.nvim", config = Cfg_rusttools, ft = "rust" },
 	{ "folke/neodev.nvim", config = Cfg_neodev, ft = "lua" },
 	{ "lervag/vimtex", config = Cfg_vimtex, ft = { "tex", "cls" } },
