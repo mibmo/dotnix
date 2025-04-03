@@ -187,6 +187,15 @@ Languages = {
 			expandtab = true,
 		},
 	},
+	{
+		name = "nftable",
+		filetype = "nft",
+		style = {
+			tabstop = 2,
+			shiftwidth = 2,
+			expandtab = true,
+		},
+	},
 }
 
 -- treesitter integration
