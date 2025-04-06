@@ -102,6 +102,7 @@ let
         se = "sudo ${e}";
         ns = "nom shell";
         nd = "nom develop";
+        nd-no-builders = "${nd} ${ignore-builders}";
         lsblk = "lsblk -o NAME,SIZE,TYPE,FSTYPE,FSVER,MOUNTPOINTS";
         build = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
         build-no-builders = "${inhibit} nom build ${dotnixDir}#nixosConfigurations.$(hostname).config.system.build.toplevel --out-link /tmp/nixos-configuration && nvd diff /run/current-system /tmp/nixos-configuration";
