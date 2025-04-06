@@ -7,7 +7,8 @@
   ];
 
   networking = {
-    firewall.enable = false;
+    firewall.enable = true;
+    nftables.enable = true;
     networkmanager = {
       enable = true;
       settings.device-p2p = {
