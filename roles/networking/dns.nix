@@ -1,5 +1,7 @@
 { config, ... }:
 let
+  cfg = config.services.unbound;
+
   tailscale-stub-zones = [
     "mib"
     "kanpai"
@@ -54,10 +56,11 @@ in
     };
   };
 
-  persist.files = [
+  persist.directories = [
     {
-      file = "/var/lib/unbound/root.key";
-      parentDirectory.mode = "u=rw,g=,o=";
+      directory = cfg.stateDir;
+      inherit (cfg) user group;
+      mode = "u=rw,g=,o=";
     }
   ];
 }
