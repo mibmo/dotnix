@@ -12,6 +12,7 @@
   persist.user.directories = [
     ".config/monero-project"
     ".electrum-ltc"
+    ".local/share/Haveno-reto"
     "assets/wallets"
   ];
 }
