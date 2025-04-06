@@ -159,6 +159,10 @@ let
           alias = "@b";
           hidden = true;
         };
+        "ddg".metaData = {
+          alias = "@ddg";
+          hidden = true;
+        };
         "google".metaData = {
           alias = "@g";
           hidden = true;
