@@ -43,6 +43,7 @@
       tree
       unzip
       usbutils
+      wcurl
       which
       zip
     ];
