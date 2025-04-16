@@ -75,6 +75,7 @@ let
     unstable = [
       "flagfox"
       "geogebra"
+      "osu-lazer(-bin)?"
       "steam(-(run|original|unwrapped))?"
     ];
     stable = [
