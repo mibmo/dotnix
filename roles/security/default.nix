@@ -31,6 +31,8 @@
     };
   };
 
+  security.apparmor.enable = true;
+
   age = {
     identityPaths = map (key: key.path) config.services.openssh.hostKeys;
     secrets = builtins.mapAttrs (name: value: {
