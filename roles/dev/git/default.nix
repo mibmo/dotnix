@@ -38,6 +38,7 @@ let
   };
   ignores = [
     "*sync-conflict-*-*-*"
+    ".gitconfig"
   ];
   includes = map (name: {
     path = "~/dev/${name}/.gitconfig";
