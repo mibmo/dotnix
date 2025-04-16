@@ -36,6 +36,8 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
@@ -49,7 +51,11 @@
     in
     {
       inherit inputs;
-      formatter.${system} = pkgs.nixfmt-rfc-style;
+      formatter.${system} =
+        (inputs.treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs.nixfmt.enable = true;
+        }).config.build.wrapper;
       nixosConfigurations = import ./hosts { inherit inputs lib config; };
     };
 }
