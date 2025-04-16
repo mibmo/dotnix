@@ -322,7 +322,7 @@ let
     "extensions.webcompat.perform_injections" = true;
     "extensions.webcompat.perform_ua_overrides" = true;
 
-    # privacy 
+    # privacy
     "app.shield.optoutstudies.enabled" = false;
     "browser.contentblocking.category" = "strict";
     "privacy.donottrackheader.enabled" = true;
