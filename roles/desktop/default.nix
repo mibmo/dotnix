@@ -34,6 +34,7 @@
     packages = with pkgs; [
       libreoffice
       pulsemixer
+      tor-browser
     ];
   };
 
