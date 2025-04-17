@@ -48,6 +48,7 @@ let
       noop
       pruneIntersectedAttrs
       recurse
+      mkDefaultEnableOption
       recurseTransform
       setIf
       ;
@@ -61,6 +62,13 @@ let
 
   # requirements for being a valid host specification
   isHost = s: s ? "host";
+
+  mkDefaultEnableOption =
+    args:
+    (nixpkgs-lib.options.mkEnableOption args)
+    // {
+      default = true;
+    };
 
   # identity function
   # @TODO: deprecate in favor of `lib.trivial.id`
