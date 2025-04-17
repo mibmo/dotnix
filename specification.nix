@@ -22,6 +22,9 @@ let
         ./roles/desktop/email
         ./roles/internet/syncthing
         ./roles/internet/ipfs
+
+        ./roles/browsers/chromium
+        ./roles/browsers/firefox
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5JejZv7d0tOG1QXxbHVt4qhp8nMpOfSGTMsL/l98kf" ];
     };
@@ -39,6 +42,8 @@ let
         ./roles/desktop/email
         ./roles/internet/syncthing
         ./roles/internet/ipfs
+
+        ./roles/browsers/firefox
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnTI64CyDnCoQFZKWI0T1Z6YcyVW8XrJypWxD9HdMGW" ];
     };
@@ -57,6 +62,9 @@ let
         ./roles/desktop/email
         ./roles/internet/syncthing
         ./roles/internet/ipfs
+
+        ./roles/browsers/chromium
+        ./roles/browsers/firefox
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPQ3PpMq59iLXy5j/r/mwTlrZsU2xhyDtTXdHv6yM7b" ];
     };

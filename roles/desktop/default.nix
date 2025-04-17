@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ../internet/chromium
-    ../internet/firefox
     ./communication
     ./crypto
     ./fcitx5
