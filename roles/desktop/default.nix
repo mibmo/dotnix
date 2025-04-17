@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./communication
     ./crypto
     ./fcitx5
     ./fonts
