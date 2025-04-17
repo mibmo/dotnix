@@ -1,13 +1,13 @@
 {
   lib,
-  settings,
+  specification,
   ...
 }:
 let
   parallelConnections = 16;
   extraConfig = {
     core = {
-      editor = settings.defaults.editor;
+      editor = specification.defaults.editor;
       untrackedCache = true;
     };
     init.defaultBranch = "main";
@@ -32,8 +32,8 @@ let
       smudge = "cat";
     };
   };
-  signing = lib.mkIf (settings.gpg ? keyId) {
-    key = settings.gpg.keyId;
+  signing = lib.mkIf (specification.gpg ? keyId) {
+    key = specification.gpg.keyId;
     signByDefault = true;
   };
   ignores = [
@@ -106,8 +106,8 @@ in
     lfs.enable = true;
     delta.enable = true;
 
-    userName = settings.user.name;
-    userEmail = settings.user.email;
+    userName = specification.user.name;
+    userEmail = specification.user.email;
     inherit
       attributes
       extraConfig

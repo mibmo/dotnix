@@ -1,13 +1,13 @@
 {
   lib,
   config,
-  settings,
+  specification,
   ...
 }:
 let
   inherit (lib.attrsets) attrValues;
 
-  inherit (settings.user) name;
+  inherit (specification.user) name;
   home = "/home/${name}";
   hosts = {
     managed = lib.lists.remove config.networking.hostName [

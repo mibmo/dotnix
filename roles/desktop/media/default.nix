@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  settings,
+  specification,
   ...
 }:
 let
@@ -14,7 +14,7 @@ let
   json = pkgs.formats.json { };
   ini = pkgs.formats.ini { };
 
-  home = "/home/${settings.user.name}/";
+  home = "/home/${specification.user.name}/";
 
   torrent = {
     categories = [

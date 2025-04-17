@@ -1,9 +1,13 @@
-{ inputs, ... }:
+{
+  inputs,
+  self,
+  specification,
+  ...
+}:
 let
-  config = import ./config.nix { inherit inputs; };
-  inherit (config) permittedInsecurePackages permittedUnfreePatterns;
-
   nixpkgs-lib = inputs.nixpkgs.lib;
+  inherit (specification) permittedInsecurePackages permittedUnfreePatterns;
+
   inherit (nixpkgs-lib.attrsets)
     attrNames
     attrByPath
@@ -13,10 +17,13 @@ let
     mapAttrs
     mapAttrs'
     mapAttrsRecursive
+    recursiveUpdate
+    mapAttrsRecursiveCond
     ;
   inherit (nixpkgs-lib.strings) concatStringsSep hasPrefix removePrefix;
   inherit (nixpkgs-lib.trivial) pipe;
   inherit (nixpkgs-lib) getName;
+  inherit (nixpkgs-lib.customisation) callPackageWith;
   inherit (builtins)
     any
     head
@@ -26,6 +33,37 @@ let
     replaceStrings
     ;
 
+  # exposed library functions
+  dot = {
+    inherit
+      applyHosts
+      isHost
+      differingPaths
+      inputNixpkgsToVersion
+      loadDirectory
+      mkHost
+      mkPackageSets
+      mkSystem
+      nixpkgsInputs
+      noop
+      pruneIntersectedAttrs
+      recurse
+      recurseTransform
+      setIf
+      ;
+  };
+
+  # final combined library
+  lib = recursiveUpdate nixpkgs-lib { inherit dot; };
+
+  # recursively finalize all specifications in `specification.nix` into hosts.
+  applyHosts = mapAttrsRecursiveCond (s: !isHost s) mkHost;
+
+  # requirements for being a valid host specification
+  isHost = s: s ? "host";
+
+  # identity function
+  # @TODO: deprecate in favor of `lib.trivial.id`
   noop = a: a;
 
   # set key in attribute set based on condition
@@ -61,7 +99,7 @@ let
   # temporary var; will be attr of release-dependent overlays
   overlays = { }; # temp
 
-  packageSets =
+  mkPackageSets =
     system:
     mapAttrs' (
       name: input:
@@ -89,37 +127,87 @@ let
       }
     ) nixpkgsInputs;
 
-  mkModule =
-    module:
-    args@{ ... }:
+  # create package set from system.
+  # used to inject own package and build tools
+  mkPkgs =
+    system:
     let
-      pkgs = (packageSets module.system).${moduleNixpkgsVersion};
-    in
-    {
-      imports = [
-        ./modules
-        module.host
-      ] ++ module.roles;
-
-      # inherit config and overlays from evaluating nixpkgs
-      nixpkgs = {
-        inherit (pkgs) config overlays;
+      nixpkgs = import inputs.nixpkgs {
+        inherit system;
+        overlays = import ../overlays { inherit lib; };
       };
+      callPackage = callPackageWith (nixpkgs // pkgs);
+      pkgs =
+        nixpkgs
+        // self.packages.${system}
+        // {
+          # @TODO: inject build tools
+        };
+    in
+    pkgs;
 
-      _module.args =
-        {
-          inherit inputs;
-          host = module;
-          settings = import ./config.nix {
-            inherit inputs pkgs;
-            lib = combined-lib;
-          };
-          clib = lib;
-        }
-        // mapAttrs' (release: value: {
-          name = "pkgs-${replaceStrings [ "." ] [ "_" ] release}";
-          inherit value;
-        }) (packageSets module.system);
+  # make a system configuration given a host specification
+  mkSystem =
+    host:
+    let
+      # outside modules used by configuration
+      externalModules = with inputs; [
+        home-manager.nixosModules.home-manager
+        disko.nixosModules.disko
+        impermanence.nixosModules.impermanence
+        nur.modules.nixos.default
+        agenix.nixosModules.age
+        hyprland.nixosModules.default
+        stylix.nixosModules.stylix
+      ];
+      # custom modules
+      customModules = ../modules;
+      # add package sets
+      packageSets = mkPackageSets host.system;
+      packageArgs = mapAttrs' (name: value: {
+        name = removePrefix "nix" name;
+        inherit value;
+      }) packageSets;
+
+      module-pkgs = packageSets.${moduleNixpkgsVersion};
+    in
+    nixpkgs-lib.nixosSystem {
+      inherit (host) system;
+      specialArgs = packageArgs // {
+        inherit
+          host
+          inputs
+          lib
+          specification
+          ;
+        #pkgs = mkPkgs host.system;
+      };
+      modules =
+        externalModules
+        ++ host.roles
+        ++ [
+          customModules
+          host.host
+          # @TODO: hack for compatability with many package sets
+          {
+            # inherit config and overlays from evaluating nixpkgs
+            nixpkgs = {
+              inherit (module-pkgs) config overlays;
+            };
+
+            _module.args = mapAttrs' (release: value: {
+              name = "pkgs-${replaceStrings [ "." ] [ "_" ] release}";
+              inherit value;
+            }) packageSets;
+          }
+        ];
+    };
+
+  # finalize a host.
+  mkHost =
+    key: host:
+    recursiveUpdate host {
+      roles = host.roles or [ ] ++ [ ../roles/common ];
     };
 
   # read directory, producing attribute set where child sets represent
@@ -231,23 +319,5 @@ let
           )
           (pruneIntersectedAttrs "none" (loadDirectory source) (loadDirectory destination))
       );
-
-  combined-lib = nixpkgs-lib // lib;
-
-  lib = {
-    inherit
-      noop
-      setIf
-      recurse
-      recurseTransform
-      mkModule
-      loadDirectory
-      pruneIntersectedAttrs
-      differingPaths
-      packageSets
-      nixpkgsInputs
-      inputNixpkgsToVersion
-      ;
-  };
 in
 lib

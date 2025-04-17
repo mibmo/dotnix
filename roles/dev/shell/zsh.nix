@@ -1,11 +1,11 @@
 {
   lib,
-  clib,
   pkgs,
-  settings,
+  specification,
   ...
 }:
 let
+  inherit (lib.dot) setIf;
   inherit (lib.attrsets) mapAttrsToList;
   inherit (lib.strings) concatStringsSep;
 
@@ -13,14 +13,14 @@ let
     function ${name}() {
       ${body}
     }
-  '') settings.shell.functions;
+  '') specification.shell.functions;
 
   initExtra = ''
     # config functions
     ${concatStringsSep "\n" shellCommands}
   '';
 
-  shellAliases = settings.shell.aliases // { };
+  shellAliases = specification.shell.aliases // { };
 
   usePlugin =
     attrs@{
@@ -31,7 +31,7 @@ let
     {
       inherit name;
       inherit (plugin) src;
-      ${clib.setIf "file" (file != null)} = file;
+      ${setIf "file" (file != null)} = file;
     };
   plugins = map usePlugin [
     {

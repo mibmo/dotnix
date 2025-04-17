@@ -1,4 +1,4 @@
-{ settings, pkgs, ... }:
+{ specification, pkgs, ... }:
 
 {
   imports = [
@@ -6,5 +6,5 @@
     ./zsh.nix
   ];
 
-  users.users.${settings.user.name}.shell = pkgs.fish;
+  users.users.${specification.user.name}.shell = pkgs.fish;
 }

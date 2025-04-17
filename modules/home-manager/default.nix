@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  settings,
+  specification,
   ...
 }:
 let
@@ -44,7 +44,7 @@ in
 
   config = {
     users = {
-      users.${settings.user.name}.extraGroups = cfg.groups;
+      users.${specification.user.name}.extraGroups = cfg.groups;
       groups = lib.genAttrs cfg.groups (_: { });
     };
 
@@ -56,15 +56,16 @@ in
       backupFileExtension = "backup";
 
       # use same state version across root and user
-      users.root.home.stateVersion = config.home-manager.users.${settings.user.name}.home.stateVersion;
+      users.root.home.stateVersion =
+        config.home-manager.users.${specification.user.name}.home.stateVersion;
 
-      users.${settings.user.name} = {
+      users.${specification.user.name} = {
         news.display = "silent";
         imports = [ cfg.settings ];
         home = {
           inherit (cfg) packages;
           sessionVariables = {
-            EDITOR = settings.defaults.editor;
+            EDITOR = specification.defaults.editor;
           } // cfg.environment;
         };
       };

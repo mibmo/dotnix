@@ -1,13 +1,13 @@
 {
   config,
-  settings,
+  specification,
   ...
 }:
 {
   imports = [
-    ./networking
-    ./security
-    ./misc/fonts
+    ../networking
+    ../security
+    ../misc/fonts
   ];
 
   substituters = [
@@ -31,7 +31,7 @@
 
   users = {
     mutableUsers = false;
-    users.${settings.user.name} = {
+    users.${specification.user.name} = {
       isNormalUser = true;
       extraGroups = [
         "wheel"

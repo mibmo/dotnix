@@ -1,6 +1,6 @@
 {
   pkgs,
-  settings,
+  specification,
   modulesPath,
   ...
 }:
@@ -54,7 +54,7 @@
 
   # system
   system.stateVersion = "24.05";
-  home-manager.users.${settings.user.name}.home.stateVersion = "24.05";
+  home-manager.users.${specification.user.name}.home.stateVersion = "24.05";
   networking = {
     hostName = "sakamoto";
     hostId = "e4c85bd0";

@@ -1,11 +1,10 @@
 {
   lib,
-  clib,
   pkgs,
   ...
 }:
 let
-  inherit (clib) setIf;
+  inherit (lib.dot) setIf;
   inherit (lib.attrsets) mapAttrs recursiveUpdate;
   inherit (lib.meta) getExe getExe';
 

@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  settings,
+  specification,
   ...
 }:
 let
@@ -33,7 +33,7 @@ let
           dontUnpack = true;
         };
     in
-    mapAttrsToList transpileFunction settings.shell.functions;
+    mapAttrsToList transpileFunction specification.shell.functions;
 
   shellInit = ''
     set fish_greeting
@@ -46,7 +46,7 @@ let
     ${concatMapStringsSep "\n" readFile shellCommands}
   '';
 
-  shellAbbrs = settings.shell.aliases // { };
+  shellAbbrs = specification.shell.aliases // { };
 
   plugins =
     with pkgs.fishPlugins;

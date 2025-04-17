@@ -1,11 +1,13 @@
-args@{
+{
   inputs,
-  lib ? args.pkgs.lib,
-  pkgs ? { },
+  lib,
+  ...
 }:
 let
+  inherit (lib.dot) applyHosts;
+
   hardwareModules = inputs.nixos-hardware.nixosModules;
-  hosts = {
+  hosts = applyHosts {
     hamilton = {
       name = "hamilton";
       system = "x86_64-linux";
@@ -144,21 +146,24 @@ let
         done
       '';
       # unlink result symlinks
-      cleanup-results =
-        let
-          cleanup = pkgs.writeShellScript "cleanup.sh" ''
-            for link in "$@"
-            do
-              target=$(readlink -f "$link")
-              printf "\n%s -> %s" "$link" "$target"
-              case $target in "/nix/store/"*)
-                printf " [unlinked]"
-                unlink "$link"
-              esac
-            done
-          '';
-        in
-        ''fd '^result(-[a-zA-Z]+)?$' --type symlink --unrestricted --exec-batch ${cleanup}'';
+      # @TODO: move all these elsewhere to allow using `pkgs`
+      /*
+        cleanup-results =
+          let
+            cleanup = pkgs.writeShellScript "cleanup.sh" ''
+              for link in "$@"
+              do
+                target=$(readlink -f "$link")
+                printf "\n%s -> %s" "$link" "$target"
+                case $target in "/nix/store/"*)
+                  printf " [unlinked]"
+                  unlink "$link"
+                esac
+              done
+            '';
+          in
+          ''fd '^result(-[a-zA-Z]+)?$' --type symlink --unrestricted --exec-batch ${cleanup}'';
+      */
     };
   };
 

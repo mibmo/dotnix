@@ -1,7 +1,7 @@
 {
   pkgs,
   config,
-  settings,
+  specification,
   ...
 }:
 let
@@ -72,7 +72,7 @@ in
       # key is attribute name of extension in gnomeExtensions
       extensions = {
         appindicator = { };
-        burn-my-windows.active-profile = "/home/${settings.user.name}/.config/burn-my-windows/profiles/main.conf";
+        burn-my-windows.active-profile = "/home/${specification.user.name}/.config/burn-my-windows/profiles/main.conf";
       };
 
       keybindPath = name: "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/${name}";

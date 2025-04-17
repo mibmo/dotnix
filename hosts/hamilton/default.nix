@@ -1,7 +1,7 @@
 {
   pkgs-23_11,
   config,
-  settings,
+  specification,
   ...
 }:
 {
@@ -57,5 +57,5 @@
 
   # state versions
   system.stateVersion = "22.11";
-  home-manager.users.${settings.user.name}.home.stateVersion = "22.11";
+  home-manager.users.${specification.user.name}.home.stateVersion = "22.11";
 }

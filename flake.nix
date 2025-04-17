@@ -41,21 +41,46 @@
   };
 
   outputs =
-    inputs@{ nixpkgs, ... }:
+    inputs@{ self, nixpkgs, ... }:
     let
+      lib = import ./lib { inherit self inputs specification; };
+      specification = import ./specification.nix { inherit inputs lib; };
+
+      inherit (builtins) readFile;
+      inherit (lib.dot) mkPkgs;
+      inherit (lib.attrsets)
+        attrValues
+        attrsToList
+        concatMapAttrs
+        genAttrs
+        hasAttrByPath
+        isDerivation
+        recursiveUpdate
+        ;
+      inherit (lib.lists) filter flatten fold;
+      inherit (lib.strings) match splitString;
+
+      perSystem =
+        maker:
+        genAttrs lib.systems.flakeExposed (
+          system:
+          maker rec {
+            inherit inputs system lib;
+            pkgs = mkPkgs system;
+          }
+        );
+
       system = "x86_64-linux";
-      lib = nixpkgs.lib // import ./lib.nix { inherit inputs; };
       nixpkgsInstances = lib.packageSets system;
       pkgs = nixpkgsInstances.unstable;
-      config = import ./config.nix { inherit inputs pkgs lib; };
     in
     {
-      inherit inputs;
+      inherit lib inputs specification;
       formatter.${system} =
         (inputs.treefmt-nix.lib.evalModule pkgs {
           projectRootFile = "flake.nix";
           programs.nixfmt.enable = true;
         }).config.build.wrapper;
-      nixosConfigurations = import ./hosts { inherit inputs lib config; };
+      nixosConfigurations = import ./hosts { inherit inputs lib specification; };
     };
 }

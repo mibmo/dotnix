@@ -1,26 +1,12 @@
 {
-  inputs,
   lib,
-  config,
+  specification,
+  ...
 }:
 let
-  mkHost =
-    host:
-    lib.nixosSystem {
-      inherit (host) system;
-      modules = with inputs; [
-        home-manager.nixosModules.home-manager
-        disko.nixosModules.disko
-        impermanence.nixosModules.impermanence
-        nur.modules.nixos.default
-        agenix.nixosModules.age
-        hyprland.nixosModules.default
-        stylix.nixosModules.stylix
-        ../roles/common.nix
-        (lib.mkModule host)
-      ];
-    };
-
-  hosts = lib.recurse (c: c ? name) mkHost config.hosts;
+  inherit (lib.attrsets) collect;
+  inherit (lib.lists) fold;
 in
-hosts
+fold (host: acc: acc // { ${host.name} = lib.dot.mkSystem host; }) { } (
+  collect (c: c ? name) specification.hosts
+)

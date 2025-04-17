@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  settings,
+  specification,
   ...
 }:
 let
@@ -45,7 +45,7 @@ in
 
       directories = unique cfg.directories;
       files = unique cfg.files;
-      users.${settings.user.name} = {
+      users.${specification.user.name} = {
         directories = unique cfg.user.directories;
         files = unique cfg.user.files;
       };
