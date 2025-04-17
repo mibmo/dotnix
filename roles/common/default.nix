@@ -12,8 +12,6 @@
     ./secrets
     ./security
     ./system
-
-    ../misc/fonts
   ];
 
   substituters = [
