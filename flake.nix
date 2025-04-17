@@ -105,6 +105,7 @@
       inherit lib inputs specification;
       formatter = perSystem ({ system, ... }: treefmt.${system}.config.build.wrapper);
       nixosConfigurations = import ./hosts { inherit inputs lib specification; };
+      packages = perSystem (import ./pkgs);
       checks = perSystem (
         { system, ... }:
         # add tests of packages

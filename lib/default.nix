@@ -37,21 +37,22 @@ let
   dot = {
     inherit
       applyHosts
-      isHost
-      mkPkgs
       differingPaths
       inputNixpkgsToVersion
+      isHost
       loadDirectory
+      mkDefaultEnableOption
       mkHost
       mkPackageSets
+      mkPkgs
       mkSystem
       nixpkgsInputs
       noop
       pruneIntersectedAttrs
       recurse
-      mkDefaultEnableOption
       recurseTransform
       setIf
+      traverse
       ;
   };
 
@@ -328,5 +329,34 @@ let
           )
           (pruneIntersectedAttrs "none" (loadDirectory source) (loadDirectory destination))
       );
+
+  # generic directory traversal function.
+  # usage:
+  #  traverse $handlers [ ./path/to/root ]
+  # where $handlers is an attribute set mapping file types to
+  # functions that are given { path, name } where path is a list
+  # with the file path and name is the name of the file
+  # example:
+  #   traverse {
+  #     regular = { name, ... }: name;
+  #     symlink = _: "link";
+  #   } [ ./. ];
+  traverse =
+    handlers: path:
+    filterAttrs (_: value: value != null) (
+      mapAttrs (
+        name: type:
+        let
+          handler =
+            (
+              {
+                directory = { path, name }: traverse handlers (path ++ [ name ]);
+              }
+              // handlers
+            ).${type} or (id: id);
+        in
+        handler { inherit path name; }
+      ) (readDir (concatStringsSep "/" path))
+    );
 in
 lib
