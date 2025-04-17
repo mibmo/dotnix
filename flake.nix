@@ -70,17 +70,40 @@
           }
         );
 
-      system = "x86_64-linux";
-      nixpkgsInstances = lib.packageSets system;
-      pkgs = nixpkgsInstances.unstable;
+      treefmt = perSystem (
+        { pkgs, ... }:
+        inputs.treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          settings = {
+            excludes =
+              let
+                invalidIgnoreRuleRegex = ''(#.*|.+/)?'';
+                ignoreRules = filter (rule: match invalidIgnoreRuleRegex rule == null) (
+                  flatten (
+                    map (rule: [
+                      "**/${rule}"
+                      rule
+                      "${rule}/**"
+                    ]) (splitString "\n" (readFile ./.gitignore))
+                  )
+                );
+              in
+              ignoreRules
+              ++ [
+                # unsupported
+                "*.git{config,ignore}"
+                "*.md"
+                # binary
+                "*.age"
+              ];
+          };
+          programs.nixfmt.enable = true;
+        }
+      );
     in
     {
       inherit lib inputs specification;
-      formatter.${system} =
-        (inputs.treefmt-nix.lib.evalModule pkgs {
-          projectRootFile = "flake.nix";
-          programs.nixfmt.enable = true;
-        }).config.build.wrapper;
+      formatter = perSystem ({ system, ... }: treefmt.${system}.config.build.wrapper);
       nixosConfigurations = import ./hosts { inherit inputs lib specification; };
     };
 }

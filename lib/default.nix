@@ -38,6 +38,7 @@ let
     inherit
       applyHosts
       isHost
+      mkPkgs
       differingPaths
       inputNixpkgsToVersion
       loadDirectory
@@ -147,7 +148,7 @@ let
       callPackage = callPackageWith (nixpkgs // pkgs);
       pkgs =
         nixpkgs
-        // self.packages.${system}
+        // self.packages.${system} or { }
         // {
           # @TODO: inject build tools
         };
