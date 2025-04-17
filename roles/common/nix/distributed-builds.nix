@@ -114,5 +114,5 @@ in
     }
   ) hosts;
 
-  age.secrets.remote-builder-key.file = "${../../secrets}/remotebuilder_${config.networking.hostName}";
+  age.secrets.remote-builder-key.file = "${../../../secrets}/remotebuilder_${config.networking.hostName}";
 }

@@ -1,5 +1,9 @@
 { inputs, pkgs, ... }:
 {
+  imports = [
+    ./distributed-builds.nix
+  ];
+
   nix = {
     package = pkgs.nixVersions.stable;
 

@@ -5,6 +5,12 @@
 }:
 {
   imports = [
+    ./authentication
+    ./desktop
+    ./nix
+    ./secrets
+    ./system
+
     ../networking
     ../security
     ../misc/fonts
