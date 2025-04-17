@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  specification,
+  ...
+}:
 {
   imports = [
     ./distributed-builds.nix

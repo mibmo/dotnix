@@ -18,13 +18,14 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
 
+    disko.url = "github:nix-community/disko";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    impermanence.url = "github:nix-community/impermanence";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    disko.url = "github:nix-community/disko";
-    impermanence.url = "github:nix-community/impermanence";
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -34,14 +35,13 @@
       };
     };
 
+    # styling
     hyprland.url = "github:hyprwm/Hyprland";
     stylix.url = "github:danth/stylix";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
   outputs =
-    inputs@{ self, nixpkgs, ... }:
+    inputs@{ self, ... }:
     let
       lib = import ./lib { inherit self inputs specification; };
       specification = import ./specification.nix { inherit inputs lib; };
@@ -105,5 +105,48 @@
       inherit lib inputs specification;
       formatter = perSystem ({ system, ... }: treefmt.${system}.config.build.wrapper);
       nixosConfigurations = import ./hosts { inherit inputs lib specification; };
+      checks = perSystem (
+        { system, ... }:
+        # add tests of packages
+        fold recursiveUpdate { } (
+          map (
+            { name, value }:
+            if isDerivation value && hasAttrByPath [ "passthru" "tests" ] value then
+              concatMapAttrs (test: value: { "${name}-${test}" = value; }) value.passthru.tests
+            else
+              { }
+          ) (attrsToList self.packages.${system})
+        )
+        // {
+          formatting = self.treefmt.${system}.config.build.check self;
+        }
+      );
+      devShells = perSystem (
+        {
+          system,
+          pkgs,
+          ...
+        }:
+        {
+          default =
+            let
+              tools = map (input: input.packages.${system}.default) (
+                with inputs;
+                [
+                  disko
+                  agenix
+                ]
+              );
+            in
+            pkgs.mkShell {
+              inputsFrom = attrValues self.packages.${system} or { };
+              packages =
+                tools
+                ++ (with pkgs; [
+                  python3
+                ]);
+            };
+        }
+      );
     };
 }

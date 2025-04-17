@@ -181,4 +181,7 @@ in
     gpg
     ;
   inherit permittedInsecurePackages permittedUnfreePatterns;
+
+  # path to this flake, relative to user's home
+  path-to-flake = "dev/dotnix";
 }
