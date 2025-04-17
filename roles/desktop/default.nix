@@ -12,7 +12,6 @@
     ./notes
     ./reader
     ./stylix.nix
-    ./ydotool
   ];
 
   environment.systemPackages = with pkgs; [
