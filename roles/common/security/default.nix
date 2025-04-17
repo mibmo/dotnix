@@ -36,8 +36,8 @@
   age = {
     identityPaths = map (key: key.path) config.services.openssh.hostKeys;
     secrets = builtins.mapAttrs (name: value: {
-      file = ../../secrets/${name};
-    }) (import ../../secrets/secrets.nix);
+      file = ../../../secrets/${name};
+    }) (import ../../../secrets/secrets.nix);
   };
 
   environment.shellInit = ''
