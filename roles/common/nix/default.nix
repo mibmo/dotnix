@@ -10,6 +10,18 @@
   ];
 
   nix = {
+    registry.dotnix = {
+      exact = true;
+      from = {
+        type = "indirect";
+        id = "dotnix";
+      };
+      to = {
+        type = "path";
+        path = "/home/${specification.user.name}/${specification.path-to-flake}";
+      };
+    };
+
     package = pkgs.nixVersions.stable;
 
     gc = {
