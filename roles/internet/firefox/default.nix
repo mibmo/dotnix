@@ -348,58 +348,5 @@ in
     ] (_: "firefox.desktop");
   };
 
-  persist.user =
-    let
-      perProfile = profile: map (path: ".mozilla/firefox/${profile}/${path}");
-      prefix = prefix: map (suffix: prefix + suffix);
-      sqlite =
-        file:
-        prefix file [
-          ".sqlite"
-          ".sqlite-shm"
-          ".sqlite-wal"
-        ];
-    in
-    lib.attrsets.mapAttrs (_: paths: perProfile "default" (lib.lists.flatten paths)) {
-      directories = [
-        # website local storage
-        "storage"
-      ];
-      files = [
-        # mitigate bounce tracking protection.
-        # should generally not be persisted
-        #(sqlite "bounce-tracking-protection")
-
-        # website preferences; media permissions, font preferences, accessibility, etc
-        #(sqlite "content-prefs")
-
-        # website cookies
-        (sqlite "cookies")
-
-        # favicon cache and metadata
-        (sqlite "facicons")
-
-        # web form history; logins, credentials, usernames, etc
-        #(sqlite "formhistory")
-
-        # permissions for specific websites; allowing pop-ups, location access, camera/mic, etc
-        #(sqlite "permissions")
-
-        # bookmarks, browsing history, and other metadata
-        (sqlite "places")
-
-        # tracking protection information; blocked websites, block history, etc
-        (sqlite "protections")
-
-        # firefox sync data
-        #(sqlite "storage-sync-v2")
-
-        # website local storage
-        (sqlite "storage")
-
-        # extensions data, e.g. icons and manifests.
-        # may not need to persist when configuring via policy
-        #(sqlite "webappsstore")
-      ];
-    };
+  persist.user.directories = [ ".mozilla/firefox" ];
 }
