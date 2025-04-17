@@ -1,1 +1,0 @@
-nixos-rebuild build --flake .#$hostname && nix-diff --character-oriented /nix/store/g1ij1v2v04n5a3fsc3dgdpjiglwnv2fy-nixos-system-hamilton-23.11.20230819.d680ded result
