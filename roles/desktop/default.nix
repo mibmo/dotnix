@@ -5,7 +5,6 @@
     ./crypto
     ./fcitx5
     ./fonts
-    ./reader
     ./stylix.nix
   ];
 
