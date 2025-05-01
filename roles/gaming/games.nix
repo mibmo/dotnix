@@ -3,6 +3,7 @@
 {
   persist.user.directories = [
     ".factorio"
+    ".local/share/PrismLauncher"
     ".local/share/Terraria"
     ".local/share/binding of isaac afterbirth+ mods"
     ".local/share/binding of isaac afterbirth+"
@@ -13,5 +14,6 @@
   home.packages = with pkgs; [
     etterna
     osu-lazer
+    prismlauncher
   ];
 }
