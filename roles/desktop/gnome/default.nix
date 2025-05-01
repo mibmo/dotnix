@@ -1,6 +1,7 @@
 {
-  pkgs,
   config,
+  lib,
+  pkgs,
   specification,
   ...
 }:
@@ -162,4 +163,7 @@ in
           }
         ) extensions);
     };
+
+  # gnome handles tablets
+  hardware.opentabletdriver.enable = lib.mkForce false;
 }
