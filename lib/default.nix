@@ -178,6 +178,9 @@ let
         name = removePrefix "nix" name;
         inherit value;
       }) packageSets;
+      customPackages = {
+        nixpkgs.overlays = [ (_: _: self.packages.${host.system} or { }) ];
+      };
 
       module-pkgs = packageSets.${moduleNixpkgsVersion};
     in
@@ -190,13 +193,13 @@ let
           lib
           specification
           ;
-        #pkgs = mkPkgs host.system;
       };
       modules =
         externalModules
         ++ host.roles
         ++ [
           customModules
+          customPackages
           host.host
           # @TODO: hack for compatability with many package sets
           {
