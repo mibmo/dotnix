@@ -595,6 +595,10 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = true
 
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 --[[
 @TODO: telescope
 @TODO: test completion & DAP with other languages (i.e. rust)
