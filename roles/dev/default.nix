@@ -7,7 +7,7 @@
     ./terminal
     ./android
     ./containers
-    ./virt-manager
+    ./virtualisation
     ../internet/tor
     ../internet/i2p
   ];

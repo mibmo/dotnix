@@ -8,7 +8,13 @@
       uris = [ "qemu:///system" ];
     };
   };
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    waydroid.enable = true;
+  };
   programs.dconf.enable = true;
-  persist.directories = [ "/var/lib/libvirt" ];
+  persist = {
+    directories = [ "/var/lib/libvirt" ];
+    user.directories = [ ".local/share/waydroid" ];
+  };
 }
