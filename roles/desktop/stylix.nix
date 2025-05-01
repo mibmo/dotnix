@@ -3,9 +3,16 @@
 {
   stylix = {
     enable = true;
+    # nice wallpapers:
+    # - https://wall.alphacoders.com/big.php?i=1379605
+    # - https://wall.alphacoders.com/big.php?i=1374980
+    # - https://wall.alphacoders.com/big.php?i=595859
+    # - https://wall.alphacoders.com/big.php?i=1316373
+    # - https://wall.alphacoders.com/big.php?i=787153
+    # - https://wall.alphacoders.com/big.php?i=608170
     image = pkgs.fetchurl {
-      url = "https://images2.alphacoders.com/137/1379605.png";
-      hash = "sha256-VOO3j8EGXb33qJkJA8pi2jF/RkiqMHUrO19dDiH+hyk=";
+      url = "https://images8.alphacoders.com/137/1374980.jpg";
+      hash = "sha256-y9EF4d+QeSvDqu+xR4tDKKg3XAdZzhWQhCf9GZa/zXc=";
     };
     fonts = {
       monospace = {
