@@ -24,6 +24,7 @@ in
     inkscape
     kicad
     krita
+    musescore
     openscad-unstable
     anki
     prusa-slicer
