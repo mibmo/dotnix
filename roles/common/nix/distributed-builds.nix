@@ -4,6 +4,7 @@ let
 
   hosts = {
     kanna = {
+      enabled = false;
       host = "kanna.kanpai";
       sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPgiVv9HzuP6HlCvJeUYdSsMCp60/0HSlkYw7YA80lVX";
       storePublicKey = "C3JZdjcT13Kgqwnau3qX/YWxerHT9A1Canbb/iX+AXc=";
@@ -35,6 +36,7 @@ let
     };
 
     muffin = {
+      enabled = false;
       host = "muffin.kanpai";
       sshPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/Xm/uSh6Ppy2lBtTr4ucw8mVBYWrqcDYLXmXN1XMTP";
       storePublicKey = "p09hN/DGfVxn0fvlKbaPglRLkV1RPPQHgj/prKPN31Y=";
