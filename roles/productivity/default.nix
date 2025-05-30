@@ -25,7 +25,7 @@ in
     kicad
     krita
     musescore
-    openscad-unstable
+    pkgs-stable.openscad-unstable
     anki
     prusa-slicer
     pkgs-stable.renderdoc
