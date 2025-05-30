@@ -88,7 +88,7 @@ in
 
   persist.user = {
     files = [
-      ".config/qBittorrent/qBittorrent" # general config
+      ".config/qBittorrent/qBittorrent.conf" # general config
       ".config/qBittorrent/qBittorrent-data.conf" # stats
     ];
     directories = [
