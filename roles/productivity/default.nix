@@ -6,6 +6,12 @@ let
       kikit-library
     ];
   };
+
+  inkscape = pkgs.inkscape-with-extensions.override {
+    inkscapeExtensions = with pkgs.inkscape-extensions; [
+      textext # latex and typst support
+    ];
+  };
 in
 {
   home.packages = with pkgs; [
