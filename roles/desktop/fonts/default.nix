@@ -25,5 +25,9 @@ in
 
     # chinese
     smiley-sans
+
+    comic-mono
+    comic-neue
+    comic-relief
   ];
 }
