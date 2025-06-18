@@ -13,6 +13,7 @@
     waydroid.enable = true;
   };
   programs.dconf.enable = true;
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
   persist = {
     directories = [ "/var/lib/libvirt" ];
     user.directories = [ ".local/share/waydroid" ];
