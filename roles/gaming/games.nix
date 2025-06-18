@@ -13,7 +13,7 @@
 
   home.packages = with pkgs; [
     etterna
-    osu-lazer
+    osu-lazer-bin
     prismlauncher
   ];
 }
