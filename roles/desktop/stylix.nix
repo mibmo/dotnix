@@ -11,8 +11,8 @@
     # - https://wall.alphacoders.com/big.php?i=787153
     # - https://wall.alphacoders.com/big.php?i=608170
     image = pkgs.fetchurl {
-      url = "https://images8.alphacoders.com/137/1374980.jpg";
-      hash = "sha256-y9EF4d+QeSvDqu+xR4tDKKg3XAdZzhWQhCf9GZa/zXc=";
+      url = "https://images3.alphacoders.com/608/thumb-1920-608170.jpg";
+      hash = "sha256-OilFco6QdTinL7nehKjnHxDkhKswPQy0Vx8pIWRRREs=";
     };
     fonts = {
       monospace = {
