@@ -19,7 +19,7 @@ in
     pkgs-stable.blender-hip
     edgetx
     freecad
-    gimp
+    gimp3
     godot_4
     inkscape
     kicad
