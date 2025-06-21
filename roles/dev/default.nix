@@ -14,6 +14,7 @@
 
   home = {
     packages = with pkgs; [
+      aria2
       arp-scan
       bat
       (curlFull.override {
@@ -42,7 +43,6 @@
       tree
       unzip
       usbutils
-      wcurl
       which
       zip
     ];
