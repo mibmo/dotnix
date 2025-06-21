@@ -21,7 +21,6 @@
         http3Support = true;
         openssl = pkgs.quictls;
       })
-      devdocs-desktop
       duf
       dwarfs
       ffmpeg
