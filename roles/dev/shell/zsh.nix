@@ -15,7 +15,7 @@ let
     }
   '') specification.shell.functions;
 
-  initExtra = ''
+  initContent = ''
     # config functions
     ${concatStringsSep "\n" shellCommands}
   '';
@@ -66,7 +66,7 @@ in
       enable = true;
       enableCompletion = true;
       enableVteIntegration = true;
-      inherit initExtra shellAliases plugins;
+      inherit initContent shellAliases plugins;
       antidote.enable = true;
     };
   };

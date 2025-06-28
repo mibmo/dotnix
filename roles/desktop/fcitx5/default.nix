@@ -20,7 +20,7 @@
       QT_IM_MODULE = "fcitx";
       XMODIFIERS = "@im=fcitx";
     };
-    systemPackages = lib.optional config.services.xserver.desktopManager.gnome.enable pkgs.gnomeExtensions.kimpanel;
+    systemPackages = lib.optional config.services.desktopManager.gnome.enable pkgs.gnomeExtensions.kimpanel;
   };
 
   home.settings.home.file =

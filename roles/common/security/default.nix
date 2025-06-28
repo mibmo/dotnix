@@ -26,7 +26,7 @@
         enableExtraSocket = true;
         enableSshSupport = true;
         enableScDaemon = true;
-        pinentryPackage = config.programs.gnupg.agent.pinentryPackage;
+        pinentry.package = config.programs.gnupg.agent.pinentryPackage;
       };
     };
   };
