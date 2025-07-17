@@ -46,4 +46,8 @@ in
       hash = "sha256-FHHZ5MnOWbWnLIL2+d5VJoYAto4/GshK8S0DU3Bx7O8=";
     };
   };
+
+  persist.user.directories = [
+    ".config/obs-studio"
+  ];
 }
