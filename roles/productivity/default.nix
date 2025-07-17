@@ -27,6 +27,7 @@ in
     musescore
     pkgs-stable.openscad-unstable
     anki
+    penpot-desktop
     prusa-slicer
     pkgs-stable.renderdoc
   ];
