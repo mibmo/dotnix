@@ -55,4 +55,10 @@ in
     path = "${home}/assets/litterbox";
     enable = true;
   };
+  "Bad Dragons" = {
+    id = "owyud-vzhpj";
+    devices = [ "cheesedesk" ];
+    path = "${home}/assets/bad-dragons";
+    enable = true;
+  };
 }
