@@ -18,8 +18,11 @@ let
 
   torrent = {
     categories = [
+      "animation"
+      "documentary"
       "game"
       "movie"
+      "nsfw"
       "series"
     ];
     /*
