@@ -1,11 +1,10 @@
 {
   pkgs,
-  pkgs-24_05,
   ...
 }:
 {
   home.packages = with pkgs; [
-    pkgs-24_05.electrum-ltc
+    electrum-ltc
     monero-gui
   ];
 
