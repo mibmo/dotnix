@@ -142,9 +142,10 @@ let
     };
   };
 
-  search = {
+  search = rec {
     force = true;
-    default = "ddg";
+    default = "startpage";
+    privateDefault = default;
     engines =
       let
         second = 1000;
@@ -161,11 +162,20 @@ let
         };
         "ddg".metaData = {
           alias = "@ddg";
-          hidden = true;
+          hidden = false;
         };
         "google".metaData = {
           alias = "@g";
           hidden = true;
+        };
+        "Startpage" = {
+          urls = [ { template = "https://startpage.com/sp/search?query={searchTerms}"; } ];
+          icon = "https://startpage.com/sp/cdn/favicons/favicon-32x32-gradient.png";
+          updateInterval = week;
+          definedAliases = [
+            "@sp"
+            "@startpage"
+          ];
         };
 
         # nix
