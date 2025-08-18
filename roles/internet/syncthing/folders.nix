@@ -3,16 +3,23 @@
   hosts ? { },
 }:
 let
+  second = 1;
+  minute = second * 60;
+  hour = minute * 60;
+  day = hour * 24;
+  week = day * 7;
+  month = week * 4;
+
   staggered =
     {
-      days ? 14, # every two weeks
-      clean ? 3600, # every hour
+      age ? week * 2,
+      clean ? hour,
     }:
     {
       type = "staggered";
       params = {
         cleanInterval = toString clean;
-        maxAge = toString (days * 86400);
+        maxAge = toString age;
       };
     };
 in
@@ -26,9 +33,7 @@ in
       "ichi"
     ];
     path = "${home}/.secret";
-    versioning = staggered {
-      days = 7 * 4 * 2; # two months
-    };
+    versioning = staggered { age = month * 2; };
     enable = true;
   };
   "Code" = {
