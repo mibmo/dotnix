@@ -63,6 +63,9 @@ in
         encryption = "aes-256-gcm";
         keylocation = "prompt";
         keyformat = "passphrase";
+
+        # enable filenames up to 1023 bytes (as opposed to 255)
+        longname = "on";
       };
 
       datasets = {
