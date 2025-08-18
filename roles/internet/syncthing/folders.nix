@@ -54,6 +54,13 @@ in
     path = "${home}/assets/books";
     enable = true;
   };
+  "Torrents" = {
+    id = "sryfy-ikp5y";
+    devices = [ ];
+    path = "${home}/assets/torrents";
+    versioning = staggered { age = week; };
+    enable = true;
+  };
   "LitterBox" = {
     id = "adwbv-qpipw";
     devices = [ "holger" ];
