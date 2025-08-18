@@ -114,52 +114,52 @@ in
         packages = [
           config.programs.gnupg.agent.pinentryPackage
           pkgs.file-roller
-        ] ++ map (name: pkgs.gnomeExtensions.${name}) (attrNames extensions);
+        ]
+        ++ map (name: pkgs.gnomeExtensions.${name}) (attrNames extensions);
       };
 
-      dconf.settings =
+      dconf.settings = {
+        "org/gnome/desktop/interface"."show-battery-percentage" = true;
+        "org/gnome/desktop/wm/preferences"."focus-mode" = "sloppy";
+        "org/gnome/mutter" = {
+          "dynamic-workspaces" = true;
+          "edge-tiling" = true;
+        };
+        "org/gnome/settings-daemon/plugins/color"."night-light-enable" = true;
+        "org/gnome/settings-daemon/plugins/power" = {
+          "ambient-enabled" = true;
+          "sleep-inactive-ac-timeout" = 7200; # 2 hours
+          "sleep-inactive-battery-timeout" = 300; # 5 min
+        };
+
+        "org/gnome/desktop/peripherals/mouse"."accel-profile" = "flat";
+        "org/gnome/desktop/peripherals/touchpad"."send-events" = "disabled-on-external-mouse";
+
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = map keybindDir (attrNames keybinds);
+
+          www = [ "<Super>w" ];
+        };
+        "org/gnome/desktop/wm/keybindings"."close" = [ "<Super>q" ];
+
+        "org/gnome/shell"."enabled-extensions" = map (name: pkgs.gnomeExtensions.${name}.extensionUuid) (
+          attrNames extensions
+        );
+      }
+      // (mapAttrs' (name: value: {
+        name = keybindPath name;
+        inherit value;
+      }) keybinds)
+      // (mapAttrs' (
+        name: config:
+        let
+          extension = pkgs.gnomeExtensions.${name};
+        in
         {
-          "org/gnome/desktop/interface"."show-battery-percentage" = true;
-          "org/gnome/desktop/wm/preferences"."focus-mode" = "sloppy";
-          "org/gnome/mutter" = {
-            "dynamic-workspaces" = true;
-            "edge-tiling" = true;
-          };
-          "org/gnome/settings-daemon/plugins/color"."night-light-enable" = true;
-          "org/gnome/settings-daemon/plugins/power" = {
-            "ambient-enabled" = true;
-            "sleep-inactive-ac-timeout" = 7200; # 2 hours
-            "sleep-inactive-battery-timeout" = 300; # 5 min
-          };
-
-          "org/gnome/desktop/peripherals/mouse"."accel-profile" = "flat";
-          "org/gnome/desktop/peripherals/touchpad"."send-events" = "disabled-on-external-mouse";
-
-          "org/gnome/settings-daemon/plugins/media-keys" = {
-            custom-keybindings = map keybindDir (attrNames keybinds);
-
-            www = [ "<Super>w" ];
-          };
-          "org/gnome/desktop/wm/keybindings"."close" = [ "<Super>q" ];
-
-          "org/gnome/shell"."enabled-extensions" = map (name: pkgs.gnomeExtensions.${name}.extensionUuid) (
-            attrNames extensions
-          );
+          name = "org/gnome/shell/extensions/${config.meta.dconfKey or extension.extensionPortalSlug}";
+          value = removeAttrs config [ "meta" ];
         }
-        // (mapAttrs' (name: value: {
-          name = keybindPath name;
-          inherit value;
-        }) keybinds)
-        // (mapAttrs' (
-          name: config:
-          let
-            extension = pkgs.gnomeExtensions.${name};
-          in
-          {
-            name = "org/gnome/shell/extensions/${config.meta.dconfKey or extension.extensionPortalSlug}";
-            value = removeAttrs config [ "meta" ];
-          }
-        ) extensions);
+      ) extensions);
     };
 
   # gnome handles tablets

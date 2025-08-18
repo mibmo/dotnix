@@ -17,7 +17,8 @@ in
     userDirs = {
       enable = true;
       createDirectories = true;
-    } // builtins.mapAttrs (_: path: "/home/${specification.user.name}/${path}") userDirs;
+    }
+    // builtins.mapAttrs (_: path: "/home/${specification.user.name}/${path}") userDirs;
   };
 
   persist.user.directories = lib.attrsets.attrValues userDirs;

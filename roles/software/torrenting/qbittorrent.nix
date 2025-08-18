@@ -58,27 +58,26 @@ in
           (
             mapAttrs (folder: config: {
               recursive = config.recursive or false;
-              add_torrent_params =
-                {
-                  operating_mode = "AutoManaged";
-                  use_auto_tmm =
-                    rec {
-                      "" = auto;
-                      "auto" = true;
-                      "manual" = false;
-                    }
-                    .${toString config.mode} or true;
-                  stop_condition =
-                    rec {
-                      "" = none;
-                      "none" = "";
-                      "metadata" = "MetadataReceived";
-                      "downloaded" = "FilesChecked";
-                    }
-                    .${toString config.stopCondition} or "None";
-                  ${setIf (config ? "start") "stopped"} = !config.start;
-                }
-                //
+              add_torrent_params = {
+                operating_mode = "AutoManaged";
+                use_auto_tmm =
+                  rec {
+                    "" = auto;
+                    "auto" = true;
+                    "manual" = false;
+                  }
+                  .${toString config.mode} or true;
+                stop_condition =
+                  rec {
+                    "" = none;
+                    "none" = "";
+                    "metadata" = "MetadataReceived";
+                    "downloaded" = "FilesChecked";
+                  }
+                  .${toString config.stopCondition} or "None";
+                ${setIf (config ? "start") "stopped"} = !config.start;
+              }
+              //
                 # passthru params
                 genAttrs (filter (property: config ? property) [
                   "category"

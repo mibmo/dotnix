@@ -66,7 +66,8 @@ in
           inherit (cfg) packages;
           sessionVariables = {
             EDITOR = specification.defaults.editor;
-          } // cfg.environment;
+          }
+          // cfg.environment;
         };
       };
     };
