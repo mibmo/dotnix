@@ -56,7 +56,13 @@ in
   };
   "Torrents" = {
     id = "sryfy-ikp5y";
-    devices = [ ];
+    devices = hosts.managed ++ [
+      "mobai"
+      "starlight"
+      "trixie"
+      "muffin"
+      "holger"
+    ];
     path = "${home}/assets/torrents";
     versioning = staggered { age = week; };
     enable = true;
