@@ -15,6 +15,7 @@ let
 in
 {
   home.packages = with pkgs; [
+    audacity
     betaflight-configurator
     pkgs-stable.blender-hip
     edgetx
