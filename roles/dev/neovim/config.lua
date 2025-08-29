@@ -449,21 +449,8 @@ function Cfg_vimtex()
 	}
 end
 
-function Cfg_rusttools()
-	--[[ @TODO: once codelldb has been packaged, switch to using it
-  local extension_path = 
-  local codelldb_path =  extension_path .. 'adapter/codelldb'
-  local liblldb_path =  extension_path .. 'adapter/codelldb'
-
-  local rust_tools = require('rust-tools')
-  rust_tools.setup({
-    dap = {
-      adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
-    }
-  })
-  --]]
-
-	require("rust-tools").setup()
+function Cfg_rustaceanvim()
+	vim.g.rustaceanvim = {}
 end
 
 function Cfg_neodev()
@@ -523,7 +510,7 @@ require("lazy").setup({
 
 	-- tools
 	{ "iamcco/markdown-preview.nvim", build = "cd app && yarn install", ft = "markdown" },
-	{ "simrat39/rust-tools.nvim", config = Cfg_rusttools, ft = "rust" },
+	{ "mrcjkb/rustaceanvim", config = Cfg_rustaceanvim, ft = "rust" },
 	{ "folke/neodev.nvim", config = Cfg_neodev, ft = "lua" },
 	{ "lervag/vimtex", config = Cfg_vimtex, ft = { "tex", "cls" } },
 
