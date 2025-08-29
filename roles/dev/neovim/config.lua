@@ -196,6 +196,21 @@ Languages = {
 			expandtab = true,
 		},
 	},
+	{
+		name = "QML",
+		filetype = "qml",
+		treesitter = {
+			link = "qmljs",
+		},
+		style = {
+			tabstop = 4,
+			shiftwidth = 4,
+			expandtab = true,
+		},
+		lsp = {
+			server = "qmlls",
+		},
+	},
 }
 
 -- treesitter integration

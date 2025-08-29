@@ -41,6 +41,7 @@
         nixd
         pyright
         rust-analyzer
+        kdePackages.qtdeclarative # qml
 
         # debuggers
         delve
