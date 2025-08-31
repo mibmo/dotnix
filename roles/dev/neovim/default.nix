@@ -1,4 +1,4 @@
-{ pkgs-stable, ... }:
+{ pkgs, pkgs-stable, ... }:
 {
   home.settings = {
     programs.neovim = {
@@ -40,7 +40,7 @@
         lua54Packages.digestif
         nixd
         pyright
-        rust-analyzer
+        pkgs.rust-analyzer
         kdePackages.qtdeclarative # qml
 
         # debuggers
