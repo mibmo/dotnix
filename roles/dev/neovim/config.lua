@@ -460,6 +460,7 @@ function Cfg_neodev()
 	neodev.setup({
 		override = function(root_dir, options)
 			-- @TODO: set to $HOME/dev/dotnix/programs/neovim
+			-- @TODO: what does this even do?
 			if util.has_file(root_dir, "/home/mib/dev/dotnix/programs/neovim") then
 				options.enabled = true
 				options.plugins = true
@@ -479,6 +480,7 @@ require("lazy").setup({
 	-- magic
 	{ "neovim/nvim-lspconfig", config = Cfg_lspconfig },
 	{ "mfussenegger/nvim-dap", config = Cfg_dap },
+	-- @TODO: change to stevearc/conform.nvim
 	{ "mhartington/formatter.nvim", config = Cfg_formatter },
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = Cfg_treesitter, ft = TreesitterLanguages },
 	{
