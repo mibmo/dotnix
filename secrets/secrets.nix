@@ -1,8 +1,9 @@
 let
-  lib = (import <nixpkgs/lib>) // (import ../lib.nix { inputs = { }; });
-  config = import ../config.nix {
-    inherit lib;
-    inputs = { };
+  flake = builtins.getFlake (toString ./..);
+  inherit (flake) lib;
+
+  specification = import ../specification.nix {
+    inherit (flake) inputs lib;
   };
 
   inherit (lib.attrsets) collect recursiveUpdate;
@@ -11,7 +12,7 @@ let
 
   getKeys = m: (m.keys.ssh or [ ]) ++ (m.keys.age or [ ]);
   foldKeys = foldl (acc: m: acc ++ getKeys m) [ ];
-  keys = [ lafayette ] ++ foldKeys (collect (c: c ? name) config.hosts);
+  keys = [ lafayette ] ++ foldKeys (collect (c: c ? name) specification.hosts);
 
   lafayette = "age1e007kgnn4e2g0mtzvy5vdepujzfkz6v6hqh6aqa4655l62jcpgnsxv769h";
 
