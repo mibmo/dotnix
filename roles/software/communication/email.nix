@@ -118,6 +118,12 @@ in
     programs.thunderbird = {
       enable = true;
       profiles.default = {
+        accountsOrder = [
+          "mib@kanp.ai"
+          "company@kanp.ai"
+          "root@kanp.ai"
+          "s245244@dtu.dk"
+        ];
         isDefault = true;
         withExternalGnupg = true;
       };
