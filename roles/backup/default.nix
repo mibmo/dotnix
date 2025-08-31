@@ -24,7 +24,7 @@ let
       archiveBaseName = name;
       repo =
         {
-          luca = "ssh://u488762@u488762.your-storagebox.de:23/./${host.name}";
+          lucoa = "ssh://u488762@u488762.your-storagebox.de:23/./${host.name}";
         }
         .${repo} or (throw "No such repository '${repo}'");
       startAt = frequency;
@@ -57,7 +57,7 @@ in
     jobs = {
       "books" = mkJob {
         name = "books";
-        repo = "luca";
+        repo = "lucoa";
         frequency = "daily";
         paths = "/home/${specification.user.name}/assets/books";
         patterns = [
@@ -69,7 +69,7 @@ in
       };
       "dev" = mkJob {
         name = "dev";
-        repo = "luca";
+        repo = "lucoa";
         frequency = "hourly";
         compression = "zstd";
         paths = "/home/${specification.user.name}/dev";
@@ -97,7 +97,7 @@ in
       };
       "education" = mkJob {
         name = "education";
-        repo = "luca";
+        repo = "lucoa";
         frequency = "hourly";
         paths = "/home/${specification.user.name}/assets/education";
         patterns = [
@@ -120,17 +120,44 @@ in
           monthly = 6;
         };
       };
+      /*
+        "zfs-daily-snapshots" = {
+          dumpCommand = lib.getExe (
+            pkgs.writeShellApplication {
+              name = "get-zfs-snapshots";
+              runtimeInputs = with pkgs; [
+                zfs
+              ];
+              text = ''
+                zfs list -t snapshot -pH -o name | grep "daily" | while read -r name; do
+                  dataset="$(echo $name | cut -d@ -f1)"
+                  snapshot="$(echo $name | cut -d@ -f2-)"
+                  snapdir="$(zfs get snapdir -pH -o value "$dataset")"
+                  if [[ "$snapdir" = "hidden" ]]; then
+                    mountpoint="$(zfs get mountpoint -pH -o value "$dataset")"
+                    if [[ "$mountpoint" = "legacy" ]]; then
+                      mountpoint="$(cat /etc/fstab | grep '^data/persist' | cut -d' ' -f2)"
+                    fi
+                    snapdir="$mountpoint/.zfs/snapshot"
+                  fi
+                  echo "$snapdir/$snapshot"
+                done
+              '';
+            }
+          );
+        };
+      */
     };
   };
 
   age.secrets = {
-    "borg-luca-sakamoto-pass" = {
-      file = ../../secrets/borg_luca_sakamoto_pass;
+    "borg-lucoa-sakamoto-pass" = {
+      file = ../../secrets/borg_lucoa_sakamoto_pass;
       owner = specification.user.name;
       group = "users";
     };
-    "borg-luca-sakamoto-key" = {
-      file = ../../secrets/borg_luca_sakamoto_key;
+    "borg-lucoa-sakamoto-key" = {
+      file = ../../secrets/borg_lucoa_sakamoto_key;
       owner = specification.user.name;
       group = "users";
     };
