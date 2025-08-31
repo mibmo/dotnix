@@ -87,6 +87,18 @@ let
         port = 465;
       };
     };
+    "root@kanp.ai" = {
+      realName = "root";
+      userName = "root";
+      imap = {
+        host = "mail.kanp.ai";
+        port = 993;
+      };
+      smtp = {
+        host = "mail.kanp.ai";
+        port = 465;
+      };
+    };
     "s245244@dtu.dk" = {
       realName = "RTS";
       flavor = "outlook.office365.com";
