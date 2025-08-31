@@ -68,27 +68,23 @@ let
       primary = true;
       realName = "mib";
       imap = {
-        tls.useStartTls = true;
         host = "mail.kanp.ai";
-        port = 143;
+        port = 993;
       };
       smtp = {
-        tls.useStartTls = true;
         host = "mail.kanp.ai";
-        port = 587;
+        port = 465;
       };
     };
     "company@kanp.ai" = {
       realName = "Kanpai";
       imap = {
-        tls.useStartTls = true;
         host = "mail.kanp.ai";
-        port = 143;
+        port = 993;
       };
       smtp = {
-        tls.useStartTls = true;
         host = "mail.kanp.ai";
-        port = 587;
+        port = 465;
       };
     };
     "s245244@dtu.dk" = {
