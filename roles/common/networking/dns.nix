@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.services.unbound;
 
@@ -55,6 +60,60 @@ in
       }) tailscale-stub-zones;
     };
   };
+
+  # forward active vpn's dns servers while enabled
+  networking.networkmanager.dispatcherScripts = [
+    {
+      type = "pre-up";
+      source = lib.getExe (
+        pkgs.writeShellApplication {
+          name = "vpnUpDnsHook";
+          runtimeInputs = with pkgs; [
+            unbound
+            networkmanager
+            perl
+          ];
+          text = ''
+            log() { echo "[vpn]" "$@"; }
+
+            if [[ "$DEVICE_IFACE" == wg-* ]] && [ "$2" = "pre-up" ]; then
+              log "starting dns forward of $CONNECTION_ID"
+
+              nameservers="$(nmcli --terse con show "$CONNECTION_UUID" | perl -nle 'print "$1" if /^ipv[46]\.dns:(.*)$/s' 2>/dev/null)"
+              log "found nameservers: $nameservers"
+              if unbound-control forward "$nameservers" >/dev/null 2>&1;
+                then log "started forwarding vpn nameservers"
+                else log "failed to forward vpn nameservers"
+              fi
+            fi
+          '';
+        }
+      );
+    }
+    {
+      type = "pre-down";
+      source = lib.getExe (
+        pkgs.writeShellApplication {
+          name = "vpnDownDnsHook";
+          runtimeInputs = with pkgs; [
+            unbound
+          ];
+          text = ''
+            log() { echo "[vpn]" "$@"; }
+
+            if [[ "$DEVICE_IFACE" == wg-* ]] && [ "$2" = "pre-down" ]; then
+              log "stopping dns forward of $CONNECTION_ID"
+
+              if unbound-control forward off 1>/dev/null 2>&1;
+                then log "stopped forwarding vpn nameservers"
+                else log "failed to stop forward vpn nameservers"
+              fi
+            fi
+          '';
+        }
+      );
+    }
+  ];
 
   persist.directories = [
     {
