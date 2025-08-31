@@ -71,6 +71,8 @@ let
         ./roles/software/notes
         ./roles/software/reader
         ./roles/software/torrenting
+
+        ./roles/backup
       ];
       keys.ssh = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBPQ3PpMq59iLXy5j/r/mwTlrZsU2xhyDtTXdHv6yM7b" ];
     };
