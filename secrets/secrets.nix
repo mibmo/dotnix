@@ -30,6 +30,8 @@ let
     "remotebuilder_hamilton"
     "remotebuilder_macadamia"
     "remotebuilder_sakamoto"
+    "borg_luca_sakamoto_key"
+    "borg_luca_sakamoto_pass"
   ];
 in
 builtins.foldl' (l: r: l // r) { } (map mkSecret secrets)
