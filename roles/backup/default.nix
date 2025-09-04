@@ -95,6 +95,55 @@ in
           monthly = 6;
         };
       };
+      "diary" = mkJob {
+        name = "diary";
+        repo = "lucoa";
+        frequency = "daily";
+        compression = "zstd";
+        paths = "/home/${specification.user.name}/assets/diary";
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
+      "documents" = mkJob {
+        name = "documents";
+        repo = "lucoa";
+        frequency = "daily";
+        compression = "zstd";
+        paths = "/home/${specification.user.name}/assets/documents";
+        patterns = [
+          ''! .stfolder*''
+          ''- **/*.sync*''
+          ''- **/.nextcloudsync.log''
+        ];
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
+      "email" = mkJob {
+        name = "email";
+        repo = "lucoa";
+        frequency = "daily";
+        paths = "/home/${specification.user.name}/.thunderbird";
+        patterns = [
+          # don't backup encryption keys
+          ''- re:key[0-9]+.db''
+          # journal files
+          ''- *.db-journal''
+        ];
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
       "education" = mkJob {
         name = "education";
         repo = "lucoa";
@@ -113,6 +162,38 @@ in
           ''! **/target''
           ''! **/build''
         ];
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
+      "images" = mkJob {
+        name = "images";
+        repo = "lucoa";
+        frequency = "daily";
+        compression = "zstd";
+        paths = "/home/${specification.user.name}/assets/images";
+        patterns = [
+          ''! .stfolder*''
+          ''- **/*.sync*''
+          ''- **/.nextcloudsync.log''
+          ''- re:shuzhi-[dl]\.svg''
+        ];
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
+      "notes" = mkJob {
+        name = "notes";
+        repo = "lucoa";
+        frequency = "daily";
+        compression = "zstd";
+        paths = "/home/${specification.user.name}/assets/notes";
         prune-keep = {
           within = "1d";
           daily = 7;
