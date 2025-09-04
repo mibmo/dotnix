@@ -31,7 +31,7 @@ let
       dateFormat = "-u '+%Y-%m-%dT%H:%M:%S'";
       doInit = false;
       # wait till lock becomes available
-      extraCreateArgs = [ "--lock-wait=600" ];
+      extraCreateArgs = [ "--lock-wait=1800" ];
       inherit
         user
         group
