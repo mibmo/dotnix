@@ -147,7 +147,7 @@ in
       "education" = mkJob {
         name = "education";
         repo = "lucoa";
-        frequency = "hourly";
+        frequency = "daily";
         paths = "/home/${specification.user.name}/assets/education";
         patterns = [
           ''! .stfolder*''
