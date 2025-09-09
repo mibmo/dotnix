@@ -144,7 +144,7 @@ let
 
   search = rec {
     force = true;
-    default = "startpage";
+    default = "ddg";
     privateDefault = default;
     engines =
       let
