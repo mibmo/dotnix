@@ -384,6 +384,7 @@ in
       directories = [
         # website local storage
         "storage"
+        "sessionstore-backups"
       ];
       files = [
         # mitigate bounce tracking protection.
@@ -422,6 +423,7 @@ in
         #(sqlite "webappsstore")
 
         # last session's tabs
+        "sessionCheckpoints.json"
         "sessionstore.jsonlz4"
       ];
     };
