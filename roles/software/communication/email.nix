@@ -64,9 +64,10 @@ let
     } config;
 
   accounts = mapAttrs mkEmail {
-    "mib@kanp.ai" = {
+    "mib" = {
       primary = true;
       realName = "mib";
+      address = "mib@kanp.ai";
       imap = {
         host = "mail.kanp.ai";
         port = 993;
@@ -76,8 +77,9 @@ let
         port = 465;
       };
     };
-    "company@kanp.ai" = {
+    "company" = {
       realName = "Kanpai";
+      address = "company@kanp.ai";
       imap = {
         host = "mail.kanp.ai";
         port = 993;
@@ -87,9 +89,9 @@ let
         port = 465;
       };
     };
-    "root@kanp.ai" = {
+    "root" = {
       realName = "root";
-      userName = "root";
+      address = "root@kanp.ai";
       imap = {
         host = "mail.kanp.ai";
         port = 993;
