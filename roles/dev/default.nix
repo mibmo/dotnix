@@ -76,6 +76,12 @@
         ssh = {
           enable = true;
           serverAliveInterval = 60;
+          matchBlocks.kanpai = {
+            host = "*.kanpai";
+            port = 12248;
+            # for now, just use root
+            user = "root";
+          };
         };
       };
     };
