@@ -59,6 +59,10 @@ let
       thunderbird = {
         enable = true;
         profiles = [ "default" ];
+        settings = id: {
+          # use maildir instead of mbox for storing mails
+          "mail.server.server_${id}.storeContractID" = "@mozilla.org/msgstore/maildirstore;1";
+        };
       };
       ${setIf "passwordCommand" (meta ? authentication)} = passwordCommand;
     } config;
@@ -107,6 +111,9 @@ let
       thunderbird.settings = id: {
         # auth via oAuth2
         "mail.server.server_${id}.authMethod" = 10;
+        # @TODO: also defined here because merging of lambdas make no sense (and thunderbird.settings is one).
+        #        should overhaul the system to avoid issues like this.
+        "mail.server.server_${id}.storeContractID" = "@mozilla.org/msgstore/maildirstore;1";
       };
       #meta.authentication = {
       #  flavor = "keepassxc";
@@ -128,6 +135,10 @@ in
         ];
         isDefault = true;
         withExternalGnupg = true;
+        settings = {
+          # use maildir instead of mbox for storing mails
+          "mail.serverDefaultStoreContractID" = "@mozilla.org/msgstore/maildirstore;1";
+        };
       };
     };
 
