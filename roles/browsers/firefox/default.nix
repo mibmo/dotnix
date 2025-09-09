@@ -258,6 +258,16 @@ let
           ];
         };
 
+        "Noogle" = {
+          urls = [ { template = "https://noogle.dev/q?term={searchTerms}"; } ];
+          icon = "https://noogle.dev/favicon.png";
+          updateInterval = week;
+          definedAliases = [
+            "@ngl"
+            "@noogle"
+          ];
+        };
+
         # rust
         "Rust Language Documentation" = {
           urls = [ { template = "https://doc.rust-lang.org/std/?search={searchTerms}"; } ];
