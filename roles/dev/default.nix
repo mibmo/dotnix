@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./git
@@ -76,11 +76,17 @@
         ssh = {
           enable = true;
           serverAliveInterval = 60;
-          matchBlocks.kanpai = {
-            host = "*.kanpai";
-            port = 12248;
-            # for now, just use root
-            user = "root";
+          matchBlocks = {
+            onion = {
+              host = "*.onion";
+              proxyCommand = "nc -X 5 -x localhost:${toString config.services.tor.client.socksListenAddress.port} %h %p";
+            };
+            kanpai = {
+              host = "*.kanpai";
+              port = 12248;
+              # for now, just use root
+              user = "root";
+            };
           };
         };
       };
