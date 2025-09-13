@@ -10,9 +10,27 @@
     # - https://wall.alphacoders.com/big.php?i=1316373
     # - https://wall.alphacoders.com/big.php?i=787153
     # - https://wall.alphacoders.com/big.php?i=608170
+    # - https://wall.alphacoders.com/big.php?i=1317591
+    # - https://wall.alphacoders.com/big.php?i=1185563
+    # - https://wall.alphacoders.com/big.php?i=1378883
+    # - https://wall.alphacoders.com/big.php?i=1330681
+    # - https://wall.alphacoders.com/big.php?i=700301
+    # - https://wall.alphacoders.com/big.php?i=1053832
+    # - https://wall.alphacoders.com/big.php?i=1313211
+    # - https://wall.alphacoders.com/big.php?i=1314602
+    # - https://wall.alphacoders.com/big.php?i=1315430
+    # - https://wall.alphacoders.com/big.php?i=1314599
+    # - https://wall.alphacoders.com/big.php?i=782164
+    # - https://wall.alphacoders.com/big.php?i=1140173
+    # - https://wall.alphacoders.com/big.php?i=1271728
+    # - https://wall.alphacoders.com/big.php?i=1305211
+    # - https://wall.alphacoders.com/big.php?i=1282153
+    # - https://wall.alphacoders.com/big.php?i=104722
+    # - https://wall.alphacoders.com/big.php?i=1144040
+    # - https://www.wallpaperhub.app/wallpapers/12229
     image = pkgs.fetchurl {
-      url = "https://images3.alphacoders.com/608/thumb-1920-608170.jpg";
-      hash = "sha256-OilFco6QdTinL7nehKjnHxDkhKswPQy0Vx8pIWRRREs=";
+      url = "https://images2.alphacoders.com/130/1305211.png";
+      hash = "sha256-L+pDNTpz/cfyI7ADYYhsHq/v9FrZ3po5Vz672tF0acU=";
     };
     fonts = {
       monospace = {
