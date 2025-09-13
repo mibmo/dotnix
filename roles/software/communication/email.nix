@@ -129,9 +129,9 @@ in
       enable = true;
       profiles.default = {
         accountsOrder = [
-          "mib@kanp.ai"
-          "company@kanp.ai"
-          "root@kanp.ai"
+          "mib"
+          "root"
+          "company"
           "s245244@dtu.dk"
         ];
         isDefault = true;
