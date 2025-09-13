@@ -1,4 +1,5 @@
 {
+  host,
   lib,
   pkgs,
   pkgs-stable,
@@ -69,7 +70,14 @@ in
       jack.enable = true;
       pulse.enable = true;
     };
-    xserver.xkb.layout = "dk";
+
+    # per-host console keyboard layout
+    xserver.xkb.layout =
+      {
+        sakamoto = "us";
+      }
+      .${host.name} or "dk";
+
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
