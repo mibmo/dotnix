@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   specification,
   ...
 }:
@@ -27,9 +28,16 @@ let
       "https://gitlab.com/".insteadOf = "gl:";
       "ssh://git@gitlab.com".pushInsteadOf = "gl:";
     };
-    filter.ignore-marked-lines = {
-      clean = "sed -E '/@ignore(: .+)?$/d'";
-      smudge = "cat";
+    filter = {
+      ignore-marked = {
+        clean =
+          let
+            blocks = "sed -E '/<@ignore(: .+)?>$/,/<!ignore>$/d'";
+            lines = "sed -E '/@ignore(: .+)?$/d'";
+          in
+          "bash ${pkgs.writeShellScript "ignore-marked-clean" ''${blocks} | ${lines}''}";
+        smudge = "cat";
+      };
     };
   };
   signing = lib.mkIf (specification.gpg ? keyId) {
@@ -96,7 +104,7 @@ let
       map mkFilter [
         { attributes = "text"; }
         { attributes = "eol=lf"; }
-        { attributes = "filter=ignore-marked-lines"; }
+        { attributes = "filter=ignore-marked"; }
       ]
     );
 in
