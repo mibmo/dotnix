@@ -3,6 +3,8 @@
 {
   stylix = {
     enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+
     # nice wallpapers:
     # - https://wall.alphacoders.com/big.php?i=1379605
     # - https://wall.alphacoders.com/big.php?i=1374980
