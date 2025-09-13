@@ -43,6 +43,11 @@ in
         # increase cache size
         rrset-cache-size = "400m";
         msg-cache-size = "200m";
+
+        # serve expired records while updating
+        serve-expired = true;
+        serve-expired-ttl = 86400;
+        serve-expired-client-timeout = 500;
       };
 
       remote-control = {
