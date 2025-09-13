@@ -111,6 +111,7 @@ let
       thunderbird.settings = id: {
         # auth via oAuth2
         "mail.server.server_${id}.authMethod" = 10;
+        "mail.smtpserver.smtp_${id}.authMethod" = 10;
         # @TODO: also defined here because merging of lambdas make no sense (and thunderbird.settings is one).
         #        should overhaul the system to avoid issues like this.
         "mail.server.server_${id}.storeContractID" = "@mozilla.org/msgstore/maildirstore;1";
