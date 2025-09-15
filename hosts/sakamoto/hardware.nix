@@ -20,7 +20,6 @@
 
   # amdgpu
   hardware.amdgpu = {
-    amdvlk.enable = true;
     opencl.enable = true;
   };
 
