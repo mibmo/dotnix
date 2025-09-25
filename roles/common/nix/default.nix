@@ -33,7 +33,7 @@
       };
     };
 
-    package = pkgs.nixVersions.stable;
+    #package = pkgs.nixVersions.stable;
 
     gc = {
       automatic = true;

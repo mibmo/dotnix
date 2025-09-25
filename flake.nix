@@ -16,6 +16,7 @@
     #nixpkgs-21_11.url = "nixpkgs/nixos-21.11";
     #nixpkgs-21_05.url = "nixpkgs/nixos-21.05";
 
+    determinate.url = "github:determinatesystems/determinate";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/NUR";
 
