@@ -75,8 +75,13 @@
         ripgrep.enable = true;
         ssh = {
           enable = true;
-          serverAliveInterval = 60;
+          # @TODO this will be removed in the future, when defining
+          # defaults at module top-level is deprecated
+          enableDefaultConfig = false;
           matchBlocks = {
+            "*" = {
+              serverAliveInterval = 60;
+            };
             onion = {
               host = "*.onion";
               proxyCommand = "nc -X 5 -x localhost:${toString config.services.tor.client.socksListenAddress.port} %h %p";
