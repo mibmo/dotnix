@@ -496,7 +496,13 @@ require("lazy").setup({
 	{ "mfussenegger/nvim-dap", config = Cfg_dap },
 	-- @TODO: change to stevearc/conform.nvim
 	{ "mhartington/formatter.nvim", config = Cfg_formatter },
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", config = Cfg_treesitter, ft = TreesitterLanguages },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+		config = Cfg_treesitter,
+		ft = TreesitterLanguages,
+	},
 	{
 		"hrsh7th/nvim-cmp",
 		config = Cfg_cmp,
