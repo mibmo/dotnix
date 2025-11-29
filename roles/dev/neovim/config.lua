@@ -211,6 +211,21 @@ Languages = {
 			server = "qmlls",
 		},
 	},
+	{
+		name = "c",
+		filetype = "clangformat",
+		treesitter = {
+			link = "c",
+		},
+		style = {
+			tabstop = 2,
+			shiftwidth = 2,
+			expandtab = true,
+		},
+		lsp = {
+			server = "clangd",
+		},
+	},
 }
 
 -- treesitter integration

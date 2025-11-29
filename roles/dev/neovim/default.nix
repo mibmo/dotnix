@@ -42,6 +42,7 @@
         pyright
         pkgs.rust-analyzer
         kdePackages.qtdeclarative # qml
+        clang-tools # c & cpp
 
         # debuggers
         delve
