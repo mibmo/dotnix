@@ -45,7 +45,10 @@ in
         mpv.enable = true;
         sioyek = {
           enable = true;
-          config."should_launch_new_window" = "1";
+          config = {
+            "should_launch_new_instance" = "1";
+            "should_launch_new_window" = "1";
+          };
         };
         zathura.enable = true;
       };
