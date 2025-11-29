@@ -332,14 +332,13 @@ function Cfg_cmp()
 	})
 
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
-	local lspconfig = require("lspconfig")
 
 	for _, language in pairs(Languages) do
 		if language.lsp ~= nil then
-			lspconfig[language.lsp.server].setup({
+			vim.lsp.config[language.lsp.server] = {
 				capabilities = capabilities,
 				settings = language.lsp.settings,
-			})
+			}
 		end
 	end
 end
