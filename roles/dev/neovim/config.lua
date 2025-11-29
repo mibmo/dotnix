@@ -226,6 +226,23 @@ Languages = {
 			server = "clangd",
 		},
 	},
+	{
+		name = "F#",
+		filetype = "fsharp",
+		treesitter = {
+			install_info = {
+				url = "https://github.com/ionide/tree-sitter-fsharp",
+				files = { "src/parser.c", "src/scanner.c" },
+				location = "fsharp",
+				branch = "main",
+			},
+		},
+		style = {
+			tabstop = 4,
+			shiftwidth = 4,
+			expandtab = true,
+		},
+	},
 }
 
 -- treesitter integration
