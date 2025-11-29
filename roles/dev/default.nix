@@ -29,6 +29,7 @@
       gnumake
       killall
       ldns
+      libjxl
       libqalculate
       lsof
       lurk
