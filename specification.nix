@@ -92,6 +92,7 @@ let
       "flagfox"
       "geogebra"
       "osu-lazer(-bin)?"
+      "p7zip"
       "steam(-(run|original|unwrapped))?"
     ];
     stable = [

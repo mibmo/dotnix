@@ -38,7 +38,7 @@
       nix-tree
       nixpkgs-review
       nvd
-      p7zip
+      p7zip-rar
       pciutils
       tree
       unzip
