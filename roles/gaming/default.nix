@@ -11,6 +11,7 @@ let
       libpng
       libpulseaudio
       libvorbis
+      SDL2 # sdl2 compatability layer using sdl3
       stdenv.cc.cc.lib
       vkd3d
       xorg.libXScrnSaver
