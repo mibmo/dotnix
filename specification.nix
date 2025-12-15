@@ -68,6 +68,7 @@ let
         ./roles/browsers/firefox
         ./roles/internet/nextcloud
         ./roles/software/communication
+        ./roles/software/media
         ./roles/software/notes
         ./roles/software/reader
         ./roles/software/torrenting
