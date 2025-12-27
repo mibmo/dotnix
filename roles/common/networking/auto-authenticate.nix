@@ -53,7 +53,7 @@ in
       [
         {
           name = "dsbwifi";
-          ap-name = ".DSB_Wi-Fi";
+          ap-name = "DSB_Wi-Fi";
           effect = ''
             ${curl} \
                 --header 'Host: dsbwifi.dk' \
