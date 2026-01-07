@@ -6,7 +6,7 @@
 }:
 let
   parallelConnections = 16;
-  extraConfig = {
+  settings = {
     core = {
       editor = specification.defaults.editor;
       untrackedCache = true;
@@ -118,7 +118,7 @@ in
       userEmail = specification.user.email;
       inherit
         attributes
-        extraConfig
+        settings
         ignores
         includes
         signing
