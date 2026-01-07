@@ -30,7 +30,7 @@
         fd
         gawk
         luaPackages.jsregexp
-        python310Packages.pygments
+        python313Packages.pygments
         ripgrep
         texlive.combined.scheme-full
         vscode-extensions.llvm-org.lldb-vscode
