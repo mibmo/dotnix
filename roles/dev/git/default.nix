@@ -7,6 +7,7 @@
 let
   parallelConnections = 16;
   settings = {
+    user = { inherit (specification.user) name email; };
     core = {
       editor = specification.defaults.editor;
       untrackedCache = true;
@@ -114,8 +115,6 @@ in
       enable = true;
       lfs.enable = true;
 
-      userName = specification.user.name;
-      userEmail = specification.user.email;
       inherit
         attributes
         settings
