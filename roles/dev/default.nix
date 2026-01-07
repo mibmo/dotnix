@@ -75,12 +75,18 @@
         ripgrep.enable = true;
         ssh = {
           enable = true;
-          # @TODO this will be removed in the future, when defining
-          # defaults at module top-level is deprecated
-          enableDefaultConfig = false;
           matchBlocks = {
             "*" = {
-              serverAliveInterval = 60;
+              forwardAgent = false;
+              addKeysToAgent = "no";
+              compression = false;
+              serverAliveInterval = 0;
+              serverAliveCountMax = 3;
+              hashKnownHosts = false;
+              userKnownHostsFile = "~/.ssh/known_hosts";
+              controlMaster = "no";
+              controlPath = "~/.ssh/master-%r@%n:%p";
+              controlPersist = "no";
             };
             onion = {
               host = "*.onion";

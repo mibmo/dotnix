@@ -109,19 +109,24 @@ let
     );
 in
 {
-  home.settings.programs.git = {
-    enable = true;
-    lfs.enable = true;
-    delta.enable = true;
+  home.settings.programs = {
+    git = {
+      enable = true;
+      lfs.enable = true;
 
-    userName = specification.user.name;
-    userEmail = specification.user.email;
-    inherit
-      attributes
-      extraConfig
-      ignores
-      includes
-      signing
-      ;
+      userName = specification.user.name;
+      userEmail = specification.user.email;
+      inherit
+        attributes
+        extraConfig
+        ignores
+        includes
+        signing
+        ;
+    };
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+    };
   };
 }
