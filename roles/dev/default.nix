@@ -20,7 +20,6 @@
       (curlFull.override {
         c-aresSupport = true;
         http3Support = true;
-        openssl = pkgs.quictls;
       })
       duf
       dwarfs

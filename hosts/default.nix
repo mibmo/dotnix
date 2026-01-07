@@ -5,8 +5,8 @@
 }:
 let
   inherit (lib.attrsets) collect;
-  inherit (lib.lists) fold;
+  inherit (lib.lists) foldr;
 in
-fold (host: acc: acc // { ${host.name} = lib.dot.mkSystem host; }) { } (
+foldr (host: acc: acc // { ${host.name} = lib.dot.mkSystem host; }) { } (
   collect (c: c ? name) specification.hosts
 )

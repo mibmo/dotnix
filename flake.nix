@@ -59,7 +59,7 @@
         isDerivation
         recursiveUpdate
         ;
-      inherit (lib.lists) filter flatten fold;
+      inherit (lib.lists) filter flatten foldr;
       inherit (lib.strings) match splitString;
 
       perSystem =
@@ -111,7 +111,7 @@
       checks = perSystem (
         { system, ... }:
         # add tests of packages
-        fold recursiveUpdate { } (
+        foldr recursiveUpdate { } (
           map (
             { name, value }:
             if isDerivation value && hasAttrByPath [ "passthru" "tests" ] value then

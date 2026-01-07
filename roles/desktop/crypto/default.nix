@@ -4,7 +4,8 @@
 }:
 {
   home.packages = with pkgs; [
-    electrum-ltc
+    # @TODO: add back. currently depends on vulnerable ecdsa
+    #electrum-ltc
     monero-gui
   ];
 
