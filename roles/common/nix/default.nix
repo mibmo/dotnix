@@ -65,7 +65,6 @@
 
         # gc
         min-free = 1 * GiB;
-        max-free = 5 * GiB;
 
         # avoid unwanted gc when using flakes
         keep-outputs = true;
