@@ -231,6 +231,16 @@ in
     };
   };
 
+  # allow non-PQ KEX for Hetzner storageboxes
+  # @TODO: check periodically if this is still necessary
+  programs.ssh.extraConfig = ''
+    Host *.your-storagebox.de
+      KexAlgorithms +curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+  '';
+  home.settings.programs.ssh.matchBlocks."*.your-storagebox.de".kexAlgorithms = [
+    "+curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256"
+  ];
+
   age.secrets = {
     "borg-lucoa-sakamoto-pass" = {
       file = ../../secrets/borg_lucoa_sakamoto_pass;
