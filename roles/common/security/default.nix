@@ -3,6 +3,14 @@
   config,
   ...
 }:
+let
+  # post-quantum openssh kex exchange algorithms
+  sshPQKex = [
+    "sntrup761x25519-sha512"
+    "sntrup761x25519-sha512@openssh.com"
+    "mlkem768x25519-sha256"
+  ];
+in
 {
   home = {
     packages = with pkgs; [
@@ -20,6 +28,7 @@
           enable = true;
           scdaemonSettings.disable-ccid = true;
         };
+        ssh.matchBlocks."*".kexAlgorithms = sshPQKex;
       };
       services.gpg-agent = {
         enable = true;
@@ -47,7 +56,10 @@
   hardware.gpgSmartcards.enable = true;
   hardware.nitrokey.enable = true;
   services.pcscd.enable = true;
-  programs.ssh.startAgent = false;
+  programs.ssh = {
+    startAgent = false;
+    kexAlgorithms = sshPQKex;
+  };
 
   persist.user = {
     directories = [
