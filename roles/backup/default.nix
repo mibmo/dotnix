@@ -18,7 +18,6 @@ let
       frequency ? "daily",
       patterns ? [ ],
       prune-keep ? { },
-      ...
     }:
     {
       archiveBaseName = name;
