@@ -61,7 +61,6 @@ in
       "starlight"
       "trixie"
       "muffin"
-      "holger"
     ];
     path = "${home}/assets/torrents";
     versioning = staggered { age = week; };
