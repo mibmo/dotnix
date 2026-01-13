@@ -142,6 +142,7 @@ in
         name = "email";
         repo = "lucoa";
         frequency = "daily";
+        compression = "zstd";
         paths = "/home/${specification.user.name}/.thunderbird";
         patterns = [
           # don't backup encryption keys
