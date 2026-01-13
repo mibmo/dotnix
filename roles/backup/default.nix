@@ -214,6 +214,22 @@ in
           monthly = 6;
         };
       };
+      "memes" = mkJob {
+        name = "memes";
+        repo = "lucoa";
+        frequency = "weekly";
+        paths = "/home/${specification.user.name}/assets/memes";
+        patterns = [
+          ''! .stfolder*''
+          ''- **/*.sync*''
+          ''- **/.nextcloudsync.log''
+          ''- re:shuzhi-[dl]\.svg''
+        ];
+        prune-keep = {
+          within = "1d";
+          weekly = 2;
+        };
+      };
       "notes" = mkJob {
         name = "notes";
         repo = "lucoa";
