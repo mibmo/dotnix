@@ -181,6 +181,19 @@ in
           monthly = 6;
         };
       };
+      "torrents" = mkJob {
+        name = "torrents";
+        repo = "lucoa";
+        frequency = "daily";
+        compression = "zstd";
+        paths = "/home/${specification.user.name}/assets/torrents";
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
       "images" = mkJob {
         name = "images";
         repo = "lucoa";
