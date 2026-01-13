@@ -54,6 +54,19 @@ in
 
   services.borgbackup = {
     jobs = {
+      "backup" = mkJob {
+        name = "backup";
+        repo = "lucoa";
+        frequency = "daily";
+        compression = "zstd";
+        paths = "/home/${specification.user.name}/backup";
+        prune-keep = {
+          within = "1d";
+          daily = 7;
+          weekly = 4;
+          monthly = 6;
+        };
+      };
       "books" = mkJob {
         name = "books";
         repo = "lucoa";
