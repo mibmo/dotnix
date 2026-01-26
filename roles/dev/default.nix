@@ -51,6 +51,8 @@
       # talk directly to usb and serial devices
       "dialout"
       "uucp"
+      # access network interface
+      "netdev"
       # allow capuring packets with wireshark
       "wireshark"
     ];
