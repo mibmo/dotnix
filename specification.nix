@@ -20,7 +20,6 @@ let
 
         ./roles/desktop/gnome
         ./roles/internet/syncthing
-        ./roles/internet/ipfs
 
         ./roles/browsers/chromium
         ./roles/browsers/firefox
@@ -42,7 +41,6 @@ let
 
         ./roles/desktop/gnome
         ./roles/internet/syncthing
-        ./roles/internet/ipfs
 
         ./roles/browsers/firefox
         ./roles/software/communication
@@ -62,7 +60,6 @@ let
 
         ./roles/desktop/gnome
         ./roles/internet/syncthing
-        ./roles/internet/ipfs
 
         ./roles/browsers/chromium
         ./roles/browsers/firefox
