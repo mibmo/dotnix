@@ -162,7 +162,7 @@ let
     let
       # outside modules used by configuration
       externalModules = with inputs; [
-        determinate.nixosModules.default
+        #determinate.nixosModules.default
         home-manager.nixosModules.home-manager
         disko.nixosModules.disko
         impermanence.nixosModules.impermanence
