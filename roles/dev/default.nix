@@ -40,6 +40,7 @@
       nvd
       p7zip-rar
       pciutils
+      pv
       sshfs
       tree
       unzip
