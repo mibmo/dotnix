@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     # @TODO: add back. currently depends on vulnerable ecdsa
     #electrum-ltc
+    monero-cli
     monero-gui
   ];
 
