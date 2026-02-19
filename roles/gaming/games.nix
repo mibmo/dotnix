@@ -4,6 +4,7 @@
   persist.user.directories = [
     ".factorio"
     ".local/share/FasterThanLight"
+    ".local/share/IntoTheBreach"
     ".local/share/PrismLauncher"
     ".local/share/Terraria"
     ".local/share/binding of isaac afterbirth+ mods"
