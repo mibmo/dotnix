@@ -1,7 +1,7 @@
 { ... }:
 {
   home.settings.services.nextcloud-client = {
-    enable = true;
+    enable = false;
     startInBackground = true;
   };
 
