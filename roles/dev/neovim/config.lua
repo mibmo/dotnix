@@ -151,6 +151,16 @@ Languages = {
 		},
 	},
 	{
+		name = "Cascading Style Sheets",
+		filetype = "css",
+		formatter = "css:prettier",
+		style = {
+			tabstop = 2,
+			shiftwidth = 2,
+			expandtab = true,
+		},
+	},
+	{
 		name = "Java",
 		filetype = "java",
 		formatter = "java:google_java_format",

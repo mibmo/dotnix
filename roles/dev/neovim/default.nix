@@ -52,7 +52,7 @@
         google-java-format # java
         deno # typescript
         nixfmt-rfc-style # nix
-        rubyPackages.htmlbeautifier # html
+        prettier # css & html
         stylua # lua
       ];
     };
