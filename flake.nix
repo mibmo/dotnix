@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.follows = "nixpkgs-unstable";
-    nixpkgs-stable.follows = "nixpkgs-25_05";
+    nixpkgs-stable.follows = "nixpkgs-25_11";
 
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nixpkgs-25_11.url = "nixpkgs/nixos-25.11";
     nixpkgs-25_05.url = "nixpkgs/nixos-25.05";
     nixpkgs-24_11.url = "nixpkgs/nixos-24.11";
     nixpkgs-24_05.url = "nixpkgs/nixos-24.05";
