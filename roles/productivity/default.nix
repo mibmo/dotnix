@@ -51,5 +51,6 @@ in
 
   persist.user.directories = [
     ".config/obs-studio"
+    ".local/share/Anki2"
   ];
 }
