@@ -30,6 +30,7 @@ in
     ./crypto
     ./fcitx5
     ./fonts
+    ./printing.nix
     ./stylix.nix
   ];
 
@@ -84,19 +85,6 @@ in
     libinput = {
       enable = true;
       touchpad.disableWhileTyping = true;
-    };
-    printing = {
-      enable = true;
-      stateless = true;
-      startWhenNeeded = true;
-      drivers = with pkgs-stable; [
-        brlaser
-        canon-cups-ufr2
-        cups-bjnp
-        cups-dymo
-        gutenprint
-        hplip
-      ];
     };
   };
 
