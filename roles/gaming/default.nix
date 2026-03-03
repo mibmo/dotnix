@@ -54,7 +54,7 @@ in
     packages = with pkgs; [
       (lutris.override { inherit extraPkgs; })
       rpcs3
-      wineWowPackages.waylandFull
+      wineWow64Packages.waylandFull
     ];
     settings.programs.mangohud.enable = true;
   };
