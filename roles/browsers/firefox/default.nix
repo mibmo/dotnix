@@ -73,6 +73,8 @@ let
       };
     # remove paywalls for journals
     unpaywall = { };
+    # userscript support
+    violentmonkey = { };
   };
 
   policies = {
