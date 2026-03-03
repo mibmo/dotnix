@@ -14,10 +14,10 @@ let
       SDL2 # sdl2 compatability layer using sdl3
       stdenv.cc.cc.lib
       vkd3d
-      xorg.libXScrnSaver
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXinerama
+      libXScrnSaver
+      libXcursor
+      libXi
+      libXinerama
     ];
 in
 {

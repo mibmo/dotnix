@@ -13,7 +13,7 @@ let
       sleep 1
       # get all VNC-related windows and disable decorations
       ${lib.getExe pkgs.wmctrl} -ulp | grep "VNC" | cut -d" " -f1 | while read -r xid; do
-        ${lib.getExe pkgs.xorg.xprop} -id "$xid" -format _MOTIF_WM_HINTS 32c -set _MOTIF_WM_HINTS 2
+        ${lib.getExe pkgs.xprop} -id "$xid" -format _MOTIF_WM_HINTS 32c -set _MOTIF_WM_HINTS 2
       done
     done
   '';
