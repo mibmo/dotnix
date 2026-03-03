@@ -4,8 +4,15 @@
   ...
 }:
 let
-  inherit (lib.attrsets) genAttrs mapAttrs';
-  inherit (lib.strings) concatStringsSep;
+  inherit (lib.attrsets) genAttrs genAttrs' mapAttrs';
+  inherit (lib.lists) flatten;
+  inherit (lib.strings)
+    concatMapStringsSep
+    concatStringsSep
+    split
+    substring
+    toSentenceCase
+    ;
 
   firefox-addons = pkgs.nur.repos.rycee.firefox-addons;
 
@@ -155,6 +162,35 @@ let
         hour = 60 * minute;
         day = 24 * hour;
         week = 7 * day;
+
+        musicbrainz =
+          genAttrs'
+            [
+              "artist"
+              "release"
+              "release_group"
+              "label"
+            ]
+            (
+              type:
+              let
+                parts = flatten (split "_" type);
+                name = concatMapStringsSep " " toSentenceCase parts;
+                initials = concatMapStringsSep "" (substring 0 1) parts;
+              in
+              {
+                name = "MusicBrainz, ${name}";
+                value = {
+                  urls = [ { template = "https://musicbrainz.org/search?type=${type}&query={searchTerms}"; } ];
+                  icon = "https://musicbrainz.org/static/images/favicons/favicon-32x32.png";
+                  updateInterval = week;
+                  definedAliases = [
+                    "@mb${initials}"
+                    "@musicbrainz${type}"
+                  ];
+                };
+              }
+            );
       in
       {
         # traditional
@@ -322,7 +358,8 @@ let
             "@jisho"
           ];
         };
-      };
+      }
+      // musicbrainz;
   };
 
   settings = {
