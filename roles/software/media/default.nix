@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     feishin
     kdePackages.kasts
+    nicotine-plus
     picard
   ];
 
@@ -11,10 +12,12 @@
       ".config/MusicBrainz/Picard"
       ".config/feishin"
       ".local/share/KDE/kasts"
+      ".local/share/nicotine"
     ];
     files = [
       ".config/KDE/kasts.conf"
       ".config/MusicBrainz/Picard.ini"
+      ".config/nicotine/config"
     ];
   };
 }
