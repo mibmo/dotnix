@@ -11,12 +11,12 @@
     directories = [
       ".config/MusicBrainz"
       ".config/feishin"
+      ".config/nicotine"
       ".local/share/KDE/kasts"
       ".local/share/nicotine"
     ];
     files = [
       ".config/KDE/kasts.conf"
-      ".config/nicotine/config"
     ];
   };
 }
