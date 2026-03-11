@@ -56,6 +56,7 @@ in
           ap-name = "DSB_Wi-Fi";
           effect = ''
             ${curl} \
+                --get \
                 --header 'Host: dsbwifi.dk' \
                 --form 'language=dk' \
                 "https://$IP4_GATEWAY/login.php"
