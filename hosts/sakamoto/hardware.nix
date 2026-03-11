@@ -23,6 +23,11 @@
     opencl.enable = true;
   };
 
-  # use swap less often
-  boot.kernel.sysctl."vm.swappiness" = 10;
+  boot = {
+    # use swap less often
+    kernel.sysctl."vm.swappiness" = 10;
+    # fix amdgpu driver's screen artefacting: https://www.reddit.com/r/framework/comments/1rbz9vh/screen_artifacts_on_fw_16/
+    kernelParams = [ "amdgpu.dcdebugmask=0x410" ];
+  };
+
 }
