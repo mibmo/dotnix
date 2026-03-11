@@ -32,6 +32,9 @@
         enable = true;
         efiSupport = true;
         device = "nodev";
+
+        # expose option to boot into memtest86
+        memtest86.enable = true;
       };
       #systemd-boot.enable = true;
     };
