@@ -9,14 +9,13 @@
 
   persist.user = {
     directories = [
-      ".config/MusicBrainz/Picard"
+      ".config/MusicBrainz"
       ".config/feishin"
       ".local/share/KDE/kasts"
       ".local/share/nicotine"
     ];
     files = [
       ".config/KDE/kasts.conf"
-      ".config/MusicBrainz/Picard.ini"
       ".config/nicotine/config"
     ];
   };
